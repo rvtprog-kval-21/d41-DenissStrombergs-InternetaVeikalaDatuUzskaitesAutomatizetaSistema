@@ -1,4 +1,4 @@
-import { DataTypes, Sequelize } from 'sequelize'
+import { Sequelize } from 'sequelize'
 import Attribute from '../model/Attribute.model'
 import AttributeSet from '../model/AttributeSet.model'
 import AttributeSetAttribute from '../model/AttributeSetAttribute.model'

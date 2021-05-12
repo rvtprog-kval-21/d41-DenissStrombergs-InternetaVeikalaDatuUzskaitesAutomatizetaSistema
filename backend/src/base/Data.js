@@ -1,50 +1,60 @@
 export const DATA = [
     {
+        modelName: 'Admin',
+        modelData: [
+            {
+                username: 'deniss',
+                email: 'test@test.com',
+                password: 'Test12#$',
+                firstName: 'Deniss',
+                lastName: 'Strombergs'
+            }
+        ]
+    },
+    {
         modelName: 'Attribute',
         modelData: [
             {
-                isEnabled: true,
                 code: 'color',
+                isEnabled: true,
                 label: 'Color',
-                isFilter: true,
-                attributeOptions: ''
+                attributeOptions: ``,
+                isFilter: true
             },
-
             {
-                isEnabled: true,
                 code: 'pencil_hardness',
+                isEnabled: true,
                 label: 'Pencil hardness',
+                attributeOptions: ``,
                 isFilter: true,
-                attributeOptions: ''
             },
             {
-                isEnabled: true,
                 code: 'nib_size',
+                isEnabled: true,
                 label: 'Nib size',
-                isFilter: true,
-                attributeOptions: ''
+                attributeOptions: ``,
+                isFilter: true
             },
-
             {
-                isEnabled: true,
                 code: 'author',
+                isEnabled: true,
                 label: 'Author',
+                attributeOptions: ``,
                 isFilter: true,
-                attributeOptions: ''
             },
             {
-                isEnabled: true,
                 code: 'publisher',
+                isEnabled: true,
                 label: 'Publisher',
+                attributeOptions: ``,
                 isFilter: true,
-                attributeOptions: ''
             },
             {
+                code: 'page_count',
                 isEnabled: true,
-                code: 'pageCount',
                 label: 'Page count',
-                isFilter: true,
-                attributeOptions: ''
+                attributeOptions: ``,
+                isFilter: true
             }
         ]
     },
@@ -52,18 +62,18 @@ export const DATA = [
         modelName: 'AttributeSet',
         modelData: [
             {
-                isEnabled: true,
                 code: 'default',
+                isEnabled: true,
                 name: 'Default'
             },
             {
-                isEnabled: true,
                 code: 'drawing',
+                isEnabled: true,
                 name: 'Drawing'
             },
             {
-                isEnabled: true,
                 code: 'reading',
+                isEnabled: true,
                 name: 'Reading'
             }
         ]
@@ -75,7 +85,121 @@ export const DATA = [
                 AttributeSetId: 1,
                 AttributeId: 1
             },
-
+            {
+                AttributeSetId: 2,
+                AttributeId: 1
+            },
+            {
+                AttributeSetId: 2,
+                AttributeId: 2
+            },
+            {
+                AttributeSetId: 2,
+                AttributeId: 3
+            },
+            {
+                AttributeSetId: 3,
+                AttributeId: 1
+            },
+            {
+                AttributeSetId: 3,
+                AttributeId: 4
+            },
+            {
+                AttributeSetId: 3,
+                AttributeId: 5
+            },
+            {
+                AttributeSetId: 3,
+                AttributeId: 6
+            }
+        ]
+    },
+    {
+        modelName: 'Block',
+        modelData: [
+            {
+                code: 'test_block',
+                isEnabled: true,
+                content: '<h2>Test Block</h2>'
+            }
+        ]
+    },
+    {
+        modelName: 'Category',
+        modelData: [
+            {
+                urlKey: null,
+                isEnabled: true,
+                name: 'Root',
+                productCount: 0,
+                isInMenu: true,
+                CategoryId: 1
+            },
+            {
+                urlKey: 'drawing',
+                isEnabled: true,
+                name: 'Drawing',
+                productCount: 0,
+                isInMenu: true,
+                CategoryId: 1
+            },
+            {
+                urlKey: 'reading',
+                isEnabled: true,
+                name: 'Reading',
+                productCount: 0,
+                isInMenu: true,
+                CategoryId: 1
+            },
+            {
+                urlKey: 'pencils',
+                isEnabled: true,
+                name: 'Pencils',
+                productCount: 0,
+                isInMenu: true,
+                CategoryId: 2
+            },
+            {
+                urlKey: 'pens',
+                isEnabled: true,
+                name: 'Pens',
+                productCount: 0,
+                isInMenu: true,
+                CategoryId: 2
+            },
+            {
+                urlKey: 'regular_pencils',
+                isEnabled: true,
+                name: 'Regular pencils',
+                productCount: 0,
+                isInMenu: true,
+                CategoryId: 4
+            },
+            {
+                urlKey: 'mechanical_pencils',
+                isEnabled: true,
+                name: 'Mechanical pencils',
+                productCount: 0,
+                isInMenu: true,
+                CategoryId: 4
+            },
+            {
+                urlKey: 'ballpoint_pens',
+                isEnabled: true,
+                name: 'Ballpoint pens',
+                productCount: 0,
+                isInMenu: true,
+                CategoryId: 5
+            },
+            {
+                urlKey: 'fountain_pens',
+                isEnabled: true,
+                name: 'Fountain pens',
+                productCount: 0,
+                isInMenu: true,
+                CategoryId: 5
+            }
         ]
     },
     {
@@ -83,9 +207,9 @@ export const DATA = [
         modelData: [
             {
                 email: 'test@test.com',
+                password: 'Test12#$',
                 firstName: 'Deniss',
-                lastName: 'Strombergs',
-                password: 'Test12#$'
+                lastName: 'Strombergs'
             }
         ]
     },
@@ -99,7 +223,7 @@ export const DATA = [
                 country: 'Latvia',
                 city: 'Marupe',
                 province: 'Marupes novads',
-                street1: 'Zeltritu iela 26-8',
+                street1: 'Tiraine, Viskalnu iela 13-8',
                 street2: '',
                 postalCode: 'LV-2167',
                 CustomerId: 1
@@ -107,193 +231,66 @@ export const DATA = [
         ]
     },
     {
-        modelName: 'Coupon',
+        modelName: 'Cart',
         modelData: [
             {
-                code: 'PERCENTAGE_20',
-                discount: 20,
-                type: 'percentage',
-            },
-            {
-                code: 'AMOUNT_20',
-                discount: 0.5,
-                type: 'amount',
+                CustomerId: 1
             }
         ]
     },
     {
-        modelName: 'Product',
+        modelName: 'CustomerGroup',
         modelData: [
             {
-                isEnabled: true,
-                urlKey: 'mechanical_pencil',
-                type: 'configurable',
-                sku: 'mechanical_pencil',
-                name: 'Mechanical pencil (0.02mm, 0.03mm)',
-                price: 0,
-                shortDescription: 'Apple that comes in various colors: red, green, and blue.',
-                longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                media: `
-                    {
-                        "thumbnail": "https://via.placeholder.com/240x180",
-                        "small": https://via.placeholder.com/480x360",
-                        "base": "https://via.placeholder.com/1280x720",
-                        "other": [
-                            https://via.placeholder.com/960x720
-                        ]
-                    }
-                `,
-                attributeValues: ``,
-                config: ``,
-                AttributeSetId: 2
-            },
-
-
-            {
-                isEnabled: true,
-                urlKey: null,
-                type: 'simple',
-                sku: 'mechanical_pencil_002mm',
-                name: 'Mechanical pencil (0.02mm)',
-                price: 20,
-                shortDescription: 'Mechanical pencil with 0.02mm nib.',
-                longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                media: `
-                    {
-                        "thumbnail": "https://via.placeholder.com/240x180",
-                        "small": https://via.placeholder.com/480x360",
-                        "base": "https://via.placeholder.com/1280x720",
-                        "other": [
-                            https://via.placeholder.com/960x720
-                        ]
-                    }
-                `,
-                attributeValues: `
-                    {
-                        nibSize: 0
-                    }
-                `,
-                config: ``,
-                AttributeSetId: 2
-            },
-
-            {
-                isEnabled: true,
-                urlKey: null,
-                type: 'configurable',
-                sku: 'mechanical_pencil_003mm',
-                name: 'Mechanical pencil (0.03mm)',
-                price: 15,
-                shortDescription: 'Mechanical pencil with 0.03mm nib.',
-                longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                media: `
-                    {
-                        "thumbnail": "https://via.placeholder.com/240x180",
-                        "small": https://via.placeholder.com/480x360",
-                        "base": "https://via.placeholder.com/1280x720",
-                        "other": [
-                            https://via.placeholder.com/960x720
-                        ]
-                    }
-                `,
-                attributeValues: `
-                    {
-                        nibSize: 1
-                    }
-                `,
-                config: ``,
-                AttributeSetId: 2
-            }
-        ]
-    },
-
-    {
-        modelName: 'Category',
-        modelData: [
-            {
-                isEnabled: true,
-                name: 'Root',
-                urlKey: '',
-                productCount: 0,
-                isInMenu: true,
-                CategoryId: 1
-            },
-
-            {
-                isEnabled: true,
-                name: 'Drawing',
-                urlKey: 'drawing',
-                productCount: 0,
-                isInMenu: true,
-                CategoryId: 1
+                code: 'new',
+                name: 'New'
             },
             {
-                isEnabled: true,
-                name: 'Reading',
-                urlKey: 'reading',
-                productCount: 0,
-                isInMenu: true,
-                CategoryId: 1
-            },
-
-            {
-                isEnabled: true,
-                name: 'Pencils',
-                urlKey: 'pencils',
-                productCount: 0,
-                isInMenu: true,
-                CategoryId: 2
-            },
-            {
-                isEnabled: true,
-                name: 'Pens',
-                urlKey: 'pens',
-                productCount: 0,
-                isInMenu: true,
-                CategoryId: 2
-            },
-
-            {
-                isEnabled: true,
-                name: 'Regular pencils',
-                urlKey: 'regular_pencils',
-                productCount: 0,
-                isInMenu: true,
-                CategoryId: 4
-            },
-            {
-                isEnabled: true,
-                name: 'Mechanical pencils',
-                urlKey: 'mechanical_pencils',
-                productCount: 0,
-                isInMenu: true,
-                CategoryId: 4
-            },
-            {
-                isEnabled: true,
-                name: 'Ballpoint pens',
-                urlKey: 'ballpoint_pens',
-                productCount: 0,
-                isInMenu: true,
-                CategoryId: 5
-            },
-            {
-                isEnabled: true,
-                name: 'Fountain pens',
-                urlKey: 'fountain_pens',
-                productCount: 0,
-                isInMenu: true,
-                CategoryId: 5
+                code: 'loyal',
+                name: 'Loyal'
             }
         ]
     },
     {
-        modelName: 'Block',
+        modelName: 'CustomerGroup',
         modelData: [
             {
-                isEnabled: true,
-                code: 'test_block',
-                content: '<h1>Test Block</h1>'
+                CustomerId: 1,
+                CustomerGroupId: 1
+            },
+            {
+                CustomerId: 1,
+                CustomerGroupId: 2
+            }
+        ]
+    },
+    {
+        modelName: 'Order',
+        modelData: [
+            {
+                reference: '4WGINO4G',
+                date: '2021-04-20',
+                status: 'ordered',
+                isReturned: false,
+                totalDelivery: 6.99,
+                totalTax: 21.0,
+                subtotal: 79.0,
+                total: 100.0,
+                CustomerId: 1,
+                AddressId: 1
+            }
+        ]
+    },
+    {
+        modelName: 'Invoice',
+        modelData: [
+            {
+                date: '2021-04-20',
+                totalDelivery: 6.99,
+                totalTax: 21.0,
+                subtotal: 79.0,
+                total: 100.0,
+                OrderId: 1
             }
         ]
     },
@@ -309,51 +306,150 @@ export const DATA = [
         ]
     },
     {
-        modelName: 'CategoryProduct',
+        modelName: 'PaymentCard',
         modelData: [
             {
-                CategoryId: 7,
-                ProductId: 1
+                cardholderName: 'Deniss Strombergs',
+                number: '5555555555554444',
+                cvcCode: '123',
+                expirationDate: '2021-12-31',
+                CustomerId: 1
             }
         ]
     },
     {
-        modelName: 'Invoice',
+        modelName: 'PriceRule',
         modelData: [
             {
-                date: '2021-04-20',
-                totalExTaxes: 1,
-                deliveryFees: 2,
-                taxes: 3,
-                total: 5,
-                CustomerId: 1,
-                AddressId: 1
+                code: 'black_friday_2021',
+                type: 'percentage',
+                discountValue: 50,
+                filter: `
+                    {
+                        "from": "2021-11-26",
+                        "to": "2021-11-27"
+                    }
+                `
             }
         ]
     },
     {
-        modelName: 'Order',
+        modelName: 'Product',
         modelData: [
             {
-                date: '2021-04-20',
-                reference: 'REFERENCE',
-                total: 100,
-                returned: false,
-                status: 'ordered',
-                CustomerId: 1,
-                AddressId: 1
+                urlKey: 'mechanical_pencil',
+                sku: 'mechanical_pencil',
+                isEnabled: true,
+                type: 'configurable',
+                name: 'Mechanical pencil (0.02mm, 0.03mm)',
+                price: 0.0,
+                stockQuantity: 0,
+                specialDiscountType: '',
+                specialDiscountValue: 0.0,
+                specialTaxRate: 0.0,
+                shortDescription: 'Mechanical pencil that comes with 2 sizes of nib.',
+                longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                media: `
+                    {
+                        "thumbnail": "https://via.placeholder.com/240x180",
+                        "small": https://via.placeholder.com/480x360",
+                        "base": "https://via.placeholder.com/1280x720",
+                        "other": [
+                            https://via.placeholder.com/960x720
+                        ]
+                    }
+                `,
+                attributeValues: ``,
+                attributeConfig: `
+                    {
+                        "configurableAttributes": [
+                            "nib_size"
+                        ]
+                    }
+                `,
+                cache: ``,
+                AttributeSetId: 2
+            },
+            {
+                urlKey: null,
+                sku: 'mechanical_pencil_002mm',
+                isEnabled: true,
+                type: 'simple',
+                name: 'Mechanical pencil (0.02mm)',
+                price: 20.0,
+                stockQuantity: 100,
+                specialDiscountType: '',
+                specialDiscountValue: 0.0,
+                specialTaxRate: 0.0,
+                shortDescription: 'Mechanical pencil with 0.02mm nib.',
+                longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                media: `
+                    {
+                        "thumbnail": "https://via.placeholder.com/240x180",
+                        "small": https://via.placeholder.com/480x360",
+                        "base": "https://via.placeholder.com/1280x720",
+                        "other": [
+                            https://via.placeholder.com/960x720
+                        ]
+                    }
+                `,
+                attributeValues: `
+                    {
+                        nib_size: 0
+                    }
+                `,
+                attributeConfig: ``,
+                cache: ``,
+                AttributeSetId: 2
+            },
+            {
+                urlKey: null,
+                sku: 'mechanical_pencil_003mm',
+                isEnabled: true,
+                type: 'simple',
+                name: 'Mechanical pencil (0.03mm)',
+                price: 15.0,
+                stockQuantity: 100,
+                specialDiscountType: '',
+                specialDiscountValue: 0.0,
+                specialTaxRate: 0.0,
+                shortDescription: 'Mechanical pencil with 0.03mm nib.',
+                longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                media: `
+                    {
+                        "thumbnail": "https://via.placeholder.com/240x180",
+                        "small": https://via.placeholder.com/480x360",
+                        "base": "https://via.placeholder.com/1280x720",
+                        "other": [
+                            https://via.placeholder.com/960x720
+                        ]
+                    }
+                `,
+                attributeValues: `
+                    {
+                        nib_size: 1
+                    }
+                `,
+                attributeConfig: ``,
+                cache: ``,
+                AttributeSetId: 2
             }
         ]
     },
+
+
     {
-        modelName: 'Admin',
+        modelName: 'CartItem',
         modelData: [
             {
-                username: 'admin',
-                password: 'test',
-                first_name: 'Deniss',
-                last_name: 'Strombergs',
-                email: 'test@test.com'
+                quantity: 5,
+                CartId: 1,
+                ProductId: 2
+            },
+            {
+                quantity: 10,
+                CartId: 1,
+                ProductId: 3
             }
         ]
     },
@@ -361,12 +457,29 @@ export const DATA = [
         modelName: 'OrderItem',
         modelData: [
             {
-                price: 1,
-                quantity: 1,
-                priceVat: 1,
-                vat: 1,
+                quantity: 2,
+                totalTax: 4.2,
+                subtotal: 20 ,
+                total: 24.2,
                 OrderId: 1,
-                ProductId: 1
+                ProductId: 2
+            },
+            {
+                quantity: 2,
+                totalTax: 31.5,
+                subtotal: 15 ,
+                total: 18.15,
+                OrderId: 1,
+                ProductId: 3
+            }
+        ]
+    },
+    {
+        modelName: 'ProductCategory',
+        modelData: [
+            {
+                ProductId: 1,
+                CategoryId: 7
             }
         ]
     },
@@ -374,24 +487,25 @@ export const DATA = [
         modelName: 'Review',
         modelData: [
             {
+                date: '2021-05-05',
                 title: 'Trash',
-                content: 'Big trash',
-                raiting: 5,
+                content: 'Absolute garbage, does not work.',
+                raiting: 1,
                 CustomerId: 1,
-                date: '2021-04-20',
                 ProductId: 1
             }
         ]
     },
     {
-        modelName: 'PaymentCard',
+        modelName: 'Variant',
         modelData: [
             {
-                number: '1233132112321231',
-                cardholder: 'Deniss Strombergs',
-                cvc: '123',
-                expirationDate: '2021-12-31',
-                CustomerId: 1
+                ParentId: 1,
+                ChildId: 2
+            },
+            {
+                ParentId: 1,
+                ChildId: 3
             }
         ]
     }

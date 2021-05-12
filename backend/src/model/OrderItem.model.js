@@ -15,9 +15,6 @@ export class OrderItem extends Model {
                 quantity: {
                     type: DataTypes.INTEGER
                 },
-                totalDelivery: {
-                    type: DataTypes.FLOAT
-                },
                 totalTax: {
                     type: DataTypes.FLOAT
                 },

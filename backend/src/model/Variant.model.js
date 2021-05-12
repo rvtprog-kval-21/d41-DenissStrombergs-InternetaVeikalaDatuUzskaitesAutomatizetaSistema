@@ -5,12 +5,6 @@ export class Variant extends Model {
     static init(sequelize) {
         return super.init(
             {
-                id: {
-                    type: DataTypes.INTEGER,
-                    primaryKey: true,
-                    allowNull: false,
-                    autoIncrement: true
-                },
                 ParentId: {
                     type: DataTypes.INTEGER,
                     references: {
@@ -38,7 +32,8 @@ export class Variant extends Model {
             models.Product,
             {
                 through: this,
-                as: 'Parents'
+                as: 'Parents',
+                foreignKey: 'ParentId'
             }
         )
 
@@ -46,7 +41,8 @@ export class Variant extends Model {
             models.Product,
             {
                 through: this,
-                as: 'Children'
+                as: 'Children',
+                foreignKey: 'ChildId'
             }
         )
     }

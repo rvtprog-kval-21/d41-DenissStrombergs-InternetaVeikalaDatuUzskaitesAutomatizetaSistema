@@ -12,7 +12,8 @@ export class Category extends Model {
                 },
                 urlKey: {
                     type: DataTypes.STRING,
-                    unique: true
+                    unique: true,
+                    allowNull: true
                 },
                 isEnabled: {
                     type: DataTypes.BOOLEAN
@@ -39,6 +40,11 @@ export class Category extends Model {
                 modelName: 'Category'
             }
         )
+    }
+
+    static associate() {
+        this.belongsTo(this)
+        this.hasMany(this)
     }
 }
 
