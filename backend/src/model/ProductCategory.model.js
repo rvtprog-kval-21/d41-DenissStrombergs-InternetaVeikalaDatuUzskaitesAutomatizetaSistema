@@ -1,55 +1,48 @@
 import { DataTypes, Model } from 'sequelize'
 import Product from './Product.model'
+import Category from './Category.model'
 
-export class Variant extends Model {
+export class ProductCategory extends Model {
     static init(sequelize) {
         return super.init(
             {
-                id: {
-                    type: DataTypes.INTEGER,
-                    primaryKey: true,
-                    allowNull: false,
-                    autoIncrement: true
-                },
-                ParentId: {
+                ProductId: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Product,
                         key: 'id'
                     }
                 },
-                ChildId: {
+                CategoryId: {
                     type: DataTypes.INTEGER,
                     references: {
-                        model: Product,
+                        model: Category,
                         key: 'id'
                     }
                 }
             },
             {
                 sequelize,
-                modelName: 'Variant'
+                modelName: 'ProductCategory'
             }
         )
     }
-
+    
     static associate(models) {
         models.Product.belongsToMany(
-            models.Product,
+            models.Category,
             {
-                through: this,
-                as: 'Parents'
+                through: this
             }
         )
 
-        models.Product.belongsToMany(
+        models.Category.belongsToMany(
             models.Product,
             {
-                through: this,
-                as: 'Children'
+                through: this
             }
         )
     }
 }
 
-export default Variant
+export default ProductCategory

@@ -1,43 +1,43 @@
 import { DataTypes, Model } from 'sequelize'
-import Category from './Category.model'
-import Product from './Product.model'
+import Customer from './Customer.model'
+import CustomerGroup from './CustomerGroup.model'
 
-export class CategoryProduct extends Model {
+export class CustomerCustomerGroup extends Model {
     static init(sequelize) {
         return super.init(
             {
-                CategoryId: {
+                CustomerId: {
                     type: DataTypes.INTEGER,
                     references: {
-                        model: Category,
+                        model: Customer,
                         key: 'id'
                     }
                 },
-                ProductId: {
+                CustomerGroupId: {
                     type: DataTypes.INTEGER,
                     references: {
-                        model: Product,
+                        model: CustomerGroup,
                         key: 'id'
                     }
                 }
             },
             {
                 sequelize,
-                modelName: 'CategoryProduct'
+                modelName: 'CustomerCustomerGroup'
             }
         )
     }
-    
+
     static associate(models) {
-        models.Category.belongsToMany(
-            models.Product,
+        models.Customer.belongsToMany(
+            models.CustomerGroup,
             {
                 through: this
             }
         )
-        
-        models.Product.belongsToMany(
-            models.Category,
+
+        models.CustomerGroup.belongsToMany(
+            models.Customer,
             {
                 through: this
             }
@@ -45,4 +45,4 @@ export class CategoryProduct extends Model {
     }
 }
 
-export default CategoryProduct
+export default CustomerCustomerGroup

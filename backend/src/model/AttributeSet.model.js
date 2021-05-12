@@ -10,12 +10,12 @@ export class AttributeSet extends Model {
                     allowNull: false,
                     autoIncrement: true
                 },
-                isEnabled: {
-                    type: DataTypes.BOOLEAN
-                },
                 code: {
                     type: DataTypes.STRING,
                     unique: true
+                },
+                isEnabled: {
+                    type: DataTypes.BOOLEAN
                 },
                 name: {
                     type: DataTypes.STRING

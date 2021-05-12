@@ -1,4 +1,5 @@
 import { DataTypes, Model } from 'sequelize'
+import Order from './Order.model'
 
 export class Invoice extends Model {
     static init(sequelize) {
@@ -10,8 +11,27 @@ export class Invoice extends Model {
                     allowNull: false,
                     autoIncrement: true
                 },
-                isEnabled: {
-                    type: DataTypes.BOOLEAN
+                date: {
+                    type: DataTypes.DATE,
+                },
+                totalDelivery: {
+                    type: DataTypes.FLOAT
+                },
+                totalTax: {
+                    type: DataTypes.FLOAT
+                },
+                subtotal: {
+                    type: DataTypes.FLOAT
+                },
+                total: {
+                    type: DataTypes.FLOAT
+                },
+                OrderId: {
+                    type: DataTypes.INTEGER,
+                    references: {
+                        model: Order,
+                        key: 'id'
+                    }
                 }
             },
             {
@@ -19,6 +39,10 @@ export class Invoice extends Model {
                 modelName: 'Invoice'
             }
         )
+    }
+
+    static associate(models) {
+        this.hasOne(models.Invoice)
     }
 }
 

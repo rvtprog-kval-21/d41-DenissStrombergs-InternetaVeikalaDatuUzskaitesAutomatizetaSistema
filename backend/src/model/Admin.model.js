@@ -1,6 +1,6 @@
-import { Model, DataTypes } from 'sequelize'
+import { DataTypes, Model } from 'sequelize'
 
-export class Attribute extends Model {
+export class Admin extends Model {
     static init(sequelize) {
         return super.init(
             {
@@ -10,29 +10,30 @@ export class Attribute extends Model {
                     allowNull: false,
                     autoIncrement: true
                 },
-                code: {
+                username: {
                     type: DataTypes.STRING,
                     unique: true
                 },
-                isEnabled: {
-                    type: DataTypes.BOOLEAN
+                email: {
+                    type: DataTypes.STRING,
+                    unique: true
                 },
-                label: {
+                password: {
                     type: DataTypes.STRING
                 },
-                attributeOptions: {
-                    type: DataTypes.JSONB
+                firstName: {
+                    type: DataTypes.STRING
                 },
-                isFilter: {
-                    type: DataTypes.BOOLEAN
+                lastName: {
+                    type: DataTypes.STRING
                 }
             },
             {
                 sequelize,
-                modelName: 'Attribute'
+                modelName: 'Admin'
             }
         )
     }
 }
 
-export default Attribute
+export default Admin

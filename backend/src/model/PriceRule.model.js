@@ -1,6 +1,6 @@
-import { Model, DataTypes } from 'sequelize'
+import { DataTypes, Model } from 'sequelize'
 
-export class Attribute extends Model {
+export class PriceRule extends Model {
     static init(sequelize) {
         return super.init(
             {
@@ -14,25 +14,22 @@ export class Attribute extends Model {
                     type: DataTypes.STRING,
                     unique: true
                 },
-                isEnabled: {
-                    type: DataTypes.BOOLEAN
-                },
-                label: {
+                type: {
                     type: DataTypes.STRING
                 },
-                attributeOptions: {
-                    type: DataTypes.JSONB
+                discountValue: {
+                    type: DataTypes.FLOAT
                 },
-                isFilter: {
-                    type: DataTypes.BOOLEAN
+                filter: {
+                    type: DataTypes.JSONB
                 }
             },
             {
                 sequelize,
-                modelName: 'Attribute'
+                modelName: 'PriceRule'
             }
         )
     }
 }
 
-export default Attribute
+export default PriceRule

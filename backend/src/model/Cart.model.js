@@ -27,6 +27,7 @@ export class Cart extends Model {
     }
 
     static associate(models) {
+        this.hasMany(models.CartItem)
         this.belongsTo(models.Customer)
     }
 }

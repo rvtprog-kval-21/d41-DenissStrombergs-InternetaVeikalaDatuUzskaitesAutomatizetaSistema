@@ -6,7 +6,8 @@ export const typeMap = {
     FLOAT: 'Float!',
     STRING: 'String!',
     JSONB: 'String!',
-    TEXT: 'String!'
+    TEXT: 'String!',
+    DATE: 'Date!'
 }
 
 export function generateFields(model, tabSize, tabCount) {
@@ -61,6 +62,8 @@ export function generateTypeDef(model) {
     const assoc2 = generateAssociationsReferences(model, 4, 3)
 
     const a = `
+        scalar Date
+
         type ${ singularName } {
             id: ID!
             ${ fields1.replace(/!/g, '') }
@@ -75,7 +78,7 @@ export function generateTypeDef(model) {
             id: ID
             ids: [ID]
             ${ fields1.replace(/!/g, '') }
-            ${ assoc2 }
+            ${ (assoc2.match(/ProductId/gi) || []).length > 1 ? '' : assoc2 }
         }
 
         input ${ singularName }Input {

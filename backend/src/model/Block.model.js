@@ -10,15 +10,15 @@ export class Block extends Model {
                     allowNull: false,
                     autoIncrement: true
                 },
-                isEnabled: {
-                    type: DataTypes.BOOLEAN
-                },
                 code: {
                     type: DataTypes.STRING,
                     unique: true
                 },
+                isEnabled: {
+                    type: DataTypes.BOOLEAN
+                },
                 content: {
-                    type: DataTypes.STRING
+                    type: DataTypes.TEXT
                 }
             },
             {

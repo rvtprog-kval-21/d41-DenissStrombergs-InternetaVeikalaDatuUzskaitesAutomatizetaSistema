@@ -1,8 +1,7 @@
 import { DataTypes, Model } from 'sequelize'
 import Customer from './Customer.model'
-import Product from './Product.model'
 
-export class Review extends Model {
+export class PaymentCard extends Model {
     static init(sequelize) {
         return super.init(
             {
@@ -12,17 +11,17 @@ export class Review extends Model {
                     allowNull: false,
                     autoIncrement: true
                 },
-                date: {
+                cardholderName: {
+                    type: DataTypes.STRING
+                },
+                number: {
+                    type: DataTypes.STRING
+                },
+                cvcCode: {
+                    type: DataTypes.STRING
+                },
+                expirationDate: {
                     type: DataTypes.DATE
-                },
-                title: {
-                    type: DataTypes.STRING
-                },
-                content: {
-                    type: DataTypes.STRING
-                },
-                rating: {
-                    type: DataTypes.INTEGER
                 },
                 CustomerId: {
                     type: DataTypes.INTEGER,
@@ -30,26 +29,18 @@ export class Review extends Model {
                         model: Customer,
                         key: 'id'
                     }
-                },
-                ProductId: {
-                    type: DataTypes.INTEGER,
-                    references: {
-                        model: Product,
-                        key: 'id'
-                    }
                 }
             },
             {
                 sequelize,
-                modelName: 'Review'
+                modelName: 'PaymentCard'
             }
         )
     }
 
     static associate(models) {
         this.belongsTo(models.Customer)
-        this.belongsTo(models.Product)
     }
 }
 
-export default Review
+export default PaymentCard

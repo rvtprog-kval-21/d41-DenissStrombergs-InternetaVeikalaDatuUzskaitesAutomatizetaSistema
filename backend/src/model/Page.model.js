@@ -10,12 +10,12 @@ export class Page extends Model {
                     allowNull: false,
                     autoIncrement: true
                 },
-                isEnabled: {
-                    type: DataTypes.BOOLEAN
-                },
                 urlKey: {
                     type: DataTypes.STRING,
                     unique: true
+                },
+                isEnabled: {
+                    type: DataTypes.BOOLEAN
                 },
                 title: {
                     type: DataTypes.STRING

@@ -23,16 +23,16 @@ export class Address extends Model {
                 country: {
                     type: DataTypes.STRING
                 },
-                streetAddressLine1: {
-                    type: DataTypes.STRING
-                },
-                streetAddressLine2: {
-                    type: DataTypes.STRING
-                },
-                streetAddressLine3: {
-                    type: DataTypes.STRING
-                },
                 city: {
+                    type: DataTypes.STRING
+                },
+                province: {
+                    type: DataTypes.STRING
+                },
+                street1: {
+                    type: DataTypes.STRING
+                },
+                street2: {
                     type: DataTypes.STRING
                 },
                 postalCode: {
@@ -55,6 +55,7 @@ export class Address extends Model {
 
     static associate(models) {
         this.belongsTo(models.Customer)
+        this.hasMany(models.Order)
     }
 }
 

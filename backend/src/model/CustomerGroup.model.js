@@ -1,7 +1,6 @@
 import { DataTypes, Model } from 'sequelize'
-import Customer from './Customer.model'
 
-export class Card extends Model {
+export class CustomerGroup extends Model {
     static init(sequelize) {
         return super.init(
             {
@@ -11,24 +10,20 @@ export class Card extends Model {
                     allowNull: false,
                     autoIncrement: true
                 },
-                CustomerId: {
-                    type: DataTypes.INTEGER,
-                    references: {
-                        model: Customer,
-                        key: 'id'
-                    }
+                code: {
+                    type: DataTypes.STRING,
+                    unique: true
+                },
+                name: {
+                    type: DataTypes.STRING
                 }
             },
             {
                 sequelize,
-                modelName: 'Card'
+                modelName: 'CustomerGroup'
             }
         )
     }
-
-    static associate(models) {
-        this.belongsTo(models.Customer)
-    }
 }
 
-export default Card
+export default CustomerGroup

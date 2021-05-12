@@ -37,7 +37,7 @@ export const DATA = [
                 code: 'publisher',
                 label: 'Publisher',
                 isFilter: true,
-                attributeoptions: ''
+                attributeOptions: ''
             },
             {
                 isEnabled: true,
@@ -95,12 +95,12 @@ export const DATA = [
             {
                 firstName: 'Deniss',
                 lastName: 'Strombergs',
-                phoneNumber: '23234234',
+                phoneNumber: '22034599',
                 country: 'Latvia',
-                streetAddressLine1: 'Zeltritu iela 26',
-                streetAddressLine2: '',
-                streetAddressLine3: '',
-                city: 'Marupes novads',
+                city: 'Marupe',
+                province: 'Marupes novads',
+                street1: 'Zeltritu iela 26-8',
+                street2: '',
                 postalCode: 'LV-2167',
                 CustomerId: 1
             }
@@ -144,6 +144,7 @@ export const DATA = [
                     }
                 `,
                 attributeValues: ``,
+                config: ``,
                 AttributeSetId: 2
             },
 
@@ -172,6 +173,7 @@ export const DATA = [
                         nibSize: 0
                     }
                 `,
+                config: ``,
                 AttributeSetId: 2
             },
 
@@ -199,6 +201,7 @@ export const DATA = [
                         nibSize: 1
                     }
                 `,
+                config: ``,
                 AttributeSetId: 2
             }
         ]
@@ -311,6 +314,84 @@ export const DATA = [
             {
                 CategoryId: 7,
                 ProductId: 1
+            }
+        ]
+    },
+    {
+        modelName: 'Invoice',
+        modelData: [
+            {
+                date: '2021-04-20',
+                totalExTaxes: 1,
+                deliveryFees: 2,
+                taxes: 3,
+                total: 5,
+                CustomerId: 1,
+                AddressId: 1
+            }
+        ]
+    },
+    {
+        modelName: 'Order',
+        modelData: [
+            {
+                date: '2021-04-20',
+                reference: 'REFERENCE',
+                total: 100,
+                returned: false,
+                status: 'ordered',
+                CustomerId: 1,
+                AddressId: 1
+            }
+        ]
+    },
+    {
+        modelName: 'Admin',
+        modelData: [
+            {
+                username: 'admin',
+                password: 'test',
+                first_name: 'Deniss',
+                last_name: 'Strombergs',
+                email: 'test@test.com'
+            }
+        ]
+    },
+    {
+        modelName: 'OrderItem',
+        modelData: [
+            {
+                price: 1,
+                quantity: 1,
+                priceVat: 1,
+                vat: 1,
+                OrderId: 1,
+                ProductId: 1
+            }
+        ]
+    },
+    {
+        modelName: 'Review',
+        modelData: [
+            {
+                title: 'Trash',
+                content: 'Big trash',
+                raiting: 5,
+                CustomerId: 1,
+                date: '2021-04-20',
+                ProductId: 1
+            }
+        ]
+    },
+    {
+        modelName: 'PaymentCard',
+        modelData: [
+            {
+                number: '1233132112321231',
+                cardholder: 'Deniss Strombergs',
+                cvc: '123',
+                expirationDate: '2021-12-31',
+                CustomerId: 1
             }
         ]
     }
