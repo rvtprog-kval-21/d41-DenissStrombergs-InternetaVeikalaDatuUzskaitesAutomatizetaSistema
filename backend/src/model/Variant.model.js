@@ -1,7 +1,7 @@
 import { DataTypes, Model } from 'sequelize'
-import Customer from './Customer.model'
+import Product from './Product.model'
 
-export class CustomerCart extends Model {
+export class Variant extends Model {
     static init(sequelize) {
         return super.init(
             {
@@ -11,24 +11,20 @@ export class CustomerCart extends Model {
                     allowNull: false,
                     autoIncrement: true
                 },
-                CustomerId: {
+                ProductId: {
                     type: DataTypes.INTEGER,
                     references: {
-                        model: Customer,
+                        model: Product,
                         key: 'id'
                     }
                 }
             },
             {
                 sequelize,
-                modelName: 'CustomerCart'
+                modelName: 'Variant'
             }
         )
     }
-
-    static associate(models) {
-        this.belongsTo(models.Customer)
-    }
 }
 
-export default CustomerCart
+export default Variant

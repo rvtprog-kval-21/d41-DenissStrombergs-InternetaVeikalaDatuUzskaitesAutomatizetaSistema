@@ -2,7 +2,7 @@ import { DataTypes, Model } from 'sequelize'
 import Customer from './Customer.model'
 import Product from './Product.model'
 
-export class ProductReview extends Model {
+export class Review extends Model {
     static init(sequelize) {
         return super.init(
             {
@@ -38,10 +38,10 @@ export class ProductReview extends Model {
             },
             {
                 sequelize,
-                modelName: 'ProductReview'
+                modelName: 'Review'
             }
         )
     }
 }
 
-export default ProductReview
+export default Review

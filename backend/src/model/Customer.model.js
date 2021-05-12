@@ -31,7 +31,7 @@ export class Customer extends Model {
     }
 
     static associate(models) {
-        this.hasMany(models.CustomerAddress)
+        this.hasMany(models.Address)
     }
 }
 

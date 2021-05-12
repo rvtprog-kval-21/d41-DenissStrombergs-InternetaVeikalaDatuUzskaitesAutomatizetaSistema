@@ -6,11 +6,13 @@ import Block from '../model/Block.model'
 import Category from '../model/Category.model'
 import CategoryProduct from '../model/CategoryProduct.model'
 import Customer from '../model/Customer.model'
-import CustomerAddress from '../model/CustomerAddress.model'
+import Address from '../model/Address.model'
+import Invoice from '../model/Invoice.model'
+import Order from '../model/Order.model'
 import Page from '../model/Page.model'
 import Product from '../model/Product.model'
-import ProductReview from '../model/ProductReview.model'
-import ProductVariant from '../model/ProductVariant.model'
+import Review from '../model/Review.model'
+import Variant from '../model/Variant.model'
 import CONFIG from './Config'
 import DATA from './Data'
 
@@ -34,12 +36,14 @@ class Database {
             Block: Block.init(this.sequelize),
             Category: Category.init(this.sequelize),
             Customer: Customer.init(this.sequelize),
-            CustomerAddress: CustomerAddress.init(this.sequelize),
+            Address: Address.init(this.sequelize),
+            Invoice: Invoice.init(this.sequelize, DataTypes),
+            Order: Order.init(this.sequelize, DataTypes),
             Page: Page.init(this.sequelize, DataTypes),
             Product: Product.init(this.sequelize, DataTypes),
             CategoryProduct: CategoryProduct.init(this.sequelize),
-            ProductReview: ProductReview.init(this.sequelize),
-            ProductVariant: ProductVariant.init(this.sequelize, DataTypes)
+            Review: Review.init(this.sequelize),
+            Variant: Variant.init(this.sequelize, DataTypes)
         }
     }
 

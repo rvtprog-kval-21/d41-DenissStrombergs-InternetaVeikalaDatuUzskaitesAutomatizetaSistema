@@ -24,23 +24,32 @@ const client = new ApolloClient({
 })
 
 export function Router() {
+
+    const renderStorefront = () => {
+        return (
+            <>
+                <Header/>
+                <Switch>
+                    <Route path="/" render={ () => (<Homepage/>) } exact/>
+                    <Route path="/account" render={ () => (<Account/>) } exact/>
+                    <Route path="/cart" render={ () => (<Cart/>) } exact/>
+                    <Route path="/category/:urlKey" render={ () => (<Category/>) }/>
+                    <Route path="/checkout" render={ () => (<Checkout/>) } exact/>
+                    <Route path="/page/:urlKey" render={ () => (<Page/>) }/>
+                    <Route path="/product/:urlKey" render={ () => (<Product/>) }/>
+                    <Route path="/search/:query" render={ () => (<Search/>) }/>
+                    <Route render={ () => (<Error/>) }/>
+                </Switch>
+                <Footer/>
+            </>
+        )
+    }
+
     return (
         <BrowserRouter>
             <Provider store={ store }>
                 <ApolloProvider client={ client }>
-                <Header/>
-                    <Switch>
-                        <Route path="/" render={ () => (<Homepage/>) } exact/>
-                        <Route path="/account" render={ () => (<Account/>) } exact/>
-                        <Route path="/cart" render={ () => (<Cart/>) } exact/>
-                        <Route path="/category/:urlKey" render={ () => (<Category/>) }/>
-                        <Route path="/checkout" render={ () => (<Checkout/>) } exact/>
-                        <Route path="/page/:urlKey" render={ () => (<Page/>) }/>
-                        <Route path="/product/:urlKey" render={ () => (<Product/>) }/>
-                        <Route path="/search/:query" render={ () => (<Search/>) }/>
-                        <Route render={ () => (<Error/>) }/>
-                    </Switch>
-                    <Footer/>
+                    { window.location.pathname.includes('admin') ? null : renderStorefront() }
                 </ApolloProvider>
             </Provider>
             <Route path="/admin" render={ () => (<Admin/>) }/>

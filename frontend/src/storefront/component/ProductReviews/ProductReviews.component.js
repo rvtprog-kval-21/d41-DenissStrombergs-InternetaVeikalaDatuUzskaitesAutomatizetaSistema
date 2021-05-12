@@ -1,6 +1,6 @@
 import { Typography } from "@material-ui/core"
 
-export function renderReview(review) {
+export function renderProductReview(review) {
     const { title, content, author: { first_name, last_name } } = review
 
     return (
@@ -23,7 +23,7 @@ export function ProductReviews(props) {
 
     return (
         <div>
-            { reviews.map(renderReview) }
+            { reviews.map(renderProductReview) }
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import { DataTypes, Model } from 'sequelize'
 import Customer from './Customer.model'
 
-export class CustomerAddress extends Model {
+export class Address extends Model {
     static init(sequelize) {
         return super.init(
             {
@@ -48,7 +48,7 @@ export class CustomerAddress extends Model {
             },
             {
                 sequelize,
-                modelName: 'CustomerAddress'
+                modelName: 'Address'
             }
         )
     }
@@ -58,4 +58,4 @@ export class CustomerAddress extends Model {
     }
 }
 
-export default CustomerAddress
+export default Address

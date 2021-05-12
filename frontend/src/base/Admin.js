@@ -2,14 +2,18 @@ import { useState, useEffect } from 'react'
 import { createBrowserHistory } from 'history'
 import { Admin as ReactAdmin, Resource } from "react-admin"
 import buildGraphQLProvider from 'ra-data-graphql-simple'
-import { AttributeCreate, AttributeEdit, AttributeList } from "../admin/resource/Attribute.resource"
-import { AttributeSetCreate, AttributeSetEdit, AttributeSetList } from "../admin/resource/AttributeSet.resource"
-import { CategoryCreate, CategoryEdit, CategoryList } from "../admin/resource/Category.resource"
-import { ProductCreate, ProductEdit, ProductList } from "../admin/resource/Product.resource"
-import { ProductReviewCreate, ProductReviewEdit, ProductReviewList } from "../admin/resource/ProductReview.resource"
-import { BlockCreate, BlockEdit, BlockList } from '../admin/resource/Block.resource'
-import { PageCreate, PageEdit, PageList } from '../admin/resource/Page.resource'
-import Dashboard from '../admin/component/Dashboard.component'
+import Dashboard from '../admin/component/Dashboard/Dashboard.component'
+import CategoryResource from '../admin/component/Category/CategoryResource.component'
+import AttributeResource from '../admin/component/Attribute/AttributeResource.component'
+import AttributeSetResource from '../admin/component/AttributeSet/AttributeSetResource.component'
+import BlockResource from '../admin/component/Block/BlockResource.component'
+import PageResource from '../admin/component/Page/PageResource.component'
+import ProductResource from '../admin/component/Product/ProductResource.component'
+import ReviewResource from '../admin/component/Review/ReviewResource.component'
+import Layout from '../admin/component/Layout/Layout.component'
+import InvoiceResource from '../admin/component/Invoice/InvoiceResource.component'
+import OrderResource from '../admin/component/Order/OrderResource.component'
+import CustomerResource from '../admin/component/Customer/CustomerResource.component'
 
 export function Admin() {
     const [dataProvider, setDataProvider] = useState(null)
@@ -35,14 +39,22 @@ export function Admin() {
     }
 
     return (
-        <ReactAdmin dataProvider={ dataProvider } history={ createBrowserHistory({ basename: 'admin' }) } dashboard={ Dashboard }>
-            <Resource name="Attribute" list={ AttributeList } create={ AttributeCreate } edit={ AttributeEdit }/>
-            <Resource name="AttributeSet" options={ { label: 'Attribute sets' } } list={ AttributeSetList } create={ AttributeSetCreate } edit={ AttributeSetEdit }/>
-            <Resource name="Block" list={ BlockList } create={ BlockCreate } edit={ BlockEdit }/>
-            <Resource name="Category" list={ CategoryList } create={ CategoryCreate } edit={ CategoryEdit }/>
-            <Resource name="Page" list={ PageList } create={ PageCreate } edit={ PageEdit }/>
-            <Resource name="Product" list={ ProductList } create={ ProductCreate } edit={ ProductEdit }/>
-            <Resource name="ProductReview" options={ { label: 'Product reviews' } } list={ ProductReviewList } create={ ProductReviewCreate } edit={ ProductReviewEdit }/>
+        <ReactAdmin
+            dataProvider={ dataProvider }
+            history={ createBrowserHistory({ basename: 'admin' }) }
+            dashboard={ Dashboard }
+            layout={ Layout }
+        >
+            <Resource { ...AttributeResource } />
+            <Resource { ...AttributeSetResource } />
+            <Resource { ...BlockResource } />
+            <Resource { ...CategoryResource } />
+            <Resource { ...InvoiceResource } />
+            <Resource { ...OrderResource } />
+            <Resource { ...CustomerResource } />
+            <Resource { ...PageResource } />
+            <Resource { ...ProductResource } />
+            <Resource { ...ReviewResource } />
         </ReactAdmin>
     )
 }

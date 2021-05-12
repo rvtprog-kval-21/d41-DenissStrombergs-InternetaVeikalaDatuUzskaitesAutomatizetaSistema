@@ -37,12 +37,28 @@ export function generateAssociations(model, tabSize, tabCount) {
     return associations.trimStart().slice(0, -1)
 }
 
+export function generateAssociationsReferences(model, tabSize, tabCount) {
+    let associations = ''
+
+    for (const associationKey in model.associations) {
+        const associationValue = model.associations[associationKey]
+
+        if (associationValue.associationType == 'BelongsToMany') {
+            associations += ' '.repeat(tabSize * tabCount) + pascalcase(associationValue.target.name) + 'Id' + ': ' + 'ID' + '\n'
+        }
+    }
+
+    return associations.trimStart().slice(0, -1)
+}
+
+
 export function generateTypeDef(model) {
     const singularName = pascalcase(model.name)
     const pluralName = pascalcase(model.tableName)
     const fields1 = generateFields(model, 4, 3)
     const fields2 = generateFields(model, 4, 4)
     const associations = generateAssociations(model, 4, 3)
+    const assoc2 = generateAssociationsReferences(model, 4, 3)
 
     const a = `
         type ${ singularName } {
@@ -59,6 +75,7 @@ export function generateTypeDef(model) {
             id: ID
             ids: [ID]
             ${ fields1.replace(/!/g, '') }
+            ${ assoc2 }
         }
 
         input ${ singularName }Input {

@@ -90,7 +90,7 @@ export const DATA = [
         ]
     },
     {
-        modelName: 'CustomerAddress',
+        modelName: 'Address',
         modelData: [
             {
                 firstName: 'Deniss',

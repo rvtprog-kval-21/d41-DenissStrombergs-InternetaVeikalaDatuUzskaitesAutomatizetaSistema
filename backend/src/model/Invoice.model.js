@@ -1,7 +1,6 @@
 import { DataTypes, Model } from 'sequelize'
-import Product from './Product.model'
 
-export class ProductVariant extends Model {
+export class Invoice extends Model {
     static init(sequelize) {
         return super.init(
             {
@@ -11,20 +10,16 @@ export class ProductVariant extends Model {
                     allowNull: false,
                     autoIncrement: true
                 },
-                ProductId: {
-                    type: DataTypes.INTEGER,
-                    references: {
-                        model: Product,
-                        key: 'id'
-                    }
+                isEnabled: {
+                    type: DataTypes.BOOLEAN
                 }
             },
             {
                 sequelize,
-                modelName: 'ProductVariant'
+                modelName: 'Invoice'
             }
         )
     }
 }
 
-export default ProductVariant
+export default Invoice
