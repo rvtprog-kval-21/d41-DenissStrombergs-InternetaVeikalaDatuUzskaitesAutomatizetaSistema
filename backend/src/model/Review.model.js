@@ -12,6 +12,9 @@ export class Review extends Model {
                     allowNull: false,
                     autoIncrement: true
                 },
+                status: {
+                    type: DataTypes.STRING,
+                },
                 date: {
                     type: DataTypes.DATE
                 },

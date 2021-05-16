@@ -42,7 +42,7 @@ export class Invoice extends Model {
     }
 
     static associate(models) {
-        this.hasOne(models.Invoice)
+        //this.belongsTo(models.Order)
     }
 }
 

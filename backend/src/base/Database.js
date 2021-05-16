@@ -17,12 +17,11 @@ import OrderItem from '../model/OrderItem.model'
 import Page from '../model/Page.model'
 import Product from '../model/Product.model'
 import Review from '../model/Review.model'
-import PriceRule from '../model/PriceRule.model'
 import Variant from '../model/Variant.model'
 import CONFIG from './Config'
 import DATA from './Data'
 import PaymentCard from '../model/PaymentCard.model'
-import Admin from '../model/Admin.model'
+import User from '../model/User.model'
 
 class Database {
     constructor() {
@@ -38,7 +37,7 @@ class Database {
 
     init() {
         this.models = {
-            Admin: Admin.init(this.sequelize),
+            User: User.init(this.sequelize),
             Attribute: Attribute.init(this.sequelize),
             AttributeSet: AttributeSet.init(this.sequelize),
             AttributeSetAttribute: AttributeSetAttribute.init(this.sequelize),
@@ -53,13 +52,12 @@ class Database {
             Invoice: Invoice.init(this.sequelize),
             Page: Page.init(this.sequelize),
             PaymentCard: PaymentCard.init(this.sequelize),
-            PriceRule: PriceRule.init(this.sequelize),
             Product: Product.init(this.sequelize),
             CartItem: CartItem.init(this.sequelize),
             OrderItem: OrderItem.init(this.sequelize),
             ProductCategory: ProductCategory.init(this.sequelize),
             Review: Review.init(this.sequelize),
-            Variant: Variant.init(this.sequelize)
+            //Variant: Variant.init(this.sequelize)
         }
     }
 

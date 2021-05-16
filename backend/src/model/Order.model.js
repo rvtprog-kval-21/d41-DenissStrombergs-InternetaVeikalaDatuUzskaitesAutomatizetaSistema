@@ -37,14 +37,14 @@ export class Order extends Model {
                 total: {
                     type: DataTypes.FLOAT
                 },
-                CustomerId: {
+                customer_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Customer,
                         key: 'id'
                     }
                 },
-                AddressId: {
+                address_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Address,
@@ -60,10 +60,10 @@ export class Order extends Model {
     }
 
     static associate(models) {
-        this.belongsTo(models.Address)
-        this.belongsTo(models.Customer)
-        this.hasOne(models.Invoice)
-        this.hasMany(models.OrderItem)
+        this.belongsTo(models.Address, { foreignKey: 'address_id' })
+        this.belongsTo(models.Customer, { foreignKey: 'customer_id' })
+        //this.hasOne(models.Invoice)
+        this.hasMany(models.OrderItem, { foreignKey: 'order_id' })
     }
 }
 

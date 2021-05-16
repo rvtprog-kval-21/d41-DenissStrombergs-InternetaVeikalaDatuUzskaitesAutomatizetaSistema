@@ -20,6 +20,9 @@ export class Attribute extends Model {
                 label: {
                     type: DataTypes.STRING
                 },
+                type: {
+                    type: DataTypes.STRING
+                },
                 attributeOptions: {
                     type: DataTypes.JSONB
                 },
@@ -32,6 +35,9 @@ export class Attribute extends Model {
                 modelName: 'Attribute'
             }
         )
+    }
+
+    static associate(models) {
     }
 }
 

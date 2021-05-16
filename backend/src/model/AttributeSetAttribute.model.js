@@ -6,14 +6,20 @@ export class AttributeSetAttribute extends Model {
     static init(sequelize) {
         return super.init(
             {
-                AttributeSetId: {
+                id: {
+                    type: DataTypes.INTEGER,
+                    primaryKey: true,
+                    allowNull: false,
+                    autoIncrement: true
+                },
+                attribute_set_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Attribute,
                         key: 'id'
                     }
                 },
-                AttributeId: {
+                attribute_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: AttributeSet,
@@ -32,14 +38,16 @@ export class AttributeSetAttribute extends Model {
         models.AttributeSet.belongsToMany(
             models.Attribute,
             {
-                through: this
+                through: this,
+                foreignKey: 'attribute_set_id'
             }
         )
 
         models.Attribute.belongsToMany(
             models.AttributeSet,
             {
-                through: this
+                through: this,
+                foreignKey: 'attribute_id'
             }
         )
     }

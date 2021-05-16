@@ -24,14 +24,14 @@ export class OrderItem extends Model {
                 total: {
                     type: DataTypes.FLOAT
                 },
-                OrderId: {
+                order_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Order,
                         key: 'id'
                     }
                 },
-                ProductId: {
+                product_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Product,
@@ -47,8 +47,8 @@ export class OrderItem extends Model {
     }
 
     static associate(models) {
-        this.belongsTo(models.Order)
-        this.belongsTo(models.Product)
+        this.belongsTo(models.Order, { foreignKey: 'order_id' })
+        this.belongsTo(models.Product, { foreignKey: 'product_id' })
     }
 }
 

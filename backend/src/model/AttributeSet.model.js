@@ -29,7 +29,7 @@ export class AttributeSet extends Model {
     }
 
     static associate(models) {
-        this.hasMany(models.Product)
+        //this.hasMany(models.Product)
     }
 }
 

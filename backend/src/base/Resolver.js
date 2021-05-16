@@ -8,7 +8,7 @@ export function generateResolver(model) {
         Query: {
             [singularName]: async function(_, data, { models }) {
                 try {
-                    return await models[singularName].findByPk(data.id, { include: { all: true, nested: true } })
+                    return await models[singularName].findByPk(data.id, { include: { all: true } })
                 } catch (error) {
                     console.error(error)
 
@@ -25,8 +25,7 @@ export function generateResolver(model) {
                         offset: data.page * data.perPage || 0,
                         order: data.sortField && data.sortOrder ? [[data.sortField, data.sortOrder]] : [],
                         include: {
-                            all: true,
-                            nested: true
+                            all: true
                         },
                         where: filter
                     })
@@ -37,6 +36,9 @@ export function generateResolver(model) {
                 }
             },
             ['_all' + pluralName + 'Meta']: async function(_, data, { models }) {
+                const { ids, ...other } = data.filter || {}
+                const filter = ids ? { id: ids, ...other } : filter
+
                 try {
                     return {
                         count: await models[singularName].count({
@@ -44,9 +46,9 @@ export function generateResolver(model) {
                             offset: data.page * data.perPage || 0,
                             order: data.sortField && data.sortOrder ? [[data.sortField, data.sortOrder]] : [],
                             include: {
-                                all: true,
-                                nested: true
-                            }
+                                all: true
+                            },
+                            where: filter
                         })
                     }
                 } catch (error) {
@@ -69,7 +71,9 @@ export function generateResolver(model) {
             ['update' + singularName]: async function(_, data, { models }) {
                 try {
                     const entity = await models[singularName].findByPk(data.id)
+                    console.log(data)
                     Object.assign(entity, data)
+
                     await entity.save()
 
                     return entity

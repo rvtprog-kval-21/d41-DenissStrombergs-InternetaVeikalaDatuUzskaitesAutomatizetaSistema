@@ -38,7 +38,7 @@ export class Address extends Model {
                 postalCode: {
                     type: DataTypes.STRING
                 },
-                CustomerId: {
+                customer_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Customer,
@@ -54,7 +54,7 @@ export class Address extends Model {
     }
 
     static associate(models) {
-        this.belongsTo(models.Customer)
+        this.belongsTo(models.Customer, { foreignKey: 'customer_id' })
         this.hasMany(models.Order)
     }
 }

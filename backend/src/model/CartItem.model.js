@@ -38,8 +38,19 @@ export class CartItem extends Model {
     }
 
     static associate(models) {
-        this.belongsTo(models.Cart)
-        this.belongsTo(models.Product)
+        models.Cart.belongsToMany(
+            models.Product,
+            {
+                through: this
+            }
+        )
+
+        models.Product.belongsToMany(
+            models.Cart,
+            {
+                through: this
+            }
+        )
     }
 }
 

@@ -1,6 +1,6 @@
 export const DATA = [
     {
-        modelName: 'Admin',
+        modelName: 'User',
         modelData: [
             {
                 username: 'deniss',
@@ -18,13 +18,27 @@ export const DATA = [
                 code: 'color',
                 isEnabled: true,
                 label: 'Color',
-                attributeOptions: ``,
+                type: 'select',
+                attributeOptions: `
+                    [
+                        {
+                            "label": "Red"
+                        },
+                        {
+                            "label": "Green"
+                        },
+                        {
+                            "label": "Blue"
+                        }
+                    ]
+                `,
                 isFilter: true
             },
             {
                 code: 'pencil_hardness',
                 isEnabled: true,
                 label: 'Pencil hardness',
+                type: 'number',
                 attributeOptions: ``,
                 isFilter: true,
             },
@@ -32,6 +46,7 @@ export const DATA = [
                 code: 'nib_size',
                 isEnabled: true,
                 label: 'Nib size',
+                type: 'number',
                 attributeOptions: ``,
                 isFilter: true
             },
@@ -39,6 +54,7 @@ export const DATA = [
                 code: 'author',
                 isEnabled: true,
                 label: 'Author',
+                type: 'string',
                 attributeOptions: ``,
                 isFilter: true,
             },
@@ -46,6 +62,7 @@ export const DATA = [
                 code: 'publisher',
                 isEnabled: true,
                 label: 'Publisher',
+                type: 'string',
                 attributeOptions: ``,
                 isFilter: true,
             },
@@ -53,6 +70,7 @@ export const DATA = [
                 code: 'page_count',
                 isEnabled: true,
                 label: 'Page count',
+                type: 'number',
                 attributeOptions: ``,
                 isFilter: true
             }
@@ -82,36 +100,36 @@ export const DATA = [
         modelName: 'AttributeSetAttribute',
         modelData: [
             {
-                AttributeSetId: 1,
-                AttributeId: 1
+                attribute_set_id: 1,
+                attribute_id: 1
             },
             {
-                AttributeSetId: 2,
-                AttributeId: 1
+                attribute_set_id: 2,
+                attribute_id: 1
             },
             {
-                AttributeSetId: 2,
-                AttributeId: 2
+                attribute_set_id: 2,
+                attribute_id: 2
             },
             {
-                AttributeSetId: 2,
-                AttributeId: 3
+                attribute_set_id: 2,
+                attribute_id: 3
             },
             {
-                AttributeSetId: 3,
-                AttributeId: 1
+                attribute_set_id: 3,
+                attribute_id: 1
             },
             {
-                AttributeSetId: 3,
-                AttributeId: 4
+                attribute_set_id: 3,
+                attribute_id: 4
             },
             {
-                AttributeSetId: 3,
-                AttributeId: 5
+                attribute_set_id: 3,
+                attribute_id: 5
             },
             {
-                AttributeSetId: 3,
-                AttributeId: 6
+                attribute_set_id: 3,
+                attribute_id: 6
             }
         ]
     },
@@ -252,7 +270,7 @@ export const DATA = [
         ]
     },
     {
-        modelName: 'CustomerGroup',
+        modelName: 'CustomerCustomerGroup',
         modelData: [
             {
                 CustomerId: 1,
@@ -276,8 +294,8 @@ export const DATA = [
                 totalTax: 21.0,
                 subtotal: 79.0,
                 total: 100.0,
-                CustomerId: 1,
-                AddressId: 1
+                customer_id: 1,
+                address_id: 1
             }
         ]
     },
@@ -318,22 +336,6 @@ export const DATA = [
         ]
     },
     {
-        modelName: 'PriceRule',
-        modelData: [
-            {
-                code: 'black_friday_2021',
-                type: 'percentage',
-                discountValue: 50,
-                filter: `
-                    {
-                        "from": "2021-11-26",
-                        "to": "2021-11-27"
-                    }
-                `
-            }
-        ]
-    },
-    {
         modelName: 'Product',
         modelData: [
             {
@@ -360,15 +362,14 @@ export const DATA = [
                     }
                 `,
                 attributeValues: ``,
-                attributeConfig: `
+                variations: `
                     {
                         "configurableAttributes": [
                             "nib_size"
                         ]
                     }
                 `,
-                cache: ``,
-                AttributeSetId: 2
+                attribute_set_id: 2
             },
             {
                 urlKey: null,
@@ -398,9 +399,8 @@ export const DATA = [
                         nib_size: 0
                     }
                 `,
-                attributeConfig: ``,
-                cache: ``,
-                AttributeSetId: 2
+                variations: ``,
+                attribute_set_id: 2
             },
             {
                 urlKey: null,
@@ -430,9 +430,8 @@ export const DATA = [
                         nib_size: 1
                     }
                 `,
-                attributeConfig: ``,
-                cache: ``,
-                AttributeSetId: 2
+                variations: ``,
+                attribute_set_id: 2
             }
         ]
     },
@@ -461,16 +460,16 @@ export const DATA = [
                 totalTax: 4.2,
                 subtotal: 20 ,
                 total: 24.2,
-                OrderId: 1,
-                ProductId: 2
+                order_id: 1,
+                product_id: 2
             },
             {
                 quantity: 2,
                 totalTax: 31.5,
                 subtotal: 15 ,
                 total: 18.15,
-                OrderId: 1,
-                ProductId: 3
+                order_id: 1,
+                product_id: 3
             }
         ]
     },
@@ -487,6 +486,7 @@ export const DATA = [
         modelName: 'Review',
         modelData: [
             {
+                status: 'accepted',
                 date: '2021-05-05',
                 title: 'Trash',
                 content: 'Absolute garbage, does not work.',

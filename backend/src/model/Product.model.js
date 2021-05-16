@@ -56,13 +56,10 @@ export class Product extends Model {
                 attributeValues: {
                     type: DataTypes.JSONB
                 },
-                attributeConfig: {
+                variations: {
                     type: DataTypes.JSONB
                 },
-                cache: {
-                    type: DataTypes.JSONB
-                },
-                AttributeSetId: {
+                attribute_set_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: AttributeSet,
@@ -78,10 +75,10 @@ export class Product extends Model {
     }
 
     static associate(models) {
-        this.belongsTo(models.AttributeSet)
-        this.hasMany(models.CartItem)
-        this.hasMany(models.OrderItem)
-        this.hasMany(models.Review)
+        this.belongsTo(models.AttributeSet, { foreignKey: 'attribute_set_id' })
+        //this.hasMany(models.CartItem)
+        this.hasMany(models.OrderItem, { foreignKey: 'product_id' })
+        //this.hasMany(models.Review)
     }
 }
 
