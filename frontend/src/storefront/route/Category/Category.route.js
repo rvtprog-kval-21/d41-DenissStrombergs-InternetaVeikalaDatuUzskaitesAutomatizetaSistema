@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom"
+import { useParams } from 'react-router-dom'
 import queryString from 'query-string'
 import Pagination from '@material-ui/lab/Pagination'
-import { GetCategory } from "../../query/Category.query"
+import { GetCategory } from '../../query/Category.query'
 import { PAGE_SIZE } from './Category.config'
-import ProductList from "../../component/ProductList/ProductList.component"
-import FilterList from "../../component/FilterList/FilterList.component"
+import ProductList from '../../component/ProductList/ProductList.component'
+import FilterList from '../../component/FilterList/FilterList.component'
 
 export function Category() {
     const { urlKey } = useParams()

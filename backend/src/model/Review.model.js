@@ -27,14 +27,14 @@ export class Review extends Model {
                 rating: {
                     type: DataTypes.INTEGER
                 },
-                CustomerId: {
+                customer_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Customer,
                         key: 'id'
                     }
                 },
-                ProductId: {
+                product_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Product,
@@ -50,8 +50,8 @@ export class Review extends Model {
     }
 
     static associate(models) {
-        this.belongsTo(models.Customer)
-        this.belongsTo(models.Product)
+        this.belongsTo(models.Customer, { foreignKey: 'customer_id' })
+        this.belongsTo(models.Product, { foreignKey: 'product_id' })
     }
 }
 

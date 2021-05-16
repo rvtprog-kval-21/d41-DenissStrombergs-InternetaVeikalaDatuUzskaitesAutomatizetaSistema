@@ -1,8 +1,8 @@
-import React from 'react';
-import CheckoutDeliveryOptions from '../../component/CheckoutDeliveryOptions/CheckoutDeliveryOptions.component';
-import CheckoutGuestForm from '../../component/CheckoutGuestForm/CheckoutGuestForm.component';
-import CheckoutShippingForm from '../../component/CheckoutShippingForm/CheckoutShippingForm.component';
-import CheckoutSummary from '../../component/CheckoutSummary/CheckoutSummary.component';
+import React from 'react'
+import CheckoutDeliveryOptions from '../../component/CheckoutDeliveryOptions/CheckoutDeliveryOptions.component'
+import CheckoutGuestForm from '../../component/CheckoutGuestForm/CheckoutGuestForm.component'
+import CheckoutShippingForm from '../../component/CheckoutShippingForm/CheckoutShippingForm.component'
+import CheckoutSummary from '../../component/CheckoutSummary/CheckoutSummary.component'
 
 export function Checkout() {
     return (

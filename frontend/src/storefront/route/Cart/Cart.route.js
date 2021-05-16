@@ -1,5 +1,5 @@
-import CartList from "../../component/CartList/CartList.component"
-import CartSummary from "../../component/CartSummary/CartSummary.component"
+import CartList from '../../component/CartList/CartList.component'
+import CartSummary from '../../component/CartSummary/CartSummary.component'
 
 export function Cart() {
     return (

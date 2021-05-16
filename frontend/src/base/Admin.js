@@ -13,6 +13,12 @@ import CustomerGroupResource from '../admin/resource/CustomerGroup/CustomerGroup
 import CustomerResource from '../admin/resource/Customer/CustomerResource.component'
 import OrderItemResource from '../admin/resource/OrderItem/OrderItemResource.component'
 import OrderResource from '../admin/resource/Order/OrderResource.component'
+import InvoiceResource from '../admin/resource/Invoice/InvoiceResource.component'
+import CategoryResource from '../admin/resource/Category/CategoryResource.component'
+import ProductCategoryResource from '../admin/resource/ProductCategory/ProductCategoryResource.component'
+import ReviewResource from '../admin/resource/Review/ReviewResource.component'
+import Layout from '../admin/component/Layout/Layout.component'
+import AddressResource from '../admin/resource/Address/AddressResource.component'
 
 export function Admin() {
     const [dataProvider, setDataProvider] = useState(null)
@@ -41,6 +47,7 @@ export function Admin() {
         <ReactAdmin
             dataProvider={ dataProvider }
             history={ createBrowserHistory({ basename: 'admin' }) }
+            layout={ Layout }
         >
             <Resource { ...UserResource } />
             <Resource { ...AttributeResource } />
@@ -51,8 +58,13 @@ export function Admin() {
             <Resource { ...ProductResource } />
             <Resource { ...CustomerGroupResource } />
             <Resource { ...CustomerResource } />
+            <Resource { ...AddressResource } />
             <Resource { ...OrderItemResource } />
             <Resource { ...OrderResource } />
+            <Resource { ...InvoiceResource } />
+            <Resource { ...CategoryResource } />
+            <Resource { ...ProductCategoryResource } />
+            <Resource { ...ReviewResource } />
         </ReactAdmin>
     )
 }

@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core"
+import { Typography } from '@material-ui/core'
 
 export function renderProductReview(review) {
     const { title, content, author: { first_name, last_name } } = review

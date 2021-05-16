@@ -11,7 +11,7 @@ export class Cart extends Model {
                     allowNull: false,
                     autoIncrement: true
                 },
-                CustomerId: {
+                customer_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Customer,
@@ -27,8 +27,8 @@ export class Cart extends Model {
     }
 
     static associate(models) {
-        this.hasMany(models.CartItem)
-        this.belongsTo(models.Customer)
+        this.hasMany(models.CartItem, { foreignKey: 'cart_id' })
+        this.belongsTo(models.Customer, { foreignKey: 'customer_id' })
     }
 }
 

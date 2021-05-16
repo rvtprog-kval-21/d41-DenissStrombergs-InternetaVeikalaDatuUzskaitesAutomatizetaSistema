@@ -6,14 +6,20 @@ export class ProductCategory extends Model {
     static init(sequelize) {
         return super.init(
             {
-                ProductId: {
+                id: {
+                    type: DataTypes.INTEGER,
+                    primaryKey: true,
+                    allowNull: false,
+                    autoIncrement: true
+                },
+                product_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Product,
                         key: 'id'
                     }
                 },
-                CategoryId: {
+                category_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Category,
@@ -32,14 +38,16 @@ export class ProductCategory extends Model {
         models.Product.belongsToMany(
             models.Category,
             {
-                through: this
+                through: this,
+                foreign_key: 'product_id'
             }
         )
 
         models.Category.belongsToMany(
             models.Product,
             {
-                through: this
+                through: this,
+                foreign_key: 'category_id'
             }
         )
     }

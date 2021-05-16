@@ -55,7 +55,7 @@ export class Address extends Model {
 
     static associate(models) {
         this.belongsTo(models.Customer, { foreignKey: 'customer_id' })
-        this.hasMany(models.Order)
+        this.hasMany(models.Order, { foreignKey: 'address_id' })
     }
 }
 

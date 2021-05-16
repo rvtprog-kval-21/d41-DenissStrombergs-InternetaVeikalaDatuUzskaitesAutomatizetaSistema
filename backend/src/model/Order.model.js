@@ -60,10 +60,11 @@ export class Order extends Model {
     }
 
     static associate(models) {
+        this.hasOne(models.Invoice, { foreignKey: 'order_id' })
+        this.hasMany(models.OrderItem, { foreignKey: 'order_id' })
         this.belongsTo(models.Address, { foreignKey: 'address_id' })
         this.belongsTo(models.Customer, { foreignKey: 'customer_id' })
-        //this.hasOne(models.Invoice)
-        this.hasMany(models.OrderItem, { foreignKey: 'order_id' })
+
     }
 }
 

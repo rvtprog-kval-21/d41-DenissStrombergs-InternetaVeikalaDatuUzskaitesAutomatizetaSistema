@@ -7,17 +7,17 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
 export function AttributeSetAttributeCreate(props) {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false)
     const [create, { loading, error }] = useCreate()
     const refresh = useRefresh()
 
     const handleClickOpen = () => {
-        setOpen(true);
-    };
+        setOpen(true)
+    }
     
     const handleClose = () => {
-        setOpen(false);
-    };
+        setOpen(false)
+    }
 
     const onSave = (test) => {
         const { record: { id } } = props

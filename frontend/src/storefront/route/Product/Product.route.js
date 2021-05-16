@@ -1,14 +1,14 @@
-import { useParams } from "react-router-dom"
-import ProductGallery from "../../component/ProductGallery/ProductGallery.component"
-import GetProduct from "../../query/Product.query"
+import { useParams } from 'react-router-dom'
+import ProductGallery from '../../component/ProductGallery/ProductGallery.component'
+import GetProduct from '../../query/Product.query'
 import Tab from '@material-ui/core/Tab'
 import TabList from '@material-ui/lab/TabList'
 import TabPanel from '@material-ui/lab/TabPanel'
-import { useState } from "react"
+import { useState } from 'react'
 import TabContext from '@material-ui/lab/TabContext'
-import ProductDetails from "../../component/ProductDetails/ProductDetails.component"
-import ProductReviews from "../../component/ProductReviews/ProductReviews.component"
-import ProductActions from "../../component/ProductActions/ProductActions.component"
+import ProductDetails from '../../component/ProductDetails/ProductDetails.component'
+import ProductReviews from '../../component/ProductReviews/ProductReviews.component'
+import ProductActions from '../../component/ProductActions/ProductActions.component'
 
 export function Product() {
     const { urlKey } = useParams()

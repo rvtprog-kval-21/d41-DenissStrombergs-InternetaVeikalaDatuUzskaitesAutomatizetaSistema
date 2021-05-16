@@ -3,7 +3,7 @@ import configureStore from './Store'
 import Admin from './Admin'
 import Homepage from '../storefront/route/Homepage/Homepage.route'
 import Error from '../storefront/route/Error/Error.route'
-import { BrowserRouter, Switch, Route } from "react-router-dom"
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Footer from '../storefront/component/Footer/Footer.component'
 import Header from '../storefront/component/Header/Header.component'
 import Account from '../storefront/route/Account/Account.route'

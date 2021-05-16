@@ -1,5 +1,5 @@
-import { Box, Link, Typography } from "@material-ui/core"
-import { GetCategories } from "../../query/Category.query"
+import { Box, Link, Typography } from '@material-ui/core'
+import { GetCategories } from '../../query/Category.query'
 
 export function renderFirstLevelItem(category) {
     const { name, urlKey } = category

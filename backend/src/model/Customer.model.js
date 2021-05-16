@@ -32,10 +32,10 @@ export class Customer extends Model {
     }
 
     static associate(models) {
-        this.hasMany(models.Address)
-        this.hasOne(models.Cart)
-        this.hasMany(models.Order)
-        this.hasMany(models.PaymentCard)
+        this.hasMany(models.Address, { foreignKey: 'customer_id' })
+        this.hasOne(models.Cart, { foreignKey: 'customer_id' })
+        this.hasMany(models.Order, { foreignKey: 'customer_id' })
+        this.hasMany(models.PaymentCard, { foreignKey: 'customer_id' })
     }
 }
 

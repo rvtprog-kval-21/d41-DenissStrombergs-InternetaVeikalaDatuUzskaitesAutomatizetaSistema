@@ -1,5 +1,5 @@
-import { Grid } from "@material-ui/core"
-import ProductItem from "../ProductItem/ProductItem.component"
+import { Grid } from '@material-ui/core'
+import ProductItem from '../ProductItem/ProductItem.component'
 
 export function renderProductItem(product) {
     return (

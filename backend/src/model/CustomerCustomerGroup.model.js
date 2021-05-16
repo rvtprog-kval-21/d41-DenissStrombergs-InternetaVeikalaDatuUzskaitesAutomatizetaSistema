@@ -6,14 +6,20 @@ export class CustomerCustomerGroup extends Model {
     static init(sequelize) {
         return super.init(
             {
-                CustomerId: {
+                id: {
+                    type: DataTypes.INTEGER,
+                    primaryKey: true,
+                    allowNull: false,
+                    autoIncrement: true
+                },
+                customer_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Customer,
                         key: 'id'
                     }
                 },
-                CustomerGroupId: {
+                customer_group_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: CustomerGroup,
@@ -32,14 +38,16 @@ export class CustomerCustomerGroup extends Model {
         models.Customer.belongsToMany(
             models.CustomerGroup,
             {
-                through: this
+                through: this,
+                foreignKey: 'customer_id'
             }
         )
 
         models.CustomerGroup.belongsToMany(
             models.Customer,
             {
-                through: this
+                through: this,
+                foreignKey: 'customer_group_id'
             }
         )
     }

@@ -1,18 +1,16 @@
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid, IconButton } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
+import Card from '@material-ui/core/Card'
+import CardActionArea from '@material-ui/core/CardActionArea'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import CardMedia from '@material-ui/core/CardMedia'
+import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@material-ui/core/styles'
+import { Grid, IconButton } from '@material-ui/core'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { useCallback } from 'react';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
-import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add'
+import RemoveIcon from '@material-ui/icons/Remove'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 const useStyles = makeStyles({
     root: {
@@ -29,7 +27,7 @@ const useStyles = makeStyles({
 
 export function CartItem(props) {
     const { product: { product: { name, url_key }, product, quantity } } = props
-    const classes = useStyles();
+    const classes = useStyles()
     const history = useHistory()
     const dispatch = useDispatch()
 

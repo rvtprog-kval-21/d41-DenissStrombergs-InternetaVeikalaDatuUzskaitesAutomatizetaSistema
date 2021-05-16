@@ -5,14 +5,14 @@ export class Variant extends Model {
     static init(sequelize) {
         return super.init(
             {
-                ParentId: {
+                parent_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Product,
                         key: 'id'
                     }
                 },
-                ChildId: {
+                child_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Product,
@@ -33,7 +33,7 @@ export class Variant extends Model {
             {
                 through: this,
                 as: 'Parents',
-                foreignKey: 'ParentId'
+                foreignKey: 'parent_id'
             }
         )
 
@@ -42,7 +42,7 @@ export class Variant extends Model {
             {
                 through: this,
                 as: 'Children',
-                foreignKey: 'ChildId'
+                foreignKey: 'child_id'
             }
         )
     }

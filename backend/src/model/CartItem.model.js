@@ -15,14 +15,14 @@ export class CartItem extends Model {
                 quantity: {
                     type: DataTypes.INTEGER
                 },
-                CartId: {
+                cart_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Cart,
                         key: 'id'
                     }
                 },
-                ProductId: {
+                product_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Product,
@@ -41,14 +41,16 @@ export class CartItem extends Model {
         models.Cart.belongsToMany(
             models.Product,
             {
-                through: this
+                through: this,
+                foreignKey: 'cart_id'
             }
         )
 
         models.Product.belongsToMany(
             models.Cart,
             {
-                through: this
+                through: this,
+                foreignKey: 'product_id'
             }
         )
     }

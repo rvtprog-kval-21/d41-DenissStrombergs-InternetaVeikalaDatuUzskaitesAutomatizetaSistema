@@ -1,7 +1,7 @@
-import React from 'react';
-import { Formik } from 'formik';
-import TextField from '@material-ui/core/TextField';
-import { Button, Typography } from '@material-ui/core';
+import React from 'react'
+import { Formik } from 'formik'
+import TextField from '@material-ui/core/TextField'
+import { Button, Typography } from '@material-ui/core'
 
 export function CheckoutShippingForm() {
     const renderForm = (props) => {

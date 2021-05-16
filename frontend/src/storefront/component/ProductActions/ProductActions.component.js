@@ -1,5 +1,5 @@
-import { useDispatch } from "react-redux"
-import { Button, Typography } from "@material-ui/core"
+import { useDispatch } from 'react-redux'
+import { Button, Typography } from '@material-ui/core'
 
 export function ProductActions(props) {
     const { product, product: { name, sku, price} } = props

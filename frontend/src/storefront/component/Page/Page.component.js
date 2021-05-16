@@ -1,5 +1,5 @@
 import parse from 'html-react-parser'
-import GetPage from "../../query/Page.query"
+import GetPage from '../../query/Page.query'
 
 export function Page(props) {
     const { urlKey } = props

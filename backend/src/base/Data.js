@@ -152,7 +152,8 @@ export const DATA = [
                 name: 'Root',
                 productCount: 0,
                 isInMenu: true,
-                CategoryId: 1
+                content: '',
+                category_id: null
             },
             {
                 urlKey: 'drawing',
@@ -160,7 +161,8 @@ export const DATA = [
                 name: 'Drawing',
                 productCount: 0,
                 isInMenu: true,
-                CategoryId: 1
+                content: '',
+                category_id: 1
             },
             {
                 urlKey: 'reading',
@@ -168,7 +170,8 @@ export const DATA = [
                 name: 'Reading',
                 productCount: 0,
                 isInMenu: true,
-                CategoryId: 1
+                content: '',
+                category_id: 1
             },
             {
                 urlKey: 'pencils',
@@ -176,7 +179,8 @@ export const DATA = [
                 name: 'Pencils',
                 productCount: 0,
                 isInMenu: true,
-                CategoryId: 2
+                content: '',
+                category_id: 2
             },
             {
                 urlKey: 'pens',
@@ -184,7 +188,8 @@ export const DATA = [
                 name: 'Pens',
                 productCount: 0,
                 isInMenu: true,
-                CategoryId: 2
+                content: '',
+                category_id: 2
             },
             {
                 urlKey: 'regular_pencils',
@@ -192,7 +197,8 @@ export const DATA = [
                 name: 'Regular pencils',
                 productCount: 0,
                 isInMenu: true,
-                CategoryId: 4
+                content: '',
+                category_id: 4
             },
             {
                 urlKey: 'mechanical_pencils',
@@ -200,7 +206,8 @@ export const DATA = [
                 name: 'Mechanical pencils',
                 productCount: 0,
                 isInMenu: true,
-                CategoryId: 4
+                content: '',
+                category_id: 4
             },
             {
                 urlKey: 'ballpoint_pens',
@@ -208,7 +215,8 @@ export const DATA = [
                 name: 'Ballpoint pens',
                 productCount: 0,
                 isInMenu: true,
-                CategoryId: 5
+                content: '',
+                category_id: 5
             },
             {
                 urlKey: 'fountain_pens',
@@ -216,7 +224,8 @@ export const DATA = [
                 name: 'Fountain pens',
                 productCount: 0,
                 isInMenu: true,
-                CategoryId: 5
+                content: '',
+                category_id: 5
             }
         ]
     },
@@ -244,7 +253,7 @@ export const DATA = [
                 street1: 'Tiraine, Viskalnu iela 13-8',
                 street2: '',
                 postalCode: 'LV-2167',
-                CustomerId: 1
+                customer_id: 1
             }
         ]
     },
@@ -252,7 +261,7 @@ export const DATA = [
         modelName: 'Cart',
         modelData: [
             {
-                CustomerId: 1
+                customer_id: 1
             }
         ]
     },
@@ -273,12 +282,12 @@ export const DATA = [
         modelName: 'CustomerCustomerGroup',
         modelData: [
             {
-                CustomerId: 1,
-                CustomerGroupId: 1
+                customer_id: 1,
+                customer_group_id: 1
             },
             {
-                CustomerId: 1,
-                CustomerGroupId: 2
+                customer_id: 1,
+                customer_group_id: 2
             }
         ]
     },
@@ -308,7 +317,7 @@ export const DATA = [
                 totalTax: 21.0,
                 subtotal: 79.0,
                 total: 100.0,
-                OrderId: 1
+                order_id: 1
             }
         ]
     },
@@ -331,7 +340,7 @@ export const DATA = [
                 number: '5555555555554444',
                 cvcCode: '123',
                 expirationDate: '2021-12-31',
-                CustomerId: 1
+                customer_id: 1
             }
         ]
     },
@@ -435,20 +444,18 @@ export const DATA = [
             }
         ]
     },
-
-
     {
         modelName: 'CartItem',
         modelData: [
             {
                 quantity: 5,
-                CartId: 1,
-                ProductId: 2
+                cart_id: 1,
+                product_id: 2
             },
             {
                 quantity: 10,
-                CartId: 1,
-                ProductId: 3
+                cart_id: 1,
+                product_id: 3
             }
         ]
     },
@@ -477,8 +484,8 @@ export const DATA = [
         modelName: 'ProductCategory',
         modelData: [
             {
-                ProductId: 1,
-                CategoryId: 7
+                product_id: 1,
+                category_id: 7
             }
         ]
     },
@@ -491,8 +498,8 @@ export const DATA = [
                 title: 'Trash',
                 content: 'Absolute garbage, does not work.',
                 raiting: 1,
-                CustomerId: 1,
-                ProductId: 1
+                customer_id: 1,
+                product_id: 1
             }
         ]
     },
@@ -500,12 +507,12 @@ export const DATA = [
         modelName: 'Variant',
         modelData: [
             {
-                ParentId: 1,
-                ChildId: 2
+                parent_id: 1,
+                child_id: 2
             },
             {
-                ParentId: 1,
-                ChildId: 3
+                parent_id: 1,
+                child_id: 3
             }
         ]
     }

@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core"
+import { Typography } from '@material-ui/core'
 
 export function ProductDetails(props) {
     const { product: { description} } = props

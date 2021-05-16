@@ -1,4 +1,6 @@
 import { BooleanInput, Datagrid, DateInput, Edit, NumberField, NumberInput, ReferenceField, ReferenceManyField, SimpleForm, TextField, TextInput } from 'react-admin'
+import AddressField from '../Address/AddressField.component'
+import CustomerField from '../Customer/CustomerField.component'
 import OrderStatusInput from './OrderStatusInput.component'
 
 export function OrderEdit(props) {
@@ -31,6 +33,12 @@ export function OrderEdit(props) {
                         <NumberField source="total" />
                     </Datagrid>
                 </ReferenceManyField>
+                <ReferenceField source="customer_id" reference="Customer">
+                    <CustomerField />
+                </ReferenceField>
+                <ReferenceField source="address_id" reference="Address" fullWidth link={ false }>
+                    <AddressField />
+                </ReferenceField>
             </SimpleForm>
         </Edit>
     )

@@ -23,7 +23,7 @@ export class PaymentCard extends Model {
                 expirationDate: {
                     type: DataTypes.DATE
                 },
-                CustomerId: {
+                customer_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Customer,
@@ -39,7 +39,7 @@ export class PaymentCard extends Model {
     }
 
     static associate(models) {
-        this.belongsTo(models.Customer)
+        this.belongsTo(models.Customer, { foreignKey: 'customer_id' })
     }
 }
 

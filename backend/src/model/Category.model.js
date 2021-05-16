@@ -27,7 +27,10 @@ export class Category extends Model {
                 isInMenu: {
                     type: DataTypes.BOOLEAN
                 },
-                CategoryId: {
+                content: {
+                    type: DataTypes.TEXT
+                },
+                category_id: {
                     type: DataTypes.INTEGER,
                     references: {
                         model: Category,
@@ -43,8 +46,8 @@ export class Category extends Model {
     }
 
     static associate() {
-        this.belongsTo(this)
-        this.hasMany(this)
+        this.hasMany(this, { foreignKey: 'category_id' })
+        this.belongsTo(this, { foreignKey: 'category_id' })
     }
 }
 
