@@ -7,9 +7,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid } from '@material-ui/core'
-import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { useCallback } from 'react'
 
 const useStyles = makeStyles({
     root: {
@@ -21,14 +19,12 @@ const useStyles = makeStyles({
 })
 
 export function ProductItem(props) {
-    const { product: { name, sku, price, short_description, url_key } } = props
+    const { product: { name, sku, price, shortDescription, urlKey } } = props
     const classes = useStyles()
     const history = useHistory()
 
-    console.log(props)
-
     const onProductClick = () => {
-        history.push(`/product/${ url_key }`)
+        history.push(`/product/${ urlKey }`)
     }
 
     return (
@@ -48,7 +44,7 @@ export function ProductItem(props) {
                             { name }
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            { short_description }
+                            { shortDescription }
                         </Typography>
                         </CardContent>
                     </CardActionArea>

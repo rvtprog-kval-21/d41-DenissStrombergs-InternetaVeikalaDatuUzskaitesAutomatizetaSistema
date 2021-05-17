@@ -4,6 +4,7 @@ import Popover from '@material-ui/core/Popover'
 import IconButton from '@material-ui/core/IconButton'
 import SearchIcon from '@material-ui/icons/Search'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
+import SearchForm from '../SearchForm/SearchForm.component'
 
 export function SearchOverlay() {
     return (
@@ -18,8 +19,9 @@ export function SearchOverlay() {
                         anchorReference="anchorPosition"
                         anchorPosition={{ top: 0, left: window.innerWidth }}
                         marginThreshold={ 0 }
+                        PaperProps={{ style: { width: '500px', height: '100%', maxHeight: 'none' } }}
                     >
-                        <Typography>Search</Typography>
+                        <SearchForm />
                     </Popover>
                 </div>
             )}

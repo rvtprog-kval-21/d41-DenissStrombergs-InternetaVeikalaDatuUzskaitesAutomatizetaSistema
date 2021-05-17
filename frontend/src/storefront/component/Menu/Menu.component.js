@@ -1,24 +1,6 @@
 import { Box, Link, Typography } from '@material-ui/core'
 import { GetCategories } from '../../query/Category.query'
 
-export function renderFirstLevelItem(category) {
-    const { name, urlKey } = category
-
-    return (
-        <Link href={ `/category/${ urlKey }` } color="inherit">
-            <Typography>
-                { name }
-            </Typography>
-        </Link>
-    )
-}
-
-export function renderFirstLevelList(categories, parentCategory) {
-    const children = categories.filter((category) => category.categoryId == parentCategory.id && category.name != 'Root')
-
-    return children.map(renderFirstLevelItem)
-}
-
 export function Menu() {
     const categories = GetCategories()
 
@@ -28,9 +10,29 @@ export function Menu() {
 
     const rootCategory = categories.find((category) => category.id === '1')
 
+    const renderFirstLevelItem = (parentCategory) => {
+        const { name, urlKey } = parentCategory
+        const children = categories.filter((category) => category.categoryId == parentCategory.id && category.name != 'Root')
+        console.log(children)
+    
+        return (
+            <Link href={ `/category/${ urlKey }` } color="inherit">
+                <Typography>
+                    { name }
+                </Typography>
+            </Link>
+        )
+    }
+
+    const renderFirstLevelList = () => {
+        const children = categories.filter((category) => category.categoryId == rootCategory.id && category.name != 'Root')
+
+        return children.map(renderFirstLevelItem)
+    }
+
     return (
         <Box display="flex">
-            { renderFirstLevelList(categories, rootCategory) }
+            { renderFirstLevelList() }
         </Box>
     )
 }

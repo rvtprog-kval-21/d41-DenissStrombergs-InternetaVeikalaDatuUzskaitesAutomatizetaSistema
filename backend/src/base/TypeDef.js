@@ -1,5 +1,4 @@
 import pascalcase from 'pascalcase'
-import pluralize from 'pluralize'
 
 export const typeMap = {
     BOOLEAN: 'Boolean!',

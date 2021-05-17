@@ -1,4 +1,5 @@
 import React from 'react'
+import AddressForm from '../../component/AddressForm/AddressForm.component'
 import CheckoutDeliveryOptions from '../../component/CheckoutDeliveryOptions/CheckoutDeliveryOptions.component'
 import CheckoutGuestForm from '../../component/CheckoutGuestForm/CheckoutGuestForm.component'
 import CheckoutShippingForm from '../../component/CheckoutShippingForm/CheckoutShippingForm.component'

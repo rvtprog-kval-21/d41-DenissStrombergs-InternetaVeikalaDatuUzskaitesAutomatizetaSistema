@@ -1,53 +1,67 @@
-import React from 'react'
-import { Formik } from 'formik'
-import TextField from '@material-ui/core/TextField'
+import { useState } from 'react'
+import Typography from '@material-ui/core/Typography'
 import { Button } from '@material-ui/core'
+import SignUpForm from '../../component/SignUpForm/SignUpForm.component'
+import SignInForm from '../../component/SignInForm/SignInForm.component'
+import { useSelector } from 'react-redux'
 
 export function Account() {
-    const validate = (values) => {
-        const errors = {}
-        if (!values.email) {
-          errors.email = 'Required'
-        } else if (
-          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-        ) {
-          errors.email = 'Invalid email address'
-        }
-        return errors
-      }
+    const [step, setStep] = useState('SIGN_IN')
+    const { isSignedIn } = useSelector(state => state.customer) || {}
 
-    const onSubmit = (values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2))
-          setSubmitting(false)
-        }, 400)
+    const onCreateAccountClick = () => {
+        setStep('SIGN_UP')
+    }
+
+    const onLoginIntoAccountClick = () => {
+        setStep('SIGN_IN')
+    }
+
+    const renderSignIn = () => {
+        return (
+            <div>
+                <SignInForm />
+                <Typography>
+                    Don't haven an account?
+                </Typography>
+                <Button
+                    onClick={ onCreateAccountClick }
+                    variant="contained"
+                    color="primary"
+                >
+                    Create an account
+                </Button>
+            </div>
+        )
+    }
+
+    const renderSignUp = () => {
+        return (
+            <div>
+                <SignUpForm />
+                <Typography>
+                    Already have an account?
+                </Typography>
+                <Button
+                    onClick={ onLoginIntoAccountClick }
+                    variant="contained"
+                    color="primary"
+                >
+                    Login into account
+                </Button>
+            </div>
+        )
+    }
+
+    const stepRenderMap = {
+        'SIGN_IN': renderSignIn,
+        'SIGN_UP': renderSignUp
     }
 
     return (
         <div>
-            <Formik
-                initialValues={{ email: '', password: '' }}
-                validate={ validate }
-                onSubmit={ onSubmit }
-            >
-                {({
-                    values,
-                    errors,
-                    touched,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                    isSubmitting
-                }) => (
-                    <form onSubmit={handleSubmit}>
-                    <TextField  error={ errors.email && touched.email } helperText={ errors.email } label="Email" placeholder="Email" fullWidth type="email" name="email" onChange={ handleChange } onBlur={ handleBlur } value={ values.email } />
-                    <TextField error={ errors.password && touched.password } helperText={ errors.password } label="Password" placeholder="Password" fullWidth type="password" name="password" onChange={ handleChange } onBlur={ handleBlur } value={ values.password } />
-                    {errors.password && touched.password && errors.password}
-                    <Button type="submit" disabled={ isSubmitting } variant="contained" color="primary">Proceed to billing</Button>
-                    </form>
-                )}
-            </Formik>
-      </div>
+            { stepRenderMap[step]() }
+        </div>
     )
 }
 

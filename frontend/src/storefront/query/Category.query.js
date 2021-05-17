@@ -9,7 +9,7 @@ export const CATEGORIES = gql`
             urlKey,
             productCount,
             isInMenu,
-            categoryId: CategoryId
+            categoryId: category_id
         }
     }
 `

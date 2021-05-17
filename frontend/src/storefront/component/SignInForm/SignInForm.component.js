@@ -2,10 +2,13 @@ import { Button } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
 
-export function CheckoutGuestForm() {
+export function SignInForm() {
     const initialValues = {
         email: '',
-        password: ''
+        password: '',
+        confirmPassword: '',
+        firstName: '',
+        lastName: ''
     }
 
     const validate = (values) => {
@@ -63,4 +66,4 @@ export function CheckoutGuestForm() {
     )
 }
 
-export default CheckoutGuestForm
+export default SignInForm

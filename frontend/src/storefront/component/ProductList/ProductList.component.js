@@ -8,7 +8,7 @@ export function renderProductItem(product) {
 }
 
 export function ProductList(props) {
-    const { category: { products= [] } = {} } = props
+    const { category: { products = [] } = {} } = props
 
     return (
         <div className="ProductList">

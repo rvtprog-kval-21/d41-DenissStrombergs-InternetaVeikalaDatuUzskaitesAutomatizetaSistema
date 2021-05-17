@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { ReferenceInput, SelectInput, SimpleForm, useCreate, useRefresh  } from 'react-admin'
+import { ReferenceInput, SelectInput, SimpleForm, useCreate, useRefresh } from 'react-admin'
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
-export function AttributeSetAttributeCreate(props) {
+export function AttributeSetAttributeCreateButton(props) {
     const [open, setOpen] = useState(false)
     const [create, { loading, error }] = useCreate()
     const refresh = useRefresh()
@@ -46,7 +46,7 @@ export function AttributeSetAttributeCreate(props) {
                 <DialogContent>
                     <SimpleForm resource="AttributeSetAttribute" save={ onSave }>
                         <ReferenceInput source="attribute_id" reference="Attribute">
-                            <SelectInput source="name" />
+                            <SelectInput source="label" />
                         </ReferenceInput>
                     </SimpleForm>
                 </DialogContent>
@@ -55,4 +55,4 @@ export function AttributeSetAttributeCreate(props) {
     )
 }
 
-export default AttributeSetAttributeCreate
+export default AttributeSetAttributeCreateButton

@@ -140,6 +140,11 @@ export const DATA = [
                 code: 'test_block',
                 isEnabled: true,
                 content: '<h2>Test Block</h2>'
+            },
+            {
+                code: 'footer',
+                isEnabled: true,
+                content: '<h2>Footer</h2>'
             }
         ]
     },
@@ -329,18 +334,12 @@ export const DATA = [
                 urlKey: 'test_page',
                 title: 'Test Page',
                 content: '<h1>Test Page</h1>'
-            }
-        ]
-    },
-    {
-        modelName: 'PaymentCard',
-        modelData: [
+            },
             {
-                cardholderName: 'Deniss Strombergs',
-                number: '5555555555554444',
-                cvcCode: '123',
-                expirationDate: '2021-12-31',
-                customer_id: 1
+                isEnabled: true,
+                urlKey: 'homepage',
+                title: 'Homepage',
+                content: '<h1>Welcome to the store.</h1>'
             }
         ]
     },
@@ -486,6 +485,10 @@ export const DATA = [
             {
                 product_id: 1,
                 category_id: 7
+            },
+            {
+                product_id: 1,
+                category_id: 2
             }
         ]
     },

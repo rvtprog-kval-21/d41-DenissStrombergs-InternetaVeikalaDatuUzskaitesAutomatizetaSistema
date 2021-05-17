@@ -22,6 +22,7 @@ export function CartOverlay() {
                         anchorReference="anchorPosition"
                         anchorPosition={{ top: 0, left: window.innerWidth }}
                         marginThreshold={ 0 }
+                        PaperProps={{ style: { width: '500px', height: '100%', maxHeight: 'none' } }}
                     >
                         <Typography>Cart</Typography>
                         <CartList />

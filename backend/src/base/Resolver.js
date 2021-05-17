@@ -17,7 +17,7 @@ export function generateResolver(model) {
             },
             ['all' + pluralName]: async function(_, data, { models }) {
                 const { ids, ...other } = data.filter || {}
-                const filter = ids ? { id: ids, ...other } : filter
+                const filter = ids ? { id: ids, ...other } : data.filter
                 
                 try {
                     return await models[singularName].findAll({
@@ -71,7 +71,6 @@ export function generateResolver(model) {
             ['update' + singularName]: async function(_, data, { models }) {
                 try {
                     const entity = await models[singularName].findByPk(data.id)
-                    console.log(data)
                     Object.assign(entity, data)
 
                     await entity.save()

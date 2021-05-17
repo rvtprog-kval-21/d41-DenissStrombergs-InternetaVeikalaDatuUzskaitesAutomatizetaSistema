@@ -18,7 +18,7 @@ export function ProductCreate(props) {
                 <NumberInput source="specialTaxRate" />
                 <TextInput source="shortDescription" />
                 <RichTextInput source="longDescription" />
-                <ReferenceInput source="AttributeSetId" reference="AttributeSet">
+                <ReferenceInput source="attribute_set_id" reference="AttributeSet">
                     <SelectInput source="name" />
                 </ReferenceInput>
                 <TextInput source="attributeValues" />

@@ -1,4 +1,5 @@
 import { BooleanInput, Datagrid, DeleteButton, Edit, ReferenceField, ReferenceManyField, SimpleForm, TextField, TextInput } from 'react-admin'
+import AttributeSetAttributeCreateButton from './AttributeSetAttributeCreateButton.component'
 
 export function AttributeSetEdit(props) {
     return (
@@ -7,13 +8,16 @@ export function AttributeSetEdit(props) {
                 <TextInput source="id" disabled/>
                 <BooleanInput source="isEnabled"/>
                 <TextInput source="name"/>
+                <AttributeSetAttributeCreateButton />
                 <ReferenceManyField
-                    source="AttributesIds"
-                    target="ids"
-                    reference="Attribute"
+                    source="id"
+                    target="attribute_set_id"
+                    reference="AttributeSetAttribute"
                 >
                     <Datagrid>
-                        <TextField source="label" />
+                        <ReferenceField source="attribute_id" reference="Attribute">
+                            <TextField source="label" />
+                        </ReferenceField>
                         <DeleteButton redirect={ false } />
                     </Datagrid>
                 </ReferenceManyField>

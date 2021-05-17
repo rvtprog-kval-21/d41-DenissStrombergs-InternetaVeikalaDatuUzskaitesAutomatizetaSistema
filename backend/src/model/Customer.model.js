@@ -22,6 +22,10 @@ export class Customer extends Model {
                 },
                 lastName: {
                     type: DataTypes.STRING
+                },
+                isSignedIn: {
+                    type: DataTypes.BOOLEAN,
+                    defaultValue: false
                 }
             },
             {
@@ -35,7 +39,6 @@ export class Customer extends Model {
         this.hasMany(models.Address, { foreignKey: 'customer_id' })
         this.hasOne(models.Cart, { foreignKey: 'customer_id' })
         this.hasMany(models.Order, { foreignKey: 'customer_id' })
-        this.hasMany(models.PaymentCard, { foreignKey: 'customer_id' })
     }
 }
 

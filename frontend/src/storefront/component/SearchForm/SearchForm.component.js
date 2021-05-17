@@ -2,10 +2,9 @@ import { Button } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
 
-export function CheckoutGuestForm() {
+export function SearchForm() {
     const initialValues = {
-        email: '',
-        password: ''
+        search: ''
     }
 
     const validate = (values) => {
@@ -28,16 +27,9 @@ export function CheckoutGuestForm() {
             <Form>
                 <Field
                     component={ TextField }
-                    type="email"
-                    name="email"
-                    label="Email"
-                    fullWidth
-                />
-                <Field
-                    component={ TextField }
-                    type="password"
-                    name="password"
-                    label="Password"
+                    type="text"
+                    name="search"
+                    label="Search"
                     fullWidth
                 />
                 <Button
@@ -46,7 +38,7 @@ export function CheckoutGuestForm() {
                     variant="contained"
                     color="primary"
                 >
-                    Sign up
+                    Search
                 </Button>
             </Form>
         )
@@ -63,4 +55,4 @@ export function CheckoutGuestForm() {
     )
 }
 
-export default CheckoutGuestForm
+export default SearchForm

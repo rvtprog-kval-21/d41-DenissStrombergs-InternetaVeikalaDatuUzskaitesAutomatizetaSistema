@@ -1,12 +1,12 @@
 import { Typography } from '@material-ui/core'
 
 export function renderProductReview(review) {
-    const { title, content, author: { first_name, last_name } } = review
+    const { title, content, author: { firstName, lastName } } = review
 
     return (
         <div>
             <Typography>
-                { `${ first_name } ${ last_name }` }
+                { `${ firstName } ${ lastName }` }
             </Typography>
             <Typography variant="h5">
                 { title }

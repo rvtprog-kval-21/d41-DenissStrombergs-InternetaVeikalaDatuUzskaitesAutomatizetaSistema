@@ -20,7 +20,6 @@ import Review from '../model/Review.model'
 import Variant from '../model/Variant.model'
 import CONFIG from './Config'
 import DATA from './Data'
-import PaymentCard from '../model/PaymentCard.model'
 import User from '../model/User.model'
 
 class Database {
@@ -51,7 +50,6 @@ class Database {
             Order: Order.init(this.sequelize),
             Invoice: Invoice.init(this.sequelize),
             Page: Page.init(this.sequelize),
-            PaymentCard: PaymentCard.init(this.sequelize),
             Product: Product.init(this.sequelize),
             CartItem: CartItem.init(this.sequelize),
             OrderItem: OrderItem.init(this.sequelize),

@@ -31,10 +31,10 @@ export function Router() {
                 <Header/>
                 <Switch>
                     <Route path="/" render={ () => (<Homepage/>) } exact/>
+                    <Route path="/checkout" render={ () => (<Checkout/>) } exact/>
                     <Route path="/account" render={ () => (<Account/>) } exact/>
                     <Route path="/cart" render={ () => (<Cart/>) } exact/>
                     <Route path="/category/:urlKey" render={ () => (<Category/>) }/>
-                    <Route path="/checkout" render={ () => (<Checkout/>) } exact/>
                     <Route path="/page/:urlKey" render={ () => (<Page/>) }/>
                     <Route path="/product/:urlKey" render={ () => (<Product/>) }/>
                     <Route path="/search/:query" render={ () => (<Search/>) }/>

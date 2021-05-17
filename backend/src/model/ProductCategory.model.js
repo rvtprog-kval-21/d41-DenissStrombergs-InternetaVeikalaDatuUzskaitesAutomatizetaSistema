@@ -39,7 +39,7 @@ export class ProductCategory extends Model {
             models.Category,
             {
                 through: this,
-                foreign_key: 'product_id'
+                foreignKey: 'product_id'
             }
         )
 
@@ -47,7 +47,7 @@ export class ProductCategory extends Model {
             models.Product,
             {
                 through: this,
-                foreign_key: 'category_id'
+                foreignKey: 'category_id'
             }
         )
     }
