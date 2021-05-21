@@ -5,7 +5,7 @@ export const typeMap = {
     INTEGER: 'Int!',
     FLOAT: 'Float!',
     STRING: 'String!',
-    JSONB: 'String!',
+    JSONB: 'JSON!',
     TEXT: 'String!',
     DATE: 'Date!'
 }
@@ -64,6 +64,7 @@ export function generateTypeDef(model) {
 
     const a = `
         scalar Date
+        scalar JSON
 
         type ${ singularName } {
             id: ID!

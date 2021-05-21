@@ -21,7 +21,8 @@ export class Cart extends Model {
             },
             {
                 sequelize,
-                modelName: 'Cart'
+                modelName: 'Cart',
+                timestamps: false
             }
         )
     }

@@ -5,7 +5,7 @@ export const accountResolver = {
                 const customer = await models.Customer.findOne({ where: {
                     email: data.email,
                     password: data.password
-                }})
+                }, include: { model: models.Cart, include: [models.Product] }})
                 customer.isSignedIn = true
                 customer.save()
 

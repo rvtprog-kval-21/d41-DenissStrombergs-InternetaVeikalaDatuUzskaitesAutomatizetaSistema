@@ -29,7 +29,8 @@ export class ProductCategory extends Model {
             },
             {
                 sequelize,
-                modelName: 'ProductCategory'
+                modelName: 'ProductCategory',
+                timestamps: false
             }
         )
     }

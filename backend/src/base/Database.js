@@ -17,7 +17,6 @@ import OrderItem from '../model/OrderItem.model'
 import Page from '../model/Page.model'
 import Product from '../model/Product.model'
 import Review from '../model/Review.model'
-import Variant from '../model/Variant.model'
 import CONFIG from './Config'
 import DATA from './Data'
 import User from '../model/User.model'
@@ -54,8 +53,7 @@ class Database {
             CartItem: CartItem.init(this.sequelize),
             OrderItem: OrderItem.init(this.sequelize),
             ProductCategory: ProductCategory.init(this.sequelize),
-            Review: Review.init(this.sequelize),
-            //Variant: Variant.init(this.sequelize)
+            Review: Review.init(this.sequelize)
         }
     }
 

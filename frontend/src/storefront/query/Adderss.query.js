@@ -1,4 +1,6 @@
-export const GET_ALL_ADDRESSES = `
+import { gql, useQuery } from '@apollo/client'
+
+export const GET_ALL_ADDRESSES = gql`
     query GetAllAddresses($customerId: ID!) {
         allAddresses(filter: { customer_id: $customerId }) {
             id
@@ -15,7 +17,7 @@ export const GET_ALL_ADDRESSES = `
     }
 `
 
-export const CREATE_ADDRESS = `
+export const CREATE_ADDRESS = gql`
     mutation CreateAddress(
         $firstName: String!,
         $lastName: String!,
@@ -54,7 +56,7 @@ export const CREATE_ADDRESS = `
     }
 `
 
-export const UPDATE_ADDRESS = `
+export const UPDATE_ADDRESS = gql`
     mutation UpdateAddress(
         $id: ID!,
         $firstName: String!,
@@ -95,7 +97,7 @@ export const UPDATE_ADDRESS = `
     }
 `
 
-export const DELETE_ADDRESS = `
+export const DELETE_ADDRESS = gql`
     mutation DeleteAddress($id: ID!) {
         deleteAddress(id: $id) {
             id
@@ -103,18 +105,42 @@ export const DELETE_ADDRESS = `
     }
 `
 
-export function GetAllAddresses() {
+export function GetAllAddresses(variables) {
+    const { loading, error, data } = useQuery(GET_ALL_ADDRESSES, { variables })
 
+    if (loading || error) {
+        return null
+    }
+
+    return data
 }
 
-export function CreateAddress() {
+export function CreateAddress(variables) {
+    const { loading, error, data } = useQuery(CREATE_ADDRESS, { variables })
 
+    if (loading || error) {
+        return null
+    }
+
+    return data
 }
 
-export function UpdateAddress() {
+export function UpdateAddress(variables) {
+    const { loading, error, data } = useQuery(UPDATE_ADDRESS, { variables })
 
+    if (loading || error) {
+        return null
+    }
+
+    return data
 }
 
-export function DeleteAddress() {
+export function DeleteAddress(variables) {
+    const { loading, error, data } = useQuery(DELETE_ADDRESS, { variables })
 
+    if (loading || error) {
+        return null
+    }
+
+    return data
 }

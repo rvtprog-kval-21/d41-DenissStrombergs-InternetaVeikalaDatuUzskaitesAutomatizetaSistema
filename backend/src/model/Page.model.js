@@ -26,7 +26,8 @@ export class Page extends Model {
             },
             {
                 sequelize,
-                modelName: 'Page'
+                modelName: 'Page',
+                timestamps: false
             }
         )
     }

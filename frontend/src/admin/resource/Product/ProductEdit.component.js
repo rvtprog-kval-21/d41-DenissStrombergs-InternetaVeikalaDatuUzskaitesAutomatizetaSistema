@@ -1,6 +1,5 @@
 import { BooleanInput, Edit, NumberInput, ReferenceInput, SimpleForm, TextInput, SelectInput } from 'react-admin'
 import RichTextInput from 'ra-input-rich-text'
-import { ProductTypeInput } from './ProductTypeInput.component'
 import { ProductSpecialDiscountTypeInput } from './ProductSpecialDiscountTypeInput.component'
 
 export function ProductEdit(props) {
@@ -10,7 +9,6 @@ export function ProductEdit(props) {
                 <TextInput source="id" disabled />
                 <TextInput source="sku" />
                 <BooleanInput source="isEnabled" />
-                <ProductTypeInput { ...props } />
                 <TextInput source="name" />
                 <NumberInput source="price" />
                 <NumberInput source="stockQuantity" />
@@ -23,7 +21,6 @@ export function ProductEdit(props) {
                     <SelectInput source="name" />
                 </ReferenceInput>
                 <TextInput source="attributeValues" />
-                <TextInput source="variations" />
             </SimpleForm>
         </Edit>
     )

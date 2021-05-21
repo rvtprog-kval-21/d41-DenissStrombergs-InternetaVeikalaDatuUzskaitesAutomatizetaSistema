@@ -54,7 +54,8 @@ export class Order extends Model {
             },
             {
                 sequelize,
-                modelName: 'Order'
+                modelName: 'Order',
+                timestamps: false
             }
         )
     }

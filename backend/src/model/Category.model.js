@@ -40,7 +40,8 @@ export class Category extends Model {
             },
             {
                 sequelize,
-                modelName: 'Category'
+                modelName: 'Category',
+                timestamps: false
             }
         )
     }

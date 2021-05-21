@@ -1,10 +1,25 @@
 import { gql, useQuery } from '@apollo/client'
 
-export const GET_CART = ``
+export const GET_CART = gql`
+    query GetCart(customerId: ID!) {
+        allCarts(filter: { customer_id: $customerId }) {
+            id
+            Products {
+              id
+            }
+        }
+    }
+`
 
 export const UPDATE_CART = ``
 
-export const DELETE_CART = ``
+export const CLEAR_CART = gql`
+    mutation ClearCart(customerId: ID!) {
+        clearCart(customer_id: $customerId) {
+            id
+        }
+    }
+`
 
 export const ADD_PRODUCT = ``
 

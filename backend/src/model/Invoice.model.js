@@ -36,7 +36,8 @@ export class Invoice extends Model {
             },
             {
                 sequelize,
-                modelName: 'Invoice'
+                modelName: 'Invoice',
+                timestamps: false
             }
         )
     }

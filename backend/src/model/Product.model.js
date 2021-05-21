@@ -23,9 +23,6 @@ export class Product extends Model {
                 isEnabled: {
                     type: DataTypes.BOOLEAN
                 },
-                type: {
-                    type: DataTypes.STRING
-                },
                 name: {
                     type: DataTypes.STRING
                 },
@@ -56,9 +53,6 @@ export class Product extends Model {
                 attributeValues: {
                     type: DataTypes.JSONB
                 },
-                variations: {
-                    type: DataTypes.JSONB
-                },
                 attribute_set_id: {
                     type: DataTypes.INTEGER,
                     references: {
@@ -69,14 +63,15 @@ export class Product extends Model {
             },
             {
                 sequelize,
-                modelName: 'Product'
+                modelName: 'Product',
+                timestamps: false
             }
         )
     }
 
     static associate(models) {
         this.belongsTo(models.AttributeSet, { foreignKey: 'attribute_set_id' })
-        //this.hasMany(models.CartItem)
+        this.hasMany(models.CartItem, { foreignKey: 'product_id' })
         this.hasMany(models.OrderItem, { foreignKey: 'product_id' })
         this.hasMany(models.Review, { foreignKey: 'product_id' })
     }

@@ -29,7 +29,8 @@ export class AttributeSetAttribute extends Model {
             },
             {
                 sequelize,
-                modelName: 'AttributeSetAttribute'
+                modelName: 'AttributeSetAttribute',
+                timestamps: false
             }
         )
     }

@@ -23,7 +23,8 @@ export class Block extends Model {
             },
             {
                 sequelize,
-                modelName: 'Block'
+                modelName: 'Block',
+                timestamps: false
             }
         )
     }

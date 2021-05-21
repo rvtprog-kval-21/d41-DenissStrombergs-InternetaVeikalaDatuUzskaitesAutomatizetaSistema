@@ -1,4 +1,6 @@
-export const GET_ALL_CUSTOMER_REVIEWS = `
+import { gql, useQuery } from '@apollo/client'
+
+export const GET_ALL_CUSTOMER_REVIEWS = gql`
     query GetAllCustomerReviews($customerId: ID!) {
         allReviews(filter: { customer_id: $customerId }) {
             id
@@ -16,7 +18,7 @@ export const GET_ALL_CUSTOMER_REVIEWS = `
     }
 `
 
-export const GET_ALL_PRODUCT_REVIEWS = `
+export const GET_ALL_PRODUCT_REVIEWS = gql`
     query GetAllProductReviews($productId: ID!) {
         allReviews(filter: { product_id: $productId }) {
             id
@@ -34,7 +36,7 @@ export const GET_ALL_PRODUCT_REVIEWS = `
     }
 `
 
-export const CREATE_REVIEW = `
+export const CREATE_REVIEW = gql`
     mutation CreateReview(
         $title: String!,
         $content: String!,
@@ -61,7 +63,7 @@ export const CREATE_REVIEW = `
     }
 `
 
-export const UPDATE_REVIEW = `
+export const UPDATE_REVIEW = gql`
     mutation UpdateReview(
         $id: ID!,
         $title: String!,
@@ -86,7 +88,7 @@ export const UPDATE_REVIEW = `
     }
 `
 
-export const DELETE_REVIEW = `
+export const DELETE_REVIEW = gql`
     mutation DeleteReview($id: ID!) {
         deleteReview(id: $id) {
             id
@@ -94,22 +96,52 @@ export const DELETE_REVIEW = `
     }
 `
 
-export function GetAllCustomerReviews() {
+export function GetAllCustomerReviews(variables) {
+    const { loading, error, data } = useQuery(GET_ALL_CUSTOMER_REVIEWS, { variables })
 
+    if (loading || error) {
+        return null
+    }
+
+    return data
 }
 
-export function GetAllProductReviews() {
+export function GetAllProductReviews(variables) {
+    const { loading, error, data } = useQuery(GET_ALL_PRODUCT_REVIEWS, { variables })
 
+    if (loading || error) {
+        return null
+    }
+
+    return data
 }
 
-export function CreateReview() {
+export function CreateReview(variables) {
+    const { loading, error, data } = useQuery(CREATE_REVIEW, { variables })
 
+    if (loading || error) {
+        return null
+    }
+
+    return data
 }
 
-export function UpdateReview() {
+export function UpdateReview(variables) {
+    const { loading, error, data } = useQuery(UPDATE_REVIEW, { variables })
 
+    if (loading || error) {
+        return null
+    }
+
+    return data
 }
 
-export function DeleteReview() {
+export function DeleteReview(variables) {
+    const { loading, error, data } = useQuery(DELETE_REVIEW, { variables })
 
+    if (loading || error) {
+        return null
+    }
+
+    return data
 }

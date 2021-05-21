@@ -32,7 +32,8 @@ export class CartItem extends Model {
             },
             {
                 sequelize,
-                modelName: 'CartItem'
+                modelName: 'CartItem',
+                timestamps: false
             }
         )
     }

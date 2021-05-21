@@ -26,11 +26,16 @@ export class Customer extends Model {
                 isSignedIn: {
                     type: DataTypes.BOOLEAN,
                     defaultValue: false
+                },
+                isGuest: {
+                    type: DataTypes.BOOLEAN,
+                    defaultValue: false
                 }
             },
             {
                 sequelize,
-                modelName: 'Customer'
+                modelName: 'Customer',
+                timestamps: false
             }
         )
     }

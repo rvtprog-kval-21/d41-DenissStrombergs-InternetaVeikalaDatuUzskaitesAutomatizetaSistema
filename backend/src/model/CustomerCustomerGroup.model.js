@@ -29,7 +29,8 @@ export class CustomerCustomerGroup extends Model {
             },
             {
                 sequelize,
-                modelName: 'CustomerCustomerGroup'
+                modelName: 'CustomerCustomerGroup',
+                timestamps: false
             }
         )
     }

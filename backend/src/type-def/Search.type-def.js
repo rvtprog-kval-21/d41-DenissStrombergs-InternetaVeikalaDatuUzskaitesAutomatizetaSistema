@@ -5,12 +5,23 @@ export const searchTypeDef = `
         Attributes: [Attribute]
     }
 
-    input SearchFilter {
-        query: String
+    input AttributeValue {
+        code: String!
+        value: String!
     }
 
-    type Mutation {
-        search(filter: SearchFilter!) : [Search]
+    type Query {
+        search(
+            category_id: ID
+            search: String
+            priceMin: Float
+            priceMax: Float
+            attributeValues: [AttributeValue]
+            page: Int
+            perPage: Int
+            sortField: String
+            sortOrder: String
+        ) : Search
     }
 `
 

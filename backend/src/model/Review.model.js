@@ -44,7 +44,8 @@ export class Review extends Model {
             },
             {
                 sequelize,
-                modelName: 'Review'
+                modelName: 'Review',
+                timestamps: false
             }
         )
     }
