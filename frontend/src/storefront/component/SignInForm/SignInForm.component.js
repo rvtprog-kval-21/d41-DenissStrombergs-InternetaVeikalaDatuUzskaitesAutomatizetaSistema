@@ -1,14 +1,16 @@
+import { useApolloClient } from '@apollo/client'
 import { Button } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
+import { useDispatch } from 'react-redux'
+import { signIn } from '../../query/Account.query'
 
 export function SignInForm() {
+    const client = useApolloClient()
+    const dispatch = useDispatch()
     const initialValues = {
         email: '',
-        password: '',
-        confirmPassword: '',
-        firstName: '',
-        lastName: ''
+        password: ''
     }
 
     const validate = (values) => {
@@ -17,11 +19,17 @@ export function SignInForm() {
         return errors
     }
 
-    const onSubmit = (values, props) => {
+    const onSubmit = async (values, props) => {
         const { setSubmitting } = props
 
         setSubmitting(false)
-        console.log(values)
+
+        dispatch({
+            type: 'SIGN_IN',
+            payload: {
+                account: await signIn(client, values)
+            }
+        })
     }
 
     const renderForm = (props) => {
@@ -49,7 +57,7 @@ export function SignInForm() {
                     variant="contained"
                     color="primary"
                 >
-                    Sign up
+                    Sign in
                 </Button>
             </Form>
         )

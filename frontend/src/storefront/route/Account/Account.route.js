@@ -1,68 +1,57 @@
-import { useState } from 'react'
-import Typography from '@material-ui/core/Typography'
-import { Button } from '@material-ui/core'
-import SignUpForm from '../../component/SignUpForm/SignUpForm.component'
-import SignInForm from '../../component/SignInForm/SignInForm.component'
 import { useSelector } from 'react-redux'
+import { Redirect, useParams } from 'react-router'
+import AccountNavigation from '../../component/AccountNavigation/AccountNavigation.component'
+import AccountSettings from '../../component/AccountSettings/AccountSettings.component'
+import AccountReviewList from '../../component/AccountReviewList/AccountReviewList.component'
+import AccountOrderList from '../../component/AccountOrderList/AccountOrderList.component'
+import AccountSign from '../../component/AccountSign/AccountSign.component'
+import AccountAddressList from '../../component/AccountAddressList/AccountAddressList.component'
 
 export function Account() {
-    const [step, setStep] = useState('SIGN_IN')
-    const { isSignedIn } = useSelector(state => state.customer) || {}
+    const account = useSelector(state => state.AccountReducer)
+    const { section } = useParams()
 
-    const onCreateAccountClick = () => {
-        setStep('SIGN_UP')
+    const renderSection = () => {
+        switch (section) {
+            case 'addresses':
+                return (
+                    <AccountAddressList />
+                )
+            case 'settings':
+                return (
+                    <AccountSettings />
+                )
+            case 'orders':
+                return (
+                    <AccountOrderList />
+                )
+            case 'reviews':
+                return (
+                    <AccountReviewList />
+                )
+            default:
+                return (
+                    <Redirect to="/account/settings" />
+                )
+        }
     }
 
-    const onLoginIntoAccountClick = () => {
-        setStep('SIGN_IN')
-    }
-
-    const renderSignIn = () => {
+    const renderAccount = () => {
         return (
             <div>
-                <SignInForm />
-                <Typography>
-                    Don't haven an account?
-                </Typography>
-                <Button
-                    onClick={ onCreateAccountClick }
-                    variant="contained"
-                    color="primary"
-                >
-                    Create an account
-                </Button>
+                <AccountNavigation section={ section } />
+                { renderSection() }
             </div>
         )
     }
 
-    const renderSignUp = () => {
+    const renderSign = () => {
         return (
-            <div>
-                <SignUpForm />
-                <Typography>
-                    Already have an account?
-                </Typography>
-                <Button
-                    onClick={ onLoginIntoAccountClick }
-                    variant="contained"
-                    color="primary"
-                >
-                    Login into account
-                </Button>
-            </div>
+            <AccountSign />
         )
     }
 
-    const stepRenderMap = {
-        'SIGN_IN': renderSignIn,
-        'SIGN_UP': renderSignUp
-    }
-
-    return (
-        <div>
-            { stepRenderMap[step]() }
-        </div>
-    )
+    return account ? renderAccount() : renderSign()
 }
 
 export default Account

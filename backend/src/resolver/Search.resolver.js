@@ -8,17 +8,27 @@ export const searchResolver = {
             values.forEach((attributeValue) => { attributeValues[attributeValue.code] = attributeValue.value })
 
             try {
-                const category = await models.Category.findByPk(data.category_id)
-                const products = await models.Product.findAll({
-                    limit: data.perPage || 100000,
-                    offset: data.page * data.perPage || 0,
-                    order: data.sortField && data.sortOrder ? [[data.sortField, data.sortOrder]] : [],
-                    include: {
-                        all: true
-                    },
+                const category = await models.Category.findOne({
                     where: {
+                        urlKey: data.categoryUrlKey || '',
+                        isEnabled: true
+                    }
+                })
+                const products = await models.Product.findAll({
+                    include: [
+                        {
+                            model: models.Category,
+                            where: {
+                                id: category?.id || {
+                                    [Op.ne]: null
+                                }
+                            }
+                        }
+                    ],
+                    where: {
+                        isEnabled: true,
                         name: {
-                            [Op.iLike]: '%' + data.search + '%'
+                            [Op.iLike]: '%' + (data.search || '') + '%'
                         },
                         price: {
                             [Op.and]: {
@@ -32,7 +42,8 @@ export const searchResolver = {
 
                 return {
                     Category: category,
-                    Products: products
+                    Products: products,
+                    Attributes: []
                 }
             } catch (error) {
                 console.error(error)

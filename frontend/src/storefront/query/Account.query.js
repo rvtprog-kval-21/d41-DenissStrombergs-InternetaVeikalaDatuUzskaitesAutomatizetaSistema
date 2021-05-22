@@ -2,7 +2,7 @@ import { gql, useQuery } from '@apollo/client'
 
 export const SIGN_IN = gql`
     mutation SignIn($email: String!, $password: String!) {
-        signIn(email: $email, password: $password) {
+        account: signIn(email: $email, password: $password) {
             id
             email
             firstName
@@ -30,7 +30,7 @@ export const SIGN_UP = gql`
         $firstName: String!,
         $lastName: String!
     ) {
-        signUp(
+        account: signUp(
             email: $email,
             password: $password,
             firstName: $firstName,
@@ -44,32 +44,23 @@ export const SIGN_UP = gql`
     }
 `
 
-export function SignIn(variables) {
-    const { loading, error, data } = useQuery(SIGN_IN, { variables })
-
-    if (loading || error) {
-        return null
-    }
-
-    return data
+export function signIn(client, variables) {
+    return client.mutate({
+        mutation: SIGN_IN,
+        variables
+    }).then(({ data }) => data?.account)
 }
 
-export function SingOut(variables) {
-    const { loading, error, data } = useQuery(SIGN_OUT, { variables })
-
-    if (loading || error) {
-        return null
-    }
-
-    return data
+export function singOut(client, variables) {
+    return client.mutate({
+        mutation: SIGN_OUT,
+        variables
+    }).then(({ data }) => data?.account)
 }
 
-export function SignUp(variables) {
-    const { loading, error, data } = useQuery(SIGN_UP, { variables })
-
-    if (loading || error) {
-        return null
-    }
-
-    return data
+export function SignUp(client, variables) {
+    return client.mutate({
+        mutation: SIGN_UP,
+        variables
+    }).then(({ data }) => data?.account)
 }

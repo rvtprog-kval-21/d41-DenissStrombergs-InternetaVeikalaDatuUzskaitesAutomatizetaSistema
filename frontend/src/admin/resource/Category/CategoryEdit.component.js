@@ -9,7 +9,6 @@ export function CategoryEdit(props) {
                 <TextInput source="urlKey" />
                 <BooleanInput source="isEnabled" />
                 <TextInput source="name" />
-                <NumberInput source="productCount" disabled />
                 <BooleanInput source="isInMenu" />
                 <RichTextInput source="content" />
             </SimpleForm>

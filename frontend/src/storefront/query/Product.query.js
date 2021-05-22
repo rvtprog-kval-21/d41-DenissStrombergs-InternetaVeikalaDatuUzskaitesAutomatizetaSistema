@@ -1,26 +1,26 @@
 import { gql, useQuery } from '@apollo/client'
 
-export const PRODUCT = gql`
+export const GET_PRODUCT = gql`
     query Product($urlKey: String!) {
         allProducts(filter: { urlKey: $urlKey }) {
-            id,
-            isEnabled,
-            name,
-            sku,
-            price,
-            shortDescription,
-            urlKey,
-            type,
+            id
+            sku
+            name
+            price
+            stockQuantity
+            specialDiscountType
+            specialDiscountValue
+            specialTaxRate
+            shortDescription
             longDescription
+            media
+            attributeValues
         }
     }
 `
 
-export function GetProduct({ urlKey }) {
-    const { data: { allProducts: [product] = [] } = {} } = useQuery(PRODUCT, {
-        variables: { urlKey }
-    })
-
+export function GetProduct(variables) {
+    const { data: { allProducts: [product] = [] } = {} } = useQuery(GET_PRODUCT, { variables })
 
     if (!product) {
         return null

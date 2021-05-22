@@ -8,7 +8,6 @@ export function OrderList(props) {
                 <TextField source="reference" />
                 <DateField source="date" />
                 <TextField source="status" />
-                <BooleanField source="isReturned" />
                 <NumberField source="totalDelivery" />
                 <NumberField source="totalTax" />
                 <NumberField source="subtotal" />

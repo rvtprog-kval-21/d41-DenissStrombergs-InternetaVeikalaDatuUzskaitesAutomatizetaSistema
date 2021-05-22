@@ -24,7 +24,6 @@ const client = new ApolloClient({
 })
 
 export function Router() {
-
     const renderStorefront = () => {
         return (
             <>
@@ -32,12 +31,13 @@ export function Router() {
                 <Switch>
                     <Route path="/" render={ () => (<Homepage/>) } exact/>
                     <Route path="/checkout" render={ () => (<Checkout/>) } exact/>
-                    <Route path="/account" render={ () => (<Account/>) } exact/>
+                    <Route path="/account" render={ () => (<Account/>) } exact />
+                    <Route path="/account/:section" render={ () => (<Account/>) } />
                     <Route path="/cart" render={ () => (<Cart/>) } exact/>
                     <Route path="/category/:urlKey" render={ () => (<Category/>) }/>
                     <Route path="/page/:urlKey" render={ () => (<Page/>) }/>
                     <Route path="/product/:urlKey" render={ () => (<Product/>) }/>
-                    <Route path="/search/:query" render={ () => (<Search/>) }/>
+                    <Route path="/search/:search" render={ () => (<Search/>) }/>
                     <Route render={ () => (<Error/>) }/>
                 </Switch>
                 <Footer/>

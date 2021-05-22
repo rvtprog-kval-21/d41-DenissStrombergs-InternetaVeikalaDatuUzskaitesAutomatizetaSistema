@@ -11,11 +11,7 @@ export function Block(props) {
 
     const { content } = block
 
-    return (
-        <div>
-            { parse(content) }
-        </div>
-    )
+    return parse(content)
 }
 
 export default Block

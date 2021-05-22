@@ -11,11 +11,7 @@ export function Page(props) {
 
     const { content } = page
 
-    return (
-        <div>
-            { parse(content) }
-        </div>
-    )
+    return parse(content)
 }
 
 export default Page

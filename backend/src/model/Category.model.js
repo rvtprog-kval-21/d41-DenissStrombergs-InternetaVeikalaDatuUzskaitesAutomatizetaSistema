@@ -21,9 +21,6 @@ export class Category extends Model {
                 name: {
                     type: DataTypes.STRING
                 },
-                productCount: {
-                    type: DataTypes.INTEGER
-                },
                 isInMenu: {
                     type: DataTypes.BOOLEAN
                 },

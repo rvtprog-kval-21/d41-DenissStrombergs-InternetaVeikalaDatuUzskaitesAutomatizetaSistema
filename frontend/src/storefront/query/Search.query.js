@@ -1,27 +1,56 @@
 import { gql, useQuery } from '@apollo/client'
 
 export const SEARCH = gql`
-    query Search($priceMin: Float!, $priceMax: Float!, attributeValues: AttributeValues!) {
-        search(filter: { price_min:  }) {
-            id,
-            isEnabled,
-            name,
-            sku,
-            price,
-            shortDescription,
-            urlKey,
-            type,
-            longDescription
+    query Search(
+        $categoryUrlKey: String,
+        $search: String,
+        $priceMin: Float,
+        $priceMax: Float,
+        $attributeValues: [AttributeValue],
+        $page: Int,
+        $perPage: Int,
+        $sort: String
+    ) {
+        search(
+            categoryUrlKey: $categoryUrlKey,
+            search: $search,
+            priceMin: $priceMin,
+            priceMax: $priceMax,
+            attributeValues: $attributeValues,
+            page: $page,
+            perPage: $perPage,
+            sort: $sort
+        ) {
+            category: Category {
+                id
+                name
+                content
+            }
+            products: Products {
+                id
+                urlKey
+                sku
+                name
+                price
+                stockQuantity
+                specialDiscountType
+                specialDiscountValue
+                specialTaxRate
+                media
+            }
+            attribute: Attributes {
+                id
+            }
         }
     }
 `
 
 export function Search(variables) {
-    const { loading, error, data } = useQuery(SEARCH, { variables })
+    const { loading, error, data: { search } = {} } = useQuery(SEARCH, { variables })
 
     if (loading || error) {
         return null
     }
 
-    return data
+    return search
 }

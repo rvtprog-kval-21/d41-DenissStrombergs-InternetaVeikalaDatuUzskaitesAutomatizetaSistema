@@ -16,15 +16,10 @@ app.use('/graphql', graphqlHTTP({
 }))
 app.listen(3001)
 
-
-
 import { writeFileSync } from 'fs'
 import sequelizeErd from 'sequelize-erd'
 
-
 (async function(){
-
-  const svg = await sequelizeErd({ source: database.sequelize, engine: 'dot' }); 
-  writeFileSync('./erd.svg', svg);
-
-})();
+     const svg = await sequelizeErd({ source: database.sequelize, engine: 'dot' })
+    writeFileSync('../documentation/erd.svg', svg)
+})()

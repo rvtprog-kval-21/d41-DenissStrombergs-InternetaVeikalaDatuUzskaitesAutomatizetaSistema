@@ -1,8 +1,8 @@
 import { Box, Link, Typography } from '@material-ui/core'
-import { GetCategories } from '../../query/Category.query'
+import { GetAllCategories } from '../../query/Category.query'
 
 export function Menu() {
-    const categories = GetCategories()
+    const categories = GetAllCategories()
 
     if (!categories) {
         return null
@@ -13,7 +13,6 @@ export function Menu() {
     const renderFirstLevelItem = (parentCategory) => {
         const { name, urlKey } = parentCategory
         const children = categories.filter((category) => category.categoryId == parentCategory.id && category.name != 'Root')
-        console.log(children)
     
         return (
             <Link href={ `/category/${ urlKey }` } color="inherit">

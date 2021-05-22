@@ -1,42 +1,20 @@
 import { gql, useQuery } from '@apollo/client'
 
-export const CATEGORIES = gql`
-    query GetCategories {
-        allCategories(filter: { isInMenu: true }) {
-            id,
-            isEnabled,
-            name,
-            urlKey,
-            productCount,
-            isInMenu,
+export const GET_ALL_CATEGORIES = gql`
+    query GetAllCategories {
+        allCategories(filter: { isEnabled: true, isInMenu: true }) {
+            id
+            isEnabled
+            name
+            urlKey
+            isInMenu
             categoryId: category_id
         }
     }
 `
 
-export const CATEGORY = gql`
-    query GetCategory($urlKey: String!) {
-        allCategories(filter: { urlKey: $urlKey }) {
-            id,
-            isEnabled,
-            name,
-            urlKey,
-            productCount,
-            products: Products {
-                id,
-                isEnabled,
-                name,
-                sku,
-                price,
-                shortDescription,
-                urlKey
-            }
-        }
-    }
-`
-
-export function GetCategories() {
-    const { data: { allCategories: categories } = {} } = useQuery(CATEGORIES, {})
+export function GetAllCategories() {
+    const { data: { allCategories: categories } = {} } = useQuery(GET_ALL_CATEGORIES, {})
 
     if (!categories) {
         return null
@@ -44,18 +22,3 @@ export function GetCategories() {
 
     return categories
 }
-
-export function GetCategory({ urlKey }) {
-    const { data: { allCategories: [category] = [] } = {} } = useQuery(CATEGORY, {
-        variables: { urlKey }
-    })
- 
-
-    if (!category) {
-        return null
-    }
-
-    return category
-}
-
-export default GetCategory

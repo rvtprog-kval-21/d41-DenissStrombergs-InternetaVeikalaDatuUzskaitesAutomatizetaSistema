@@ -10,8 +10,8 @@ export const PAGE = gql`
     }
 `
 
-export function GetPage({ urlKey }) {
-    const { loading, error, data: { allPages: [page] = [] } = {} } = useQuery(PAGE, { variables: { urlKey } })
+export function GetPage(variables) {
+    const { loading, error, data: { allPages: [page] = [] } = {} } = useQuery(PAGE, { variables })
 
     if (loading || error) {
         return null

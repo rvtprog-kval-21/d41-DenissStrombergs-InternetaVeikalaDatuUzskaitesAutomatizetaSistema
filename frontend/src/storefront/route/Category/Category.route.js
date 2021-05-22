@@ -1,25 +1,26 @@
 import { useParams } from 'react-router-dom'
-import queryString from 'query-string'
-import Pagination from '@material-ui/lab/Pagination'
-import { GetCategory } from '../../query/Category.query'
-import { PAGE_SIZE } from './Category.config'
+import parse from 'html-react-parser'
+import { Search } from '../../query/Search.query'
 import ProductList from '../../component/ProductList/ProductList.component'
 import FilterList from '../../component/FilterList/FilterList.component'
 
 export function Category() {
     const { urlKey } = useParams()
-    const search = queryString.parse(window.location.search)
-    const category = GetCategory({ urlKey })
+    const search = Search({
+        categoryUrlKey: urlKey
+    })
 
-    if (!category) {
+    if (!search) {
         return null
     }
 
+    const { category: { content } } = search
+
     return (
-        <div className="Category">
-            <FilterList category={ category } />
-            <ProductList category={ category } />
-            <Pagination count={ Math.ceil(category?.product_count / PAGE_SIZE) } />
+        <div>
+            { parse(content) }
+            <FilterList search={ search } />
+            <ProductList search={ search } />
         </div>
     )
 }

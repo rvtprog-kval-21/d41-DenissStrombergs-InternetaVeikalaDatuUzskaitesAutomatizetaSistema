@@ -142,7 +142,11 @@ export const DATA = [
             {
                 code: 'footer',
                 isEnabled: true,
-                content: '<h2>Footer</h2>'
+                content: `
+                    <footer>
+                        <h2>Footer</h2>
+                    </footer>
+                `
             }
         ]
     },
@@ -153,63 +157,58 @@ export const DATA = [
                 urlKey: null,
                 isEnabled: true,
                 name: 'Root',
-                productCount: 0,
                 isInMenu: true,
-                content: '',
+                content: ``,
                 category_id: null
             },
             {
                 urlKey: 'drawing',
                 isEnabled: true,
                 name: 'Drawing',
-                productCount: 0,
                 isInMenu: true,
-                content: '',
+                content: `
+                    <h2>Drawing</h2>
+                `,
                 category_id: 1
             },
             {
                 urlKey: 'reading',
                 isEnabled: true,
                 name: 'Reading',
-                productCount: 0,
                 isInMenu: true,
-                content: '',
+                content: ``,
                 category_id: 1
             },
             {
                 urlKey: 'pencils',
                 isEnabled: true,
                 name: 'Pencils',
-                productCount: 0,
                 isInMenu: true,
-                content: '',
+                content: ``,
                 category_id: 2
             },
             {
                 urlKey: 'pens',
                 isEnabled: true,
                 name: 'Pens',
-                productCount: 0,
                 isInMenu: true,
-                content: '',
+                content: ``,
                 category_id: 2
             },
             {
                 urlKey: 'regular_pencils',
                 isEnabled: true,
                 name: 'Regular pencils',
-                productCount: 0,
                 isInMenu: true,
-                content: '',
+                content: ``,
                 category_id: 4
             },
             {
                 urlKey: 'mechanical_pencils',
                 isEnabled: true,
                 name: 'Mechanical pencils',
-                productCount: 0,
                 isInMenu: true,
-                content: '',
+                content: ``,
                 category_id: 4
             },
             {
@@ -218,7 +217,7 @@ export const DATA = [
                 name: 'Ballpoint pens',
                 productCount: 0,
                 isInMenu: true,
-                content: '',
+                content: ``,
                 category_id: 5
             },
             {
@@ -227,7 +226,7 @@ export const DATA = [
                 name: 'Fountain pens',
                 productCount: 0,
                 isInMenu: true,
-                content: '',
+                content: ``,
                 category_id: 5
             }
         ]
@@ -301,7 +300,6 @@ export const DATA = [
                 reference: '4WGINO4G',
                 date: '2021-04-20',
                 status: 'ordered',
-                isReturned: false,
                 totalDelivery: 6.99,
                 totalTax: 21.0,
                 subtotal: 79.0,
@@ -461,7 +459,7 @@ export const DATA = [
                 date: '2021-05-05',
                 title: 'Trash',
                 content: 'Absolute garbage, does not work.',
-                raiting: 1,
+                rating: 1,
                 customer_id: 1,
                 product_id: 1
             }

@@ -5,7 +5,9 @@ export function Page() {
     const { urlKey } = useParams()
 
     return (
-        <PageComponent urlKey={ urlKey } />
+        <div>
+            <PageComponent urlKey={ urlKey } />
+        </div>
     )
 }
 

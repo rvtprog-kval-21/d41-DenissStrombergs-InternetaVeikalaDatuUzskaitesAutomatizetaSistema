@@ -8,7 +8,6 @@ export function CategoryList(props) {
                 <TextField source="urlKey" />
                 <BooleanField source="isEnabled" />
                 <TextField source="name" />
-                <NumberField source="productCount" />
                 <BooleanField source="isInMenu" />
                 <EditButton />
             </Datagrid>

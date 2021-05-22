@@ -11,7 +11,6 @@ export function OrderEdit(props) {
                 <TextInput source="reference" disabled />
                 <DateInput source="date" disabled />
                 <OrderStatusInput />
-                <BooleanInput source="isReturned" />
                 <NumberInput source="totalDelivery" disabled />
                 <NumberInput source="totalTax" disabled />
                 <NumberInput source="subtotal" disabled />

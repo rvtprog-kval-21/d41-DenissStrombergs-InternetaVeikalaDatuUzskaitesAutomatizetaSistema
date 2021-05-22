@@ -12,15 +12,14 @@ export const searchTypeDef = `
 
     type Query {
         search(
-            category_id: ID
+            categoryUrlKey: String
             search: String
             priceMin: Float
             priceMax: Float
             attributeValues: [AttributeValue]
             page: Int
             perPage: Int
-            sortField: String
-            sortOrder: String
+            sort: String
         ) : Search
     }
 `

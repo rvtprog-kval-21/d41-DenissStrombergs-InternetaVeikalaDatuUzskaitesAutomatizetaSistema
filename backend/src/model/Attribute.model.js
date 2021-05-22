@@ -28,6 +28,9 @@ export class Attribute extends Model {
                 },
                 isFilter: {
                     type: DataTypes.BOOLEAN
+                },
+                attributeGroup: {
+                    type: DataTypes.STRING
                 }
             },
             {

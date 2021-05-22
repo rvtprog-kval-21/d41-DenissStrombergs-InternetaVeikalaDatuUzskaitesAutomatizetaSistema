@@ -22,9 +22,6 @@ export class Order extends Model {
                 status: {
                     type: DataTypes.STRING
                 },
-                isReturned: {
-                    type: DataTypes.BOOLEAN,
-                },
                 totalDelivery: {
                     type: DataTypes.FLOAT
                 },

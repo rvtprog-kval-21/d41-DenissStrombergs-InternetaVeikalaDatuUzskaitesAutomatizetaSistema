@@ -2,7 +2,7 @@ import { gql, useQuery } from '@apollo/client'
 
 export const GET_ALL_CUSTOMER_REVIEWS = gql`
     query GetAllCustomerReviews($customerId: ID!) {
-        allReviews(filter: { customer_id: $customerId }) {
+        reviews: allReviews(filter: { customer_id: $customerId }) {
             id
             status
             date
@@ -20,7 +20,7 @@ export const GET_ALL_CUSTOMER_REVIEWS = gql`
 
 export const GET_ALL_PRODUCT_REVIEWS = gql`
     query GetAllProductReviews($productId: ID!) {
-        allReviews(filter: { product_id: $productId }) {
+        reviews: allReviews(filter: { product_id: $productId }) {
             id
             status
             date
@@ -44,7 +44,7 @@ export const CREATE_REVIEW = gql`
         $customerId: ID!,
         $productId: ID!
     ) {
-        createReview(
+        review: createReview(
             title: $title,
             content: $content,
             rating: $rating,
@@ -70,7 +70,7 @@ export const UPDATE_REVIEW = gql`
         $content: String!,
         $rating: Int!
     ) {
-        updateReview(
+        review: updateReview(
             id: $id,
             title: $title,
             content: $content,
@@ -97,43 +97,43 @@ export const DELETE_REVIEW = gql`
 `
 
 export function GetAllCustomerReviews(variables) {
-    const { loading, error, data } = useQuery(GET_ALL_CUSTOMER_REVIEWS, { variables })
+    const { loading, error, data: { reviews } = {} } = useQuery(GET_ALL_CUSTOMER_REVIEWS, { variables })
 
     if (loading || error) {
         return null
     }
 
-    return data
+    return reviews
 }
 
 export function GetAllProductReviews(variables) {
-    const { loading, error, data } = useQuery(GET_ALL_PRODUCT_REVIEWS, { variables })
+    const { loading, error, data: { reviews } = {} } = useQuery(GET_ALL_PRODUCT_REVIEWS, { variables })
 
     if (loading || error) {
         return null
     }
 
-    return data
+    return reviews
 }
 
 export function CreateReview(variables) {
-    const { loading, error, data } = useQuery(CREATE_REVIEW, { variables })
+    const { loading, error, data: { review } } = useQuery(CREATE_REVIEW, { variables })
 
     if (loading || error) {
         return null
     }
 
-    return data
+    return review
 }
 
 export function UpdateReview(variables) {
-    const { loading, error, data } = useQuery(UPDATE_REVIEW, { variables })
+    const { loading, error, data: { review } } = useQuery(UPDATE_REVIEW, { variables })
 
     if (loading || error) {
         return null
     }
 
-    return data
+    return review
 }
 
 export function DeleteReview(variables) {

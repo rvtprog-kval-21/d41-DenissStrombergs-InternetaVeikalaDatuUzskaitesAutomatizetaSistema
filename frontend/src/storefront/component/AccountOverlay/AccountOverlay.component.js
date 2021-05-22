@@ -7,9 +7,11 @@ import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import { Button } from '@material-ui/core'
 import SignUpForm from '../SignUpForm/SignUpForm.component'
 import SignInForm from '../SignInForm/SignInForm.component'
+import { useSelector } from 'react-redux'
 
 export function AccountOverlay() {
     const [step, setStep] = useState('SIGN_IN')
+    const account = useSelector((state) => state.AccountReducer)
 
     const onCreateAccountClick = () => {
         setStep('SIGN_UP')
@@ -60,26 +62,40 @@ export function AccountOverlay() {
         'SIGN_UP': renderSignUp
     }
 
-    return (
-        <PopupState variant="popover" popupId="demo-popup-popover">
-            {(popupState) => (
-                <div>
-                    <IconButton { ...bindTrigger(popupState) } aria-label="account" color="inherit">
-                        <AccountCircleIcon />
-                    </IconButton>
-                    <Popover
-                        { ...bindPopover(popupState) }
-                        anchorReference="anchorPosition"
-                        anchorPosition={{ top: 0, left: window.innerWidth }}
-                        marginThreshold={ 0 }
-                        PaperProps={{ style: { width: '500px', height: '100%', maxHeight: 'none' } }}
-                    >
-                        { stepRenderMap[step]() }
-                    </Popover>
-                </div>
-            )}
-        </PopupState>
-    )
+    console.log(account)
+
+    const renderPopup = () => {
+        return (
+            <PopupState variant="popover" popupId="demo-popup-popover">
+                {(popupState) => (
+                    <div>
+                        <IconButton { ...bindTrigger(popupState) } aria-label="account" color="inherit">
+                            <AccountCircleIcon />
+                        </IconButton>
+                        <Popover
+                            { ...bindPopover(popupState) }
+                            anchorReference="anchorPosition"
+                            anchorPosition={{ top: 0, left: window.innerWidth }}
+                            marginThreshold={ 0 }
+                            PaperProps={{ style: { width: '500px', height: '100%', maxHeight: 'none' } }}
+                        >
+                            { stepRenderMap[step]() }
+                        </Popover>
+                    </div>
+                )}
+            </PopupState>
+        )
+    }
+
+    const renderButton = () => {
+        return (
+            <IconButton href="/account" aria-label="account" color="inherit">
+                <AccountCircleIcon />
+            </IconButton>
+        )
+    }
+
+    return account ? renderButton() : renderPopup()
 }
 
 export default AccountOverlay

@@ -2,7 +2,7 @@ import { gql, useQuery } from '@apollo/client'
 
 export const GET_ALL_ADDRESSES = gql`
     query GetAllAddresses($customerId: ID!) {
-        allAddresses(filter: { customer_id: $customerId }) {
+        addresses: allAddresses(filter: { customer_id: $customerId }) {
             id
             firstName
             lastName
@@ -30,7 +30,7 @@ export const CREATE_ADDRESS = gql`
         $postalCode: String!,
         $customerId: ID!
     ) {
-        createAddress(
+        address: createAddress(
             firstName: $firstName,
             lastName: $lastName,
             phoneNumber: $phoneNumber,
@@ -70,7 +70,7 @@ export const UPDATE_ADDRESS = gql`
         $postalCode: String!,
         $customerId: ID!
     ) {
-        updateAddress(
+        address: updateAddress(
             id: $id,
             firstName: $firstName,
             lastName: $lastName,
@@ -106,33 +106,33 @@ export const DELETE_ADDRESS = gql`
 `
 
 export function GetAllAddresses(variables) {
-    const { loading, error, data } = useQuery(GET_ALL_ADDRESSES, { variables })
+    const { loading, error, data: { addresses } = {} } = useQuery(GET_ALL_ADDRESSES, { variables })
 
     if (loading || error) {
         return null
     }
 
-    return data
+    return addresses
 }
 
 export function CreateAddress(variables) {
-    const { loading, error, data } = useQuery(CREATE_ADDRESS, { variables })
+    const { loading, error, data: { address } = {} } = useQuery(CREATE_ADDRESS, { variables })
 
     if (loading || error) {
         return null
     }
 
-    return data
+    return address
 }
 
 export function UpdateAddress(variables) {
-    const { loading, error, data } = useQuery(UPDATE_ADDRESS, { variables })
+    const { loading, error, data: { address } = {} } = useQuery(UPDATE_ADDRESS, { variables })
 
     if (loading || error) {
         return null
     }
 
-    return data
+    return address
 }
 
 export function DeleteAddress(variables) {
