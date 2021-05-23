@@ -36,6 +36,24 @@ export const GET_ALL_PRODUCT_REVIEWS = gql`
     }
 `
 
+export const GET_REVIEW = gql`
+    query GetReview($id: ID!) {
+        review: Review(id: $id) {
+            id
+            status
+            date
+            title
+            content
+            rating
+            product: Product {
+                id
+                urlKey
+                name
+            }
+        }
+    }
+`
+
 export const CREATE_REVIEW = gql`
     mutation CreateReview(
         $title: String!,
@@ -114,6 +132,16 @@ export function GetAllProductReviews(variables) {
     }
 
     return reviews
+}
+
+export function GetReview(variables) {
+    const { loading, error, data: { review } = {} } = useQuery(GET_REVIEW, { variables })
+
+    if (loading || error) {
+        return null
+    }
+
+    return review
 }
 
 export function createReview(client, variables) {

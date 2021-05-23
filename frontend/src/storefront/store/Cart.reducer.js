@@ -1,4 +1,4 @@
-const initialState = JSON.parse(window.localStorage.getItem('CART')) || {}
+export const initialState = JSON.parse(window.localStorage.getItem('CART')) || {}
 
 export function CartReducer(state = initialState, action) {
     const { type, payload: { cartItem } = {} } = action

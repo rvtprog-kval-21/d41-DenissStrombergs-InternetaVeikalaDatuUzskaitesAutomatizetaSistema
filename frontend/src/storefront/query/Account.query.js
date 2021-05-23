@@ -18,6 +18,31 @@ export const SIGN_IN = gql`
     }
 `
 
+export const UPDATE_ACCOUNT = gql`
+    mutation UpdateAccount(
+        $customerId: ID!,
+        $email: String!,
+        $firstName: String!,
+        $lastName: String!
+    ) {
+        account: updateAccount(
+            customer_id: $customerId,
+            email: $email,
+            firstName: $firstName,
+            lastName: $lastName
+        ) {
+            email
+            firstName
+            lastName
+        }
+    }
+`
+export const CHANGE_PASSWORD = gql`
+    mutation ChangePassword($customerId: ID!, $oldPassword: String!, $newPassword: String!) {
+        changePassword(customer_id: $customerId, oldPassword: $oldPassword, newPassword: $newPassword)
+    }
+`
+
 export const SIGN_OUT= gql`
     mutation SignOut($customerId: ID!) {
         signOut(customer_id: $customerId)
@@ -56,12 +81,27 @@ export function singOut(client, variables) {
     return client.mutate({
         mutation: SIGN_OUT,
         variables
-    }).then(({ data }) => data?.account)
+    }).then(({ data }) => data)
 }
 
-export function SignUp(client, variables) {
+export function signUp(client, variables) {
     return client.mutate({
         mutation: SIGN_UP,
         variables
     }).then(({ data }) => data?.account)
 }
+
+export function changePassword(client, variables) {
+    return client.mutate({
+        mutation: CHANGE_PASSWORD,
+        variables
+    }).then(({ data }) => data)
+}
+
+export function updateAccount(client, variables) {
+    return client.mutate({
+        mutation: UPDATE_ACCOUNT,
+        variables
+    }).then(({ data }) => data.account)
+}
+

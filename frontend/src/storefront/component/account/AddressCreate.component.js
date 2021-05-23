@@ -1,9 +1,9 @@
 import AddressForm from './AddressForm.component'
 
-export function AccountAddressEdit() {
+export function AddressCreate() {
     return (
         <AddressForm />
     )
 }
 
-export default AccountAddressEdit
+export default AddressCreate

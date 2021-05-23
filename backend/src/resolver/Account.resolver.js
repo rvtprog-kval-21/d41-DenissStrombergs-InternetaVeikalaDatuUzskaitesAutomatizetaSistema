@@ -37,6 +37,45 @@ export const accountResolver = {
 
                 return null
             }
+        },
+        changePassword: async function(_, data, { models }) {
+            try {
+                const customer = await models.Customer.findByPk(data.customer_id)
+                
+                if (customer) {
+                    if (data.oldPassword == customer.password) {
+                        customer.password = data.newPassword
+                        await customer.save()
+                        return true
+                    }
+                }
+
+                return false
+            } catch (error) {
+                console.error(error)
+
+                return null
+            }
+        },
+        updateAccount: async function(_, data, { models }) {
+            try {
+                const customer = await models.Customer.findByPk(data.customer_id)
+                
+                if (customer) {
+                    customer.email = data.email
+                    customer.firstName = data.firstName
+                    customer.lastName = data.lastName
+                    await customer.save()
+                    
+                    return customer
+                }
+    
+                return null
+            } catch (error) {
+                console.error(error)
+    
+                return null
+            }
         }
     }
 }

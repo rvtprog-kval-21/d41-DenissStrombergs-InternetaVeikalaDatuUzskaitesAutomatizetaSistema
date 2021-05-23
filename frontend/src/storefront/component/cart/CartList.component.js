@@ -3,14 +3,15 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { CartItem } from './CartItem.component'
 
-export function renderCartItem(cartItem) {
-    return (
-        <CartItem cartItem={ cartItem } />
-    )
-}
-
-export function CartList() {
+export function CartList(props) {
+    const { shouldRenderCartItemActions } = props
     const cartItems = useSelector((state) => state.CartReducer)
+
+    const renderCartItem = (cartItem) => {
+        return (
+            <CartItem cartItem={ cartItem } shouldRenderCartItemActions={ shouldRenderCartItemActions } />
+        )
+    }
 
     return (
         <Grid container spacing={ 2 }>

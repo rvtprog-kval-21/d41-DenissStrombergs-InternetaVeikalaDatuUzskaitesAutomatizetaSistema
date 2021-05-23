@@ -27,12 +27,49 @@ export const GET_ALL_ORDERS = gql`
     }
 `
 
-export function GetAllOrders(variables) {
-    const { data: { orders } = {} } = useQuery(GET_ALL_ORDERS, { variables })
+export const GET_ORDER = gql`
+    query GetOrder($id: ID!) {
+        order: Order(id: $id) {
+            id
+            reference
+            date
+            status
+            totalDelivery
+            totalTax
+            subtotal
+            total
+            address: Address {
+                id
+                firstName
+                lastName
+                phoneNumber
+                country
+                city
+                province
+                street1
+                street2
+                postalCode
+            }
+        }
+    }
+`
 
-    if (!orders) {
+export function GetAllOrders(variables) {
+    const { loading, error, data: { orders } = {} } = useQuery(GET_ALL_ORDERS, { variables })
+
+    if (loading || error) {
         return null
     }
 
     return orders
+}
+
+export function GetOrder(variables) {
+    const { loading, error, data: { order } = {} } = useQuery(GET_ORDER, { variables })
+
+    if (loading || error) {
+        return null
+    }
+
+    return order
 }

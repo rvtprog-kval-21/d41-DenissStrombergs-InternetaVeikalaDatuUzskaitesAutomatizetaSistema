@@ -1,8 +1,10 @@
 import { Button } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
+import VALIDATION from '../../../base/Validation'
 
-export function AddressForm() {
+export function AddressForm(props) {
+    const { address = {}, shouldRenderSubmitButton = true } = props
     const initialValues = {
         firstName: '',
         lastName: '',
@@ -12,13 +14,8 @@ export function AddressForm() {
         province: '',
         street1: '',
         street2: '',
-        postalCode: ''
-    }
-
-    const validate = (values) => {
-        const errors = {}
-
-        return errors
+        postalCode: '',
+        ...address
     }
 
     const onSubmit = (values, props) => {
@@ -28,9 +25,26 @@ export function AddressForm() {
         console.log(values)
     }
 
-    const renderForm = (props) => {
+    const renderSaveButton = (props) => {
         const { submitForm, isSubmitting } = props
 
+        if (!shouldRenderSubmitButton) {
+            return null
+        }
+
+        return (
+            <Button
+                onClick={ submitForm }
+                disabled={ isSubmitting }
+                variant="contained"
+                color="primary"
+            >
+                Save
+            </Button>
+        )
+    }
+
+    const renderForm = (props) => {
         return (
             <Form>
                 <Field
@@ -96,14 +110,7 @@ export function AddressForm() {
                     label="Postal code"
                     fullWidth
                 />
-                <Button
-                    onClick={ submitForm }
-                    disabled={ isSubmitting }
-                    variant="contained"
-                    color="primary"
-                >
-                    Save
-                </Button>
+                { renderSaveButton(props) }
             </Form>
         )
     }
@@ -111,7 +118,7 @@ export function AddressForm() {
     return (
         <Formik
             initialValues={ initialValues }
-            validate={ validate }
+            validationSchema={ VALIDATION.ADDRESS }
             onSubmit={ onSubmit }
         >
             { renderForm }

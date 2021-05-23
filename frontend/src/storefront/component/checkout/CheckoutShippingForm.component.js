@@ -3,7 +3,7 @@ import AddressForm from '../account/AddressForm.component'
 
 export function CheckoutShippingForm() {
     return (
-        <AddressForm />
+        <AddressForm shouldRenderSubmitButton={ false } />
     )
 }
 

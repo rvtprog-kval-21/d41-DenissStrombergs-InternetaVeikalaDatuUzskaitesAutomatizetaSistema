@@ -31,9 +31,7 @@ export function Router() {
                     <Route path="/" render={ () => (<Homepage/>) } exact/>
                     <Route path="/checkout" render={ () => (<Checkout/>) } exact/>
                     <Route path="/account" render={ () => (<Account/>) } exact />
-                    <Route path="/account/:section" render={ () => (<Account/>) } />
-                    <Route path="/account/:section/create" render={ () => (<Account/>) } />
-                    <Route path="/account/:section/edit/:id" render={ () => (<Account/>) } />
+                    <Route path="/account/:section?/:action?/:id?" render={ () => (<Account/>) } />
                     <Route path="/cart" render={ () => (<Cart/>) } exact/>
                     <Route path="/category/:urlKey" render={ () => (<Category/>) }/>
                     <Route path="/page/:urlKey" render={ () => (<Page/>) }/>

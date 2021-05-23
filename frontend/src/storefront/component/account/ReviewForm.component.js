@@ -15,6 +15,7 @@ export function ReviewForm(props) {
         content: '',
         rating: 10
     }
+
     const onSubmit = async (values, props) => {
         const { setSubmitting } = props
 

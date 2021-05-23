@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button, Typography } from '@material-ui/core'
 import { AddProduct } from '../../query/Cart.query'
 import { useApolloClient } from '@apollo/client'
+import Price from './Price.component'
 
 export function ProductActions(props) {
     const client = useApolloClient()
@@ -31,7 +32,8 @@ export function ProductActions(props) {
                 { name }
             </Typography>
             <Typography>
-                { `Price: ${price}$` }
+                { 'Price: ' }
+                <Price value={ price } />
             </Typography>
             <Button onClick={ onAddToCart } variant="contained" color="primary">
                 Add to cart

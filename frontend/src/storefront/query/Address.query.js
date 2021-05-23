@@ -17,6 +17,23 @@ export const GET_ALL_ADDRESSES = gql`
     }
 `
 
+export const GET_ADDRESS = gql`
+    query GetAddress($id: ID!) {
+        address: Address(id: $id) {
+            id
+            firstName
+            lastName
+            phoneNumber
+            country
+            city
+            province
+            street1
+            street2
+            postalCode
+        }
+    }
+`
+
 export const CREATE_ADDRESS = gql`
     mutation CreateAddress(
         $firstName: String!,
@@ -115,8 +132,8 @@ export function GetAllAddresses(variables) {
     return addresses
 }
 
-export function CreateAddress(variables) {
-    const { loading, error, data: { address } = {} } = useQuery(CREATE_ADDRESS, { variables })
+export function GetAddress(variables) {
+    const { loading, error, data: { address } = {} } = useQuery(GET_ADDRESS, { variables })
 
     if (loading || error) {
         return null
@@ -125,22 +142,23 @@ export function CreateAddress(variables) {
     return address
 }
 
-export function UpdateAddress(variables) {
-    const { loading, error, data: { address } = {} } = useQuery(UPDATE_ADDRESS, { variables })
-
-    if (loading || error) {
-        return null
-    }
-
-    return address
+export function CreateAddress(client, variables) {
+    return client.mutate({
+        mutation: CREATE_ADDRESS,
+        variables
+    }).then(({ data }) => data?.address)
 }
 
-export function DeleteAddress(variables) {
-    const { loading, error, data } = useQuery(DELETE_ADDRESS, { variables })
+export function UpdateAddress(client, variables) {
+    return client.mutate({
+        mutation: UPDATE_ADDRESS,
+        variables
+    }).then(({ data }) => data?.address)
+}
 
-    if (loading || error) {
-        return null
-    }
-
-    return data
+export function DeleteAddress(client, variables) {
+    return client.mutate({
+        mutation: DELETE_ADDRESS,
+        variables
+    }).then(({ data }) => data)
 }

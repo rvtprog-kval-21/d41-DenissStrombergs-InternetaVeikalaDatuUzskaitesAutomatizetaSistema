@@ -2,7 +2,7 @@ import { gql, useQuery } from '@apollo/client'
 
 export const GET_ALL_CATEGORIES = gql`
     query GetAllCategories {
-        allCategories(filter: { isEnabled: true, isInMenu: true }) {
+        categories: allCategories(filter: { isEnabled: true, isInMenu: true }) {
             id
             isEnabled
             name
@@ -14,9 +14,9 @@ export const GET_ALL_CATEGORIES = gql`
 `
 
 export function GetAllCategories() {
-    const { data: { allCategories: categories } = {} } = useQuery(GET_ALL_CATEGORIES, {})
+    const { loading, error, data: { categories } = {} } = useQuery(GET_ALL_CATEGORIES, {})
 
-    if (!categories) {
+    if (loading || error) {
         return null
     }
 

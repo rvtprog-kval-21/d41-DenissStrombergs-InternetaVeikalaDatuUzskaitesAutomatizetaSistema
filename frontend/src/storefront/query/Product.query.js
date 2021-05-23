@@ -30,9 +30,9 @@ export const GET_PRODUCT = gql`
 `
 
 export function GetProduct(variables) {
-    const { data: { product } = {} } = useQuery(GET_PRODUCT, { variables })
+    const { loading, error, data: { product } = {} } = useQuery(GET_PRODUCT, { variables })
 
-    if (!product) {
+    if (loading || error) {
         return null
     }
 

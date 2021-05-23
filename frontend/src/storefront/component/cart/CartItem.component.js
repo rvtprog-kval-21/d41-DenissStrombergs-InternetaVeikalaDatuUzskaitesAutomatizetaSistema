@@ -13,6 +13,7 @@ import RemoveIcon from '@material-ui/icons/Remove'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { useApolloClient } from '@apollo/client'
 import { AddProduct, RemoveProduct } from '../../query/Cart.query'
+import Price from '../product/Price.component'
 
 const useStyles = makeStyles({
     media: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles({
 })
 
 export function CartItem(props) {
-    const { cartItem: { product: { name, urlKey, price }, product, quantity } } = props
+    const { cartItem: { product: { name, urlKey, price }, product, quantity }, shouldRenderCartItemActions = true } = props
     const client = useApolloClient()
     const account = useSelector((state) => state.AccountReducer)
     const classes = useStyles()
@@ -76,6 +77,29 @@ export function CartItem(props) {
         })
     }
 
+    const renderCartAction = () => {
+        if (!shouldRenderCartItemActions) {
+            return null
+        }
+
+        return (
+            <CardActions>
+                <IconButton onClick={ onAddButtonClick }>
+                    <AddIcon />
+                </IconButton>
+                <Typography>
+                    { quantity }
+                </Typography>
+                <IconButton onClick={ onRemoveButtonClick }>
+                    <RemoveIcon />
+                </IconButton>
+                <IconButton onClick={ onDeleteButtonClick }>
+                    <DeleteIcon />
+                </IconButton>
+            </CardActions>
+        )
+    }
+
     return (
         <Grid item>
             <Card className={ classes.root } >
@@ -93,25 +117,12 @@ export function CartItem(props) {
                                 { name }
                             </Typography>
                             <Typography gutterBottom variant="h5" component="h2">
-                                { price }
+                                <Price value={ price } />
                             </Typography>
                         </CardContent>
                     </div>
                 </CardActionArea>
-                <CardActions>
-                    <IconButton onClick={ onAddButtonClick }>
-                        <AddIcon />
-                    </IconButton>
-                    <Typography>
-                        { quantity }
-                    </Typography>
-                    <IconButton onClick={ onRemoveButtonClick }>
-                        <RemoveIcon />
-                    </IconButton>
-                    <IconButton onClick={ onDeleteButtonClick }>
-                        <DeleteIcon />
-                    </IconButton>
-                </CardActions>
+                { renderCartAction() }
             </Card>
         </Grid>
     )

@@ -1,25 +1,33 @@
+import { useApolloClient } from '@apollo/client'
 import { Button, Typography } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
-import { useSelector } from 'react-redux'
-import ChangePasswordForm from './ChangePassword.component'
+import { useDispatch, useSelector } from 'react-redux'
+import VALIDATION from '../../../base/Validation'
+import { updateAccount } from '../../query/Account.query'
+import ChangePasswordForm from './ChangePasswordForm.component'
 
 export function AccountSettings() {
+    const client = useApolloClient()
+    const dispatch = useDispatch()
     const account = useSelector((state) => state.AccountReducer)
     
     const initialValues = account
 
-    const validate = (values) => {
-        const errors = {}
-
-        return errors
-    }
-
-    const onSubmit = (values, props) => {
+    const onSubmit = async (values, props) => {
         const { setSubmitting } = props
 
         setSubmitting(false)
-        console.log(values)
+
+        dispatch({
+            type: 'UPDATE_ACCOUNT',
+            payload: {
+                values: await updateAccount(client, {
+                    customerId: account.id,
+                    ...values
+                })
+            }
+        })
     }
 
     const renderForm = (props) => {
@@ -65,7 +73,7 @@ export function AccountSettings() {
             <Typography variant="h5">Settings</Typography>
             <Formik
                 initialValues={ initialValues }
-                validate={ validate }
+                validationSchema={ VALIDATION.ACCOUNT }
                 onSubmit={ onSubmit }
             >
                 { renderForm }
