@@ -11,22 +11,24 @@ import { useHistory } from 'react-router-dom'
 import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/Remove'
 import DeleteIcon from '@material-ui/icons/Delete'
+import { useApolloClient } from '@apollo/client'
+import { AddProduct, RemoveProduct } from '../../query/Cart.query'
 
 const useStyles = makeStyles({
-    root: {
-        maxWidth: 345
-    },
     media: {
         height: 128,
         width: 128,
     },
     area: {
-        display: 'flex'
+        display: 'flex',
+        justifyContent: 'flex-start'
     }
 })
 
 export function CartItem(props) {
-    const { product: { product: { name, url_key }, product, quantity } } = props
+    const { cartItem: { product: { name, url_key, price }, product, quantity } } = props
+    const client = useApolloClient()
+    const account = useSelector((state) => state.AccountReducer)
     const classes = useStyles()
     const history = useHistory()
     const dispatch = useDispatch()
@@ -35,31 +37,48 @@ export function CartItem(props) {
         history.push(`/product/${ url_key }`)
     }
 
-    const onAddButtonClick = () => {
-        console.log(product)
+    const onAddButtonClick = async () => {
         dispatch({
             type: 'ADD_PRODUCT_TO_CART',
-            payload: { product }
+            payload: {
+                cartItem: await AddProduct(client, {
+                    customerId: account.id,
+                    productId: product.id,
+                    quantity: 1
+                })
+            }
         })
     }
 
-    const onRemoveButtonClick = () => {
+    const onRemoveButtonClick = async () => {
         dispatch({
             type: 'REMOVE_PRODUCT_FROM_CART',
-            payload: { product }
+            payload: {
+                cartItem: await RemoveProduct(client, {
+                    customerId: account.id,
+                    productId: product.id,
+                    quantity: 1
+                })
+            }
         })
     }
 
-    const onDeleteButtonClick = () => {
+    const onDeleteButtonClick = async () => {
         dispatch({
             type: 'DELETE_PRODUCT_FROM_CART',
-            payload: { product }
+            payload: {
+                cartItem: await RemoveProduct(client, {
+                    customerId: account.id,
+                    productId: product.id,
+                    quantity
+                })
+            }
         })
     }
 
     return (
         <Grid item>
-            <Card className={ classes.root }>
+            <Card className={ classes.root } >
                 <CardActionArea onClick={ onProductClick } className={ classes.area }>
                     <div>
                         <CardMedia
@@ -72,6 +91,9 @@ export function CartItem(props) {
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">
                                 { name }
+                            </Typography>
+                            <Typography gutterBottom variant="h5" component="h2">
+                                { price }
                             </Typography>
                         </CardContent>
                     </div>

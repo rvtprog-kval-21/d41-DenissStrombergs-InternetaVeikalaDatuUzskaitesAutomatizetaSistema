@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { DataGrid } from '@material-ui/data-grid'
-import { Button } from '@material-ui/core'
+import { Button, Typography } from '@material-ui/core'
 import { GetAllAddresses } from '../../query/Address.query'
 
 export function AccountAddressList() {
@@ -60,7 +60,10 @@ export function AccountAddressList() {
     ]
 
     return (
-        <DataGrid columns={ columns } rows={ addresses } autoHeight hideFooterPagination disableSelectionOnClick />
+        <div>
+            <Typography variant="h5">Settings</Typography>
+            <DataGrid columns={ columns } rows={ addresses } autoHeight hideFooterPagination disableSelectionOnClick />
+        </div>
     )
 }
 

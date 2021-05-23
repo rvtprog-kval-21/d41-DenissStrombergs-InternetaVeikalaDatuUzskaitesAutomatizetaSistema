@@ -38,8 +38,16 @@ export const SEARCH = gql`
                 specialTaxRate
                 media
             }
-            attribute: Attributes {
+            attributes: Attributes {
                 id
+                code
+                label
+                type
+            }
+            aggregations: Aggregations {
+                minPrice
+                maxPrice
+                filterValues
             }
         }
     }

@@ -1,14 +1,24 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Button, Typography } from '@material-ui/core'
+import { AddProduct } from '../../query/Cart.query'
+import { useApolloClient } from '@apollo/client'
 
 export function ProductActions(props) {
+    const client = useApolloClient()
+    const account = useSelector((state) => state.AccountReducer)
     const { product, product: { name, sku, price} } = props
     const dispatch = useDispatch()
 
-    const onAddToCart = () => {
+    const onAddToCart = async () => {
         dispatch({
             type: 'ADD_PRODUCT_TO_CART',
-            payload: { product }
+            payload: {
+                cartItem: await AddProduct(client, {
+                    customerId: account.id,
+                    productId: product.id,
+                    quantity: 1
+                })
+            }
         })
     }
 

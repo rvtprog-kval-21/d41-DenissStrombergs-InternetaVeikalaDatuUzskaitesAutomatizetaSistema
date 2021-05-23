@@ -1,28 +1,62 @@
-import { Button, Link } from "@material-ui/core";
+import { useApolloClient } from "@apollo/client"
+import { Button, Link, makeStyles, useTheme } from "@material-ui/core"
 
-export function AccountNavigation() {
-    const onSignOutButtonClick = () => {
-        console.log('sign out')
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import { useDispatch, useSelector } from "react-redux"
+import { singOut } from "../../query/Account.query"
+
+export function AccountNavigation(props) {
+    const dispatch = useDispatch()
+    const client = useApolloClient()
+    const account = useSelector((state) => state.AccountReducer)
+    const { section } = props
+
+    const onSignOutButtonClick = async () => {
+        dispatch({
+            type: 'SIGN_OUT',
+            payload: {
+                isSignedIn: await singOut(client, {
+                    customerId: account.id
+                })
+            }
+        })
     }
 
+    const sections = [
+        {
+            label: 'Settings',
+            code: 'settings',
+            url: '/account/settings'
+        },
+        {
+            label: 'Addresses',
+            code: 'addresses',
+            url: '/account/addresses'
+        },        {
+            label: 'Orders',
+            code: 'orders',
+            url: '/account/orders'
+        },
+        {
+            label: 'Reviews',
+            code: 'reviews',
+            url: '/account/reviews'
+        }
+    ]
+
     return (
-        <div>
-            <Link href="/account/settings" color="inherit">
-                Settings
-            </Link>
-            <Link href="/account/addresses" color="inherit">
-                Addresses
-            </Link>
-            <Link href="/account/orders" color="inherit">
-                Orders
-            </Link>
-            <Link href="/account/reviews" color="inherit">
-                Reviews
-            </Link>
-            <Button onClick={ onSignOutButtonClick }>
-                Sign out
-            </Button>
-        </div>
+        <List>
+          {sections.map((text, index) => (
+            <ListItem button component="a" href={ text.url } key={text.label } selected={ text.code == section }>
+              <ListItemText primary={text.label } />
+            </ListItem>
+          ))}
+            <ListItem button key="Sign out" onClick={ onSignOutButtonClick }>
+              <ListItemText primary="Sign out" />
+            </ListItem>
+        </List>
     )
 }
 

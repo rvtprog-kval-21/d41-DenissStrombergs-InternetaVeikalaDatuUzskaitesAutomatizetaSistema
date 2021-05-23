@@ -1,9 +1,7 @@
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
-import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
-import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid } from '@material-ui/core'
@@ -29,10 +27,8 @@ export function ProductItem(props) {
 
     return (
         <div className="ProductItem">
-            <Grid
-              item
-              >
-                <Card className={classes.root}>
+            <Grid item>
+                <Card className={ classes.root }>
                     <CardActionArea onClick={ onProductClick }>
                         <CardMedia
                             className={classes.media}
@@ -48,9 +44,6 @@ export function ProductItem(props) {
                         </Typography>
                         </CardContent>
                     </CardActionArea>
-                    <CardActions>
-                        <Button size="small" color="primary">Add to cart</Button>
-                    </CardActions>
                 </Card>
             </Grid>
         </div>

@@ -2,18 +2,18 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { CartItem } from '../CartItem/CartItem.component'
 
-export function renderCartItem(product) {
+export function renderCartItem(cartItem) {
     return (
-        <CartItem product={ product } />
+        <CartItem cartItem={ cartItem } />
     )
 }
 
 export function CartList() {
-    const { products } = useSelector((state) => state.CartReducer)
+    const cartItems = useSelector((state) => state.CartReducer)
 
     return (
         <div>
-            { Object.values(products).map(renderCartItem) }
+            { Object.values(cartItems).map(renderCartItem) }
         </div>
     )
 }

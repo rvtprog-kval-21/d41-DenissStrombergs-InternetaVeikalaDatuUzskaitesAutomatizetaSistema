@@ -2,14 +2,23 @@ export const cartResolver = {
     Mutation: {
         addProduct: async function(_, data, { models }) {
             try {
-                const product = await models.CartItem.findOrCreate({ where: { cart_id: data.cart_id, product_id: data.product_id }, defaults: data })
+                const product = await models.CartItem.findOrCreate({
+                    where: {
+                        customer_id: data.customer_id,
+                        product_id: data.product_id
+                    },
+                    defaults: data,
+                    include: [
+                        models.Product
+                    ]
+                })
 
                 if (!product[1]) {
-                    product.quantity += data.quantity
-                    await product.save()
+                    product[0].quantity += data.quantity
+                    await product[0].save()
                 }
 
-                return product
+                return product[0]
             } catch (error) {
                 console.error(error)
 
@@ -18,11 +27,19 @@ export const cartResolver = {
         },
         removeProduct: async function(_, data, { models }) {
             try {
-                const product = await models.CartItem.findOrCreate({ where: { cart_id: data.cart_id, product_id: data.product_id }, defaults: data })
+                const product = await models.CartItem.findOne({
+                    where: {
+                        customer_id: data.customer_id,
+                        product_id: data.product_id
+                    },
+                    include: [
+                        models.Product
+                    ]
+                })
 
-                if (!product[1]) {
+                if (product) {
                     product.quantity -= data.quantity
-            
+
                     if (product.quantity <= 0) {
                         await product.destroy()
                     } else {
@@ -39,7 +56,7 @@ export const cartResolver = {
         },
         clearCart: async function(_, data, { models }) {
             try {
-                const products = await models.CartItem.findAll({ where: { cart_id: data.cart_id } })
+                const products = await models.CartItem.findAll({ where: { customer_id: data.customer_id } })
                 await products.destroy()
 
                 return true

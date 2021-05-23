@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { GetAllOrders } from '../../query/Order.query'
 import { DataGrid } from '@material-ui/data-grid'
-import { Button } from '@material-ui/core'
+import { Button, Typography } from '@material-ui/core'
 
 export function AccountOrderList() {
     const { id } = useSelector((state) => state.AccountReducer)
@@ -52,7 +52,10 @@ export function AccountOrderList() {
     ]
 
     return (
-        <DataGrid columns={ columns } rows={ orders } autoHeight hideFooterPagination disableSelectionOnClick />
+        <div>
+            <Typography variant="h5">Orders</Typography>
+            <DataGrid columns={ columns } rows={ orders } autoHeight hideFooterPagination disableSelectionOnClick />
+        </div>
     )
 }
 

@@ -1,8 +1,12 @@
 export const cartTypeDef = `
+    type CartItem {
+        Product: Product
+    }
+
     type Mutation {
-        addProduct(cart_id: ID!, product_id: ID!, quantity: Int!) : Boolean
-        removeProduct(cart_id: ID!, product_id: ID!, quantity: Int!) : Boolean
-        clearCart(cart_id: ID!) : Boolean
+        addProduct(customer_id: ID!, product_id: ID!, quantity: Int!) : CartItem
+        removeProduct(customer_id: ID!, product_id: ID!, quantity: Int!) : CartItem
+        clearCart(customer_id: ID!) : Boolean
     }
 `
 

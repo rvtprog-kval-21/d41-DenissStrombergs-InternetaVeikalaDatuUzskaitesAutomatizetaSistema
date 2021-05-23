@@ -1,7 +1,7 @@
-const initialState = JSON.parse(localStorage.getItem('ACCOUNT')) || {}
+const initialState = JSON.parse(localStorage.getItem('ACCOUNT'))
 
 export function AccountReducer(state = initialState, action) {
-    const { type, payload: { account } = {} } = action
+    const { type, payload: { account, isSignedIn } = {} } = action
 
     switch (type) {
         case 'SIGN_IN':
@@ -21,9 +21,11 @@ export function AccountReducer(state = initialState, action) {
 
             return state
         case 'SIGN_OUT':
-            window.localStorage.setItem('ACCOUNT', null)
+            if (!isSignedIn) {
+                window.localStorage.setItem('ACCOUNT', null)
 
-            return state
+                return {}
+            }
         default:
             return state
     }

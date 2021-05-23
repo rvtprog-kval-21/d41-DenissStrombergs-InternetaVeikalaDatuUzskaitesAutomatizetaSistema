@@ -1,62 +1,73 @@
 import { gql, useQuery } from '@apollo/client'
 
 export const GET_CART = gql`
-    query GetCart(customerId: ID!) {
-        allCarts(filter: { customer_id: $customerId }) {
+    query GetCart($customerId: ID!) {
+        cart: allCartItems(filter: { customer_id: $customerId }) {
             id
-            Products {
-              id
+            quantity
+            product: Product {
+                id
+                sku
+                name
+                price
+                stockQuantity
+                specialDiscountType
+                specialDiscountValue
+                specialTaxRate
+                media
             }
         }
     }
 `
 
-export const UPDATE_CART = ``
+export const ADD_PRODUCT = gql`
+    mutation AddProduct($customerId: ID!, $productId: ID!, $quantity: Int!) {
+        cartItem: addProduct(customer_id: $customerId, product_id: $productId, quantity: $quantity) {
+            id
+            quantity
+            product: Product {
+                id
+                sku
+                name
+                price
+                stockQuantity
+                specialDiscountType
+                specialDiscountValue
+                specialTaxRate
+                media
+            }
+        }
+    }
+`
+
+export const REMOVE_PRODUCT = gql`
+    mutation RemoveProduct($customerId: ID!, $productId: ID!, $quantity: Int!) {
+        cartItem: removeProduct(customer_id: $customerId, product_id: $productId, quantity: $quantity) {
+            id
+            quantity
+            product: Product {
+                id
+                sku
+                name
+                price
+                stockQuantity
+                specialDiscountType
+                specialDiscountValue
+                specialTaxRate
+                media
+            }
+        }
+    }
+`
 
 export const CLEAR_CART = gql`
-    mutation ClearCart(customerId: ID!) {
-        clearCart(customer_id: $customerId) {
-            id
-        }
+    mutation ClearCart($customerId: ID!) {
+        clearCart(customer_id: $customerId)
     }
 `
 
-export const ADD_PRODUCT = ``
-
-export const REMOVE_PRODUCT = ``
-
-export function GetCart() {
-
-}
-
-export function UpdateCart() {
-
-}
-
-export function DeleteCart() {
-
-}
-
-export function AddProduct() {
-
-}
-
-export function RemoveProduct() {
-
-}
-
-export const CART = gql`
-    query Cart($key: String!) {
-        allCarts(filter: { key: $key }) {
-            id
-        }
-    }
-`
-
-export function Cart({ key }) {
-    const { data: { allCarts: [cart] = [] } = {} } = useQuery(CART, {
-        variables: { key }
-    })
+export function GetCart(variables) {
+    const { data: { cart } = {} } = useQuery(GET_CART, { variables })
 
     if (!cart) {
         return null
@@ -65,4 +76,23 @@ export function Cart({ key }) {
     return cart
 }
 
-export default Cart
+export function AddProduct(client, variables) {
+    return client.mutate({
+        mutation: ADD_PRODUCT,
+        variables
+    }).then(({ data }) => data?.cartItem)
+}
+
+export function RemoveProduct(client, variables) {
+    return client.mutate({
+        mutation: REMOVE_PRODUCT,
+        variables
+    }).then(({ data }) => data?.cartItem)
+}
+
+export function ClearCart(client, variables) {
+    return client.mutate({
+        mutation: CLEAR_CART,
+        variables
+    }).then(({ data }) => data)
+}

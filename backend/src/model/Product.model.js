@@ -53,6 +53,9 @@ export class Product extends Model {
                 attributeValues: {
                     type: DataTypes.JSONB
                 },
+                soldAmount: {
+                    type: DataTypes.INTEGER
+                },
                 attribute_set_id: {
                     type: DataTypes.INTEGER,
                     references: {
@@ -74,6 +77,7 @@ export class Product extends Model {
         this.hasMany(models.CartItem, { foreignKey: 'product_id' })
         this.hasMany(models.OrderItem, { foreignKey: 'product_id' })
         this.hasMany(models.Review, { foreignKey: 'product_id' })
+        this.hasMany(models.CartItem, { foreignKey: 'product_id'})
     }
 }
 

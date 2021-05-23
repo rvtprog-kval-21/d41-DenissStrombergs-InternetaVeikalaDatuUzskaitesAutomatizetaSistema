@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { DataGrid } from '@material-ui/data-grid'
 import { GetAllCustomerReviews } from '../../query/Review.query'
-import { Button } from '@material-ui/core'
+import { Button, Typography } from '@material-ui/core'
 
 export function AccountReviewList() {
     const { id } = useSelector((state) => state.AccountReducer)
@@ -47,7 +47,10 @@ export function AccountReviewList() {
     ]
 
     return (
-        <DataGrid columns={ columns } rows={ reviews } autoHeight hideFooterPagination disableSelectionOnClick />
+        <div>
+            <Typography variant="h5">Reviews</Typography>
+            <DataGrid columns={ columns } rows={ reviews } autoHeight hideFooterPagination disableSelectionOnClick />
+        </div>
     )
 }
 

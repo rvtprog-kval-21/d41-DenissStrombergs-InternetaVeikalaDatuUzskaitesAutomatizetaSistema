@@ -1,8 +1,17 @@
 export const searchTypeDef = `
+    scalar FilterValues
+
+    type Aggregations {
+        minPrice: Float
+        maxPrice: Float
+        filterValues: FilterValues
+    }
+
     type Search {
         Category: Category
         Products: [Product]
         Attributes: [Attribute]
+        Aggregations: Aggregations
     }
 
     input AttributeValue {

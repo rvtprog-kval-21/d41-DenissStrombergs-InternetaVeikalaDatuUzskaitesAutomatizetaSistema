@@ -10,7 +10,8 @@ app.use(cors())
 app.use('/graphql', graphqlHTTP({
     schema: buildSchema(database.models),
     context: {
-        models: database.models
+        models: database.models,
+        sequelize: database.sequelize
     },
     graphiql: true
 }))

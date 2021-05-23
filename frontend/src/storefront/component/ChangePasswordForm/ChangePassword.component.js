@@ -1,13 +1,13 @@
-import { Button, Typography } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
-import { useSelector } from 'react-redux'
-import ChangePasswordForm from '../ChangePasswordForm/ChangePassword.component'
 
-export function AccountSettings() {
-    const account = useSelector((state) => state.AccountReducer)
-    
-    const initialValues = account
+export function ChangePasswordForm() {
+    const initialValues = {
+        oldPassword: '',
+        newPassword: '',
+        confirmNewPassword: ''
+    }
 
     const validate = (values) => {
         const errors = {}
@@ -29,23 +29,23 @@ export function AccountSettings() {
             <Form>
                 <Field
                     component={ TextField }
-                    type="email"
-                    name="email"
-                    label="Email"
+                    type="password"
+                    name="oldPassword"
+                    label="Old password"
                     fullWidth
                 />
                 <Field
                     component={ TextField }
-                    type="text"
-                    name="firstName"
-                    label="First name"
+                    type="password"
+                    name="newPassword"
+                    label="New password"
                     fullWidth
                 />
                 <Field
                     component={ TextField }
-                    type="text"
-                    name="lastName"
-                    label="Last name"
+                    type="password"
+                    name="confirmNewPassword"
+                    label="Confirm new password"
                     fullWidth
                 />
                 <Button
@@ -61,18 +61,15 @@ export function AccountSettings() {
     }
 
     return (
-        <div>
-            <Typography variant="h5">Settings</Typography>
-            <Formik
-                initialValues={ initialValues }
-                validate={ validate }
-                onSubmit={ onSubmit }
-            >
-                { renderForm }
-            </Formik>
-            <ChangePasswordForm />
-        </div>
+        <Formik
+            initialValues={ initialValues }
+            validate={ validate }
+            onSubmit={ onSubmit }
+        >
+            { renderForm }
+        </Formik>
     )
 }
 
-export default AccountSettings
+export default ChangePasswordForm
+

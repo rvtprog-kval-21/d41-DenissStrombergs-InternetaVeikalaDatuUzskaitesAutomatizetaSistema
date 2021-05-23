@@ -7,9 +7,10 @@ export const SIGN_IN = gql`
             email
             firstName
             lastName
-            cart: Cart {
+            cartItems: CartItems {
                 id
-                products: Products {
+                quantity
+                products: Product {
                   id
                 }
             }

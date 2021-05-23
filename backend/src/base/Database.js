@@ -3,7 +3,6 @@ import Attribute from '../model/Attribute.model'
 import AttributeSet from '../model/AttributeSet.model'
 import AttributeSetAttribute from '../model/AttributeSetAttribute.model'
 import Block from '../model/Block.model'
-import Cart from '../model/Cart.model'
 import CartItem from '../model/CartItem.model'
 import Category from '../model/Category.model'
 import ProductCategory from '../model/ProductCategory.model'
@@ -43,7 +42,6 @@ class Database {
             Category: Category.init(this.sequelize),
             Customer: Customer.init(this.sequelize),
             Address: Address.init(this.sequelize),
-            Cart: Cart.init(this.sequelize),
             CustomerGroup: CustomerGroup.init(this.sequelize),
             CustomerCustomerGroup: CustomerCustomerGroup.init(this.sequelize),
             Order: Order.init(this.sequelize),

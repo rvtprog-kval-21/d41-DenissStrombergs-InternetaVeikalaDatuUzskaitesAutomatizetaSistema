@@ -1,48 +1,37 @@
-const initialState = JSON.parse(window.localStorage.getItem('CART')) || {
-    products: {}
-}
+const initialState = JSON.parse(window.localStorage.getItem('CART')) || {}
 
 export function CartReducer(state = initialState, action) {
-    const { products } = state
-    const { type, payload: { product, product: { id } = {} } = {} } = action
-
-    if (!id) {
-        return state
-    }
+    const { type, payload: { cartItem } = {} } = action
 
     switch (type) {
         case 'ADD_PRODUCT_TO_CART':
             const out = {
                 ...state,
-                products: {
-                    ...products,
-                    [id]: {
-                        product,
-                        quantity: products[id]?.quantity + 1 || 1
-                    }
-                }
+                [cartItem.id]: cartItem
             }
-
-            console.log(products)
-
             window.localStorage.setItem('CART', JSON.stringify(out))
+
             return out
         case 'REMOVE_PRODUCT_FROM_CART':
-            const out2 = {
-                ...state,
-                products: {
-                    ...products,
-                    [id]: {
-                        product,
-                        quantity: products[id]?.quantity - 1 || 1
-                    }
+            if (cartItem) {
+                const out = {
+                    ...state,
+                    [cartItem.id]: cartItem
                 }
-            }
+                window.localStorage.setItem('CART', JSON.stringify(out))
 
-            window.localStorage.setItem('CART', JSON.stringify(out2))
-            return out2
+                return out
+            } else {
+                const { [cartItem.id]: a, ...other } = state
+                window.localStorage.setItem('CART', JSON.stringify(other))
+
+                return other
+            }
         case 'DELETE_PRODUCT_FROM_CART':
-            return state
+            const { [cartItem.id]: a, ...other } = state
+            window.localStorage.setItem('CART', JSON.stringify(other))
+
+            return other
         default:
             return state
     }

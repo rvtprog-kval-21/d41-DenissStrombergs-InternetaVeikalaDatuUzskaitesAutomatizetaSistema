@@ -3,9 +3,17 @@ import parse from 'html-react-parser'
 import { Search } from '../../query/Search.query'
 import ProductList from '../../component/ProductList/ProductList.component'
 import FilterList from '../../component/FilterList/FilterList.component'
+import { Grid, makeStyles } from '@material-ui/core'
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+    }
+}))
 
 export function Category() {
     const { urlKey } = useParams()
+    const classes = useStyles();
     const search = Search({
         categoryUrlKey: urlKey
     })
@@ -17,10 +25,16 @@ export function Category() {
     const { category: { content } } = search
 
     return (
-        <div>
+        <div className={ classes.root }>
             { parse(content) }
-            <FilterList search={ search } />
-            <ProductList search={ search } />
+            <Grid container spacing={ 3 }>
+                <Grid item xs={ 2 }>
+                     <FilterList search={ search } />
+                </Grid>
+                <Grid item xs={ 10 }>
+                    <ProductList search={ search } />
+                </Grid>
+            </Grid>
         </div>
     )
 }

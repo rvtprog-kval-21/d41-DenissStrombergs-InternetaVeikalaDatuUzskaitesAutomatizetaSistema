@@ -10,6 +10,8 @@ import checkoutResolver from '../resolver/Checkout.resolver'
 import searchResolver from '../resolver/Search.resolver'
 import accountTypeDef from '../type-def/Account.type-def'
 import accountResolver from '../resolver/Account.resolver'
+import productResolver from '../resolver/Product.resolver'
+import productTypeDef from '../type-def/Product.type-def'
 
 export function buildSchema(models) {
     const typeDefs = [
@@ -17,14 +19,16 @@ export function buildSchema(models) {
         accountTypeDef,
         cartTypeDef,
         checkoutTypeDef,
-        searchTypeDef
+        searchTypeDef,
+        productTypeDef
     ]
     const resolvers = [
         ...Object.values(models).map(generateResolver),
         accountResolver,
         cartResolver,
         checkoutResolver,
-        searchResolver
+        searchResolver,
+        productResolver
     ]
 
     return makeExecutableSchema({

@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize'
-import Cart from './Cart.model'
+import Customer from './Customer.model'
 import Product from './Product.model'
 
 export class CartItem extends Model {
@@ -15,10 +15,10 @@ export class CartItem extends Model {
                 quantity: {
                     type: DataTypes.INTEGER
                 },
-                cart_id: {
+                customer_id: {
                     type: DataTypes.INTEGER,
                     references: {
-                        model: Cart,
+                        model: Customer,
                         key: 'id'
                     }
                 },
@@ -39,21 +39,24 @@ export class CartItem extends Model {
     }
 
     static associate(models) {
-        models.Cart.belongsToMany(
+        models.Customer.belongsToMany(
             models.Product,
             {
                 through: this,
-                foreignKey: 'cart_id'
+                foreignKey: 'customer_id'
             }
         )
 
         models.Product.belongsToMany(
-            models.Cart,
+            models.Customer,
             {
                 through: this,
                 foreignKey: 'product_id'
             }
         )
+        
+        this.belongsTo(models.Product, { foreignKey: 'product_id'})
+        this.belongsTo(models.Customer, { foreignKey: 'customer_id'})
     }
 }
 

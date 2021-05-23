@@ -6,6 +6,7 @@ import AccountReviewList from '../../component/AccountReviewList/AccountReviewLi
 import AccountOrderList from '../../component/AccountOrderList/AccountOrderList.component'
 import AccountSign from '../../component/AccountSign/AccountSign.component'
 import AccountAddressList from '../../component/AccountAddressList/AccountAddressList.component'
+import { Grid } from '@material-ui/core'
 
 export function Account() {
     const account = useSelector(state => state.AccountReducer)
@@ -38,10 +39,14 @@ export function Account() {
 
     const renderAccount = () => {
         return (
-            <div>
-                <AccountNavigation section={ section } />
-                { renderSection() }
-            </div>
+            <Grid container>
+                <Grid item xs={ 2 }>
+                    <AccountNavigation section={ section } />
+                </Grid>
+                <Grid items xs={ 10 }>
+                    { renderSection() }
+                </Grid>
+            </Grid>
         )
     }
 

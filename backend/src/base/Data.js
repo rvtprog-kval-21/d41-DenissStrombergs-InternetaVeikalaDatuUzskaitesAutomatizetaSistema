@@ -30,7 +30,8 @@ export const DATA = [
                         'label': 'Blue'
                     }
                 ],
-                isFilter: true
+                isFilter: true,
+                attributeGroup: 'General'
             },
             {
                 code: 'pencil_hardness',
@@ -39,6 +40,7 @@ export const DATA = [
                 type: 'number',
                 attributeOptions: [],
                 isFilter: true,
+                attributeGroup: 'General'
             },
             {
                 code: 'nib_size',
@@ -46,7 +48,8 @@ export const DATA = [
                 label: 'Nib size',
                 type: 'number',
                 attributeOptions: [],
-                isFilter: true
+                isFilter: true,
+                attributeGroup: 'General'
             },
             {
                 code: 'author',
@@ -55,6 +58,7 @@ export const DATA = [
                 type: 'string',
                 attributeOptions: [],
                 isFilter: true,
+                attributeGroup: 'General'
             },
             {
                 code: 'publisher',
@@ -63,6 +67,7 @@ export const DATA = [
                 type: 'string',
                 attributeOptions: [],
                 isFilter: true,
+                attributeGroup: 'General'
             },
             {
                 code: 'page_count',
@@ -70,7 +75,8 @@ export const DATA = [
                 label: 'Page count',
                 type: 'number',
                 attributeOptions: [],
-                isFilter: true
+                isFilter: true,
+                attributeGroup: 'General'
             }
         ]
     },
@@ -260,14 +266,6 @@ export const DATA = [
         ]
     },
     {
-        modelName: 'Cart',
-        modelData: [
-            {
-                customer_id: 1
-            }
-        ]
-    },
-    {
         modelName: 'CustomerGroup',
         modelData: [
             {
@@ -362,6 +360,7 @@ export const DATA = [
                         'https://via.placeholder.com/960x720'
                     ]
                 },
+                soldAmount: 20,
                 attributeValues: {
                     nib_size: 0.02
                 },
@@ -387,6 +386,7 @@ export const DATA = [
                         'https://via.placeholder.com/960x720'
                     ]
                 },
+                soldAmount: 10,
                 attributeValues: {
                     nib_size: 0.03
                 },
@@ -399,12 +399,12 @@ export const DATA = [
         modelData: [
             {
                 quantity: 5,
-                cart_id: 1,
+                customer_id: 1,
                 product_id: 1
             },
             {
                 quantity: 10,
-                cart_id: 1,
+                customer_id: 1,
                 product_id: 2
             }
         ]

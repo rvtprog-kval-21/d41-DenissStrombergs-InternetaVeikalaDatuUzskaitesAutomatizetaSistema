@@ -1,8 +1,11 @@
 import { Button } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
+import { useHistory } from 'react-router'
 
 export function SearchForm() {
+    const history = useHistory()
+
     const initialValues = {
         search: ''
     }
@@ -17,7 +20,8 @@ export function SearchForm() {
         const { setSubmitting } = props
 
         setSubmitting(false)
-        console.log(values)
+
+        history.push('/search/' + values.search)
     }
 
     const renderForm = (props) => {

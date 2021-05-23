@@ -2,7 +2,7 @@ import { gql, useQuery } from '@apollo/client'
 
 export const GET_PRODUCT = gql`
     query Product($urlKey: String!) {
-        allProducts(filter: { urlKey: $urlKey }) {
+        product: ProductByUrlKey(urlKey: $urlKey) {
             id
             sku
             name
@@ -15,12 +15,22 @@ export const GET_PRODUCT = gql`
             longDescription
             media
             attributeValues
+            attributeSet: AttributeSet {
+                attributes: Attributes {
+                    id
+                    code
+                    label
+                    type
+                    attributeOptions
+                    attributeGroup
+                }
+            }
         }
     }
 `
 
 export function GetProduct(variables) {
-    const { data: { allProducts: [product] = [] } = {} } = useQuery(GET_PRODUCT, { variables })
+    const { data: { product } = {} } = useQuery(GET_PRODUCT, { variables })
 
     if (!product) {
         return null

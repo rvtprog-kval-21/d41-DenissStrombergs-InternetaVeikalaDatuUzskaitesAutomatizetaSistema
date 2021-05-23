@@ -1,10 +1,9 @@
-import { Button, Typography } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
 import { useSelector } from 'react-redux'
-import ChangePasswordForm from '../ChangePasswordForm/ChangePassword.component'
 
-export function AccountSettings() {
+export function AccountAddressEdit() {
     const account = useSelector((state) => state.AccountReducer)
     
     const initialValues = account
@@ -36,6 +35,20 @@ export function AccountSettings() {
                 />
                 <Field
                     component={ TextField }
+                    type="password"
+                    name="password"
+                    label="Password"
+                    fullWidth
+                />
+                <Field
+                    component={ TextField }
+                    type="password"
+                    name="confirmPassword"
+                    label="Confirm password"
+                    fullWidth
+                />
+                <Field
+                    component={ TextField }
                     type="text"
                     name="firstName"
                     label="First name"
@@ -61,18 +74,14 @@ export function AccountSettings() {
     }
 
     return (
-        <div>
-            <Typography variant="h5">Settings</Typography>
-            <Formik
-                initialValues={ initialValues }
-                validate={ validate }
-                onSubmit={ onSubmit }
-            >
-                { renderForm }
-            </Formik>
-            <ChangePasswordForm />
-        </div>
+        <Formik
+            initialValues={ initialValues }
+            validate={ validate }
+            onSubmit={ onSubmit }
+        >
+            { renderForm }
+        </Formik>
     )
 }
 
-export default AccountSettings
+export default AccountAddressEdit

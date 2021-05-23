@@ -4,10 +4,9 @@ import Popover from '@material-ui/core/Popover'
 import IconButton from '@material-ui/core/IconButton'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
-import { useSelector } from 'react-redux'
-import { CartItem } from '../CartItem/CartItem.component'
 import { Button } from '@material-ui/core'
 import CartList from '../CartList/CartList.component'
+import CartTotals from '../CartTotals/CartTotals.component'
 
 export function CartOverlay() {
     return (
@@ -26,6 +25,7 @@ export function CartOverlay() {
                     >
                         <Typography>Cart</Typography>
                         <CartList />
+                        <CartTotals />
                         <div>
                             <Button variant="contained" color="primary" href="/cart">Go to cart</Button>
                             <Button variant="contained" color="primary" href="/checkout">Go to checkout</Button>
