@@ -116,32 +116,23 @@ export function GetAllProductReviews(variables) {
     return reviews
 }
 
-export function CreateReview(variables) {
-    const { loading, error, data: { review } } = useQuery(CREATE_REVIEW, { variables })
-
-    if (loading || error) {
-        return null
-    }
-
-    return review
+export function createReview(client, variables) {
+    return client.mutate({
+        mutation: CREATE_REVIEW,
+        variables
+    }).then(({ data }) => data?.review)
 }
 
-export function UpdateReview(variables) {
-    const { loading, error, data: { review } } = useQuery(UPDATE_REVIEW, { variables })
-
-    if (loading || error) {
-        return null
-    }
-
-    return review
+export function updateReview(client, variables) {
+    return client.mutate({
+        mutation: UPDATE_REVIEW,
+        variables
+    }).then(({ data }) => data?.review)
 }
 
-export function DeleteReview(variables) {
-    const { loading, error, data } = useQuery(DELETE_REVIEW, { variables })
-
-    if (loading || error) {
-        return null
-    }
-
-    return data
+export function deleteReview(client, variables) {
+    return client.mutate({
+        mutation: UPDATE_REVIEW,
+        variables
+    }).then(({ data }) => data)
 }

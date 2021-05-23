@@ -1,4 +1,4 @@
-import { DataTypes, Model } from 'sequelize'
+import { DataTypes, Model, Sequelize } from 'sequelize'
 import Customer from './Customer.model'
 import Product from './Product.model'
 
@@ -14,9 +14,11 @@ export class Review extends Model {
                 },
                 status: {
                     type: DataTypes.STRING,
+                    defaultValue: 'pending'
                 },
                 date: {
-                    type: DataTypes.DATE
+                    type: DataTypes.DATE,
+                    defaultValue: Sequelize.NOW
                 },
                 title: {
                     type: DataTypes.STRING

@@ -27,6 +27,7 @@ export const ADD_PRODUCT = gql`
             quantity
             product: Product {
                 id
+                urlKey
                 sku
                 name
                 price
@@ -47,6 +48,7 @@ export const REMOVE_PRODUCT = gql`
             quantity
             product: Product {
                 id
+                urlKey
                 sku
                 name
                 price

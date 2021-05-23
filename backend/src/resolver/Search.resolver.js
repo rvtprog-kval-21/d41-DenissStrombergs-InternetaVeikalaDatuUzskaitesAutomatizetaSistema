@@ -16,6 +16,8 @@ export const searchResolver = {
             const values = data.attributeValues || []
             values.forEach((attributeValue) => { attributeValues[attributeValue.code] = attributeValue.value })
             const order = orderMap[data.sort]
+            const page = data.page ? data.page - 1 : 0
+            const perPage = data.perPage|| 100000
 
             try {
                 const category = await models.Category.findOne({
@@ -50,8 +52,9 @@ export const searchResolver = {
                     },
                     order: order ? [order] : []
                 })
-                const minPrice = products.reduce((a, b) => (a.price < b.price ? a.price : b.price))
-                const maxPrice = products.reduce((a, b) => (a.price > b.price ? a.price : b.price))
+                const count = products.length
+                const minPrice = products.reduce((a, b) => (a.price < b.price ? a.price : b.price), 0)
+                const maxPrice = products.reduce((a, b) => (a.price > b.price ? a.price : b.price), 100000)
                 const filterValues = {}
                 products.forEach((product) => {
                     const { attributeValues } = product
@@ -79,9 +82,10 @@ export const searchResolver = {
 
                 return {
                     Category: category,
-                    Products: products,
+                    Products: products.slice(page * perPage, page * perPage + perPage),
                     Attributes: attributes,
                     Aggregations: {
+                        count,
                         minPrice,
                         maxPrice,
                         filterValues

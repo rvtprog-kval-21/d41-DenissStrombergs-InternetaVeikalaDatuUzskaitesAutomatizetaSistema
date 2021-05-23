@@ -1,18 +1,18 @@
 import { Provider } from 'react-redux'
 import configureStore from './Store'
 import Admin from './Admin'
-import Homepage from '../storefront/route/Homepage/Homepage.route'
-import Error from '../storefront/route/Error/Error.route'
+import Homepage from '../storefront/route/Homepage.route'
+import Error from '../storefront/route/Error.route'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import Footer from '../storefront/component/Footer/Footer.component'
-import Header from '../storefront/component/Header/Header.component'
-import Account from '../storefront/route/Account/Account.route'
-import Cart from '../storefront/route/Cart/Cart.route'
-import Category from '../storefront/route/Category/Category.route'
-import Checkout from '../storefront/route/Checkout/Checkout.route'
-import Page from '../storefront/route/Page/Page.route'
-import Product from '../storefront/route/Product/Product.route'
-import Search from '../storefront/route/Search/Search.route'
+import Footer from '../storefront/component/other/Footer.component'
+import Header from '../storefront/component/other/Header.component'
+import Account from '../storefront/route/Account.route'
+import Cart from '../storefront/route/Cart.route'
+import Category from '../storefront/route/Category.route'
+import Checkout from '../storefront/route/Checkout.route'
+import Page from '../storefront/route/Page.route'
+import Product from '../storefront/route/Product.route'
+import Search from '../storefront/route/Search.route'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 import { ApolloProvider } from '@apollo/client/react'
 
@@ -24,15 +24,16 @@ const client = new ApolloClient({
 })
 
 export function Router() {
-    const renderStorefront = () => {
+    const renderContent = () => {
         return (
             <>
-                <Header/>
                 <Switch>
                     <Route path="/" render={ () => (<Homepage/>) } exact/>
                     <Route path="/checkout" render={ () => (<Checkout/>) } exact/>
                     <Route path="/account" render={ () => (<Account/>) } exact />
                     <Route path="/account/:section" render={ () => (<Account/>) } />
+                    <Route path="/account/:section/create" render={ () => (<Account/>) } />
+                    <Route path="/account/:section/edit/:id" render={ () => (<Account/>) } />
                     <Route path="/cart" render={ () => (<Cart/>) } exact/>
                     <Route path="/category/:urlKey" render={ () => (<Category/>) }/>
                     <Route path="/page/:urlKey" render={ () => (<Page/>) }/>
@@ -41,6 +42,14 @@ export function Router() {
                     <Route render={ () => (<Error/>) }/>
                 </Switch>
                 <Footer/>
+            </>
+        )
+    }
+
+    const renderStorefront = () => {
+        return (
+            <>
+                <Header content={ renderContent } />
             </>
         )
     }

@@ -2,6 +2,7 @@ export const searchTypeDef = `
     scalar FilterValues
 
     type Aggregations {
+        count: Int
         minPrice: Float
         maxPrice: Float
         filterValues: FilterValues

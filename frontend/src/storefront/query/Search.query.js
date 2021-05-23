@@ -45,6 +45,7 @@ export const SEARCH = gql`
                 type
             }
             aggregations: Aggregations {
+                count
                 minPrice
                 maxPrice
                 filterValues
