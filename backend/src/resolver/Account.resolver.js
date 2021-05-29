@@ -1,3 +1,5 @@
+import { generateToken } from "../base/Auth"
+
 export const accountResolver = {
     Mutation: {
         signIn: async function(_, data, { models }) {
@@ -5,8 +7,12 @@ export const accountResolver = {
                 const customer = await models.Customer.findOne({ where: {
                     email: data.email,
                     password: data.password
-                }, include: { model: models.CartItem, include: [models.Product] }})
+                }, include: { model: models.Cart, include: {
+                    model: models.CartItem,
+                    include: [models.Product]
+                }}})
                 customer.isSignedIn = true
+                customer.token = generateToken(customer)
                 customer.save()
 
                 return customer

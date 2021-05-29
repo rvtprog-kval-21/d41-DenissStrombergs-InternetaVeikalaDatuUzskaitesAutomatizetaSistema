@@ -19,15 +19,35 @@ export function AccountSettings() {
 
         setSubmitting(false)
 
-        dispatch({
-            type: 'UPDATE_ACCOUNT',
-            payload: {
-                values: await updateAccount(client, {
-                    customerId: account.id,
-                    ...values
-                })
-            }
+        const data = await updateAccount(client, {
+            customerId: account.id,
+            ...values
         })
+
+        if (values) {
+            dispatch({
+                type: 'UPDATE_ACCOUNT',
+                payload: {
+                    data
+                }
+            })
+
+            dispatch({
+                type: 'SHOW_NOTIFICATION',
+                payload: {
+                    message: 'Successfully updated account.',
+                    severity: 'success'
+                }
+            })
+        } else {
+            dispatch({
+                type: 'SHOW_NOTIFICATION',
+                payload: {
+                    message: 'Failed to update account.',
+                    severity: 'error'
+                }
+            })
+        }
     }
 
     const renderForm = (props) => {

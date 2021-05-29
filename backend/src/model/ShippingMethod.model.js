@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize'
 
-export class Admin extends Model {
+export class ShippingMethod extends Model {
     static init(sequelize) {
         return super.init(
             {
@@ -10,34 +10,21 @@ export class Admin extends Model {
                     allowNull: false,
                     autoIncrement: true
                 },
-                username: {
+                code: {
                     type: DataTypes.STRING,
                     unique: true
                 },
-                email: {
-                    type: DataTypes.STRING,
-                    unique: true
-                },
-                password: {
+                name: {
                     type: DataTypes.STRING
-                },
-                firstName: {
-                    type: DataTypes.STRING
-                },
-                lastName: {
-                    type: DataTypes.STRING
-                },
-                token: {
-                    type: DataTypes.TEXT
                 }
             },
             {
                 sequelize,
-                modelName: 'User',
+                modelName: 'ShippingMethod',
                 timestamps: false
             }
         )
     }
 }
 
-export default Admin
+export default ShippingMethod

@@ -238,6 +238,17 @@ export const DATA = [
         ]
     },
     {
+        modelName: 'Cart',
+        modelData: [
+            {
+                totalTax: 0,
+                subtotal: 0,
+                total: 0,
+                customer_id: 1
+            }
+        ]
+    },
+    {
         modelName: 'Customer',
         modelData: [
             {
@@ -399,12 +410,12 @@ export const DATA = [
         modelData: [
             {
                 quantity: 5,
-                customer_id: 1,
+                cart_id: 1,
                 product_id: 1
             },
             {
                 quantity: 10,
-                customer_id: 1,
+                cart_id: 1,
                 product_id: 2
             }
         ]
@@ -462,6 +473,36 @@ export const DATA = [
                 rating: 1,
                 customer_id: 1,
                 product_id: 1
+            }
+        ]
+    },
+    {
+        modelName: 'Config',
+        modelData: [
+            {
+                currencySign: '$'
+            }
+        ]
+    },
+    {
+        modelName: 'ShippingMethod',
+        modelData: [
+            {
+                code: 'flat_rate',
+                name: 'Flat rate'
+            }
+        ]
+    },
+    {
+        modelName: 'PaymentMethod',
+        modelData: [
+            {
+                code: 'bank_transfer',
+                name: 'Bank transfer'
+            },
+            {
+                code: 'payment_card',
+                name: 'Payment card'
             }
         ]
     }

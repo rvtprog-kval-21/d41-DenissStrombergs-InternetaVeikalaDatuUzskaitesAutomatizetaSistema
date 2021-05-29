@@ -30,6 +30,9 @@ export class Customer extends Model {
                 isGuest: {
                     type: DataTypes.BOOLEAN,
                     defaultValue: false
+                },
+                token: {
+                    type: DataTypes.TEXT
                 }
             },
             {
@@ -41,9 +44,9 @@ export class Customer extends Model {
     }
 
     static associate(models) {
+        this.hasOne(models.Cart, { foreignKey: 'cart_id' })
         this.hasMany(models.Address, { foreignKey: 'customer_id' })
         this.hasMany(models.Order, { foreignKey: 'customer_id' })
-        this.hasMany(models.CartItem, { foreignKey: 'customer_id'})
     }
 }
 

@@ -3,23 +3,47 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router'
 import { singOut } from '../../query/Account.query'
 
 export function AccountNavigation(props) {
     const dispatch = useDispatch()
     const client = useApolloClient()
+    const history = useHistory()
     const account = useSelector((state) => state.AccountReducer)
     const { section } = props
 
     const onSignOutButtonClick = async () => {
-        dispatch({
-            type: 'SIGN_OUT',
-            payload: {
-                isSignedIn: await singOut(client, {
-                    customerId: account.id
-                })
-            }
+        const data = await singOut(client, {
+            customerId: account.id
         })
+
+        if (data) {
+            dispatch({
+                type: 'SIGN_OUT',
+                payload: {
+                    isSignedIn: data
+                }
+            })
+
+            history.push('/')
+
+            dispatch({
+                type: 'SHOW_NOTIFICATION',
+                payload: {
+                    message: 'Successfully signed out.',
+                    severity: 'success'
+                }
+            })
+        } else {
+            dispatch({
+                type: 'SHOW_NOTIFICATION',
+                payload: {
+                    message: 'Failed to update account.',
+                    severity: 'error'
+                }
+            })
+        }
     }
 
     const sections = [

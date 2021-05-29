@@ -1,4 +1,5 @@
 import { Typography } from '@material-ui/core'
+import CartTotals from './CartTotals.component'
 
 export function CartSummary() {
     return (
@@ -6,6 +7,7 @@ export function CartSummary() {
             <Typography>
                 CartSummary
             </Typography>
+            <CartTotals />
         </div>
     )
 }

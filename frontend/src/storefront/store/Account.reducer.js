@@ -7,6 +7,7 @@ export function AccountReducer(state = initialState, action) {
         case 'SIGN_IN':
             if (account) {
                 window.localStorage.setItem('ACCOUNT', JSON.stringify(account))
+                window.localStorage.setItem('TOKEN', account.token)
 
                 return account
             }
@@ -14,6 +15,7 @@ export function AccountReducer(state = initialState, action) {
             return state
         case 'SIGN_UP':
             if (account) {
+                window.localStorage.setItem('TOKEN', account.token)
                 window.localStorage.setItem('ACCOUNT', JSON.stringify(account))
 
                 return account
@@ -22,6 +24,7 @@ export function AccountReducer(state = initialState, action) {
             return state
         case 'SIGN_OUT':
             if (isSignedIn) {
+                window.localStorage.setItem('TOKEN', null)
                 window.localStorage.setItem('ACCOUNT', null)
 
                 return {}

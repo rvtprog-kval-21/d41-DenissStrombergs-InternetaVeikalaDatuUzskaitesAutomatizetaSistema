@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
-import { Grid, IconButton } from '@material-ui/core'
+import { Box, Grid, IconButton } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import AddIcon from '@material-ui/icons/Add'
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 })
 
 export function CartItem(props) {
-    const { cartItem: { product: { name, urlKey, price }, product, quantity }, shouldRenderCartItemActions = true } = props
+    const { cartItem: { product: { sku, name, urlKey, price }, product, quantity }, shouldRenderCartItemActions = true } = props
     const client = useApolloClient()
     const account = useSelector((state) => state.AccountReducer)
     const classes = useStyles()
@@ -78,22 +78,18 @@ export function CartItem(props) {
     }
 
     const renderCartAction = () => {
-        if (!shouldRenderCartItemActions) {
-            return null
-        }
-
         return (
             <CardActions>
-                <IconButton onClick={ onAddButtonClick }>
+                <IconButton onClick={ onAddButtonClick } disabled={ !shouldRenderCartItemActions }>
                     <AddIcon />
                 </IconButton>
                 <Typography>
                     { quantity }
                 </Typography>
-                <IconButton onClick={ onRemoveButtonClick }>
+                <IconButton onClick={ onRemoveButtonClick } disabled={ !shouldRenderCartItemActions }>
                     <RemoveIcon />
                 </IconButton>
-                <IconButton onClick={ onDeleteButtonClick }>
+                <IconButton onClick={ onDeleteButtonClick } disabled={ !shouldRenderCartItemActions }>
                     <DeleteIcon />
                 </IconButton>
             </CardActions>
@@ -101,29 +97,34 @@ export function CartItem(props) {
     }
 
     return (
-        <Grid item>
-            <Card className={ classes.root } >
-                <CardActionArea onClick={ onProductClick } className={ classes.area }>
-                    <div>
-                        <CardMedia
-                            className={ classes.media }
-                            image="https://via.placeholder.com/480x360"
-                            title={ name }
-                        />
-                    </div>
-                    <div>
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                { name }
-                            </Typography>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                <Price value={ price } />
-                            </Typography>
-                        </CardContent>
-                    </div>
-                </CardActionArea>
-                { renderCartAction() }
-            </Card>
+        <Grid item xs={ 12 }>
+            <Box>
+                <Card className={ classes.root } >
+                    <CardActionArea onClick={ onProductClick } className={ classes.area }>
+                        <div>
+                            <CardMedia
+                                className={ classes.media }
+                                image="https://via.placeholder.com/480x360"
+                                title={ name }
+                            />
+                        </div>
+                        <div>
+                            <CardContent>
+                                <Typography gutterBottom variant="body">
+                                    { sku }
+                                </Typography>
+                                <Typography gutterBottom variant="h6">
+                                    { name }
+                                </Typography>
+                                <Typography gutterBottom variant="h6">
+                                    <Price value={ price } />
+                                </Typography>
+                            </CardContent>
+                        </div>
+                    </CardActionArea>
+                    { renderCartAction() }
+                </Card>
+            </Box>
         </Grid>
     )
 }

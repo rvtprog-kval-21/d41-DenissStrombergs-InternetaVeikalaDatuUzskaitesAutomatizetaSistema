@@ -17,8 +17,13 @@ import InvoiceResource from '../admin/resource/Invoice/InvoiceResource.component
 import CategoryResource from '../admin/resource/Category/CategoryResource.component'
 import ProductCategoryResource from '../admin/resource/ProductCategory/ProductCategoryResource.component'
 import ReviewResource from '../admin/resource/Review/ReviewResource.component'
-import Layout from '../admin/component/Layout/Layout.component'
+import Layout from '../admin/component/Layout.component'
 import AddressResource from '../admin/resource/Address/AddressResource.component'
+import authProvider from '../admin/component/AuthProvider.component'
+import LoginPage from '../admin/component/LoginPage.component'
+import ConfigResource from '../admin/resource/Config/ConfigResource.component'
+import PaymentMethodResource from '../admin/resource/PaymentMethod/PaymentMethodResource.component'
+import ShippingMethodResource from '../admin/resource/ShippingMethod/ShippingMethodResource.component'
 
 export function Admin() {
     const [dataProvider, setDataProvider] = useState(null)
@@ -48,6 +53,8 @@ export function Admin() {
             dataProvider={ dataProvider }
             history={ createBrowserHistory({ basename: 'admin' }) }
             layout={ Layout }
+            authProvider={ authProvider }
+            loginPage={ LoginPage }
         >
             <Resource { ...UserResource } />
             <Resource { ...AttributeResource } />
@@ -65,6 +72,9 @@ export function Admin() {
             <Resource { ...CategoryResource } />
             <Resource { ...ProductCategoryResource } />
             <Resource { ...ReviewResource } />
+            <Resource { ...ConfigResource } />
+            <Resource { ...PaymentMethodResource } />
+            <Resource { ...ShippingMethodResource } />
         </ReactAdmin>
     )
 }

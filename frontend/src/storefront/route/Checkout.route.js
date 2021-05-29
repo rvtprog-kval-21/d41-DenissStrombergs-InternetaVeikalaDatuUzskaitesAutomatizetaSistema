@@ -1,4 +1,4 @@
-import { Button, Grid } from '@material-ui/core'
+import { Button, Grid, Typography } from '@material-ui/core'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import CheckoutGuestForm from '../component/checkout/CheckoutGuestForm.component'
@@ -21,15 +21,15 @@ export function Checkout() {
 
     const renderShippingStep = () => {
         return (
-            <Grid container spacing={ 2 }>
-                <Grid item xs={ 8 }>
+            <Grid container spacing={ 4 }>
+                <Grid item xs={ 7 }>
                     { renderCheckoutGuestForm() }
                     <CheckoutShippingForm />
                     <Button variant="contained" color="primary">
                         Proceed to billing
                     </Button>
                 </Grid>
-                <Grid item xs={ 4 }>
+                <Grid item xs={ 5 }>
                     <CheckoutSummary />
                 </Grid>
             </Grid>

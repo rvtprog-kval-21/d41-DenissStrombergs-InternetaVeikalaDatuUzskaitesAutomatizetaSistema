@@ -19,6 +19,10 @@ import Review from '../model/Review.model'
 import CONFIG from './Config'
 import DATA from './Data'
 import User from '../model/User.model'
+import Cart from '../model/Cart.model'
+import Config from '../model/Config.model'
+import PaymentMethod from '../model/PaymentMethod.model'
+import ShippingMethod from '../model/ShippingMethod.model'
 
 class Database {
     constructor() {
@@ -39,6 +43,7 @@ class Database {
             AttributeSet: AttributeSet.init(this.sequelize),
             AttributeSetAttribute: AttributeSetAttribute.init(this.sequelize),
             Block: Block.init(this.sequelize),
+            Cart: Cart.init(this.sequelize),
             Category: Category.init(this.sequelize),
             Customer: Customer.init(this.sequelize),
             Address: Address.init(this.sequelize),
@@ -51,7 +56,10 @@ class Database {
             CartItem: CartItem.init(this.sequelize),
             OrderItem: OrderItem.init(this.sequelize),
             ProductCategory: ProductCategory.init(this.sequelize),
-            Review: Review.init(this.sequelize)
+            Review: Review.init(this.sequelize),
+            Config: Config.init(this.sequelize),
+            PaymentMethod: PaymentMethod.init(this.sequelize),
+            ShippingMethod: ShippingMethod.init(this.sequelize)
         }
     }
 

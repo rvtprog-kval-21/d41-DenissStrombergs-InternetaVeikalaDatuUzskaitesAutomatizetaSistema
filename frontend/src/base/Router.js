@@ -13,13 +13,30 @@ import Checkout from '../storefront/route/Checkout.route'
 import Page from '../storefront/route/Page.route'
 import Product from '../storefront/route/Product.route'
 import Search from '../storefront/route/Search.route'
-import { ApolloClient, InMemoryCache } from '@apollo/client'
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
 import { ApolloProvider } from '@apollo/client/react'
+import Notification from '../storefront/component/other/Notification.component'
+import { setContext } from '@apollo/client/link/context';
 
 const store = configureStore()
 
+const httpLink = createHttpLink({
+    uri: 'http://localhost:3001/graphql'
+})
+
+const authLink = setContext((_, { headers }) => {
+    const token = localStorage.getItem('TOKEN')
+
+    return {
+        headers: {
+            ...headers,
+            authorization: token ? token : ''
+        }
+    }
+});
+
 const client = new ApolloClient({
-    uri: 'http://localhost:3001/graphql',
+    link: authLink.concat(httpLink),
     cache: new InMemoryCache()
 })
 
@@ -40,6 +57,7 @@ export function Router() {
                     <Route render={ () => (<Error/>) }/>
                 </Switch>
                 <Footer/>
+                <Notification />
             </>
         )
     }

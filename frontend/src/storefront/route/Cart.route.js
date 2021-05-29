@@ -5,7 +5,7 @@ import CartSummary from '../component/cart/CartSummary.component'
 export function Cart() {
     return (
         <div>
-            <Grid container>
+            <Grid container spacing={ 4 }>
                 <Grid item xs={ 6 }>
                     <CartList />
                 </Grid>

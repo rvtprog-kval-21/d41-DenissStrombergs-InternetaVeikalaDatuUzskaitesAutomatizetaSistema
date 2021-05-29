@@ -7,11 +7,14 @@ export const SIGN_IN = gql`
             email
             firstName
             lastName
-            cartItems: CartItems {
-                id
-                quantity
-                products: Product {
-                  id
+            token
+            cart: Cart {
+                items: CartItems {
+                    id
+                    quantity
+                    product: Product {
+                      id
+                    }
                 }
             }
         }
@@ -66,6 +69,7 @@ export const SIGN_UP = gql`
             email
             firstName
             lastName
+            token
         }
     }
 `

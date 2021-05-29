@@ -4,20 +4,23 @@ import SettingsIcon from '@material-ui/icons/Settings'
 import { Box } from '@material-ui/core'
 import { MenuItemLink } from 'react-admin'
 import SubMenu from './SubMenu.component'
-import ReviewResource from '../../resource/Review/ReviewResource.component'
-import ProductResource from '../../resource/Product/ProductResource.component'
-import CategoryResource from '../../resource/Category/CategoryResource.component'
-import OrderResource from '../../resource/Order/OrderResource.component'
-import InvoiceResource from '../../resource/Invoice/InvoiceResource.component'
-import BlockResource from '../../resource/Block/BlockResource.component'
-import PageResource from '../../resource/Page/PageResource.component'
-import CustomerResource from '../../resource/Customer/CustomerResource.component'
+import ReviewResource from '../resource/Review/ReviewResource.component'
+import ProductResource from '../resource/Product/ProductResource.component'
+import CategoryResource from '../resource/Category/CategoryResource.component'
+import OrderResource from '../resource/Order/OrderResource.component'
+import InvoiceResource from '../resource/Invoice/InvoiceResource.component'
+import BlockResource from '../resource/Block/BlockResource.component'
+import PageResource from '../resource/Page/PageResource.component'
+import CustomerResource from '../resource/Customer/CustomerResource.component'
 import ViewQuiltIcon from '@material-ui/icons/ViewQuilt'
 import CallToActionIcon from '@material-ui/icons/CallToAction'
-import UserResource from '../../resource/User/UserResource.component'
-import AttributeResource from '../../resource/Attribute/AttributeResource.component'
-import AttributeSetResource from '../../resource/AttributeSet/AttributeSetResource.component'
-import CustomerGroupResource from '../../resource/CustomerGroup/CustomerGroupResource.component'
+import UserResource from '../resource/User/UserResource.component'
+import AttributeResource from '../resource/Attribute/AttributeResource.component'
+import AttributeSetResource from '../resource/AttributeSet/AttributeSetResource.component'
+import CustomerGroupResource from '../resource/CustomerGroup/CustomerGroupResource.component'
+import ConfigResource from '../resource/Config/ConfigResource.component'
+import ShippingMethodResource from '../resource/ShippingMethod/ShippingMethodResource.component'
+import PaymentMethodResource from '../resource/PaymentMethod/PaymentMethodResource.component'
 
 export function Menu({ onMenuClick, dense = false }) {
     const [state, setState] = useState({
@@ -159,6 +162,14 @@ export function Menu({ onMenuClick, dense = false }) {
                     dense={ dense }
                 />
                 <MenuItemLink
+                    to="/Config/1"
+                    primaryText="Config"
+                    leftIcon={ <ConfigResource.icon /> }
+                    onClick={ onMenuClick }
+                    sidebarIsOpen={ open }
+                    dense={ dense }
+                />
+                <MenuItemLink
                     to="/AttributeSet"
                     primaryText="Attribute sets"
                     leftIcon={ <AttributeSetResource.icon /> }
@@ -170,6 +181,22 @@ export function Menu({ onMenuClick, dense = false }) {
                     to="/Attribute"
                     primaryText="Attributes"
                     leftIcon={ <AttributeResource.icon /> }
+                    onClick={ onMenuClick }
+                    sidebarIsOpen={ open }
+                    dense={ dense }
+                />
+                <MenuItemLink
+                    to="/ShippingMethod"
+                    primaryText="Shipping methods"
+                    leftIcon={ <ShippingMethodResource.icon /> }
+                    onClick= {onMenuClick }
+                    sidebarIsOpen={ open }
+                    dense={ dense }
+                />
+                <MenuItemLink
+                    to="/PaymentMethod"
+                    primaryText="Payment methods"
+                    leftIcon={ <PaymentMethodResource.icon /> }
                     onClick={ onMenuClick }
                     sidebarIsOpen={ open }
                     dense={ dense }

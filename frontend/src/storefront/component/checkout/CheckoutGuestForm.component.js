@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core'
+import { Button, Typography } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
 
@@ -53,13 +53,16 @@ export function CheckoutGuestForm() {
     }
 
     return (
-        <Formik
-            initialValues={ initialValues }
-            validate={ validate }
-            onSubmit={ onSubmit }
-        >
-            { renderForm }
-        </Formik>
+        <div>
+            <Typography>Create an account.</Typography>
+            <Formik
+                initialValues={ initialValues }
+                validate={ validate }
+                onSubmit={ onSubmit }
+            >
+                { renderForm }
+            </Formik>
+        </div>
     )
 }
 
