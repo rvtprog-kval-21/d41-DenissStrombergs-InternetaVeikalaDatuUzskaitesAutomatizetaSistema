@@ -7,27 +7,27 @@ import VALIDATION from '../../../base/Validation'
 import { createReview } from '../../query/Review.query'
 
 export function ReviewForm(props) {
-    const { productId } = props
+    const { productId, review } = props
     const client = useApolloClient()
-    const { id: customerId } = useSelector((state) => state.AccountReducer)
     const initialValues = {
         title: '',
         content: '',
-        rating: 10
+        rating: 10,
+        ...review
     }
 
     const onSubmit = async (values, props) => {
+        /*
         const { setSubmitting } = props
 
         setSubmitting(false)
 
         const review = await createReview(client, {
-            ...values,
-            customerId,
-            productId
+            ...values
         })
 
         console.log(review)
+        */
     }
 
     const renderForm = (props) => {

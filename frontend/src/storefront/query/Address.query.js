@@ -1,8 +1,8 @@
 import { gql, useQuery } from '@apollo/client'
 
-export const GET_ALL_ADDRESSES = gql`
-    query GetAllAddresses($customerId: ID!) {
-        addresses: allAddresses(filter: { customer_id: $customerId }) {
+export const GET_ALL_CUSTOMER_ADDRESSES = gql`
+    query GetAllCustomerAddresses {
+        addresses: allCustomerAddresses {
             id
             firstName
             lastName
@@ -17,9 +17,9 @@ export const GET_ALL_ADDRESSES = gql`
     }
 `
 
-export const GET_ADDRESS = gql`
-    query GetAddress($id: ID!) {
-        address: Address(id: $id) {
+export const GET_CUSTOMER_ADDRESS = gql`
+    query GetCustomerAddress($id: ID!) {
+        address: customerAddress(id: $id) {
             id
             firstName
             lastName
@@ -34,8 +34,8 @@ export const GET_ADDRESS = gql`
     }
 `
 
-export const CREATE_ADDRESS = gql`
-    mutation CreateAddress(
+export const CREATE_CUSTOMER_ADDRESS = gql`
+    mutation CreateCustomerAddress(
         $firstName: String!,
         $lastName: String!,
         $phoneNumber: String!,
@@ -44,10 +44,9 @@ export const CREATE_ADDRESS = gql`
         $province: String!,
         $street1: String!,
         $street2: String!,
-        $postalCode: String!,
-        $customerId: ID!
+        $postalCode: String!
     ) {
-        address: createAddress(
+        address: createCustomerAddress(
             firstName: $firstName,
             lastName: $lastName,
             phoneNumber: $phoneNumber,
@@ -56,8 +55,7 @@ export const CREATE_ADDRESS = gql`
             province: $province,
             street1: $street1,
             street2: $street2,
-            postalCode: $postalCode,
-            customer_id: $customerId
+            postalCode: $postalCode
         ) {
             id
             firstName
@@ -73,8 +71,8 @@ export const CREATE_ADDRESS = gql`
     }
 `
 
-export const UPDATE_ADDRESS = gql`
-    mutation UpdateAddress(
+export const UPDATE_CUSTOMER_ADDRESS = gql`
+    mutation UpdateCustomerAddress(
         $id: ID!,
         $firstName: String!,
         $lastName: String!,
@@ -84,10 +82,9 @@ export const UPDATE_ADDRESS = gql`
         $province: String!,
         $street1: String!,
         $street2: String!,
-        $postalCode: String!,
-        $customerId: ID!
+        $postalCode: String!
     ) {
-        address: updateAddress(
+        address: updateCustomerAddress(
             id: $id,
             firstName: $firstName,
             lastName: $lastName,
@@ -97,8 +94,7 @@ export const UPDATE_ADDRESS = gql`
             province: $province,
             street1: $street1,
             street2: $street2,
-            postalCode: $postalCode,
-            customer_id: $customerId
+            postalCode: $postalCode
         ) {
             id
             firstName
@@ -114,16 +110,16 @@ export const UPDATE_ADDRESS = gql`
     }
 `
 
-export const DELETE_ADDRESS = gql`
-    mutation DeleteAddress($id: ID!) {
-        deleteAddress(id: $id) {
+export const DELETE_CUSTOMER_ADDRESS = gql`
+    mutation DeleteCustomerAddress($id: ID!) {
+        deleteCustomerAddress(id: $id) {
             id
         }
     }
 `
 
-export function GetAllAddresses(variables) {
-    const { loading, error, data: { addresses } = {} } = useQuery(GET_ALL_ADDRESSES, { variables })
+export function GetAllCustomerAddresses(variables) {
+    const { loading, error, data: { addresses } = {} } = useQuery(GET_ALL_CUSTOMER_ADDRESSES, { variables })
 
     if (loading || error) {
         return null
@@ -132,8 +128,8 @@ export function GetAllAddresses(variables) {
     return addresses
 }
 
-export function GetAddress(variables) {
-    const { loading, error, data: { address } = {} } = useQuery(GET_ADDRESS, { variables })
+export function GetCustomerAddress(variables) {
+    const { loading, error, data: { address } = {} } = useQuery(GET_CUSTOMER_ADDRESS, { variables })
 
     if (loading || error) {
         return null
@@ -142,23 +138,23 @@ export function GetAddress(variables) {
     return address
 }
 
-export function CreateAddress(client, variables) {
+export function CreateCustomerAddress(client, variables) {
     return client.mutate({
-        mutation: CREATE_ADDRESS,
+        mutation: CREATE_CUSTOMER_ADDRESS,
         variables
     }).then(({ data }) => data?.address)
 }
 
-export function UpdateAddress(client, variables) {
+export function UpdateCustomerAddress(client, variables) {
     return client.mutate({
-        mutation: UPDATE_ADDRESS,
+        mutation: UPDATE_CUSTOMER_ADDRESS,
         variables
     }).then(({ data }) => data?.address)
 }
 
-export function DeleteAddress(client, variables) {
+export function DeleteCustomerAddress(client, variables) {
     return client.mutate({
-        mutation: DELETE_ADDRESS,
+        mutation: DELETE_CUSTOMER_ADDRESS,
         variables
     }).then(({ data }) => data)
 }

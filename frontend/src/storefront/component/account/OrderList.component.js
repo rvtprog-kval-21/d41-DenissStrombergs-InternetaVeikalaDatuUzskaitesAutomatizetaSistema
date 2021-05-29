@@ -1,11 +1,9 @@
-import { useSelector } from 'react-redux'
 import { Grid } from '@material-ui/core'
-import { GetAllOrders } from '../../query/Order.query'
+import { GetAllCustomerOrders } from '../../query/Order.query'
 import OrderItem from './OrderItem.component'
 
 export function OrderList() {
-    const { id } = useSelector((state) => state.AccountReducer)
-    const orders = GetAllOrders({ customerId: id })
+    const orders = GetAllCustomerOrders()
 
     if (!orders) {
         return null

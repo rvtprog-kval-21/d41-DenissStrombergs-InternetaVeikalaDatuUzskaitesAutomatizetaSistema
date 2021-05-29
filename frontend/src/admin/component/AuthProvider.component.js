@@ -11,12 +11,6 @@ const SIGN_IN_USER = `
     }
 `
 
-const VALIDATE_TOKEN = `
-    mutation ValidateToken($token: String!) {
-        isTokenValid: validateToken(token: $token)
-    }
-`
-
 const authProvider = {
     login: async ({ username, password }) => {
         const user = await fetch('http://localhost:3001/graphql', {
@@ -52,21 +46,7 @@ const authProvider = {
         const user = JSON.parse(localStorage.getItem('USER')) || {}
         const { token } = user
 
-        const isTokenValid = await fetch('http://localhost:3001/graphql', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                query: VALIDATE_TOKEN,
-                variables: {
-                    token
-                }
-            })
-        }).then(data => data.json()).then(({data}) => data.isTokenValid)
-
-        return isTokenValid ? Promise.resolve() : Promise.reject()
+        return token ? Promise.resolve() : Promise.reject()
     },
     getPermissions: () => Promise.reject(),
     getIdentity: () => {

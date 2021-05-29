@@ -1,8 +1,8 @@
 import { gql, useQuery } from '@apollo/client'
 
-export const GET_ALL_ORDERS = gql`
-    query GetAllOrders($customerId: ID!) {
-        orders: allOrders(filter: { customer_id: $customerId }) {
+export const GET_ALL_CUSTOMER_ORDERS = gql`
+    query GetAllOrders {
+        orders: allCustomerOrders {
             id
             reference
             date
@@ -27,9 +27,9 @@ export const GET_ALL_ORDERS = gql`
     }
 `
 
-export const GET_ORDER = gql`
-    query GetOrder($id: ID!) {
-        order: Order(id: $id) {
+export const GET_CUSTOMER_ORDER = gql`
+    query GetCustomerOrder($id: ID!) {
+        order: customerOrder(id: $id) {
             id
             reference
             date
@@ -54,8 +54,8 @@ export const GET_ORDER = gql`
     }
 `
 
-export function GetAllOrders(variables) {
-    const { loading, error, data: { orders } = {} } = useQuery(GET_ALL_ORDERS, { variables })
+export function GetAllCustomerOrders(variables) {
+    const { loading, error, data: { orders } = {} } = useQuery(GET_ALL_CUSTOMER_ORDERS, { variables })
 
     if (loading || error) {
         return null
@@ -64,8 +64,8 @@ export function GetAllOrders(variables) {
     return orders
 }
 
-export function GetOrder(variables) {
-    const { loading, error, data: { order } = {} } = useQuery(GET_ORDER, { variables })
+export function GetCustomerOrder(variables) {
+    const { loading, error, data: { order } = {} } = useQuery(GET_CUSTOMER_ORDER, { variables })
 
     if (loading || error) {
         return null

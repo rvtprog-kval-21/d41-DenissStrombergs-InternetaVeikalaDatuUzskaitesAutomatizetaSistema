@@ -24,6 +24,30 @@ import LoginPage from '../admin/component/LoginPage.component'
 import ConfigResource from '../admin/resource/Config/ConfigResource.component'
 import PaymentMethodResource from '../admin/resource/PaymentMethod/PaymentMethodResource.component'
 import ShippingMethodResource from '../admin/resource/ShippingMethod/ShippingMethodResource.component'
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context';
+
+const httpLink = createHttpLink({
+    uri: 'http://localhost:3001/graphql'
+})
+
+const authLink = setContext((_, { headers }) => {
+    const user = JSON.parse(localStorage.getItem('USER')) || {}
+    const { token } = user
+
+    return {
+        headers: {
+            ...headers,
+            role: token ? 'ADMIN' : 'PUBLIC',
+            authentication: token ? token : ''
+        }
+    }
+});
+
+const client = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache()
+})
 
 export function Admin() {
     const [dataProvider, setDataProvider] = useState(null)
@@ -31,9 +55,7 @@ export function Admin() {
     useEffect(() => {
         const onMount = async () => {
             const dataProvider = await buildGraphQLProvider({
-                clientOptions: {
-                    uri: 'http://localhost:3001/graphql'
-                }
+                client
             })
 
             setDataProvider(() => dataProvider)

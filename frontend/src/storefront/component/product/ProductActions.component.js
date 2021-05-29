@@ -15,7 +15,6 @@ export function ProductActions(props) {
             type: 'ADD_PRODUCT_TO_CART',
             payload: {
                 cartItem: await AddProduct(client, {
-                    customerId: account.id,
                     productId: product.id,
                     quantity: 1
                 })

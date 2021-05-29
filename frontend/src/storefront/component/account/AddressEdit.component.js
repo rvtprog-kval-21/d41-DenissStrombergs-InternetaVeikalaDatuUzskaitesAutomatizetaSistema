@@ -1,9 +1,9 @@
-import { GetAddress } from '../../query/Address.query'
+import { GetCustomerAddress } from '../../query/Address.query'
 import AddressForm from './AddressForm.component'
 
 export function AddressEdit(props) {
     const { id } = props
-    const address = GetAddress({ id })
+    const address = GetCustomerAddress({ id })
 
     if (!address) {
         return null

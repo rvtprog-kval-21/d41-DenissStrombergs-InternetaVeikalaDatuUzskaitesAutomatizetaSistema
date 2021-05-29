@@ -1,11 +1,9 @@
-import { useSelector } from 'react-redux'
 import { Grid } from '@material-ui/core'
-import { GetAllAddresses } from '../../query/Address.query'
+import { GetAllCustomerAddresses } from '../../query/Address.query'
 import AddressItem from './AddressItem.component'
 
 export function AddressList() {
-    const { id } = useSelector((state) => state.AccountReducer)
-    const addresses = GetAllAddresses({ customerId: id })
+    const addresses = GetAllCustomerAddresses()
 
     if (!addresses) {
         return null

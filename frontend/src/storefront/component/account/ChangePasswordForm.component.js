@@ -2,13 +2,12 @@ import { useApolloClient } from '@apollo/client'
 import { Button } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import VALIDATION from '../../../base/Validation'
 import { changePassword } from '../../query/Account.query'
 
 export function ChangePasswordForm() {
     const client = useApolloClient()
-    const account = useSelector((state) => state.AccountReducer)
     const dispatch = useDispatch()
     const initialValues = {
         oldPassword: '',
@@ -25,7 +24,6 @@ export function ChangePasswordForm() {
             type: 'CHANGE_PASSWORD',
             payload: {
                 account: await changePassword(client, {
-                    customerId: account.id,
                     oldPassword: values.oldPassword,
                     newPassword: values.newPassword
                 })

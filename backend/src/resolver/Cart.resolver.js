@@ -1,10 +1,16 @@
 export const cartResolver = {
     Mutation: {
-        addProduct: async function(_, data, { models }) {
+        addProduct: async function(_, data, { models, token }) {
             try {
+                const customer = await models.findOne({ where: { token }})
+                
+                if (!customer) {
+                    return null
+                }
+
                 const product = await models.CartItem.findOrCreate({
                     where: {
-                        customer_id: data.customer_id,
+                        customer_id: customer.id,
                         product_id: data.product_id
                     },
                     defaults: data,
@@ -25,11 +31,17 @@ export const cartResolver = {
                 return null
             }
         },
-        removeProduct: async function(_, data, { models }) {
+        removeProduct: async function(_, data, { models, token }) {
             try {
+                const customer = await models.findOne({ where: { token }})
+                
+                if (!customer) {
+                    return null
+                }
+
                 const product = await models.CartItem.findOne({
                     where: {
-                        customer_id: data.customer_id,
+                        customer_id: customer.id,
                         product_id: data.product_id
                     },
                     include: [
@@ -54,9 +66,15 @@ export const cartResolver = {
                 return null
             }
         },
-        clearCart: async function(_, data, { models }) {
+        clearCart: async function(_, data, { models , token}) {
             try {
-                const products = await models.CartItem.findAll({ where: { customer_id: data.customer_id } })
+                const customer = await models.findOne({ where: { token }})
+
+                if (!customer) {
+                    return null
+                }
+
+                const products = await models.CartItem.findAll({ where: { customer_id: customer.id } })
                 await products.destroy()
 
                 return true

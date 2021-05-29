@@ -16,7 +16,7 @@ import Search from '../storefront/route/Search.route'
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
 import { ApolloProvider } from '@apollo/client/react'
 import Notification from '../storefront/component/other/Notification.component'
-import { setContext } from '@apollo/client/link/context';
+import { setContext } from '@apollo/client/link/context'
 
 const store = configureStore()
 
@@ -25,12 +25,14 @@ const httpLink = createHttpLink({
 })
 
 const authLink = setContext((_, { headers }) => {
-    const token = localStorage.getItem('TOKEN')
+    const account = JSON.parse(localStorage.getItem('ACCOUNT')) || {}
+    const { token } = account
 
     return {
         headers: {
             ...headers,
-            authorization: token ? token : ''
+            role: token ? 'CLIENT' : 'PUBLIC',
+            authentication: token ? token : ''
         }
     }
 });

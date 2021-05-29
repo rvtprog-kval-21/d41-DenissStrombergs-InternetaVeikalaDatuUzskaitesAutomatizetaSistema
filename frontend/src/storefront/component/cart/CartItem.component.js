@@ -43,7 +43,6 @@ export function CartItem(props) {
             type: 'ADD_PRODUCT_TO_CART',
             payload: {
                 cartItem: await AddProduct(client, {
-                    customerId: account.id,
                     productId: product.id,
                     quantity: 1
                 })
@@ -56,7 +55,6 @@ export function CartItem(props) {
             type: 'REMOVE_PRODUCT_FROM_CART',
             payload: {
                 cartItem: await RemoveProduct(client, {
-                    customerId: account.id,
                     productId: product.id,
                     quantity: 1
                 })
@@ -69,7 +67,6 @@ export function CartItem(props) {
             type: 'DELETE_PRODUCT_FROM_CART',
             payload: {
                 cartItem: await RemoveProduct(client, {
-                    customerId: account.id,
                     productId: product.id,
                     quantity
                 })

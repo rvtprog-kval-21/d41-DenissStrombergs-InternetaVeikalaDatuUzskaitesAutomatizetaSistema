@@ -10,7 +10,7 @@ export const userResolver = {
                 }})
 
                 if (user) {
-                    user.token = generateToken(user)
+                    user.token = generateToken(user, 'admin')
                     user.save()
                 }
 
@@ -24,23 +24,6 @@ export const userResolver = {
         signOutUser: async function(_, data, { models }) {
             try {
                 
-            } catch (error) {
-                console.error(error)
-
-                return null
-            }
-        },
-        validateToken: async function(_, data, { models }) {
-            try {
-                const user = await models.User.findOne({ where: {
-                    token: data.token
-                }})
-
-                if (user) {
-                    return true
-                }
-
-                return false
             } catch (error) {
                 console.error(error)
 

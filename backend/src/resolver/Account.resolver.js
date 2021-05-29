@@ -12,7 +12,7 @@ export const accountResolver = {
                     include: [models.Product]
                 }}})
                 customer.isSignedIn = true
-                customer.token = generateToken(customer)
+                customer.token = generateToken(customer, 'client')
                 customer.save()
 
                 return customer
@@ -24,7 +24,7 @@ export const accountResolver = {
         },
         signOut: async function(_, data, { models }) {
             try {
-                const customer = await models.Customer.findByPk(data.customer_id)
+                const customer = await models.Customer.findOne({ where: { token }})
                 customer.isSignedIn = false
                 await customer.save()
 
@@ -46,7 +46,7 @@ export const accountResolver = {
         },
         changePassword: async function(_, data, { models }) {
             try {
-                const customer = await models.Customer.findByPk(data.customer_id)
+                const customer = await models.Customer.findOne({ where: { token }})
                 
                 if (customer) {
                     if (data.oldPassword == customer.password) {
@@ -63,9 +63,9 @@ export const accountResolver = {
                 return null
             }
         },
-        updateAccount: async function(_, data, { models }) {
+        updateAccount: async function(_, data, { models, token }) {
             try {
-                const customer = await models.Customer.findByPk(data.customer_id)
+                const customer = await models.Customer.findOne({ where: { token }})
                 
                 if (customer) {
                     customer.email = data.email

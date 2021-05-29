@@ -1,8 +1,8 @@
 import { gql, useQuery } from '@apollo/client'
 
 export const GET_ALL_CUSTOMER_REVIEWS = gql`
-    query GetAllCustomerReviews($customerId: ID!) {
-        reviews: allReviews(filter: { customer_id: $customerId }) {
+    query GetAllCustomerReviews {
+        reviews: allCustomerReviews {
             id
             status
             date
@@ -36,9 +36,9 @@ export const GET_ALL_PRODUCT_REVIEWS = gql`
     }
 `
 
-export const GET_REVIEW = gql`
-    query GetReview($id: ID!) {
-        review: Review(id: $id) {
+export const GET_CUSTOMER_REVIEW = gql`
+    query GetCustomerReview($id: ID!) {
+        review: customerReview(id: $id) {
             id
             status
             date
@@ -54,19 +54,17 @@ export const GET_REVIEW = gql`
     }
 `
 
-export const CREATE_REVIEW = gql`
-    mutation CreateReview(
+export const CREATE_CUSTOMER_REVIEW = gql`
+    mutation CreateCustomerReview(
         $title: String!,
         $content: String!,
         $rating: Int!,
-        $customerId: ID!,
         $productId: ID!
     ) {
-        review: createReview(
+        review: createCustomerReview(
             title: $title,
             content: $content,
             rating: $rating,
-            customer_id: $customerId,
             product_id: $productId
         ) {
             id
@@ -75,20 +73,19 @@ export const CREATE_REVIEW = gql`
             title
             content
             rating
-            customerId: customer_id
             productId: product_id
         }
     }
 `
 
-export const UPDATE_REVIEW = gql`
-    mutation UpdateReview(
+export const UPDATE_CUSTOMER_REVIEW = gql`
+    mutation UpdateCustomerReview(
         $id: ID!,
         $title: String!,
         $content: String!,
         $rating: Int!
     ) {
-        review: updateReview(
+        review: updateCustomerReview(
             id: $id,
             title: $title,
             content: $content,
@@ -100,15 +97,14 @@ export const UPDATE_REVIEW = gql`
             title
             content
             rating
-            customerId: customer_id
             productId: product_id
         }
     }
 `
 
-export const DELETE_REVIEW = gql`
-    mutation DeleteReview($id: ID!) {
-        deleteReview(id: $id) {
+export const DELETE_CUSTOMER_REVIEW = gql`
+    mutation DeleteCustomerReview($id: ID!) {
+        deleteCustomerReview(id: $id) {
             id
         }
     }
@@ -134,8 +130,8 @@ export function GetAllProductReviews(variables) {
     return reviews
 }
 
-export function GetReview(variables) {
-    const { loading, error, data: { review } = {} } = useQuery(GET_REVIEW, { variables })
+export function GetCustomerReview(variables) {
+    const { loading, error, data: { review } = {} } = useQuery(GET_CUSTOMER_REVIEW, { variables })
 
     if (loading || error) {
         return null
@@ -146,21 +142,21 @@ export function GetReview(variables) {
 
 export function createReview(client, variables) {
     return client.mutate({
-        mutation: CREATE_REVIEW,
+        mutation: CREATE_CUSTOMER_REVIEW,
         variables
     }).then(({ data }) => data?.review)
 }
 
 export function updateReview(client, variables) {
     return client.mutate({
-        mutation: UPDATE_REVIEW,
+        mutation: UPDATE_CUSTOMER_REVIEW,
         variables
     }).then(({ data }) => data?.review)
 }
 
 export function deleteReview(client, variables) {
     return client.mutate({
-        mutation: UPDATE_REVIEW,
+        mutation: DELETE_CUSTOMER_REVIEW,
         variables
     }).then(({ data }) => data)
 }

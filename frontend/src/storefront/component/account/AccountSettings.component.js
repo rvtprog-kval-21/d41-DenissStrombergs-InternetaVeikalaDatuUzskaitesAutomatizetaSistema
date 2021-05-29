@@ -20,7 +20,6 @@ export function AccountSettings() {
         setSubmitting(false)
 
         const data = await updateAccount(client, {
-            customerId: account.id,
             ...values
         })
 

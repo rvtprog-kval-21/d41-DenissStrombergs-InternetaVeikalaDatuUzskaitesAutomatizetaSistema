@@ -1,11 +1,9 @@
-import { useSelector } from 'react-redux'
 import { Grid } from '@material-ui/core'
 import { GetAllCustomerReviews } from '../../query/Review.query'
 import ReviewItem from './ReviewItem.component'
 
 export function ReviewList() {
-    const { id } = useSelector((state) => state.AccountReducer)
-    const reviews = GetAllCustomerReviews({ customerId: id })
+    const reviews = GetAllCustomerReviews()
 
     if (!reviews) {
         return null

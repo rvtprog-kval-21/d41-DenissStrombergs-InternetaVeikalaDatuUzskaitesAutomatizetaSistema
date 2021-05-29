@@ -14,9 +14,7 @@ export function AccountNavigation(props) {
     const { section } = props
 
     const onSignOutButtonClick = async () => {
-        const data = await singOut(client, {
-            customerId: account.id
-        })
+        const data = await singOut(client)
 
         if (data) {
             dispatch({

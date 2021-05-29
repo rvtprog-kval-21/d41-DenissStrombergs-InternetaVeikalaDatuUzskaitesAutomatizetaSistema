@@ -1,5 +1,17 @@
-export function ReviewEdit() {
-    return null
+import { GetCustomerReview } from '../../query/Review.query'
+import ReviewForm from './ReviewForm.component'
+
+export function ReviewEdit(props) {
+    const { id } = props
+    const review = GetCustomerReview({ id })
+
+    if (!review) {
+        return null
+    }
+
+    return (
+        <ReviewForm review={ review } />
+    )
 }
 
 export default ReviewEdit

@@ -14,6 +14,12 @@ import productResolver from '../resolver/Product.resolver'
 import productTypeDef from '../type-def/Product.type-def'
 import userTypeDef from '../type-def/User.type'
 import userResolver from '../resolver/User.resolver'
+import addressResolver from '../resolver/Address.resolver'
+import reviewResolver from '../resolver/Review.resolver'
+import addressTypeDef from '../type-def/Address.type-DEF'
+import reviewTypeDef from '../type-def/Review.type-def'
+import ordersTypeDef from '../type-def/Order.type-def'
+import orderResolver from '../resolver/Order.resolver'
 
 export function buildSchema(models) {
     const typeDefs = [
@@ -23,7 +29,10 @@ export function buildSchema(models) {
         checkoutTypeDef,
         searchTypeDef,
         productTypeDef,
-        userTypeDef
+        userTypeDef,
+        addressTypeDef,
+        reviewTypeDef,
+        ordersTypeDef
     ]
     const resolvers = [
         ...Object.values(models).map(generateResolver),
@@ -32,7 +41,10 @@ export function buildSchema(models) {
         checkoutResolver,
         searchResolver,
         productResolver,
-        userResolver
+        userResolver,
+        addressResolver,
+        reviewResolver,
+        orderResolver
     ]
 
     return makeExecutableSchema({

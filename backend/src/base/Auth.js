@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 
-export const generateToken = ({ username = '', email, password, firstName, lastName }) => {
-    return jwt.sign(
+export const generateToken = ({ username = '', email, password, firstName, lastName }, role = '') => {
+    return role + '_' + jwt.sign(
         {
             username,
             email,

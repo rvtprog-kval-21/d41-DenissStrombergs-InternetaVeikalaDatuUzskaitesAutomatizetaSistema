@@ -23,13 +23,11 @@ export const SIGN_IN = gql`
 
 export const UPDATE_ACCOUNT = gql`
     mutation UpdateAccount(
-        $customerId: ID!,
         $email: String!,
         $firstName: String!,
         $lastName: String!
     ) {
         account: updateAccount(
-            customer_id: $customerId,
             email: $email,
             firstName: $firstName,
             lastName: $lastName
@@ -41,14 +39,14 @@ export const UPDATE_ACCOUNT = gql`
     }
 `
 export const CHANGE_PASSWORD = gql`
-    mutation ChangePassword($customerId: ID!, $oldPassword: String!, $newPassword: String!) {
-        changePassword(customer_id: $customerId, oldPassword: $oldPassword, newPassword: $newPassword)
+    mutation ChangePassword($oldPassword: String!, $newPassword: String!) {
+        changePassword(oldPassword: $oldPassword, newPassword: $newPassword)
     }
 `
 
 export const SIGN_OUT= gql`
-    mutation SignOut($customerId: ID!) {
-        signOut(customer_id: $customerId)
+    mutation SignOut {
+        signOut
     }
 `
 
@@ -74,35 +72,35 @@ export const SIGN_UP = gql`
     }
 `
 
-export function signIn(client, variables) {
+export function signIn(client, variables = {}) {
     return client.mutate({
         mutation: SIGN_IN,
         variables
     }).then(({ data }) => data?.account)
 }
 
-export function singOut(client, variables) {
+export function singOut(client, variables = {}) {
     return client.mutate({
         mutation: SIGN_OUT,
         variables
     }).then(({ data }) => data)
 }
 
-export function signUp(client, variables) {
+export function signUp(client, variables = {}) {
     return client.mutate({
         mutation: SIGN_UP,
         variables
     }).then(({ data }) => data?.account)
 }
 
-export function changePassword(client, variables) {
+export function changePassword(client, variables = {}) {
     return client.mutate({
         mutation: CHANGE_PASSWORD,
         variables
     }).then(({ data }) => data)
 }
 
-export function updateAccount(client, variables) {
+export function updateAccount(client, variables = {}) {
     return client.mutate({
         mutation: UPDATE_ACCOUNT,
         variables

@@ -1,28 +1,8 @@
-import { gql, useQuery } from '@apollo/client'
-
-export const GET_CART = gql`
-    query GetCart($customerId: ID!) {
-        cart: allCartItems(filter: { customer_id: $customerId }) {
-            id
-            quantity
-            product: Product {
-                id
-                sku
-                name
-                price
-                stockQuantity
-                specialDiscountType
-                specialDiscountValue
-                specialTaxRate
-                media
-            }
-        }
-    }
-`
+import { gql } from '@apollo/client'
 
 export const ADD_PRODUCT = gql`
-    mutation AddProduct($customerId: ID!, $productId: ID!, $quantity: Int!) {
-        cartItem: addProduct(customer_id: $customerId, product_id: $productId, quantity: $quantity) {
+    mutation AddProduct($productId: ID!, $quantity: Int!) {
+        cartItem: addProduct(product_id: $productId, quantity: $quantity) {
             id
             quantity
             product: Product {
@@ -42,8 +22,8 @@ export const ADD_PRODUCT = gql`
 `
 
 export const REMOVE_PRODUCT = gql`
-    mutation RemoveProduct($customerId: ID!, $productId: ID!, $quantity: Int!) {
-        cartItem: removeProduct(customer_id: $customerId, product_id: $productId, quantity: $quantity) {
+    mutation RemoveProduct($productId: ID!, $quantity: Int!) {
+        cartItem: removeProduct(product_id: $productId, quantity: $quantity) {
             id
             quantity
             product: Product {
@@ -63,20 +43,10 @@ export const REMOVE_PRODUCT = gql`
 `
 
 export const CLEAR_CART = gql`
-    mutation ClearCart($customerId: ID!) {
-        clearCart(customer_id: $customerId)
+    mutation ClearCart {
+        clearCart
     }
 `
-
-export function GetCart(variables) {
-    const { data: { cart } = {} } = useQuery(GET_CART, { variables })
-
-    if (!cart) {
-        return null
-    }
-
-    return cart
-}
 
 export function AddProduct(client, variables) {
     return client.mutate({

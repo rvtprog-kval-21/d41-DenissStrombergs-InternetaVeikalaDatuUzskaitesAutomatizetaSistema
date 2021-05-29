@@ -7,15 +7,16 @@ import buildSchema from './base/Schema'
 const database = new Database()
 const app = express()
 app.use(cors())
-app.use('/graphql', graphqlHTTP((req, res) => {
-    const token = req.header('Authorization')
-    console.log(token)
+app.use('/graphql', graphqlHTTP(async (req) => {
+    const role = req.header('Role') || 'PUBLIC'
+    const token = req.header('Authentication') || ''
 
     return {
         schema: buildSchema(database.models),
         context: {
             models: database.models,
             sequelize: database.sequelize,
+            role,
             token
         },
         graphiql: true
@@ -29,6 +30,6 @@ import sequelizeErd from 'sequelize-erd'
 
 (async function(){
      const svg = await sequelizeErd({ source: database.sequelize, engine: 'dot' })
-    writeFileSync('../documentation/erd.svg', svg)
+    writeFileSync('../documentation/schema.svg', svg)
 })()
 */
