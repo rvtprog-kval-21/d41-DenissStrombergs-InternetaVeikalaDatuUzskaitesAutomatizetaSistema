@@ -1,4 +1,4 @@
-import { BooleanInput, Datagrid, DateInput, Edit, NumberField, NumberInput, ReferenceField, ReferenceManyField, SimpleForm, TextField, TextInput } from 'react-admin'
+import { Datagrid, DateInput, Edit, NumberField, NumberInput, ReferenceField, ReferenceManyField, SimpleForm, TextField, TextInput } from 'react-admin'
 import AddressField from '../Address/AddressField.component'
 import CustomerField from '../Customer/CustomerField.component'
 import OrderStatusInput from './OrderStatusInput.component'

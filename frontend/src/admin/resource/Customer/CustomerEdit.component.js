@@ -1,4 +1,6 @@
-import { Edit, PasswordInput, SimpleForm, TextInput } from 'react-admin'
+import { Edit, SimpleForm, TextInput } from 'react-admin'
+import CustomerCustomerGroupCreateButton from './CustomerCustomerGroupCreateButton.component'
+import CustomerCustomerGroupInput from './CustomerCustomerGroupInput.component'
 
 export function CustomerEdit(props) {
     return (
@@ -6,9 +8,10 @@ export function CustomerEdit(props) {
             <SimpleForm>
                 <TextInput source="id" disabled />
                 <TextInput source="email" />
-                <PasswordInput source="password" />
                 <TextInput source="firstName" />
                 <TextInput source="lastName" />
+                <CustomerCustomerGroupCreateButton />
+                <CustomerCustomerGroupInput />
             </SimpleForm>
         </Edit>
     )

@@ -26,6 +26,7 @@ import PaymentMethodResource from '../admin/resource/PaymentMethod/PaymentMethod
 import ShippingMethodResource from '../admin/resource/ShippingMethod/ShippingMethodResource.component'
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context';
+import CustomerCustomerGroupResource from '../admin/resource/CustomerCustomerGroup/CustomerCustomerGroupResource.component'
 
 const httpLink = createHttpLink({
     uri: 'http://localhost:3001/graphql'
@@ -97,6 +98,7 @@ export function Admin() {
             <Resource { ...ConfigResource } />
             <Resource { ...PaymentMethodResource } />
             <Resource { ...ShippingMethodResource } />
+            <Resource { ...CustomerCustomerGroupResource } />
         </ReactAdmin>
     )
 }

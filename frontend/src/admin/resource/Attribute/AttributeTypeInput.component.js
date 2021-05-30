@@ -14,12 +14,12 @@ export const attributeTypeChoices = [
         name: 'String'
     },
     {
-        id: 'date',
-        name: 'Date'
+        id: 'select_number',
+        name: 'Select number'
     },
     {
-        id: 'select',
-        name: 'Select'
+        id: 'select_string',
+        name: 'Select string'
     }
 ]
 

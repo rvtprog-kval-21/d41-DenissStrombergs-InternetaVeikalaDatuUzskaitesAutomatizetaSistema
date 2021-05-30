@@ -1,6 +1,10 @@
 import { BooleanInput, Edit, NumberInput, ReferenceInput, SimpleForm, TextInput, SelectInput } from 'react-admin'
 import RichTextInput from 'ra-input-rich-text'
 import { ProductSpecialDiscountTypeInput } from './ProductSpecialDiscountTypeInput.component'
+import ProductAttributeValueInput from './ProductAttributeValuesInput.component'
+import ProductMediaInput from './ProductMediaInput.component'
+import ProductCategoryInput from './ProductCategoryInput.component'
+import ProductCategoryCreateButton from './ProductCategoryCreateButton.component'
 
 export function ProductEdit(props) {
     return (
@@ -17,10 +21,10 @@ export function ProductEdit(props) {
                 <NumberInput source="specialTaxRate" />
                 <TextInput source="shortDescription" />
                 <RichTextInput source="longDescription" />
-                <ReferenceInput source="attribute_set_id" reference="AttributeSet">
-                    <SelectInput source="name" />
-                </ReferenceInput>
-                <TextInput source="attributeValues" />
+                <ProductMediaInput />
+                <ProductCategoryCreateButton />
+                <ProductCategoryInput />
+                <ProductAttributeValueInput />
             </SimpleForm>
         </Edit>
     )

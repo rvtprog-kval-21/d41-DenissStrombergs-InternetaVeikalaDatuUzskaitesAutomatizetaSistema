@@ -1,4 +1,4 @@
-import InvoiceIcon from '@material-ui/icons/SupervisorAccount'
+import InvoiceIcon from '@material-ui/icons/Receipt'
 import InvoiceList from './InvoiceList.component'
 import InvoiceShow from './InvoiceShow.component'
 

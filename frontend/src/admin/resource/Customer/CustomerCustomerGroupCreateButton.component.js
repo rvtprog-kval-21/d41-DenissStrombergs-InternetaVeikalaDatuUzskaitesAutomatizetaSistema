@@ -5,7 +5,7 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
-export function AttributeSetAttributeCreateButton(props) {
+export function CustomerCustomerGroupCreateButton(props) {
     const [open, setOpen] = useState(false)
     const [create, { loading, error }] = useCreate()
     const refresh = useRefresh()
@@ -20,9 +20,9 @@ export function AttributeSetAttributeCreateButton(props) {
 
     const onSave = (test) => {
         const { record: { id } } = props
-        const attributeSetAttribute = { attribute_set_id: id, attribute_id: test.attribute_id }
+        const customerCustomerGroup = { customer_id: id, customer_group_id: test.customer_group_id }
 
-        create('AttributeSetAttribute', attributeSetAttribute)
+        create('CustomerCustomerGroup', customerCustomerGroup)
 
         if (!error && !loading) {
             handleClose()
@@ -33,17 +33,17 @@ export function AttributeSetAttributeCreateButton(props) {
     return (
         <div>
             <Button variant="outlined" color="primary" onClick={ handleClickOpen }>
-                Add attribute
+                Add customer group
             </Button>
             <Dialog
                 open={ open }
                 onClose={ handleClose }
             >
-                <DialogTitle id="alert-dialog-title">Select attribute</DialogTitle>
+                <DialogTitle id="alert-dialog-title">Select customer group</DialogTitle>
                 <DialogContent>
-                    <SimpleForm resource="AttributeSetAttribute" save={ onSave }>
-                        <ReferenceInput source="attribute_id" reference="Attribute">
-                            <SelectInput source="id" optionText="label" />
+                    <SimpleForm resource="CustomerCustomerGroup" save={ onSave }>
+                        <ReferenceInput source="customer_group_id" reference="CustomerGroup">
+                            <SelectInput source="id" optionText="name" />
                         </ReferenceInput>
                     </SimpleForm>
                 </DialogContent>
@@ -52,4 +52,4 @@ export function AttributeSetAttributeCreateButton(props) {
     )
 }
 
-export default AttributeSetAttributeCreateButton
+export default CustomerCustomerGroupCreateButton

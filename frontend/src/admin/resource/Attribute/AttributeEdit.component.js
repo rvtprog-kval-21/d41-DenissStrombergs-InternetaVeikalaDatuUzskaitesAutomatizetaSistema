@@ -1,26 +1,33 @@
 import { useState } from 'react'
-import { BooleanInput, Edit, SimpleForm, TextInput } from 'react-admin'
+import { BooleanInput, Edit, SimpleForm, TextInput, useRefresh, useUpdate, Toolbar } from 'react-admin'
 import AttributeOptionsInput from './AttributeOptionsInput.component'
-import { AttributeTypeInput } from './AttributeTypeInput.component'
 
 export function AttributeEdit(props) {
-    const [type, setType] = useState()
+    const [attributeOptions, setAttributeOptions] = useState()
+    const [update, { loading, error }] = useUpdate()
+    const refresh = useRefresh()
 
-    const onTypeChange = (event) => {
-        const { target: { value } } = event
+    const onSave = (data) => {
+        const newData = {
+            ...data,
+            attributeOptions
+        }
 
-        setType(value)
+        update('Attribute', data.id, newData)
+
+        if (!error && !loading) {
+            refresh()
+        }
     }
 
     return (
         <Edit { ...props }>
-            <SimpleForm>
+            <SimpleForm save={ onSave } toolbar={<Toolbar alwaysEnableSaveButton /> }>
                 <TextInput source="id" disabled />
                 <TextInput source="code" />
                 <BooleanInput source="isEnabled" />
                 <TextInput source="label" />
-                <AttributeTypeInput onChange={ onTypeChange } />
-                <AttributeOptionsInput type={ type } />
+                <AttributeOptionsInput setAttributeOptions={ setAttributeOptions } />
                 <BooleanInput source="isFilter" />
             </SimpleForm>
         </Edit>

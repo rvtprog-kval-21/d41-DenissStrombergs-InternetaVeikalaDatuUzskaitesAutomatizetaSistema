@@ -1,4 +1,4 @@
-import CustomerGroupIcon from '@material-ui/icons/Widgets'
+import CustomerGroupIcon from '@material-ui/icons/Group'
 import CustomerGroupList from './CustomerGroupList.component'
 import CustomerGroupCreate from './CustomerGroupCreate.component'
 import CustomerGroupEdit from './CustomerGroupEdit.component'

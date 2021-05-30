@@ -1,4 +1,4 @@
-import ShippingMethodIcon from '@material-ui/icons/SupervisorAccount'
+import ShippingMethodIcon from '@material-ui/icons/LocalShipping'
 import ShippingMethodList from './ShippingMethodList.component'
 import ShippingMethodCreate from './ShippingMethodCreate.component'
 import ShippingMethodEdit from './ShippingMethodEdit.component'

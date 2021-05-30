@@ -18,16 +18,16 @@ export const DATA = [
                 code: 'color',
                 isEnabled: true,
                 label: 'Color',
-                type: 'select',
+                type: 'select_string',
                 attributeOptions: [
                     {
-                        'label': 'Red'
+                        value: 'Red'
                     },
                     {
-                        'label': 'Green'
+                        value: 'Green'
                     },
                     {
-                        'label': 'Blue'
+                        value: 'Blue'
                     }
                 ],
                 isFilter: true,

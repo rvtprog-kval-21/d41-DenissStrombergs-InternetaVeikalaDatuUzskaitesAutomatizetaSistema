@@ -1,4 +1,4 @@
-import PaymentMethodIcon from '@material-ui/icons/SupervisorAccount'
+import PaymentMethodIcon from '@material-ui/icons/Payment'
 import PaymentMethodList from './PaymentMethodList.component'
 import PaymentMethodCreate from './PaymentMethodCreate.component'
 import PaymentMethodEdit from './PaymentMethodEdit.component'

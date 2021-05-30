@@ -1,4 +1,4 @@
-import ReviewIcon from '@material-ui/icons/Widgets'
+import ReviewIcon from '@material-ui/icons/Message'
 import ReviewList from './ReviewList.component'
 import ReviewEdit from './ReviewEdit.component'
 

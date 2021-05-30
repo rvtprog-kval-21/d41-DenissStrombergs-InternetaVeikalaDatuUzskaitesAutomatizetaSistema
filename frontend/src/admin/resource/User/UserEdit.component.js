@@ -7,7 +7,6 @@ export function UserEdit(props) {
                 <TextInput source="id" disabled />
                 <TextInput source="username" />
                 <TextInput source="email" type="email" />
-                <PasswordInput source="password" />
                 <TextInput source="firstName" />
                 <TextInput source="lastName" />
             </SimpleForm>

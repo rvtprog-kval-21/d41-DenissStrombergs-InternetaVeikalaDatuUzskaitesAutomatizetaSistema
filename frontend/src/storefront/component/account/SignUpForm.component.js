@@ -1,9 +1,16 @@
+import { useApolloClient } from '@apollo/client'
 import { Button } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router'
 import VALIDATION from '../../../base/Validation'
+import { signUp } from '../../query/Account.query'
 
 export function SignUpForm() {
+    const client = useApolloClient()
+    const history = useHistory()
+    const dispatch = useDispatch()
     const initialValues = {
         email: '',
         password: '',
@@ -12,10 +19,22 @@ export function SignUpForm() {
         lastName: ''
     }
 
-    const onSubmit = (values, props) => {
+    const onSubmit = async (values, props) => {
         const { setSubmitting } = props
 
         setSubmitting(false)
+
+        const result = await signUp(client, values)
+
+        if (result) {
+            dispatch({
+                type: 'SIGN_UP',
+                payload: {
+                    account: result
+                }
+            })
+            history.push('/account')
+        }
     }
 
     const renderForm = (props) => {

@@ -1,4 +1,4 @@
-import OrderIcon from '@material-ui/icons/SupervisorAccount'
+import OrderIcon from '@material-ui/icons/ShoppingBasket'
 import OrderList from './OrderList.component'
 import OrderEdit from './OrderEdit.component'
 

@@ -3,11 +3,13 @@ import { Button } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router'
 import VALIDATION from '../../../base/Validation'
 import { signIn } from '../../query/Account.query'
 
 export function SignInForm() {
     const client = useApolloClient()
+    const history = useHistory()
     const dispatch = useDispatch()
     const initialValues = {
         email: '',
@@ -19,12 +21,17 @@ export function SignInForm() {
 
         setSubmitting(false)
 
-        dispatch({
-            type: 'SIGN_IN',
-            payload: {
-                account: await signIn(client, values)
-            }
-        })
+        const result = await signIn(client, values)
+
+        if (result) {
+            dispatch({
+                type: 'SIGN_IN',
+                payload: {
+                    account: result
+                }
+            })
+            history.push('/account')
+        }
     }
 
     const renderForm = (props) => {

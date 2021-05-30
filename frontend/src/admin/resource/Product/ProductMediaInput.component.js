@@ -1,8 +1,10 @@
-import { SimpleForm } from 'react-admin'
+import { ImageField, ImageInput } from 'react-admin'
 
 export function ProductMediaInput(props) {
     return (
-        null
+        <ImageInput source="media" label="Related pictures" accept="image/*" placeholder={<p>Drop your file here</p>}>
+            <ImageField source="src" title="title" />
+        </ImageInput>
     )
 }
 

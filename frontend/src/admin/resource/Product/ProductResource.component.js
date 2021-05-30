@@ -1,4 +1,4 @@
-import ProductIcon from '@material-ui/icons/Collections'
+import ProductIcon from '@material-ui/icons/Image'
 import ProductList from './ProductList.component'
 import ProductCreate from './ProductCreate.component'
 import ProductEdit from './ProductEdit.component'

@@ -21,6 +21,7 @@ import CustomerGroupResource from '../resource/CustomerGroup/CustomerGroupResour
 import ConfigResource from '../resource/Config/ConfigResource.component'
 import ShippingMethodResource from '../resource/ShippingMethod/ShippingMethodResource.component'
 import PaymentMethodResource from '../resource/PaymentMethod/PaymentMethodResource.component'
+import SalesIcon from '@material-ui/icons/Euro'
 
 export function Menu({ onMenuClick, dense = false }) {
     const [state, setState] = useState({
@@ -42,7 +43,7 @@ export function Menu({ onMenuClick, dense = false }) {
                 isOpen={ state.menuSales }
                 sidebarIsOpen={ open }
                 name="Sales"
-                icon={ <OrderResource.icon /> }
+                icon={ <SalesIcon /> }
                 dense={ dense }
             >
                 <MenuItemLink

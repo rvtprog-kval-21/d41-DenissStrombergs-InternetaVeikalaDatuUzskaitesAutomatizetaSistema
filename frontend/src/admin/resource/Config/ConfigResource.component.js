@@ -1,4 +1,4 @@
-import ConfigIcon from '@material-ui/icons/Settings'
+import ConfigIcon from '@material-ui/icons/PermDataSetting'
 import ConfigEdit from './ConfigEdit.component'
 
 export const ConfigResource = {

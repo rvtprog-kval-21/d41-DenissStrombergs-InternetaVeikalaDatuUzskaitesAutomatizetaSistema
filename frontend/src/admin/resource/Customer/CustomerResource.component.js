@@ -1,4 +1,4 @@
-import CustomerIcon from '@material-ui/icons/Widgets'
+import CustomerIcon from '@material-ui/icons/AccessibleForward'
 import CustomerList from './CustomerList.component'
 import CustomerCreate from './CustomerCreate.component'
 import CustomerEdit from './CustomerEdit.component'

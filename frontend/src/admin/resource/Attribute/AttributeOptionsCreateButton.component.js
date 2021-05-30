@@ -2,7 +2,7 @@ import Button from '@material-ui/core/Button'
 
 export function AttributeOptionsCreateButton() {
     return (
-        <Button>
+        <Button variant="contained" color="primary">
             Create option
         </Button>
     )

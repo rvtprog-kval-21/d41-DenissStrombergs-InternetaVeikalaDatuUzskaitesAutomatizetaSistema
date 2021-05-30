@@ -1,4 +1,5 @@
-import { DateField, NumberField, Show, SimpleShowLayout, TextField } from 'react-admin'
+import { DateField, NumberField, ReferenceField, Show, SimpleShowLayout, TextField } from 'react-admin'
+import OrderField from '../Order/OrderField.component'
 
 export function InvoiceShow(props) {
     return (
@@ -10,6 +11,9 @@ export function InvoiceShow(props) {
                 <NumberField source="totalTax" />
                 <NumberField source="subtotal" />
                 <NumberField source="total" />
+                <ReferenceField source="order_id" reference="Order">
+                    <OrderField />
+                </ReferenceField>
             </SimpleShowLayout>
         </Show>
     )

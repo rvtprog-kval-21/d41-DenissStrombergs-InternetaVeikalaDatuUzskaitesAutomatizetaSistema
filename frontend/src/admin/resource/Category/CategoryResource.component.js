@@ -1,4 +1,4 @@
-import CategoryIcon from '@material-ui/icons/Widgets'
+import CategoryIcon from '@material-ui/icons/Category'
 import CategoryList from './CategoryList.component'
 import CategoryCreate from './CategoryCreate.component'
 import CategoryEdit from './CategoryEdit.component'

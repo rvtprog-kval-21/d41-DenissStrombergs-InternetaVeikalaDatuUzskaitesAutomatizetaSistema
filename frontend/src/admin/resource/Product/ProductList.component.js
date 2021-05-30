@@ -7,7 +7,6 @@ export function ProductList(props) {
                 <TextField source="id" />
                 <TextField source="sku" />
                 <BooleanField source="isEnabled" />
-                <TextField source="type" />
                 <TextField source="name" />
                 <EditButton />
             </Datagrid>
