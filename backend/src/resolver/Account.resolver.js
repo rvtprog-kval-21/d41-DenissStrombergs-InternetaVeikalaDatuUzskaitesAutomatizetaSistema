@@ -7,10 +7,7 @@ export const accountResolver = {
                 const customer = await models.Customer.findOne({ where: {
                     email: data.email,
                     password: data.password
-                }, include: { model: models.Cart, include: {
-                    model: models.CartItem,
-                    include: [models.Product]
-                }}})
+                }, include: { model: models.CartItem, include: [models.Product] }})
                 customer.isSignedIn = true
                 customer.token = generateToken(customer, 'client')
                 customer.save()

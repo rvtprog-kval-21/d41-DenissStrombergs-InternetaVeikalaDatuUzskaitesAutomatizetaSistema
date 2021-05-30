@@ -22,10 +22,28 @@ export const VALIDATION = {
         firstName: Yup.string().required('Is required'),
         lastName: Yup.string().required('Is required'),
     }),
+    SIGN_IN: Yup.object().shape({
+        email: Yup.string().required('Is required'),
+        password: Yup.string().required('Is required')
+    }),
+    SIGN_UP: Yup.object().shape({
+        email: Yup.string().required('Is required'),
+        password: Yup.string().required('Is required'),
+        confirmPassword: Yup.string().required('Is required'),
+        firstName: Yup.string().required('Is required'),
+        lastName: Yup.string().required('Is required')
+    }),
     PASSWORD: Yup.object().shape({
         oldPassword: Yup.string().required('Is required'),
         newPassword: Yup.string().required('Is required'),
         confirmNewPassword: Yup.string().required('Is required')
+    }),
+    SHIPPING_STEP: Yup.object().shape({
+        shippingMethod: Yup.string().required('Is required')
+    }),
+    BILLING_STEP: Yup.object().shape({
+        acceptTerms: Yup.string().required('Is required'),
+        paymentMethod: Yup.string().required('Is required')
     })
 }
 

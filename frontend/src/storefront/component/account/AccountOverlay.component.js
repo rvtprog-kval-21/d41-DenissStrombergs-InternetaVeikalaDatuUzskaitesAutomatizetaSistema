@@ -62,8 +62,6 @@ export function AccountOverlay() {
         'SIGN_UP': renderSignUp
     }
 
-    console.log(account)
-
     const renderPopup = () => {
         return (
             <PopupState variant="popover" popupId="demo-popup-popover">

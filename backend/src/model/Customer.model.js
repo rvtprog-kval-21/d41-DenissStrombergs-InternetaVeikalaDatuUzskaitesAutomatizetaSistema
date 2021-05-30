@@ -33,6 +33,15 @@ export class Customer extends Model {
                 },
                 token: {
                     type: DataTypes.TEXT
+                },
+                totalTax: {
+                    type: DataTypes.FLOAT
+                },
+                subtotal: {
+                    type: DataTypes.FLOAT
+                },
+                total: {
+                    type: DataTypes.FLOAT
                 }
             },
             {
@@ -44,9 +53,9 @@ export class Customer extends Model {
     }
 
     static associate(models) {
-        this.hasOne(models.Cart, { foreignKey: 'cart_id' })
         this.hasMany(models.Address, { foreignKey: 'customer_id' })
         this.hasMany(models.Order, { foreignKey: 'customer_id' })
+        this.hasMany(models.CartItem, { foreignKey: 'customer_id'})
     }
 }
 

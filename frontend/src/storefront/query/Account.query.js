@@ -7,14 +7,16 @@ export const SIGN_IN = gql`
             email
             firstName
             lastName
+            isGuest
             token
-            cart: Cart {
-                items: CartItems {
+            totalTax
+            subtotal
+            total
+            cartItems: CartItems {
+                id
+                quantity
+                product: Product {
                     id
-                    quantity
-                    product: Product {
-                      id
-                    }
                 }
             }
         }

@@ -17,7 +17,6 @@ export function ProductGallery(props) {
     }
 
     const renderSlide = (slide) => {
-        console.log(slide)
         return (
             <div>
                 <img src={ slide } />

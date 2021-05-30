@@ -25,8 +25,6 @@ export function ReviewForm(props) {
         const review = await createReview(client, {
             ...values
         })
-
-        console.log(review)
         */
     }
 

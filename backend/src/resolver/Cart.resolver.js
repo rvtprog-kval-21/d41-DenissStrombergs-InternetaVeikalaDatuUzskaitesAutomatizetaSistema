@@ -2,18 +2,23 @@ export const cartResolver = {
     Mutation: {
         addProduct: async function(_, data, { models, token }) {
             try {
-                const customer = await models.findOne({ where: { token }})
+                const customer = await models.Customer.findOrCreate({ where: { token }, defaults: {
+                    isGuest: true
+                } })
                 
-                if (!customer) {
+                if (!customer[0]) {
                     return null
                 }
 
                 const product = await models.CartItem.findOrCreate({
                     where: {
-                        customer_id: customer.id,
+                        customer_id: customer[0].id,
                         product_id: data.product_id
                     },
-                    defaults: data,
+                    defaults: {
+                        ...data,
+                        customer_id: customer[0].id
+                    },
                     include: [
                         models.Product
                     ]
@@ -33,7 +38,7 @@ export const cartResolver = {
         },
         removeProduct: async function(_, data, { models, token }) {
             try {
-                const customer = await models.findOne({ where: { token }})
+                const customer = await models.Customer.findOne({ where: { token } })
                 
                 if (!customer) {
                     return null
@@ -68,7 +73,7 @@ export const cartResolver = {
         },
         clearCart: async function(_, data, { models , token}) {
             try {
-                const customer = await models.findOne({ where: { token }})
+                const customer = await models.Customer.findOne({ where: { token }})
 
                 if (!customer) {
                     return null

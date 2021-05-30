@@ -1,6 +1,7 @@
 import { Button } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
+import VALIDATION from '../../../base/Validation'
 
 export function SignUpForm() {
     const initialValues = {
@@ -11,17 +12,10 @@ export function SignUpForm() {
         lastName: ''
     }
 
-    const validate = (values) => {
-        const errors = {}
-
-        return errors
-    }
-
     const onSubmit = (values, props) => {
         const { setSubmitting } = props
 
         setSubmitting(false)
-        console.log(values)
     }
 
     const renderForm = (props) => {
@@ -79,7 +73,7 @@ export function SignUpForm() {
     return (
         <Formik
             initialValues={ initialValues }
-            validate={ validate }
+            validationSchema={ VALIDATION.SIGN_UP }
             onSubmit={ onSubmit }
         >
             { renderForm }

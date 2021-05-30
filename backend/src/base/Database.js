@@ -19,7 +19,6 @@ import Review from '../model/Review.model'
 import CONFIG from './Config'
 import DATA from './Data'
 import User from '../model/User.model'
-import Cart from '../model/Cart.model'
 import Config from '../model/Config.model'
 import PaymentMethod from '../model/PaymentMethod.model'
 import ShippingMethod from '../model/ShippingMethod.model'
@@ -43,7 +42,6 @@ class Database {
             AttributeSet: AttributeSet.init(this.sequelize),
             AttributeSetAttribute: AttributeSetAttribute.init(this.sequelize),
             Block: Block.init(this.sequelize),
-            Cart: Cart.init(this.sequelize),
             Category: Category.init(this.sequelize),
             Customer: Customer.init(this.sequelize),
             Address: Address.init(this.sequelize),

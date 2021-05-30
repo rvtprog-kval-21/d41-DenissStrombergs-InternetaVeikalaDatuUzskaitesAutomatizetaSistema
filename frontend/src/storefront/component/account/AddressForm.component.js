@@ -3,6 +3,76 @@ import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
 import VALIDATION from '../../../base/Validation'
 
+export function AddressFormFields() {
+    return (
+        <>
+            <Field
+                component={ TextField }
+                type="text"
+                name="firstName"
+                label="First name"
+                fullWidth
+            />
+            <Field
+                component={ TextField }
+                type="text"
+                name="lastName"
+                label="Last name"
+                fullWidth
+            />
+            <Field
+                component={ TextField }
+                type="text"
+                name="phoneNumber"
+                label="Phone number"
+                fullWidth
+            />
+            <Field
+                component={ TextField }
+                type="text"
+                name="country"
+                label="Country"
+                fullWidth
+            />
+            <Field
+                component={ TextField }
+                type="text"
+                name="city"
+                label="City"
+                fullWidth
+            />
+            <Field
+                component={ TextField }
+                type="text"
+                name="province"
+                label="Province"
+                fullWidth
+            />
+            <Field
+                component={ TextField }
+                type="text"
+                name="street1"
+                label="Street 1"
+                fullWidth
+            />
+            <Field
+                component={ TextField }
+                type="text"
+                name="street2"
+                label="Street 2"
+                fullWidth
+            />
+            <Field
+                component={ TextField }
+                type="text"
+                name="postalCode"
+                label="Postal code"
+                fullWidth
+            />
+        </>
+    )
+}
+
 export function AddressForm(props) {
     const { address = {}, shouldRenderSubmitButton = true } = props
     const initialValues = {
@@ -22,7 +92,6 @@ export function AddressForm(props) {
         const { setSubmitting } = props
 
         setSubmitting(false)
-        console.log(values)
     }
 
     const renderSaveButton = (props) => {
@@ -47,69 +116,7 @@ export function AddressForm(props) {
     const renderForm = (props) => {
         return (
             <Form>
-                <Field
-                    component={ TextField }
-                    type="text"
-                    name="firstName"
-                    label="First name"
-                    fullWidth
-                />
-                <Field
-                    component={ TextField }
-                    type="text"
-                    name="lastName"
-                    label="Last name"
-                    fullWidth
-                />
-                <Field
-                    component={ TextField }
-                    type="text"
-                    name="phoneNumber"
-                    label="Phone number"
-                    fullWidth
-                />
-                <Field
-                    component={ TextField }
-                    type="text"
-                    name="country"
-                    label="Country"
-                    fullWidth
-                />
-                <Field
-                    component={ TextField }
-                    type="text"
-                    name="city"
-                    label="City"
-                    fullWidth
-                />
-                <Field
-                    component={ TextField }
-                    type="text"
-                    name="province"
-                    label="Province"
-                    fullWidth
-                />
-                <Field
-                    component={ TextField }
-                    type="text"
-                    name="street1"
-                    label="Street 1"
-                    fullWidth
-                />
-                <Field
-                    component={ TextField }
-                    type="text"
-                    name="street2"
-                    label="Street 2"
-                    fullWidth
-                />
-                <Field
-                    component={ TextField }
-                    type="text"
-                    name="postalCode"
-                    label="Postal code"
-                    fullWidth
-                />
+                <AddressFormFields />
                 { renderSaveButton(props) }
             </Form>
         )

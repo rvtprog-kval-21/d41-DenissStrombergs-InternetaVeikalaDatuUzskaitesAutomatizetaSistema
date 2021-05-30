@@ -29,7 +29,6 @@ const useStyles = makeStyles({
 export function CartItem(props) {
     const { cartItem: { product: { sku, name, urlKey, price }, product, quantity }, shouldRenderCartItemActions = true } = props
     const client = useApolloClient()
-    const account = useSelector((state) => state.AccountReducer)
     const classes = useStyles()
     const history = useHistory()
     const dispatch = useDispatch()

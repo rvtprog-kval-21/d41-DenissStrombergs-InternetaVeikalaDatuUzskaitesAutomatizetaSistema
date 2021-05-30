@@ -41,7 +41,7 @@ export function FilterItem(props) {
     const { aggregations: { filterValues } } = props
 
     const onClick = (event) => {
-        console.log(event.target.value)
+        
     }
 
     const renderFilterValue = (filterValue, indexs) => {

@@ -3,7 +3,10 @@ import pascalcase from 'pascalcase'
 const fieldPermissions = {
     allBlocks: 'PUBLIC',
     allPages: 'PUBLIC',
-    allCategories: 'PUBLIC'
+    allCategories: 'PUBLIC',
+    allPaymentMethods: 'PUBLIC',
+    allShippingMethods: 'PUBLIC',
+    allReviews: 'PUBLIC'
 }
 
 export function validateFieldPermission(fieldName, role) {
@@ -18,31 +21,26 @@ export function validateFieldPermission(fieldName, role) {
 }
 
 export async function validateAccess(models, fieldName, role, token) {
-    const access = {
-        isValid: false,
-        entity: {}
-    }
-    
     switch (role) {
         case 'ADMIN':
             const admin = await models.User.findOne({ where: { token } })
 
-            if (admin) {
-                access.isValid = true
-                access.entity = admin
+            if (!admin) {
+                return false
             }
+
+            return true
         case 'CLIENT':
             const client = await models.Customer.findOne({ where: { token } })
 
-            if (client) {
-                access.isValid = validateFieldPermission(fieldName, role)
-                access.entity = client
+            if (!client) {
+                return false
             }
-        default:
-            access.isValid = validateFieldPermission(fieldName, role)
-    }
 
-    return access
+            return validateFieldPermission(fieldName, role)
+        default:
+            return validateFieldPermission(fieldName, role)
+    }
 }
 
 export function generateResolver(model) {
@@ -58,9 +56,9 @@ export function generateResolver(model) {
     return {
         Query: {
             [getName]: async function(_, data, { models, role, token }) {
-                const access = await validateAccess(models, getName, role, token)
+                const hasAccess = await validateAccess(models, getName, role, token)
                 
-                if (!access.isValid) {
+                if (!hasAccess) {
                     return null
                 }
 
@@ -73,9 +71,9 @@ export function generateResolver(model) {
                 }
             },
             [getAllName]: async function(_, data, { models, role, token }) {
-                const access = await validateAccess(models, getAllName, role, token)
+                const hasAccess = await validateAccess(models, getAllName, role, token)
                 
-                if (!access.isValid) {
+                if (!hasAccess) {
                     return null
                 }
 
@@ -99,9 +97,9 @@ export function generateResolver(model) {
                 }
             },
             [getAllMetaName]: async function(_, data, { models, role, token }) {
-                const access = await validateAccess(models, getAllMetaName, role, token)
+                const hasAccess = await validateAccess(models, getAllMetaName, role, token)
                 
-                if (!access.isValid) {
+                if (!hasAccess) {
                     return null
                 }
 
@@ -129,9 +127,9 @@ export function generateResolver(model) {
         },
         Mutation: {
             [createName]: async function(_, data, { models, role, token }) {
-                const access = await validateAccess(models, createName, role, token)
+                const hasAccess = await validateAccess(models, createName, role, token)
                 
-                if (!access.isValid) {
+                if (!hasAccess) {
                     return null
                 }
 
@@ -144,15 +142,16 @@ export function generateResolver(model) {
                 }
             },
             [updateName]: async function(_, data, { models, role, token }) {
-                const access = await validateAccess(models, updateName, role, token)
+                const hasAccess = await validateAccess(models, updateName, role, token)
                 
-                if (!access.isValid) {
+                if (!hasAccess) {
                     return null
                 }
 
                 try {
                     const entity = await models[singularName].findByPk(data.id)
                     Object.assign(entity, data)
+
                     await entity.save()
 
                     return entity
@@ -163,9 +162,9 @@ export function generateResolver(model) {
                 }
             },
             [deleteName]: async function(_, data, { models, role, token }) {
-                const access = await validateAccess(models, deleteName, role, token)
+                const hasAccess = await validateAccess(models, deleteName, role, token)
 
-                if (!access.isValid) {
+                if (!hasAccess) {
                     return null
                 }
 

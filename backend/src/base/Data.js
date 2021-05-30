@@ -490,6 +490,10 @@ export const DATA = [
             {
                 code: 'flat_rate',
                 name: 'Flat rate'
+            },
+            {
+                code: 'table_rate',
+                name: 'Table rate'
             }
         ]
     },

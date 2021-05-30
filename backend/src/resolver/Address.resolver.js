@@ -19,8 +19,6 @@ export const addressResolver = {
             try {
                 const customer = await models.Customer.findOne({ where: { token }})
 
-                console.log(customer)
-
                 if (!customer) {
                     return null
                 }

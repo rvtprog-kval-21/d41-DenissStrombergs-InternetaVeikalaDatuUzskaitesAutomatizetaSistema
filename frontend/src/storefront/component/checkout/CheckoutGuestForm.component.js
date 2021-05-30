@@ -1,24 +1,25 @@
-import { Button, Typography } from '@material-ui/core'
+import { Button, Typography, Grid } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
+import VALIDATION from '../../../base/Validation'
+import { useSelector } from 'react-redux'
 
 export function CheckoutGuestForm() {
+    const account = useSelector((state) => state.AccountReducer)
+
+    if (!account.isGuest) {
+        return null
+    }
+
     const initialValues = {
         email: '',
         password: ''
-    }
-
-    const validate = (values) => {
-        const errors = {}
-
-        return errors
     }
 
     const onSubmit = (values, props) => {
         const { setSubmitting } = props
 
         setSubmitting(false)
-        console.log(values)
     }
 
     const renderForm = (props) => {
@@ -53,16 +54,16 @@ export function CheckoutGuestForm() {
     }
 
     return (
-        <div>
+        <Grid item xs={ 12 }>
             <Typography>Create an account.</Typography>
             <Formik
                 initialValues={ initialValues }
-                validate={ validate }
+                validationSchema={ VALIDATION.SIGN_IN }
                 onSubmit={ onSubmit }
             >
                 { renderForm }
             </Formik>
-        </div>
+        </Grid>
     )
 }
 
