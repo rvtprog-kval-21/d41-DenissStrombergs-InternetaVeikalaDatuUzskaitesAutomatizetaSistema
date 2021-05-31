@@ -1,6 +1,6 @@
 export const CONFIG = {
     DATABASE: [
-        'test',
+        'postgres',
         'postgres',
         '',
         {

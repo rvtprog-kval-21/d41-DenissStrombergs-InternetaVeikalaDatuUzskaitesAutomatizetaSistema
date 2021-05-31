@@ -12,6 +12,9 @@ export class Config extends Model {
                 },
                 currencySign: {
                     type: DataTypes.STRING
+                },
+                currencySignPosition: {
+                    type: DataTypes.STRING
                 }
             },
             {

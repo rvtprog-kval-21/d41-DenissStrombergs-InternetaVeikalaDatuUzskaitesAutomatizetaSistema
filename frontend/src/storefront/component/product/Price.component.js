@@ -6,13 +6,13 @@ export function roundPriceValue(value) {
 
 export function Price(props) {
     const { value } = props
-    const { currency, currencySignPosition } = useSelector((state) => state.ConfigReducer)
+    const { currencySign, currencySignPosition } = useSelector((state) => state.ConfigReducer)
 
     switch (currencySignPosition) {
         case 'left':
-            return `${ roundPriceValue(value) } ${ currency }`
+            return `${ roundPriceValue(value) } ${ currencySign }`
         default:
-            return `${ roundPriceValue(value) } ${ currency }`
+            return `${ currencySign } ${ roundPriceValue(value) }`
     }
 }
 

@@ -2,22 +2,20 @@ export const cartResolver = {
     Mutation: {
         addProduct: async function(_, data, { models, token }) {
             try {
-                const customer = await models.Customer.findOrCreate({ where: { token }, defaults: {
-                    isGuest: true
-                } })
+                const customer = await models.Customer.findOne({ where: { token } })
                 
-                if (!customer[0]) {
+                if (!customer) {
                     return null
                 }
 
                 const product = await models.CartItem.findOrCreate({
                     where: {
-                        customer_id: customer[0].id,
+                        customer_id: customer.id,
                         product_id: data.product_id
                     },
                     defaults: {
                         ...data,
-                        customer_id: customer[0].id
+                        customer_id: customer.id
                     },
                     include: [
                         models.Product

@@ -9,7 +9,7 @@ export const accountResolver = {
                     password: data.password
                 }, include: { model: models.CartItem, include: [models.Product] }})
                 customer.isSignedIn = true
-                customer.token = generateToken(customer, 'client')
+                customer.token = generateToken(customer)
                 customer.save()
 
                 return customer
@@ -72,11 +72,11 @@ export const accountResolver = {
                     
                     return customer
                 }
-    
+
                 return null
             } catch (error) {
                 console.error(error)
-    
+
                 return null
             }
         }

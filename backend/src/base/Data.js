@@ -4,10 +4,31 @@ export const DATA = [
         modelData: [
             {
                 username: 'deniss',
-                email: 'test@test.com',
+                email: 'deniss.strombergs@scandiweb.com',
                 password: 'Test12#$',
                 firstName: 'Deniss',
                 lastName: 'Strombergs'
+            },
+            {
+                username: 'nikolajs',
+                email: 'nikolajs.lapins@gmail.com',
+                password: 'Nikolajs1234',
+                firstName: 'Nikolajs',
+                lastName: 'Lapins'
+            },
+            {
+                username: 'anna',
+                email: 'anna.kaulina@gmail.com',
+                password: 'Anna1234',
+                firstName: 'Anna',
+                lastName: 'Kaulina'
+            },
+            {
+                username: 'daniela',
+                email: 'daniela.salmina@gmail.com',
+                password: 'Daniela1234',
+                firstName: 'Daniela',
+                lastName: 'Salmina'
             }
         ]
     },
@@ -28,6 +49,21 @@ export const DATA = [
                     },
                     {
                         value: 'Blue'
+                    },
+                    {
+                        value: 'Yellow'
+                    },
+                    {
+                        value: 'Magenta'
+                    },
+                    {
+                        value: 'Cyan'
+                    },
+                    {
+                        value: 'White'
+                    },
+                    {
+                        value: 'Black'
                     }
                 ],
                 isFilter: true,
@@ -37,8 +73,42 @@ export const DATA = [
                 code: 'pencil_hardness',
                 isEnabled: true,
                 label: 'Pencil hardness',
-                type: 'number',
-                attributeOptions: [],
+                type: 'select_string',
+                attributeOptions: [
+                    {
+                        value: 'B5'
+                    },
+                    {
+                        value: 'B4'
+                    },
+                    {
+                        value: 'B3'
+                    },
+                    {
+                        value: 'B2'
+                    },
+                    {
+                        value: 'B'
+                    },
+                    {
+                        value: 'HB'
+                    },
+                    {
+                        value: 'H'
+                    },
+                    {
+                        value: 'H2'
+                    },
+                    {
+                        value: 'H3'
+                    },
+                    {
+                        value: 'H4'
+                    },
+                    {
+                        value: 'H5'
+                    }
+                ],
                 isFilter: true,
                 attributeGroup: 'General'
             },
@@ -46,8 +116,24 @@ export const DATA = [
                 code: 'nib_size',
                 isEnabled: true,
                 label: 'Nib size',
-                type: 'number',
-                attributeOptions: [],
+                type: 'select_number',
+                attributeOptions: [
+                    {
+                        value: 0.01
+                    },
+                    {
+                        value: 0.02
+                    },
+                    {
+                        value: 0.03
+                    },
+                    {
+                        value: 0.04
+                    },
+                    {
+                        value: 0.05
+                    }
+                ],
                 isFilter: true,
                 attributeGroup: 'General'
             },
@@ -234,6 +320,33 @@ export const DATA = [
                 isInMenu: true,
                 content: ``,
                 category_id: 5
+            },
+            {
+                urlKey: 'books',
+                isEnabled: true,
+                name: 'Books',
+                productCount: 0,
+                isInMenu: true,
+                content: ``,
+                category_id: 3
+            },
+            {
+                urlKey: 'comics',
+                isEnabled: true,
+                name: 'Comics',
+                productCount: 0,
+                isInMenu: true,
+                content: ``,
+                category_id: 3
+            },
+            {
+                urlKey: 'manga',
+                isEnabled: true,
+                name: 'Manga',
+                productCount: 0,
+                isInMenu: true,
+                content: ``,
+                category_id: 3
             }
         ]
     },
@@ -252,10 +365,28 @@ export const DATA = [
         modelName: 'Customer',
         modelData: [
             {
-                email: 'test@test.com',
+                email: 'deniss.strombergs@scandiweb.com',
                 password: 'Test12#$',
                 firstName: 'Deniss',
                 lastName: 'Strombergs'
+            },
+            {
+                email: 'nikolajs.lapins@gmail.com',
+                password: 'Nikolajs1234',
+                firstName: 'Nikolajs',
+                lastName: 'Lapins'
+            },
+            {
+                email: 'anna.kaulina@gmail.com',
+                password: 'Anna1234',
+                firstName: 'Anna',
+                lastName: 'Kaulina'
+            },
+            {
+                email: 'daniela.salmina@gmail.com',
+                password: 'Daniela1234',
+                firstName: 'Daniela',
+                lastName: 'Salmina'
             }
         ]
     },
@@ -273,6 +404,42 @@ export const DATA = [
                 street2: '',
                 postalCode: 'LV-2167',
                 customer_id: 1
+            },
+            {
+                firstName: 'Nikolajs',
+                lastName: 'Lapins',
+                phoneNumber: '22034599',
+                country: 'Latvia',
+                city: 'Marupe',
+                province: 'Marupes novads',
+                street1: 'Tiraine, Viskalnu iela 13-8',
+                street2: '',
+                postalCode: 'LV-2167',
+                customer_id: 2
+            },
+            {
+                firstName: 'Anna',
+                lastName: 'Kaulina',
+                phoneNumber: '22034599',
+                country: 'Latvia',
+                city: 'Marupe',
+                province: 'Marupes novads',
+                street1: 'Tiraine, Viskalnu iela 13-8',
+                street2: '',
+                postalCode: 'LV-2167',
+                customer_id: 3
+            },
+            {
+                firstName: 'Daniela',
+                lastName: 'Salmina',
+                phoneNumber: '22034599',
+                country: 'Latvia',
+                city: 'Marupe',
+                province: 'Marupes novads',
+                street1: 'Tiraine, Viskalnu iela 13-8',
+                street2: '',
+                postalCode: 'LV-2167',
+                customer_id: 4
             }
         ]
     },
@@ -280,12 +447,28 @@ export const DATA = [
         modelName: 'CustomerGroup',
         modelData: [
             {
+                code: 'guest',
+                name: 'Guest'
+            },
+            {
                 code: 'new',
                 name: 'New'
             },
             {
                 code: 'loyal',
                 name: 'Loyal'
+            },
+            {
+                code: 'rich',
+                name: 'Rich'
+            },
+            {
+                code: 'poor',
+                name: 'Poor'
+            },
+            {
+                code: 'obsessed',
+                name: 'Obsessed'
             }
         ]
     },
@@ -345,12 +528,62 @@ export const DATA = [
                 urlKey: 'homepage',
                 title: 'Homepage',
                 content: '<h1>Welcome to the store.</h1>'
+            },
+            {
+                isEnabled: true,
+                urlKey: 'about-us',
+                title: 'About Us',
+                content: '<h1>About us.</h1>'
+            },
+            {
+                isEnabled: true,
+                urlKey: 'faq',
+                title: 'FAQ',
+                content: '<h1>FAQ.</h1>'
+            },
+            {
+                isEnabled: true,
+                urlKey: 'terms_and_conditions',
+                title: 'Terms and conditions',
+                content: '<h1>Terms and conditions.</h1>'
+            },
+            {
+                isEnabled: true,
+                urlKey: 'delivery',
+                title: 'Delivery',
+                content: '<h1>Delivery.</h1>'
             }
         ]
     },
     {
         modelName: 'Product',
         modelData: [
+            {
+                urlKey: 'mechanical_pencil_001mm',
+                sku: 'mechanical_pencil_001mm',
+                isEnabled: true,
+                name: 'Mechanical pencil (0.01mm)',
+                price: 30.0,
+                stockQuantity: 100,
+                specialDiscountType: '',
+                specialDiscountValue: 0.0,
+                specialTaxRate: 0.0,
+                shortDescription: 'Mechanical pencil with 0.01mm nib.',
+                longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                media: {
+                    'thumbnail': 'https://via.placeholder.com/240x180',
+                    'small': 'https://via.placeholder.com/480x360',
+                    'base': 'https://via.placeholder.com/1280x720',
+                    'other': [
+                        'https://via.placeholder.com/960x720'
+                    ]
+                },
+                soldAmount: 10,
+                attributeValues: {
+                    nib_size: 0.01
+                },
+                attribute_set_id: 2
+            },
             {
                 urlKey: 'mechanical_pencil_002mm',
                 sku: 'mechanical_pencil_002mm',
@@ -400,6 +633,58 @@ export const DATA = [
                 soldAmount: 10,
                 attributeValues: {
                     nib_size: 0.03
+                },
+                attribute_set_id: 2
+            },
+            {
+                urlKey: 'mechanical_pencil_004mm',
+                sku: 'mechanical_pencil_004mm',
+                isEnabled: true,
+                name: 'Mechanical pencil (0.04mm)',
+                price: 30.0,
+                stockQuantity: 100,
+                specialDiscountType: '',
+                specialDiscountValue: 0.0,
+                specialTaxRate: 0.0,
+                shortDescription: 'Mechanical pencil with 0.04mm nib.',
+                longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                media: {
+                    'thumbnail': 'https://via.placeholder.com/240x180',
+                    'small': 'https://via.placeholder.com/480x360',
+                    'base': 'https://via.placeholder.com/1280x720',
+                    'other': [
+                        'https://via.placeholder.com/960x720'
+                    ]
+                },
+                soldAmount: 10,
+                attributeValues: {
+                    nib_size: 0.04
+                },
+                attribute_set_id: 2
+            },
+            {
+                urlKey: 'mechanical_pencil_005mm',
+                sku: 'mechanical_pencil_005mm',
+                isEnabled: true,
+                name: 'Mechanical pencil (0.05mm)',
+                price: 30.0,
+                stockQuantity: 100,
+                specialDiscountType: '',
+                specialDiscountValue: 0.0,
+                specialTaxRate: 0.0,
+                shortDescription: 'Mechanical pencil with 0.05mm nib.',
+                longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                media: {
+                    'thumbnail': 'https://via.placeholder.com/240x180',
+                    'small': 'https://via.placeholder.com/480x360',
+                    'base': 'https://via.placeholder.com/1280x720',
+                    'other': [
+                        'https://via.placeholder.com/960x720'
+                    ]
+                },
+                soldAmount: 10,
+                attributeValues: {
+                    nib_size: 0.05
                 },
                 attribute_set_id: 2
             }
@@ -453,11 +738,35 @@ export const DATA = [
                 category_id: 7
             },
             {
+                product_id: 3,
+                category_id: 7
+            },
+            {
+                product_id: 4,
+                category_id: 7
+            },
+            {
+                product_id: 5,
+                category_id: 7
+            },
+            {
                 product_id: 1,
                 category_id: 2
             },
             {
                 product_id: 2,
+                category_id: 2
+            },
+            {
+                product_id: 3,
+                category_id: 2
+            },
+            {
+                product_id: 4,
+                category_id: 2
+            },
+            {
+                product_id: 5,
                 category_id: 2
             }
         ]
@@ -480,7 +789,8 @@ export const DATA = [
         modelName: 'Config',
         modelData: [
             {
-                currencySign: '$'
+                currencySign: '€',
+                currencySignPosition: 'right'
             }
         ]
     },

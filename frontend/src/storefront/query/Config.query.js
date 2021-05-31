@@ -2,8 +2,8 @@ import { gql, useQuery } from '@apollo/client'
 
 export const GET_CONFIG = gql`
     query GetConfig {
-        config: Config {
-            currency
+        config: Config(id: 1) {
+            currencySign
             currencySignPosition
         }
     }

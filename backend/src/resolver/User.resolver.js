@@ -10,7 +10,7 @@ export const userResolver = {
                 }})
 
                 if (user) {
-                    user.token = generateToken(user, 'admin')
+                    user.token = generateToken(user)
                     user.save()
                 }
 

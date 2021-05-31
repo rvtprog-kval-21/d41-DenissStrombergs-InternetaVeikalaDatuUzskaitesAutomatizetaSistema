@@ -27,16 +27,14 @@ export const searchResolver = {
                     }
                 })
                 const products = await models.Product.findAll({
-                    include: [
+                    include: category?.id ? [
                         {
                             model: models.Category,
                             where: {
-                                id: category?.id || {
-                                    [Op.ne]: null
-                                }
+                                id: category?.id
                             }
                         }
-                    ],
+                    ] : [],
                     where: {
                         isEnabled: true,
                         name: {
