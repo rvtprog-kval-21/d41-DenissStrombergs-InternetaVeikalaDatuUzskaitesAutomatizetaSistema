@@ -14,6 +14,6 @@ Relativi vienkārša interneta veikala sistēma līdzīgi Magento 2, bet mazāka
 3. cd d41-DenissStrombergs-InternetaVeikals
 4. cd backend
 5. npm start
-5. cd ..
+5. Atvert jaunu konsoles logu
 6. cd frontend
 7. npm start
