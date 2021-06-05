@@ -4,41 +4,30 @@ import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
+import STYLE from '../../../base/Style'
 import VALIDATION from '../../../base/Validation'
-import { signIn } from '../../query/Account.query'
+import { signIn } from '../../dispatcher/Account.dispatcher'
 
 export function SignInForm() {
+    const dispatch = useDispatch()
     const client = useApolloClient()
     const history = useHistory()
-    const dispatch = useDispatch()
+    const classes = STYLE.form()
     const initialValues = {
         email: '',
         password: ''
     }
 
-    const onSubmit = async (values, props) => {
-        const { setSubmitting } = props
-
+    const onSubmit = (values, { setSubmitting }) => {
         setSubmitting(false)
-
-        const result = await signIn(client, values)
-
-        if (result) {
-            dispatch({
-                type: 'SIGN_IN',
-                payload: {
-                    account: result
-                }
-            })
-            history.push('/account')
-        }
+        signIn({ dispatch, client, history }, values)
     }
 
     const renderForm = (props) => {
         const { submitForm, isSubmitting } = props
 
         return (
-            <Form>
+            <Form className={ classes.root }>
                 <Field
                     component={ TextField }
                     type="email"

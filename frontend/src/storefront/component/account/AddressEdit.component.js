@@ -10,7 +10,7 @@ export function AddressEdit(props) {
     }
 
     return (
-        <AddressForm address={ address } />
+        <AddressForm mode="edit" address={ address } />
     )
 }
 

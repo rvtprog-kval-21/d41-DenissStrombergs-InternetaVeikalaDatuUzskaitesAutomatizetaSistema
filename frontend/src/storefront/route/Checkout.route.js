@@ -1,11 +1,13 @@
-import { Grid } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import { useState } from 'react'
 import CheckoutShippingStep from '../component/checkout/CheckoutShippingStep.component'
 import CheckoutSummary from '../component/checkout/CheckoutSummary.component'
 import CheckoutBillingStep from '../component/checkout/CheckoutBillingStep.component'
 import CheckoutSuccessStep from '../component/checkout/CheckoutSuccessStep.component'
+import { useSelector } from 'react-redux'
 
 export function Checkout() {
+    const { items } = useSelector((state) => state.CartReducer)
     const [step, setStep] = useState('SHIPPING')
 
     const renderShippingStep = () => {
@@ -44,6 +46,12 @@ export function Checkout() {
         'SHIPPING': renderShippingStep,
         'BILLING': renderBillingStep,
         'SUCCESS': renderSuccessStep
+    }
+
+    if (!Object.keys(items).length) {
+        return (
+            <Typography>Empty cart!</Typography>
+        )
     }
 
     return stepRenderMap[step]()

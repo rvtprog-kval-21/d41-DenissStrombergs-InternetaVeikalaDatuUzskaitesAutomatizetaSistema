@@ -4,13 +4,15 @@ import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
+import STYLE from '../../../base/Style'
 import VALIDATION from '../../../base/Validation'
-import { signUp } from '../../query/Account.query'
+import { signUp } from '../../dispatcher/Account.dispatcher'
 
 export function SignUpForm() {
+    const dispatch = useDispatch()
     const client = useApolloClient()
     const history = useHistory()
-    const dispatch = useDispatch()
+    const classes = STYLE.form()
     const initialValues = {
         email: '',
         password: '',
@@ -19,29 +21,16 @@ export function SignUpForm() {
         lastName: ''
     }
 
-    const onSubmit = async (values, props) => {
-        const { setSubmitting } = props
-
+    const onSubmit = async (values, { setSubmitting }) => {
         setSubmitting(false)
-
-        const result = await signUp(client, values)
-
-        if (result) {
-            dispatch({
-                type: 'SIGN_UP',
-                payload: {
-                    account: result
-                }
-            })
-            history.push('/account')
-        }
+        signUp({ dispatch, client, history }, values)
     }
 
     const renderForm = (props) => {
         const { submitForm, isSubmitting } = props
 
         return (
-            <Form>
+            <Form className={ classes.root }>
                 <Field
                     component={ TextField }
                     type="email"

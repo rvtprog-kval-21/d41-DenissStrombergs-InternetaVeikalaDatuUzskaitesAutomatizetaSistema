@@ -23,25 +23,20 @@ export class Customer extends Model {
                 lastName: {
                     type: DataTypes.STRING
                 },
-                isSignedIn: {
-                    type: DataTypes.BOOLEAN,
-                    defaultValue: false
-                },
-                isGuest: {
-                    type: DataTypes.BOOLEAN,
-                    defaultValue: false
-                },
                 token: {
                     type: DataTypes.TEXT
                 },
                 totalTax: {
-                    type: DataTypes.FLOAT
+                    type: DataTypes.FLOAT,
+                    defaultValue: 0
                 },
                 subtotal: {
-                    type: DataTypes.FLOAT
+                    type: DataTypes.FLOAT,
+                    defaultValue: 0
                 },
                 total: {
-                    type: DataTypes.FLOAT
+                    type: DataTypes.FLOAT,
+                    defaultValue: 0
                 }
             },
             {

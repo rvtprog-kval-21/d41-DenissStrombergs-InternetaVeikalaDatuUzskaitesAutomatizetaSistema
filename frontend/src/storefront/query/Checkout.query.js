@@ -21,8 +21,10 @@ export const GET_ALL_PAYMENT_METHODS = gql`
 `
 
 export const SUBMIT_ORDER = gql`
-    mutation SubmitOrder($token: String!) {
-        submitOrder(token: $token)
+    mutation SubmitOrder {
+        submitOrder {
+            reference
+        }
     }
 `
 

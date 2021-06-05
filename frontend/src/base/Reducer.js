@@ -1,10 +1,10 @@
 import { connectRouter } from 'connected-react-router'
 import { combineReducers } from 'redux'
-import CartReducer from '../storefront/store/Cart.reducer'
-import AccountReducer from '../storefront/store/Account.reducer'
-import CheckoutReducer from '../storefront/store/Checkout.reducer'
-import ConfigReducer from '../storefront/store/Config.reducer'
-import NotificationReducer from '../storefront/store/Notification.reducer'
+import CartReducer from '../storefront/reducer/Cart.reducer'
+import AccountReducer from '../storefront/reducer/Account.reducer'
+import CheckoutReducer from '../storefront/reducer/Checkout.reducer'
+import ConfigReducer from '../storefront/reducer/Config.reducer'
+import NotificationReducer from '../storefront/reducer/Notification.reducer'
 
 export const createRootReducer = (history) => combineReducers({
     router: connectRouter(history),

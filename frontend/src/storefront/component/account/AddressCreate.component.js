@@ -2,7 +2,7 @@ import AddressForm from './AddressForm.component'
 
 export function AddressCreate() {
     return (
-        <AddressForm />
+        <AddressForm mode="create" />
     )
 }
 

@@ -368,7 +368,10 @@ export const DATA = [
                 email: 'deniss.strombergs@scandiweb.com',
                 password: 'Test12#$',
                 firstName: 'Deniss',
-                lastName: 'Strombergs'
+                lastName: 'Strombergs',
+                totalTax: 73.5,
+                subtotal: 350,
+                total: 423.5
             },
             {
                 email: 'nikolajs.lapins@gmail.com',
@@ -695,12 +698,12 @@ export const DATA = [
         modelData: [
             {
                 quantity: 5,
-                cart_id: 1,
+                customer_id: 1,
                 product_id: 1
             },
             {
                 quantity: 10,
-                cart_id: 1,
+                customer_id: 1,
                 product_id: 2
             }
         ]
@@ -782,6 +785,69 @@ export const DATA = [
                 rating: 1,
                 customer_id: 1,
                 product_id: 1
+            },
+            {
+                status: 'accepted',
+                date: '2021-05-05',
+                title: 'Very nice',
+                content: 'Very nice product, I use it every day.',
+                rating: 10,
+                customer_id: 2,
+                product_id: 1
+            },
+            {
+                status: 'accepted',
+                date: '2021-05-05',
+                title: 'Fine',
+                content: 'Yea its pretty good, but it has its own downsides.',
+                rating: 7,
+                customer_id: 3,
+                product_id: 1
+            },
+            {
+                status: 'accepted',
+                date: '2021-05-05',
+                title: 'Very nice',
+                content: 'Very nice, but I still would prefer to use the other version.',
+                rating: 8,
+                customer_id: 4,
+                product_id: 1
+            },
+            {
+                status: 'accepted',
+                date: '2021-05-05',
+                title: 'Alirght',
+                content: 'It is alright, not too good, not too bad.',
+                rating: 5,
+                customer_id: 1,
+                product_id: 2
+            },
+            {
+                status: 'accepted',
+                date: '2021-05-05',
+                title: 'Perfect',
+                content: 'The best thing I have ever used in my life.',
+                rating: 10,
+                customer_id: 2,
+                product_id: 2
+            },
+            {
+                status: 'accepted',
+                date: '2021-05-05',
+                title: 'Trash',
+                content: 'Absolute garbage, does not work.',
+                rating: 1,
+                customer_id: 3,
+                product_id: 2
+            },
+            {
+                status: 'accepted',
+                date: '2021-05-05',
+                title: 'Trash',
+                content: 'This product is not very good, do not recomend it.',
+                rating: 5,
+                customer_id: 4,
+                product_id: 2
             }
         ]
     },

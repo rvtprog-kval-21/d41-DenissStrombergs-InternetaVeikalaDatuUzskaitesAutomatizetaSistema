@@ -2,47 +2,17 @@ import { useApolloClient } from '@apollo/client'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
-import { singOut } from '../../query/Account.query'
+import { signOut } from '../../dispatcher/Account.dispatcher'
 
 export function AccountNavigation(props) {
     const dispatch = useDispatch()
     const client = useApolloClient()
     const history = useHistory()
-    const account = useSelector((state) => state.AccountReducer)
     const { section } = props
 
-    const onSignOutButtonClick = async () => {
-        const data = await singOut(client)
-
-        if (data) {
-            dispatch({
-                type: 'SIGN_OUT',
-                payload: {
-                    isSignedIn: data
-                }
-            })
-
-            history.push('/')
-
-            dispatch({
-                type: 'SHOW_NOTIFICATION',
-                payload: {
-                    message: 'Successfully signed out.',
-                    severity: 'success'
-                }
-            })
-        } else {
-            dispatch({
-                type: 'SHOW_NOTIFICATION',
-                payload: {
-                    message: 'Failed to update account.',
-                    severity: 'error'
-                }
-            })
-        }
-    }
+    const onSignOutButtonClick = () => signOut({ dispatch, client, history })
 
     const sections = [
         {
@@ -68,9 +38,9 @@ export function AccountNavigation(props) {
 
     return (
         <List>
-          {sections.map((text, index) => (
-            <ListItem button component="a" href={ text.url } key={text.label } selected={ text.code == section }>
-              <ListItemText primary={text.label } />
+          { sections.map((text) => (
+            <ListItem button component="a" href={ text.url } key={ text.label } selected={ text.code == section }>
+              <ListItemText primary={ text.label } />
             </ListItem>
           ))}
             <ListItem button key="Sign out" onClick={ onSignOutButtonClick }>

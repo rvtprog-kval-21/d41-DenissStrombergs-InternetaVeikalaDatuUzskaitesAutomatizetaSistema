@@ -1,7 +1,13 @@
+import { useApolloClient } from '@apollo/client'
 import { Button } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
+import { useDispatch } from 'react-redux'
+import STYLE from '../../../base/Style'
 import VALIDATION from '../../../base/Validation'
+import { showNotification } from '../../dispatcher/Notification.dispatcher'
+import { createCustomerAddress, deleteCustomerAddress, updateCustomerAddress } from '../../query/Address.query'
+import { useHistory } from 'react-router'
 
 export function AddressFormFields() {
     return (
@@ -74,7 +80,11 @@ export function AddressFormFields() {
 }
 
 export function AddressForm(props) {
-    const { address = {}, shouldRenderSubmitButton = true } = props
+    const dispatch = useDispatch()
+    const client = useApolloClient()
+    const history = useHistory()
+    const classes = STYLE.form()
+    const { address = {}, shouldRenderSubmitButton = true, mode } = props
     const initialValues = {
         firstName: '',
         lastName: '',
@@ -88,10 +98,32 @@ export function AddressForm(props) {
         ...address
     }
 
-    const onSubmit = (values, props) => {
-        const { setSubmitting } = props
-
+    const onSubmit = async (values, { setSubmitting }) => {
         setSubmitting(false)
+        const data = mode === 'create' ? await createCustomerAddress(client, values) : updateCustomerAddress(client, {
+            id: address.id,
+            ...values
+        })
+        const messages = {
+            create: {
+                SUCCESS: 'Successfully created new address.',
+                ERROR: 'Failed to create new address.'
+            },
+            edit: {
+                SUCCESS: 'Successfully updated your address.',
+                ERROR: 'Failed to update your address.'
+            }
+        }
+
+        if (data) {
+            showNotification({ dispatch }, { severity: 'SUCCESS', message: messages[mode].SUCCESS })
+
+            if (mode === 'create') {
+                history.push('/account/addresses')
+            }
+        } else {
+            showNotification({ dispatch }, { severity: 'ERROR', message: messages[mode].ERROR })
+        }
     }
 
     const renderSaveButton = (props) => {
@@ -113,11 +145,39 @@ export function AddressForm(props) {
         )
     }
 
+    const onDeleteButtonClick = async () => {
+        const status = await deleteCustomerAddress(client, { id: address.id })
+
+        if (status) {
+            showNotification({ dispatch }, { severity: 'SUCCESS', message: 'Successfully deleted your address.' })
+            history.push('/account/addresses')
+        } else {
+            showNotification({ dispatch }, { severity: 'ERROR', message: 'Failed to delete your address.' })
+        }
+    }
+
+    const renderDeleteButton = (props) => {
+        if (mode !== 'edit') {
+            return null
+        }
+
+        return (
+            <Button
+                onClick={ onDeleteButtonClick }
+                variant="contained"
+                color="primary"
+            >
+                Delete
+            </Button>
+        )
+    }
+
     const renderForm = (props) => {
         return (
-            <Form>
+            <Form className={ classes.root }>
                 <AddressFormFields />
                 { renderSaveButton(props) }
+                { renderDeleteButton() }
             </Form>
         )
     }

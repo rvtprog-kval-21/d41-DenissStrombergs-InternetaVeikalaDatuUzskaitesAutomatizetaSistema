@@ -3,57 +3,28 @@ import { Button, Typography } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
 import { useDispatch, useSelector } from 'react-redux'
+import STYLE from '../../../base/Style'
 import VALIDATION from '../../../base/Validation'
-import { updateAccount } from '../../query/Account.query'
+import { updateAccount } from '../../dispatcher/Account.dispatcher'
 import ChangePasswordForm from './ChangePasswordForm.component'
 
 export function AccountSettings() {
     const client = useApolloClient()
     const dispatch = useDispatch()
+    const classes = STYLE.form()
     const account = useSelector((state) => state.AccountReducer)
-    
     const initialValues = account
 
-    const onSubmit = async (values, props) => {
-        const { setSubmitting } = props
-
+    const onSubmit = async (values, { setSubmitting }) => {
         setSubmitting(false)
-
-        const data = await updateAccount(client, {
-            ...values
-        })
-
-        if (values) {
-            dispatch({
-                type: 'UPDATE_ACCOUNT',
-                payload: {
-                    data
-                }
-            })
-
-            dispatch({
-                type: 'SHOW_NOTIFICATION',
-                payload: {
-                    message: 'Successfully updated account.',
-                    severity: 'success'
-                }
-            })
-        } else {
-            dispatch({
-                type: 'SHOW_NOTIFICATION',
-                payload: {
-                    message: 'Failed to update account.',
-                    severity: 'error'
-                }
-            })
-        }
+        updateAccount({ dispatch, client }, values)
     }
 
     const renderForm = (props) => {
         const { submitForm, isSubmitting } = props
 
         return (
-            <Form>
+            <Form className={ classes.root }>
                 <Field
                     component={ TextField }
                     type="email"

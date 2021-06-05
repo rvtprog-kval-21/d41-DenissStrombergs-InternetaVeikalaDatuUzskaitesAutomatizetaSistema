@@ -56,7 +56,7 @@ export function Account() {
         )
     }
 
-    return account ? renderAccount() : renderSign()
+    return account.token ? renderAccount() : renderSign()
 }
 
 export default Account

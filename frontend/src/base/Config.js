@@ -1,5 +1,5 @@
 export const CONFIG = {
     SEARCH: {
-        PER_PAGE: 1
+        PER_PAGE: 4
     }
 }

@@ -53,7 +53,6 @@ export const GET_CUSTOMER_ORDER = gql`
         }
     }
 `
-
 export function GetAllCustomerOrders(variables) {
     const { loading, error, data: { orders } = {} } = useQuery(GET_ALL_CUSTOMER_ORDERS, { variables })
 

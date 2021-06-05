@@ -21,6 +21,7 @@
         "html-react-parser": "^1.2.6",
         "material-ui-color-picker": "^3.5.1",
         "material-ui-popup-state": "^1.8.3",
+        "moment": "^2.29.1",
         "node-sass": "^5.0.0",
         "query-string": "^7.0.0",
         "ra-data-graphql-simple": "^3.13.2",

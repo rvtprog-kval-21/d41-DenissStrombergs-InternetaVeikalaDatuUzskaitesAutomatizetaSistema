@@ -1,8 +1,16 @@
+import { InputAdornment } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
+import moment from 'moment'
+import { useSelector } from 'react-redux'
 
 export function OrderForm(props) {
     const { order } = props
+    const config = useSelector((state) => state.ConfigReducer)
+    const initialValues = {
+        ...order,
+        date: moment(order.date).format('DD.MM.yyyy')
+    }
 
     const renderForm = () => {
         return (
@@ -38,6 +46,7 @@ export function OrderForm(props) {
                     label="Total delivery"
                     fullWidth
                     disabled
+                    InputProps={ { endAdornment: <InputAdornment position="end">{ config.currencySign }</InputAdornment> } }
                 />
                 <Field
                     component={ TextField }
@@ -46,6 +55,7 @@ export function OrderForm(props) {
                     label="Total tax"
                     fullWidth
                     disabled
+                    InputProps={ { endAdornment: <InputAdornment position="end">{ config.currencySign }</InputAdornment> } }
                 />
                 <Field
                     component={ TextField }
@@ -54,6 +64,7 @@ export function OrderForm(props) {
                     label="Subtotal"
                     fullWidth
                     disabled
+                    InputProps={ { endAdornment: <InputAdornment position="end">{ config.currencySign }</InputAdornment> } }
                 />
                 <Field
                     component={ TextField }
@@ -62,6 +73,7 @@ export function OrderForm(props) {
                     label="Total"
                     fullWidth
                     disabled
+                    InputProps={ { endAdornment: <InputAdornment position="end">{ config.currencySign }</InputAdornment> } }
                 />
             </Form>
         )
@@ -69,7 +81,7 @@ export function OrderForm(props) {
 
     return (
         <Formik
-            initialValues={ order }
+            initialValues={ initialValues }
         >
             { renderForm }
         </Formik>

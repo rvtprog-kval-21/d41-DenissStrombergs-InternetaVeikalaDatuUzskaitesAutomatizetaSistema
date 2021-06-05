@@ -8,9 +8,8 @@ export const accountResolver = {
                     email: data.email,
                     password: data.password
                 }, include: { model: models.CartItem, include: [models.Product] }})
-                customer.isSignedIn = true
                 customer.token = generateToken(customer)
-                customer.save()
+                await customer.save()
 
                 return customer
             } catch (error) {
@@ -19,10 +18,10 @@ export const accountResolver = {
                 return null
             }
         },
-        signOut: async function(_, data, { models }) {
+        signOut: async function(_, data, { models, token }) {
             try {
                 const customer = await models.Customer.findOne({ where: { token }})
-                customer.isSignedIn = false
+                customer.token = null
                 await customer.save()
 
                 return true
@@ -34,14 +33,18 @@ export const accountResolver = {
         },
         signUp: async function(_, data, { models }) {
             try {
-                return await models.Customer.create(data)
+                const customer = await models.Customer.create(data)
+                customer.token = generateToken(customer)
+                await customer.save()
+
+                return customer
             } catch (error) {
                 console.error(error)
 
                 return null
             }
         },
-        changePassword: async function(_, data, { models }) {
+        changePassword: async function(_, data, { models, token }) {
             try {
                 const customer = await models.Customer.findOne({ where: { token }})
                 

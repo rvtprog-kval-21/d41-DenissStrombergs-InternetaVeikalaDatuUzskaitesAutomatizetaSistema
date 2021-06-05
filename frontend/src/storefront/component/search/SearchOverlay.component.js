@@ -1,14 +1,14 @@
 import React from 'react'
-import Typography from '@material-ui/core/Typography'
 import Popover from '@material-ui/core/Popover'
 import IconButton from '@material-ui/core/IconButton'
 import SearchIcon from '@material-ui/icons/Search'
 import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state'
 import SearchForm from './SearchForm.component'
+import { Box } from '@material-ui/core'
 
 export function SearchOverlay() {
     return (
-        <PopupState variant="popover" popupId="demo-popup-popover">
+        <PopupState variant="popover" popupId="search-overlay">
             {(popupState) => (
                 <div>
                     <IconButton { ...bindTrigger(popupState) } aria-label="search" color="inherit">
@@ -17,11 +17,13 @@ export function SearchOverlay() {
                     <Popover
                         { ...bindPopover(popupState) }
                         anchorReference="anchorPosition"
-                        anchorPosition={{ top: 0, left: window.innerWidth }}
+                        anchorPosition={ { top: 0, left: window.innerWidth } }
                         marginThreshold={ 0 }
-                        PaperProps={{ style: { width: '500px', height: '100%', maxHeight: 'none' } }}
+                        PaperProps={ { style: { width: '500px', height: '100%', maxHeight: 'none' } } }
                     >
-                        <SearchForm />
+                        <Box padding={ 2 }>
+                            <SearchForm />
+                        </Box>
                     </Popover>
                 </div>
             )}

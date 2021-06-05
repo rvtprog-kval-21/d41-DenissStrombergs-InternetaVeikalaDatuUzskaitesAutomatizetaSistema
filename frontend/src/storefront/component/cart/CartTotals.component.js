@@ -3,11 +3,7 @@ import { useSelector } from 'react-redux'
 import Price from '../product/Price.component'
 
 export function CartTotals() {
-    const cartItems = useSelector((state) => state.CartReducer)
-    const items = Object.values(cartItems)
-    const totalTax = items.reduce((acc, val) => (acc + val.product.price * (val.product.specialTaxRate || 0.21)), 0)
-    const subtotal = items.reduce((acc, val) => (acc + val.product.price), 0)
-    const total = subtotal + totalTax
+    const { totals: { totalTax, subtotal, total } } = useSelector((state) => state.CartReducer)
 
     const totals = [
         {
@@ -28,21 +24,23 @@ export function CartTotals() {
         const { value, label } = field
 
         return (
-            <Grid container justify="space-between">
-                <Typography variant="body" component="dt">
-                    { label }
-                </Typography>
-                <Typography variant="body" component="dd">
-                    <Price value={ value } />
-                </Typography>
+            <Grid item xs={ 12 }>
+                <Grid container justify="space-between">
+                    <Typography variant="body1" component="dt">
+                        { label }
+                    </Typography>
+                    <Typography variant="body1" component="dd">
+                        <Price value={ value } />
+                    </Typography>
+                </Grid>
             </Grid>
         )
     }
 
     return (
-        <div>
+        <Grid container spacing={ 2 }>
             { totals.map(renderField) }
-        </div>
+        </Grid>
     )
 }
 

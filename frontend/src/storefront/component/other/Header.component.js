@@ -17,7 +17,7 @@ import AccountOverlay from '../account/AccountOverlay.component'
 import { Link } from '@material-ui/core'
 import Menu from './Menu.component'
 
-const drawerWidth = 240
+const drawerWidth = 320
 
 const useStyles = makeStyles((theme) => ({
     root: {

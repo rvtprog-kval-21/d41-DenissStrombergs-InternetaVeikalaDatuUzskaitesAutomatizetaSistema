@@ -1,11 +1,9 @@
-import { GetAllCustomerAddresses } from '../../query/Address.query'
 import { Grid, Typography } from '@material-ui/core'
 import AddressItem from '../account/AddressItem.component'
 import { AddressFormFields } from '../account/AddressForm.component'
 
 export function CheckoutAddressSelector(props) {
-    const { addressId, setAddressId } = props
-    const addresses = GetAllCustomerAddresses() || []
+    const { addressId, setAddressId, addresses } = props
 
     if (!addresses.length) {
         return (

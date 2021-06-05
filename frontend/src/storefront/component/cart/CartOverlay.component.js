@@ -10,7 +10,7 @@ import CartTotals from './CartTotals.component'
 
 export function CartOverlay() {
     return (
-        <PopupState variant="popover" popupId="demo-popup-popover">
+        <PopupState variant="popover" popupId="cart-overlay">
             {(popupState) => (
                 <div>
                     <IconButton { ...bindTrigger(popupState) } aria-label="cart" color="inherit">
@@ -19,9 +19,9 @@ export function CartOverlay() {
                     <Popover
                         { ...bindPopover(popupState) }
                         anchorReference="anchorPosition"
-                        anchorPosition={{ top: 0, left: window.innerWidth }}
+                        anchorPosition={ { top: 0, left: window.innerWidth } }
                         marginThreshold={ 0 }
-                        PaperProps={{ style: { width: '500px', height: '100%', maxHeight: 'none' } }}
+                        PaperProps={ { style: { width: '500px', height: '100%', maxHeight: 'none' } } }
                     >
                         <Box padding={ 2 }>
                             <Grid container spacing={ 4 }>

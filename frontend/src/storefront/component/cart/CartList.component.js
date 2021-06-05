@@ -1,21 +1,27 @@
-import { Grid } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { CartItem } from './CartItem.component'
 
 export function CartList(props) {
     const { shouldRenderCartItemActions } = props
-    const cartItems = useSelector((state) => state.CartReducer)
+    const { items } = useSelector((state) => state.CartReducer)
 
-    const renderCartItem = (cartItem) => {
+    const renderCartItem = (item) => {
         return (
-            <CartItem cartItem={ cartItem } shouldRenderCartItemActions={ shouldRenderCartItemActions } />
+            <CartItem item={ item } shouldRenderCartItemActions={ shouldRenderCartItemActions } />
+        )
+    }
+
+    if (!Object.keys(items).length) {
+        return (
+            <Typography>Empty cart!</Typography>
         )
     }
 
     return (
         <Grid container spacing={ 2 }>
-            { Object.values(cartItems).map(renderCartItem) }
+            { Object.values(items).map(renderCartItem) }
         </Grid>
     )
 }

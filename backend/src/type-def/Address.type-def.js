@@ -29,7 +29,7 @@ export const addressTypeDef = `
             street2: String!,
             postalCode: String!
         ) : Address
-        deleteCustomerAddress(id: ID!) : Address
+        deleteCustomerAddress(id: ID!) : Boolean
     }
 `
 

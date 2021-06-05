@@ -2,6 +2,7 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import { Box, Button, CardActions, Grid, Link } from '@material-ui/core'
+import moment from 'moment'
 
 export function ReviewItem(props) {
     const { review, review: { id, product: { name, urlKey } } } = props
@@ -9,7 +10,8 @@ export function ReviewItem(props) {
     const fields = [
         {
             label: 'Date',
-            key: 'date'
+            key: 'date',
+            format: (value) => moment(value).format('DD.MM.yyyy')
         },
         {
             label: 'Status',
@@ -30,7 +32,7 @@ export function ReviewItem(props) {
     ]
 
     const renderField = (field) => {
-        const { label, key } = field
+        const { label, key, format = (value) => value } = field
         const { [key]: value } = review
 
         return (
@@ -39,7 +41,7 @@ export function ReviewItem(props) {
                     { label }
                 </Typography>
                 <Typography variant="body" component="dd">
-                    { value }
+                    { format(value) }
                 </Typography>
             </Grid>
         )

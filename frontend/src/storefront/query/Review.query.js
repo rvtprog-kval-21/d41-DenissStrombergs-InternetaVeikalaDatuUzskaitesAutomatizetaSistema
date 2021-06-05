@@ -92,21 +92,16 @@ export const UPDATE_CUSTOMER_REVIEW = gql`
             rating: $rating
         ) {
             id
-            status
-            date
             title
             content
             rating
-            productId: product_id
         }
     }
 `
 
 export const DELETE_CUSTOMER_REVIEW = gql`
     mutation DeleteCustomerReview($id: ID!) {
-        deleteCustomerReview(id: $id) {
-            id
-        }
+        status: deleteCustomerReview(id: $id)
     }
 `
 
@@ -140,23 +135,23 @@ export function GetCustomerReview(variables) {
     return review
 }
 
-export function createReview(client, variables) {
+export function createCustomerReview(client, variables) {
     return client.mutate({
         mutation: CREATE_CUSTOMER_REVIEW,
         variables
     }).then(({ data }) => data?.review)
 }
 
-export function updateReview(client, variables) {
+export function updateCustomerReview(client, variables) {
     return client.mutate({
         mutation: UPDATE_CUSTOMER_REVIEW,
         variables
     }).then(({ data }) => data?.review)
 }
 
-export function deleteReview(client, variables) {
+export function deleteCustomerReview(client, variables) {
     return client.mutate({
         mutation: DELETE_CUSTOMER_REVIEW,
         variables
-    }).then(({ data }) => data)
+    }).then(({ data }) => data?.status)
 }

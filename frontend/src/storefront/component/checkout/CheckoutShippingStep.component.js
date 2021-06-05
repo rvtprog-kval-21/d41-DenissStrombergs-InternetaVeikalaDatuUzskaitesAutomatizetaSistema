@@ -6,11 +6,18 @@ import { Typography } from '@material-ui/core'
 import CheckoutAddressSelector from "./CheckoutAddressSelector.component"
 import { useState } from "react"
 import VALIDATION from "../../../base/Validation"
+import { showNotification } from "../../dispatcher/Notification.dispatcher"
+import { useDispatch } from "react-redux"
+import { createCustomerAddress, GetAllCustomerAddresses } from '../../query/Address.query'
+import { useApolloClient } from "@apollo/client"
 
 export function CheckoutShippingStep(props) {
+    const dispatch = useDispatch()
+    const client = useApolloClient()
     const [addressId, setAddressId] = useState(0)
     const shippingMethods = GetAllShippingMethods()
     const { setStep } = props
+    const addresses = GetAllCustomerAddresses() || []
 
     if (!shippingMethods) {
         return null
@@ -29,11 +36,22 @@ export function CheckoutShippingStep(props) {
         shippingMethod: shippingMethods[0].code
     }
 
-    const onSubmit = async (values, props) => {
-        if (addressId) {
-            setStep('BILLING')
+    const onSubmit = async (values, { setSubmitting }) => {
+        setSubmitting(false)
+
+        if (addresses.length) {
+            if (addressId) {
+                setStep('BILLING')
+            } else {
+                showNotification({ dispatch }, { severity: 'ERROR', message: 'Please create or select shipping address.' })
+            }
         } else {
-            setStep('BILLING')
+            const address = await createCustomerAddress(client, values)
+            
+            if (address ) {
+                setAddressId(address.id)
+                setStep('BILLING')
+            }
         }
     }
 
@@ -54,7 +72,7 @@ export function CheckoutShippingStep(props) {
         return (
             <Form>
                 <Typography variant="h3">Shipping</Typography>
-                <CheckoutAddressSelector addressId={ addressId } setAddressId={ setAddressId } />
+                <CheckoutAddressSelector addresses={ addresses } addressId={ addressId } setAddressId={ setAddressId } />
                 <Typography variant="h6">Choose shipping method:</Typography>
                 <FormControl fullWidth>
                     <FormLabel htmlFor="shippingMethod">Shipping method</FormLabel >
@@ -80,7 +98,7 @@ export function CheckoutShippingStep(props) {
                 <Formik
                     initialValues={ initialValues }
                     onSubmit={ onSubmit }
-                    validationSchema={ VALIDATION.SHIPPING_STEP }
+                    validationSchema={ addresses.length ? VALIDATION.SHIPPING_STEP : VALIDATION.SHIPPING_STEP_WITH_ADDRESS }
                 >
                     { renderForm }
                 </Formik>

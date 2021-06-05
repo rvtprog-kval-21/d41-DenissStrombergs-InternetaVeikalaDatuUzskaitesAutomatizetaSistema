@@ -3,8 +3,11 @@ import { Button, FormControlLabel, Radio, FormControl, FormLabel, Grid, Typograp
 import { Formik, Field, Form } from 'formik'
 import { RadioGroup, CheckboxWithLabel } from 'formik-material-ui'
 import VALIDATION from "../../../base/Validation"
+import { showNotification } from "../../dispatcher/Notification.dispatcher"
+import { useDispatch } from "react-redux"
 
 export function CheckoutBillingStep(props) {
+    const dispatch = useDispatch()
     const paymentMethods = GetAllPaymentMethods()
     const { setStep } = props
 
@@ -17,8 +20,15 @@ export function CheckoutBillingStep(props) {
         acceptTerms: false
     }
 
-    const onSubmit = async (values, props) => {
+    const onSubmit = async (values, { setSubmitting }) => {
+        setSubmitting(false)
         setStep('SUCCESS')
+    }
+
+    const validate = (values) => {
+        if (!values.acceptTerms) {
+            showNotification({ dispatch }, { severity: 'ERROR', message: 'Please accept terms and conditions.' })
+        }
     }
 
     const renderPaymentMethod = function(paymentMethod) {
@@ -66,6 +76,7 @@ export function CheckoutBillingStep(props) {
                     initialValues={ initialValues }
                     onSubmit={ onSubmit }
                     validationSchema={ VALIDATION.BILLING_STEP }
+                    validate={ validate }
                 >
                     { renderForm }
                 </Formik>

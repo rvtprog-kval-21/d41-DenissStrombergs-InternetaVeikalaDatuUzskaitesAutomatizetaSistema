@@ -6,25 +6,18 @@ export const reviewTypeDef = `
 
     type Mutation {
         createCustomerReview(
-            status: String,
-            date: Date,
             title: String!,
             content: String!,
             rating: Int!,
-            customer_id: ID!,
             product_id: ID!
         ) : Review
         updateCustomerReview(
             id: ID!,
-            status: String,
-            date: Date,
             title: String!,
             content: String!,
-            rating: Int!,
-            customer_id: ID!,
-            product_id: ID!
+            rating: Int!
         ) : Review
-        deleteCustomerReview(id: ID!) : Review
+        deleteCustomerReview(id: ID!) : Boolean
     }
 `
 

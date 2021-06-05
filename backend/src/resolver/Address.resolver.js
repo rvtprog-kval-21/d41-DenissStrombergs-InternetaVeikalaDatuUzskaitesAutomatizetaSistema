@@ -58,9 +58,11 @@ export const addressResolver = {
                     return null
                 }
 
-                const entity = await models[singularName].findOne({ where: { id: data.id, customer_id: customer.id } })
+                const entity = await models.Address.findOne({ where: { id: data.id, customer_id: customer.id } })
                 Object.assign(entity, data)
                 await entity.save()
+
+                return entity
             } catch (error) {
                 console.error(error)
 
@@ -75,8 +77,10 @@ export const addressResolver = {
                     return null
                 }
 
-                const entity = await models[singularName].findOne({ where: { id: data.id, customer_id: customer.id } })
+                const entity = await models.Address.findOne({ where: { id: data.id, customer_id: customer.id } })
                 await entity.destroy()
+
+                return true
             } catch (error) {
                 console.error(error)
 

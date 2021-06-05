@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core'
+import { Button, Grid } from '@material-ui/core'
 import { GetAllCustomerAddresses } from '../../query/Address.query'
 import AddressItem from './AddressItem.component'
 
@@ -16,15 +16,20 @@ export function AddressList() {
     }
 
     return (
-        <Grid
-            container
-            direction="row"
-            justify="start"
-            alignItems="center"
-            spacing={ 4 }
-        >
-            { addresses.map(renderAddressItem)  }
-        </Grid>
+        <>
+            <Button variant="contained" color="primary" href="/account/addresses/create">
+                Create
+            </Button>
+            <Grid
+                container
+                direction="row"
+                justify="start"
+                alignItems="center"
+                spacing={ 4 }
+            >
+                { addresses.map(renderAddressItem) }
+            </Grid>
+        </>
     )
 }
 

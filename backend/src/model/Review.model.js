@@ -8,9 +8,9 @@ export class Review extends Model {
             {
                 id: {
                     type: DataTypes.INTEGER,
-                    primaryKey: true,
                     allowNull: false,
-                    autoIncrement: true
+                    autoIncrement: true,
+                    unique: true
                 },
                 status: {
                     type: DataTypes.STRING,
@@ -24,20 +24,24 @@ export class Review extends Model {
                     type: DataTypes.STRING
                 },
                 content: {
-                    type: DataTypes.STRING
+                    type: DataTypes.TEXT
                 },
                 rating: {
                     type: DataTypes.INTEGER
                 },
                 customer_id: {
                     type: DataTypes.INTEGER,
+                    primaryKey: true,
+                    allowNull: false,
                     references: {
                         model: Customer,
                         key: 'id'
-                    }
+                    },
                 },
                 product_id: {
                     type: DataTypes.INTEGER,
+                    primaryKey: true,
+                    allowNull: false,
                     references: {
                         model: Product,
                         key: 'id'

@@ -42,8 +42,20 @@ export const VALIDATION = {
         shippingMethod: Yup.string().required('Is required')
     }),
     BILLING_STEP: Yup.object().shape({
-        acceptTerms: Yup.string().required('Is required'),
+        acceptTerms: Yup.boolean().oneOf([true], 'Please accept terms and conditions.'),
         paymentMethod: Yup.string().required('Is required')
+    }),
+    SHIPPING_STEP_WITH_ADDRESS: Yup.object().shape({
+        firstName: Yup.string().required('Is required'),
+        lastName: Yup.string().required('Is required'),
+        phoneNumber: Yup.string().required('Is required'),
+        country: Yup.string().required('Is required'),
+        city: Yup.string().required('Is required'),
+        province: Yup.string().required('Is required'),
+        street1: Yup.string().required('Is required'),
+        street2: Yup.string(),
+        postalCode: Yup.string().required('Is required'),
+        shippingMethod: Yup.string().required('Is required')
     })
 }
 

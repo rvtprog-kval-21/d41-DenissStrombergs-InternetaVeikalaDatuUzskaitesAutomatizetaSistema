@@ -59,9 +59,11 @@ export const reviewResolver = {
                     return null
                 }
 
-                const entity = await models[singularName].findOne({ where: { id: data.id, customer_id: customer.id } })
+                const entity = await models.Review.findOne({ where: { id: data.id, customer_id: customer.id } })
                 Object.assign(entity, data)
                 await entity.save()
+
+                return entity
             } catch (error) {
                 console.error(error)
 
@@ -76,7 +78,7 @@ export const reviewResolver = {
                     return null
                 }
 
-                const entity = await models[singularName].findOne({ where: { id: data.id, customer_id: customer.id } })
+                const entity = await models.Review.findOne({ where: { id: data.id, customer_id: customer.id } })
                 await entity.destroy()
             } catch (error) {
                 console.error(error)

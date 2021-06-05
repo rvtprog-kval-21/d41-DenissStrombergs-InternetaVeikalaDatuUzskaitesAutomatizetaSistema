@@ -112,9 +112,7 @@ export const UPDATE_CUSTOMER_ADDRESS = gql`
 
 export const DELETE_CUSTOMER_ADDRESS = gql`
     mutation DeleteCustomerAddress($id: ID!) {
-        deleteCustomerAddress(id: $id) {
-            id
-        }
+        status: deleteCustomerAddress(id: $id)
     }
 `
 
@@ -138,23 +136,23 @@ export function GetCustomerAddress(variables) {
     return address
 }
 
-export function CreateCustomerAddress(client, variables) {
+export function createCustomerAddress(client, variables) {
     return client.mutate({
         mutation: CREATE_CUSTOMER_ADDRESS,
         variables
     }).then(({ data }) => data?.address)
 }
 
-export function UpdateCustomerAddress(client, variables) {
+export function updateCustomerAddress(client, variables) {
     return client.mutate({
         mutation: UPDATE_CUSTOMER_ADDRESS,
         variables
     }).then(({ data }) => data?.address)
 }
 
-export function DeleteCustomerAddress(client, variables) {
+export function deleteCustomerAddress(client, variables) {
     return client.mutate({
         mutation: DELETE_CUSTOMER_ADDRESS,
         variables
-    }).then(({ data }) => data)
+    }).then(({ data }) => data?.status)
 }

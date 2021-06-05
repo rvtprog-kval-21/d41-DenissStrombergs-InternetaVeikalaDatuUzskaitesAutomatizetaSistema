@@ -76,7 +76,7 @@ export function AccountOverlay() {
 
     const renderPopup = () => {
         return (
-            <PopupState variant="popover" popupId="demo-popup-popover">
+            <PopupState variant="popover" popupId="account-overlay">
                 {(popupState) => (
                     <div>
                         <IconButton { ...bindTrigger(popupState) } aria-label="account" color="inherit">
@@ -85,9 +85,9 @@ export function AccountOverlay() {
                         <Popover
                             { ...bindPopover(popupState) }
                             anchorReference="anchorPosition"
-                            anchorPosition={{ top: 0, left: window.innerWidth }}
+                            anchorPosition={ { top: 0, left: window.innerWidth } }
                             marginThreshold={ 0 }
-                            PaperProps={{ style: { width: '500px', height: '100%', maxHeight: 'none' } }}
+                            PaperProps={ { style: { width: '500px', height: '100%', maxHeight: 'none' } } }
                         >
                             <Box padding={ 1 }>
                                 <Grid container spacing={ 2 }>

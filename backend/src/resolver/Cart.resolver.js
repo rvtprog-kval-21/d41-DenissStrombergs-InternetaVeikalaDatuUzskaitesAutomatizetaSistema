@@ -1,14 +1,32 @@
+export const computeTotals = async (models, customer) => {
+    const items = await models.CartItem.findAll({ where: { customer_id: customer.id }, include: [models.Product] })
+    const totalTax = items.reduce((acc, val) => (acc + val.Product.price * val.quantity * (val.Product.specialTaxRate || 0.21)), 0)
+    const subtotal = items.reduce((acc, val) => (acc + val.Product.price * val.quantity), 0)
+    const total = subtotal + totalTax
+
+    customer.totalTax = totalTax
+    customer.subtotal = subtotal
+    customer.total = total
+    await customer.save()
+
+    return {
+        totalTax,
+        subtotal,
+        total
+    }
+}
+
 export const cartResolver = {
     Mutation: {
         addProduct: async function(_, data, { models, token }) {
             try {
                 const customer = await models.Customer.findOne({ where: { token } })
-                
+
                 if (!customer) {
                     return null
                 }
 
-                const product = await models.CartItem.findOrCreate({
+                const [cartItem, isCreated] = await models.CartItem.findOrCreate({
                     where: {
                         customer_id: customer.id,
                         product_id: data.product_id
@@ -22,12 +40,20 @@ export const cartResolver = {
                     ]
                 })
 
-                if (!product[1]) {
-                    product[0].quantity += data.quantity
-                    await product[0].save()
+                if (!isCreated) {
+                    cartItem.quantity += data.quantity
+                    await cartItem.save()
+
+                    return {
+                        item: cartItem,
+                        totals: await computeTotals(models, customer)
+                    }
                 }
 
-                return product[0]
+                return {
+                    item: await models.CartItem.findByPk(cartItem.id, { include: [models.Product] }),
+                    totals: computeTotals(models, customer)
+                }
             } catch (error) {
                 console.error(error)
 
@@ -62,25 +88,10 @@ export const cartResolver = {
                     }
                 }
 
-                return product
-            } catch (error) {
-                console.error(error)
-
-                return null
-            }
-        },
-        clearCart: async function(_, data, { models , token}) {
-            try {
-                const customer = await models.Customer.findOne({ where: { token }})
-
-                if (!customer) {
-                    return null
+                return {
+                    item: product,
+                    totals: await computeTotals(models, customer)
                 }
-
-                const products = await models.CartItem.findAll({ where: { customer_id: customer.id } })
-                await products.destroy()
-
-                return true
             } catch (error) {
                 console.error(error)
 

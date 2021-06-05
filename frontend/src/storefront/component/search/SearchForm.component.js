@@ -2,9 +2,11 @@ import { Button } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
 import { useHistory } from 'react-router'
+import STYLE from '../../../base/Style'
 
 export function SearchForm() {
     const history = useHistory()
+    const classes = STYLE.form()
 
     const initialValues = {
         search: ''
@@ -28,7 +30,7 @@ export function SearchForm() {
         const { submitForm, isSubmitting } = props
 
         return (
-            <Form>
+            <Form className={ classes.root } >
                 <Field
                     component={ TextField }
                     type="text"

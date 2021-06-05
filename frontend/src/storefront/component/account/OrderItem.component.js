@@ -2,8 +2,11 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import { Box, Button, CardActions, Grid } from '@material-ui/core'
+import { useSelector } from 'react-redux'
+import moment from 'moment'
 
 export function OrderItem(props) {
+    const config = useSelector((state) => state.ConfigReducer)
     const { order, order: { id } } = props
 
     const fields = [
@@ -13,7 +16,8 @@ export function OrderItem(props) {
         },
         {
             label: 'Date',
-            key: 'date'
+            key: 'date',
+            format: (value) => moment(value).format('DD.MM.yyyy')
         },
         {
             label: 'Status',
@@ -21,24 +25,28 @@ export function OrderItem(props) {
         },
         {
             label: 'Total delivery',
-            key: 'totalDelivery'
+            key: 'totalDelivery',
+            endAdornment: config.currencySign
         },
         {
             label: 'Total tax',
-            key: 'totalTax'
+            key: 'totalTax',
+            endAdornment: config.currencySign
         },
         {
             label: 'Subtotal',
-            key: 'subtotal'
+            key: 'subtotal',
+            endAdornment: config.currencySign
         },
         {
             label: 'Total',
-            key: 'total'
+            key: 'total',
+            endAdornment: config.currencySign
         }
     ]
 
     const renderField = (field) => {
-        const { label, key } = field
+        const { label, key, endAdornment = '', format = (value) => value } = field
         const { [key]: value } = order
 
         return (
@@ -47,7 +55,7 @@ export function OrderItem(props) {
                     { label }
                 </Typography>
                 <Typography variant="body" component="dd">
-                    { value }
+                    { `${ format(value) } ${ endAdornment }` }
                 </Typography>
             </Grid>
         )

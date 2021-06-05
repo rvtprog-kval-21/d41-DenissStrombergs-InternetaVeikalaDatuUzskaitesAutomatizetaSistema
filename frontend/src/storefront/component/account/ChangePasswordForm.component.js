@@ -3,39 +3,30 @@ import { Button } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
 import { useDispatch } from 'react-redux'
+import STYLE from '../../../base/Style'
 import VALIDATION from '../../../base/Validation'
-import { changePassword } from '../../query/Account.query'
+import { changePassword } from '../../dispatcher/Account.dispatcher'
 
 export function ChangePasswordForm() {
     const client = useApolloClient()
     const dispatch = useDispatch()
+    const classes = STYLE.form()
     const initialValues = {
         oldPassword: '',
         newPassword: '',
         confirmNewPassword: ''
     }
 
-    const onSubmit = async (values, props) => {
-        const { setSubmitting } = props
-
+    const onSubmit = async (values, { setSubmitting }) => {
         setSubmitting(false)
-
-        dispatch({
-            type: 'CHANGE_PASSWORD',
-            payload: {
-                account: await changePassword(client, {
-                    oldPassword: values.oldPassword,
-                    newPassword: values.newPassword
-                })
-            }
-        })
+        changePassword({ dispatch, client }, values)
     }
 
     const renderForm = (props) => {
         const { submitForm, isSubmitting } = props
 
         return (
-            <Form>
+            <Form className={ classes.root }>
                 <Field
                     component={ TextField }
                     type="password"

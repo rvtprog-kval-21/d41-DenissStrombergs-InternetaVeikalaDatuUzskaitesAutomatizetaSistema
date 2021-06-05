@@ -27,7 +27,7 @@ export function MenuItem(props) {
         const { name, urlKey } = item
 
         return (
-            <ListItem button key={ name } component="a" href={ '/category/' + urlKey }>
+            <ListItem className={ classes.nested } button key={ name } component="a" href={ '/category/' + urlKey }>
                 <ListItemText primary={ name } />
             </ListItem>
         )
@@ -43,7 +43,7 @@ export function MenuItem(props) {
 
     return (
         <>
-            <ListItem button onClick={handleClick}>
+            <ListItem button onClick={ handleClick }>
                 <ListItemText primary={ <Link color="inherit" href={ '/category/' + urlKey }>{ name }</Link> } />
                 {open ? <ExpandLess /> : <ExpandMore />}
             </ListItem>

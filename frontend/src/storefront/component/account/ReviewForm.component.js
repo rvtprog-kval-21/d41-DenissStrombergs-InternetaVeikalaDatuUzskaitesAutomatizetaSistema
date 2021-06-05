@@ -2,13 +2,19 @@ import { useApolloClient } from '@apollo/client'
 import { Button, FormControl, InputLabel, MenuItem } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField, Select } from 'formik-material-ui'
-import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import STYLE from '../../../base/Style'
 import VALIDATION from '../../../base/Validation'
-import { createReview } from '../../query/Review.query'
+import { createCustomerReview, deleteCustomerReview, updateCustomerReview } from '../../query/Review.query'
+import { useHistory } from 'react-router'
+import { showNotification } from '../../dispatcher/Notification.dispatcher'
 
 export function ReviewForm(props) {
-    const { productId, review } = props
+    const dispatch = useDispatch()
     const client = useApolloClient()
+    const history = useHistory()
+    const { productId, review, mode } = props
+    const classes = STYLE.form()
     const initialValues = {
         title: '',
         content: '',
@@ -16,23 +22,65 @@ export function ReviewForm(props) {
         ...review
     }
 
-    const onSubmit = async (values, props) => {
-        /*
-        const { setSubmitting } = props
-
+    const onSubmit = async (values, { setSubmitting }) => {
         setSubmitting(false)
-
-        const review = await createReview(client, {
+        const data = mode === 'create' ? await createCustomerReview(client, {
+            productId: review?.product?.id || productId,
+            ...values
+        }) : await updateCustomerReview(client, {
+            id: review.id,
             ...values
         })
-        */
+        const messages = {
+            create: {
+                SUCCESS: 'Successfully posted new review.',
+                ERROR: 'Failed to post new review.'
+            },
+            edit: {
+                SUCCESS: 'Successfully updated your review.',
+                ERROR: 'Failed to update your review.'
+            }
+        }
+
+        if (data) {
+            showNotification({ dispatch }, { severity: 'SUCCESS', message: messages[mode].SUCCESS })
+        } else {
+            showNotification({ dispatch }, { severity: 'ERROR', message: messages[mode].ERROR })
+        }
+    }
+
+    const onDeleteButtonClick = async () => {
+        const status = await deleteCustomerReview(client, { id: review.id })
+
+        if (status) {
+            showNotification({ dispatch }, { severity: 'SUCCESS', message: 'Successfully deleted your review.' })
+            history.push('/account/reviews')
+        } else {
+            showNotification({ dispatch }, { severity: 'ERROR', message: 'Failed to delete your review.' })
+        }
+    }
+
+    const renderDeleteButton = (props) => {
+        if (mode !== 'edit') {
+            return null
+        }
+
+        return (
+            <Button
+                onClick={ onDeleteButtonClick }
+                variant="contained"
+                color="primary"
+            >
+                Delete
+            </Button>
+        )
     }
 
     const renderForm = (props) => {
         const { submitForm, isSubmitting } = props
 
         return (
-            <Form>
+            <Form className={ classes.root }>
                 <Field
                     component={ TextField }
                     type="text"
@@ -78,8 +126,9 @@ export function ReviewForm(props) {
                     variant="contained"
                     color="primary"
                 >
-                    Post
+                    Save
                 </Button>
+                { renderDeleteButton() }
             </Form>
         )
     }

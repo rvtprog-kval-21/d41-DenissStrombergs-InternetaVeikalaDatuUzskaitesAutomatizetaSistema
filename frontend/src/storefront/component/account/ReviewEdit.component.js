@@ -10,7 +10,7 @@ export function ReviewEdit(props) {
     }
 
     return (
-        <ReviewForm review={ review } />
+        <ReviewForm mode="edit" review={ review } />
     )
 }
 

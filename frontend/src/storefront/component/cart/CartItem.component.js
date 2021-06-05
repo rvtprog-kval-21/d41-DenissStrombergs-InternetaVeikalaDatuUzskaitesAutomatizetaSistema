@@ -6,14 +6,14 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import { Box, Grid, IconButton } from '@material-ui/core'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/Remove'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { useApolloClient } from '@apollo/client'
-import { AddProduct, RemoveProduct } from '../../query/Cart.query'
 import Price from '../product/Price.component'
+import { addProductToCart, removeProductFromCart } from '../../dispatcher/Cart.dispatcher'
 
 const useStyles = makeStyles({
     media: {
@@ -27,51 +27,21 @@ const useStyles = makeStyles({
 })
 
 export function CartItem(props) {
-    const { cartItem: { product: { sku, name, urlKey, price }, product, quantity }, shouldRenderCartItemActions = true } = props
-    const client = useApolloClient()
-    const classes = useStyles()
-    const history = useHistory()
     const dispatch = useDispatch()
+    const client = useApolloClient()
+    const history = useHistory()
+    const classes = useStyles()
+    const { item: { product: { id, sku, name, urlKey, price }, quantity }, shouldRenderCartItemActions = true } = props
 
     const onProductClick = () => {
         history.push(`/product/${ urlKey }`)
     }
 
-    const onAddButtonClick = async () => {
-        dispatch({
-            type: 'ADD_PRODUCT_TO_CART',
-            payload: {
-                cartItem: await AddProduct(client, {
-                    productId: product.id,
-                    quantity: 1
-                })
-            }
-        })
-    }
+    const onAddButtonClick = async () => addProductToCart({ dispatch, client }, { productId: id, quantity: 1 })
 
-    const onRemoveButtonClick = async () => {
-        dispatch({
-            type: 'REMOVE_PRODUCT_FROM_CART',
-            payload: {
-                cartItem: await RemoveProduct(client, {
-                    productId: product.id,
-                    quantity: 1
-                })
-            }
-        })
-    }
+    const onRemoveButtonClick = async () => removeProductFromCart({ dispatch, client }, { productId: id, quantity: 1 })
 
-    const onDeleteButtonClick = async () => {
-        dispatch({
-            type: 'DELETE_PRODUCT_FROM_CART',
-            payload: {
-                cartItem: await RemoveProduct(client, {
-                    productId: product.id,
-                    quantity
-                })
-            }
-        })
-    }
+    const onDeleteButtonClick = async () => removeProductFromCart({ dispatch, client }, { productId: id, quantity })
 
     const renderCartAction = () => {
         return (

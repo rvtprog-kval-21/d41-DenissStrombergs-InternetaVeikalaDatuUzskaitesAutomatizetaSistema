@@ -1,25 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Typography } from '@material-ui/core'
-import { AddProduct } from '../../query/Cart.query'
 import { useApolloClient } from '@apollo/client'
 import Price from './Price.component'
+import { addProductToCart } from '../../dispatcher/Cart.dispatcher'
+import { showNotification } from '../../dispatcher/Notification.dispatcher'
 
 export function ProductActions(props) {
+    const dispatch = useDispatch()
     const client = useApolloClient()
     const account = useSelector((state) => state.AccountReducer)
-    const { product, product: { name, sku, price} } = props
-    const dispatch = useDispatch()
+    const { product: { id, name, sku, price} } = props
 
-    const onAddToCart = async () => {
-        dispatch({
-            type: 'ADD_PRODUCT_TO_CART',
-            payload: {
-                cartItem: await AddProduct(client, {
-                    productId: product.id,
-                    quantity: 1
-                })
-            }
-        })
+    const onAddToCartButtonClick = () => {
+        if (account.token) {
+            addProductToCart({ dispatch, client }, { productId: id, quantity: 1 })
+        } else {
+            showNotification({ dispatch }, { severity: 'INFO', message: 'Please sign in into your account to add a product to the cart.' })
+        }
     }
 
     return (
@@ -34,7 +31,7 @@ export function ProductActions(props) {
                 { 'Price: ' }
                 <Price value={ price } />
             </Typography>
-            <Button onClick={ onAddToCart } variant="contained" color="primary">
+            <Button onClick={ onAddToCartButtonClick } variant="contained" color="primary">
                 Add to cart
             </Button>
         </div>

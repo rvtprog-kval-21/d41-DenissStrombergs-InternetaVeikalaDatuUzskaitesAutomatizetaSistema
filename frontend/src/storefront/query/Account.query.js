@@ -7,16 +7,24 @@ export const SIGN_IN = gql`
             email
             firstName
             lastName
-            isGuest
             token
             totalTax
             subtotal
             total
-            cartItems: CartItems {
+            items: CartItems {
                 id
                 quantity
                 product: Product {
                     id
+                    urlKey
+                    sku
+                    name
+                    price
+                    stockQuantity
+                    specialDiscountType
+                    specialDiscountValue
+                    specialTaxRate
+                    media
                 }
             }
         }
@@ -42,13 +50,13 @@ export const UPDATE_ACCOUNT = gql`
 `
 export const CHANGE_PASSWORD = gql`
     mutation ChangePassword($oldPassword: String!, $newPassword: String!) {
-        changePassword(oldPassword: $oldPassword, newPassword: $newPassword)
+        status: changePassword(oldPassword: $oldPassword, newPassword: $newPassword)
     }
 `
 
 export const SIGN_OUT= gql`
     mutation SignOut {
-        signOut
+        status: signOut
     }
 `
 
@@ -70,6 +78,9 @@ export const SIGN_UP = gql`
             firstName
             lastName
             token
+            totalTax
+            subtotal
+            total
         }
     }
 `
@@ -85,7 +96,7 @@ export function singOut(client, variables = {}) {
     return client.mutate({
         mutation: SIGN_OUT,
         variables
-    }).then(({ data }) => data)
+    }).then(({ data }) => data.status)
 }
 
 export function signUp(client, variables = {}) {
@@ -99,7 +110,7 @@ export function changePassword(client, variables = {}) {
     return client.mutate({
         mutation: CHANGE_PASSWORD,
         variables
-    }).then(({ data }) => data)
+    }).then(({ data }) => data?.status)
 }
 
 export function updateAccount(client, variables = {}) {
@@ -108,4 +119,3 @@ export function updateAccount(client, variables = {}) {
         variables
     }).then(({ data }) => data.account)
 }
-
