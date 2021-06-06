@@ -56,11 +56,13 @@ export function ProductEdit(props) {
         <Edit { ...props }>
             <SimpleForm save={ onSave } toolbar={ <Toolbar alwaysEnableSaveButton /> }>
                 <TextInput source="id" disabled />
+                <TextInput source="urlKey" />
                 <TextInput source="sku" />
                 <BooleanInput source="isEnabled" />
                 <TextInput source="name" />
                 <NumberInput source="price" />
                 <NumberInput source="stockQuantity" />
+                <NumberInput source="soldAmount" />
                 <ProductSpecialDiscountTypeInput />
                 <NumberInput source="specialDiscountValue" />
                 <NumberInput source="specialTaxRate" />

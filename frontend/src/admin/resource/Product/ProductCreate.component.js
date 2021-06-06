@@ -6,6 +6,7 @@ export function ProductCreate(props) {
     return (
         <Create { ...props }>
             <SimpleForm>
+                <TextInput source="urlKey" />
                 <TextInput source="sku" />
                 <BooleanInput source="isEnabled" />
                 <TextInput source="name" />
