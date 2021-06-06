@@ -59,8 +59,6 @@ export const updateAccount = async ({ dispatch, client }, payload) => {
 export const changePassword = async ({ dispatch, client }, payload) => {
     const status = await changePasswordMutation(client, payload)
 
-    console.log(status)
-
     if (status) {
         dispatch({ type: 'CHANGE_PASSWORD' })
         showNotification({ dispatch }, { severity: 'SUCCESS', message: 'Successfully changed your password.' })

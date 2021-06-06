@@ -13,7 +13,9 @@ export const GET_PRODUCT = gql`
             specialTaxRate
             shortDescription
             longDescription
-            media
+            base_image
+            thumbnail_image
+            other_images
             attributeValues
             attributeSet: AttributeSet {
                 attributes: Attributes {
@@ -26,6 +28,28 @@ export const GET_PRODUCT = gql`
                 }
             }
         }
+    }
+`
+
+export const GET_ATTRIBUTE_SET = `
+    query AttributeSet($id: ID!) {
+        attributeSet: AttributeSet(id: $id) {
+            attributes: Attributes {
+                id
+                code
+                label
+                type
+                attributeOptions
+                attributeGroup
+            }
+        }
+    }
+`
+
+
+export const UPLOAD_MEDIA = `
+    mutation UploadMedia($name: String!, $data: String!) {
+        url: uploadMedia(name: $name, data: $data)
     }
 `
 

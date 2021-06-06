@@ -1,10 +1,10 @@
-import { GetAllPaymentMethods } from "../../query/Checkout.query"
+import { GetAllPaymentMethods } from '../../query/Checkout.query'
 import { Button, FormControlLabel, Radio, FormControl, FormLabel, Grid, Typography } from '@material-ui/core'
 import { Formik, Field, Form } from 'formik'
 import { RadioGroup, CheckboxWithLabel } from 'formik-material-ui'
-import VALIDATION from "../../../base/Validation"
-import { showNotification } from "../../dispatcher/Notification.dispatcher"
-import { useDispatch } from "react-redux"
+import VALIDATION from '../../../base/Validation'
+import { showNotification } from '../../dispatcher/Notification.dispatcher'
+import { useDispatch } from 'react-redux'
 
 export function CheckoutBillingStep(props) {
     const dispatch = useDispatch()
@@ -20,8 +20,9 @@ export function CheckoutBillingStep(props) {
         acceptTerms: false
     }
 
-    const onSubmit = async (values, { setSubmitting }) => {
+    const onSubmit = async ({ paymentMethod }, { setSubmitting }) => {
         setSubmitting(false)
+        dispatch({ type: 'SET_PAYMENT_METHOD', payload: paymentMethod })
         setStep('SUCCESS')
     }
 

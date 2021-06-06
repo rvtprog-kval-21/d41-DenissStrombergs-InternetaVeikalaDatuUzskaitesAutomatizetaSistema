@@ -1,9 +1,6 @@
 import { BooleanInput, Create, NumberInput, ReferenceInput, SelectInput, SimpleForm, TextInput } from 'react-admin'
 import RichTextInput from 'ra-input-rich-text'
 import { ProductSpecialDiscountTypeInput } from './ProductSpecialDiscountTypeInput.component'
-import ProductAttributeValueInput from './ProductAttributeValuesInput.component'
-import ProductMediaInput from './ProductMediaInput.component'
-import ProductCategoryInput from './ProductCategoryInput.component'
 
 export function ProductCreate(props) {
     return (
@@ -22,9 +19,6 @@ export function ProductCreate(props) {
                 <ReferenceInput source="attribute_set_id" reference="AttributeSet">
                     <SelectInput source="name" />
                 </ReferenceInput>
-                <ProductMediaInput />
-                <ProductCategoryInput />
-                <ProductAttributeValueInput />
             </SimpleForm>
         </Create>
     )

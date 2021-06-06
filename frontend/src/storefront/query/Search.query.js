@@ -6,7 +6,7 @@ export const SEARCH = gql`
         $search: String,
         $priceMin: Float,
         $priceMax: Float,
-        $attributeValues: [AttributeValue],
+        $attributeValues: String,
         $page: Int,
         $perPage: Int,
         $sort: String
@@ -36,7 +36,9 @@ export const SEARCH = gql`
                 specialDiscountType
                 specialDiscountValue
                 specialTaxRate
-                media
+                base_image
+                thumbnail_image
+                other_images
             }
             attributes: Attributes {
                 id

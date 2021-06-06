@@ -1,6 +1,6 @@
-import { Typography, Grid } from "@material-ui/core"
-import CartList from "../cart/CartList.component"
-import CartTotals from "../cart/CartTotals.component"
+import { Typography, Grid } from '@material-ui/core'
+import CartList from '../cart/CartList.component'
+import CartTotals from '../cart/CartTotals.component'
 
 export function CheckoutSummary() {
     return (

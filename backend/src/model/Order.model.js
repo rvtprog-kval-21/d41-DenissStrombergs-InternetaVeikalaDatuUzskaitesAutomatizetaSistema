@@ -1,4 +1,4 @@
-import { DataTypes, Model } from 'sequelize'
+import { DataTypes, Model, Sequelize } from 'sequelize'
 import Address from './Address.model'
 import Customer from './Customer.model'
 
@@ -18,9 +18,11 @@ export class Order extends Model {
                 },
                 date: {
                     type: DataTypes.DATE,
+                    defaultValue: Sequelize.NOW
                 },
                 status: {
-                    type: DataTypes.STRING
+                    type: DataTypes.STRING,
+                    defaultValue: 'ordered'
                 },
                 totalDelivery: {
                     type: DataTypes.FLOAT

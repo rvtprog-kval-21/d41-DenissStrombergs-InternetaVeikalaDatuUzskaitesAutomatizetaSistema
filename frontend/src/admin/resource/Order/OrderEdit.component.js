@@ -16,10 +16,9 @@ export function OrderEdit(props) {
                 <NumberInput source="subtotal" disabled />
                 <NumberInput source="total" disabled />
                 <ReferenceManyField
-                    source="OrderItemIds"
-                    target="ids"
+                    source="id"
+                    target="order_id"
                     reference="OrderItem"
-                    fullWidth
                     label="Order items"
                 >
                     <Datagrid>

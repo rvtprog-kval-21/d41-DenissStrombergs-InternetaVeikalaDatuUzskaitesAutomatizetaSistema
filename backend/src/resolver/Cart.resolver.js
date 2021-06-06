@@ -1,7 +1,7 @@
 export const computeTotals = async (models, customer) => {
     const items = await models.CartItem.findAll({ where: { customer_id: customer.id }, include: [models.Product] })
-    const totalTax = items.reduce((acc, val) => (acc + val.Product.price * val.quantity * (val.Product.specialTaxRate || 0.21)), 0)
-    const subtotal = items.reduce((acc, val) => (acc + val.Product.price * val.quantity), 0)
+    const totalTax = items.reduce((acc, val) => (acc + val.totalTax), 0)
+    const subtotal = items.reduce((acc, val) => (acc + val.subtotal), 0)
     const total = subtotal + totalTax
 
     customer.totalTax = totalTax
@@ -14,6 +14,12 @@ export const computeTotals = async (models, customer) => {
         subtotal,
         total
     }
+}
+
+export const computeItemTotals = (item) => {
+    item.totalTax = item.Product.price * item.quantity * (item.Product.specialTaxRate || 0.21)
+    item.subtotal = item.Product.price * item.quantity
+    item.total = item.totalTax + item.subtotal
 }
 
 export const cartResolver = {
@@ -42,6 +48,7 @@ export const cartResolver = {
 
                 if (!isCreated) {
                     cartItem.quantity += data.quantity
+                    computeItemTotals(cartItem)
                     await cartItem.save()
 
                     return {
@@ -50,8 +57,11 @@ export const cartResolver = {
                     }
                 }
 
+                const out = await models.CartItem.findByPk(cartItem.id, { include: [models.Product] })
+                computeItemTotals(out)
+
                 return {
-                    item: await models.CartItem.findByPk(cartItem.id, { include: [models.Product] }),
+                    item: out,
                     totals: computeTotals(models, customer)
                 }
             } catch (error) {
@@ -80,6 +90,7 @@ export const cartResolver = {
 
                 if (product) {
                     product.quantity -= data.quantity
+                    computeItemTotals(product)
 
                     if (product.quantity <= 0) {
                         await product.destroy()

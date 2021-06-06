@@ -1,4 +1,4 @@
-import { generateToken } from "../base/Auth"
+import { generateToken } from '../base/Auth'
 
 export const userResolver = {
     Mutation: {

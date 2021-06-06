@@ -1,15 +1,15 @@
-import { GetAllShippingMethods } from "../../query/Checkout.query"
+import { GetAllShippingMethods } from '../../query/Checkout.query'
 import { Button, FormControlLabel, Radio, FormControl, FormLabel, Grid } from '@material-ui/core'
 import { Formik, Field, Form } from 'formik'
 import { RadioGroup } from 'formik-material-ui'
 import { Typography } from '@material-ui/core'
-import CheckoutAddressSelector from "./CheckoutAddressSelector.component"
-import { useState } from "react"
-import VALIDATION from "../../../base/Validation"
-import { showNotification } from "../../dispatcher/Notification.dispatcher"
-import { useDispatch } from "react-redux"
+import CheckoutAddressSelector from './CheckoutAddressSelector.component'
+import { useState } from 'react'
+import VALIDATION from '../../../base/Validation'
+import { showNotification } from '../../dispatcher/Notification.dispatcher'
+import { useDispatch } from 'react-redux'
 import { createCustomerAddress, GetAllCustomerAddresses } from '../../query/Address.query'
-import { useApolloClient } from "@apollo/client"
+import { useApolloClient } from '@apollo/client'
 
 export function CheckoutShippingStep(props) {
     const dispatch = useDispatch()
@@ -37,10 +37,12 @@ export function CheckoutShippingStep(props) {
     }
 
     const onSubmit = async (values, { setSubmitting }) => {
+        const { shippingMethod } = values
         setSubmitting(false)
 
         if (addresses.length) {
             if (addressId) {
+                dispatch({ type: 'SET_ADDRESS', payload: addresses.find((address) => address.id == addressId) })
                 setStep('BILLING')
             } else {
                 showNotification({ dispatch }, { severity: 'ERROR', message: 'Please create or select shipping address.' })
@@ -50,9 +52,12 @@ export function CheckoutShippingStep(props) {
             
             if (address ) {
                 setAddressId(address.id)
+                dispatch({ type: 'SET_ADDRESS', payload: address })
                 setStep('BILLING')
             }
         }
+
+        dispatch({ type: 'SET_SHIPPING_METHOD', payload: shippingMethod })
     }
 
     const renderShippingMethod = function(shippingMethod) {

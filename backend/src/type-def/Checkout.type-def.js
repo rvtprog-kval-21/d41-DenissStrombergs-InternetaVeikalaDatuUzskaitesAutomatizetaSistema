@@ -1,6 +1,10 @@
 export const checkoutTypeDef = `
-    type Mutation {
-        submitOrder : Boolean
+    type Query {
+        submitOrder(
+            address_id: ID!,
+            shipping_method_id: ID!,
+            payment_method_id: ID!
+        ) : String
     }
 `
 

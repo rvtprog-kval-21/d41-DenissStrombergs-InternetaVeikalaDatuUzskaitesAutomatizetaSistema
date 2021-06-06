@@ -10,7 +10,6 @@ export const initialState = {
 export function CartReducer(state = JSON.parse(window.localStorage.getItem('CART')) || initialState, action) {
     const { items } = state
     const { type, payload: { item, totals, account } = {} } = action
-    console.log(item, totals)
 
     switch (type) {
         case 'ADD_PRODUCT_TO_CART':

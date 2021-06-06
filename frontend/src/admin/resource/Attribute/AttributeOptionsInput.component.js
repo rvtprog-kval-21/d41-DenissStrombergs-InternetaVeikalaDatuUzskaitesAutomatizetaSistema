@@ -1,9 +1,9 @@
-import { Button, IconButton, TextField } from '@material-ui/core'
+import { IconButton } from '@material-ui/core'
 import { DataGrid } from '@material-ui/data-grid'
 import { useRecordContext } from 'react-admin'
-import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete';
-import { useState } from 'react';
+import AddIcon from '@material-ui/icons/Add'
+import DeleteIcon from '@material-ui/icons/Delete'
+import { useState } from 'react'
 import { AttributeTypeInput } from './AttributeTypeInput.component'
 
 const selectTypes = [

@@ -163,6 +163,15 @@ export const DATA = [
                 attributeOptions: [],
                 isFilter: true,
                 attributeGroup: 'General'
+            },
+            {
+                code: 'has_eraser',
+                isEnabled: true,
+                label: 'Has eraser',
+                type: 'boolean',
+                attributeOptions: [],
+                isFilter: true,
+                attributeGroup: 'General'
             }
         ]
     },
@@ -220,6 +229,10 @@ export const DATA = [
             {
                 attribute_set_id: 3,
                 attribute_id: 6
+            },
+            {
+                attribute_set_id: 2,
+                attribute_id: 7
             }
         ]
     },
@@ -347,17 +360,6 @@ export const DATA = [
                 isInMenu: true,
                 content: ``,
                 category_id: 3
-            }
-        ]
-    },
-    {
-        modelName: 'Cart',
-        modelData: [
-            {
-                totalTax: 0,
-                subtotal: 0,
-                total: 0,
-                customer_id: 1
             }
         ]
     },
@@ -492,7 +494,7 @@ export const DATA = [
         modelName: 'Order',
         modelData: [
             {
-                reference: '4WGINO4G',
+                reference: '9V617LMMJST',
                 date: '2021-04-20',
                 status: 'ordered',
                 totalDelivery: 6.99,
@@ -573,17 +575,26 @@ export const DATA = [
                 specialTaxRate: 0.0,
                 shortDescription: 'Mechanical pencil with 0.01mm nib.',
                 longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                media: {
-                    'thumbnail': 'https://via.placeholder.com/240x180',
-                    'small': 'https://via.placeholder.com/480x360',
-                    'base': 'https://via.placeholder.com/1280x720',
-                    'other': [
-                        'https://via.placeholder.com/960x720'
-                    ]
+                base_image: {
+                    url: 'https://via.placeholder.com/1280x720'
                 },
+                thumbnail_image: {
+                    url: 'https://via.placeholder.com/640x360'
+                },
+                other_images: [
+                    {
+                        url: 'https://via.placeholder.com/1024x1024'
+                    },
+                    {
+                        url: 'https://via.placeholder.com/512x512'
+                    }
+                ],
                 soldAmount: 10,
                 attributeValues: {
-                    nib_size: 0.01
+                    nib_size: 0.01,
+                    color: 'Black',
+                    pencil_hardness: 'HB',
+                    has_eraser: true
                 },
                 attribute_set_id: 2
             },
@@ -599,14 +610,20 @@ export const DATA = [
                 specialTaxRate: 0.0,
                 shortDescription: 'Mechanical pencil with 0.02mm nib.',
                 longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                media: {
-                    'thumbnail': 'https://via.placeholder.com/240x180',
-                    'small': 'https://via.placeholder.com/480x360',
-                    'base': 'https://via.placeholder.com/1280x720',
-                    'other': [
-                        'https://via.placeholder.com/960x720'
-                    ]
+                base_image: {
+                    url: 'https://via.placeholder.com/1280x720'
                 },
+                thumbnail_image: {
+                    url: 'https://via.placeholder.com/640x360'
+                },
+                other_images: [
+                    {
+                        url: 'https://via.placeholder.com/1024x1024'
+                    },
+                    {
+                        url: 'https://via.placeholder.com/512x512'
+                    }
+                ],
                 soldAmount: 20,
                 attributeValues: {
                     nib_size: 0.02
@@ -625,14 +642,20 @@ export const DATA = [
                 specialTaxRate: 0.0,
                 shortDescription: 'Mechanical pencil with 0.03mm nib.',
                 longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                media: {
-                    'thumbnail': 'https://via.placeholder.com/240x180',
-                    'small': 'https://via.placeholder.com/480x360',
-                    'base': 'https://via.placeholder.com/1280x720',
-                    'other': [
-                        'https://via.placeholder.com/960x720'
-                    ]
+                base_image: {
+                    url: 'https://via.placeholder.com/1280x720'
                 },
+                thumbnail_image: {
+                    url: 'https://via.placeholder.com/640x360'
+                },
+                other_images: [
+                    {
+                        url: 'https://via.placeholder.com/1024x1024'
+                    },
+                    {
+                        url: 'https://via.placeholder.com/512x512'
+                    }
+                ],
                 soldAmount: 10,
                 attributeValues: {
                     nib_size: 0.03
@@ -651,14 +674,20 @@ export const DATA = [
                 specialTaxRate: 0.0,
                 shortDescription: 'Mechanical pencil with 0.04mm nib.',
                 longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                media: {
-                    'thumbnail': 'https://via.placeholder.com/240x180',
-                    'small': 'https://via.placeholder.com/480x360',
-                    'base': 'https://via.placeholder.com/1280x720',
-                    'other': [
-                        'https://via.placeholder.com/960x720'
-                    ]
+                base_image: {
+                    url: 'https://via.placeholder.com/1280x720'
                 },
+                thumbnail_image: {
+                    url: 'https://via.placeholder.com/640x360'
+                },
+                other_images: [
+                    {
+                        url: 'https://via.placeholder.com/1024x1024'
+                    },
+                    {
+                        url: 'https://via.placeholder.com/512x512'
+                    }
+                ],
                 soldAmount: 10,
                 attributeValues: {
                     nib_size: 0.04
@@ -677,14 +706,20 @@ export const DATA = [
                 specialTaxRate: 0.0,
                 shortDescription: 'Mechanical pencil with 0.05mm nib.',
                 longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                media: {
-                    'thumbnail': 'https://via.placeholder.com/240x180',
-                    'small': 'https://via.placeholder.com/480x360',
-                    'base': 'https://via.placeholder.com/1280x720',
-                    'other': [
-                        'https://via.placeholder.com/960x720'
-                    ]
+                base_image: {
+                    url: 'https://via.placeholder.com/1280x720'
                 },
+                thumbnail_image: {
+                    url: 'https://via.placeholder.com/640x360'
+                },
+                other_images: [
+                    {
+                        url: 'https://via.placeholder.com/1024x1024'
+                    },
+                    {
+                        url: 'https://via.placeholder.com/512x512'
+                    }
+                ],
                 soldAmount: 10,
                 attributeValues: {
                     nib_size: 0.05
@@ -698,11 +733,17 @@ export const DATA = [
         modelData: [
             {
                 quantity: 5,
+                totalTax: 31.5,
+                subtotal: 150,
+                total: 181.5,
                 customer_id: 1,
                 product_id: 1
             },
             {
                 quantity: 10,
+                totalTax: 42,
+                subtotal: 200,
+                total: 242,
                 customer_id: 1,
                 product_id: 2
             }

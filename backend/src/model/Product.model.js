@@ -47,7 +47,13 @@ export class Product extends Model {
                 longDescription: {
                     type: DataTypes.TEXT
                 },
-                media: {
+                base_image: {
+                    type: DataTypes.JSONB
+                },
+                thumbnail_image: {
+                    type: DataTypes.JSONB
+                },
+                other_images: {
                     type: DataTypes.JSONB
                 },
                 attributeValues: {

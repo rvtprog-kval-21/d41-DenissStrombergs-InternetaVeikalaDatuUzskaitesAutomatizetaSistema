@@ -12,9 +12,8 @@ const orderMap = {
 export const searchResolver = {
     Query: {
         search: async function(_, data, { sequelize, models }) {
-            const attributeValues = {}
-            const values = data.attributeValues || []
-            values.forEach((attributeValue) => { attributeValues[attributeValue.code] = attributeValue.value })
+            const attributeValues = (JSON.parse(data.attributeValues || '{}') || {})
+            Object.keys(attributeValues).forEach((key) => attributeValues[key] = { [Op.in]: Object.values(attributeValues[key]) })
             const order = orderMap[data.sort]
             const page = data.page ? data.page - 1 : 0
             const perPage = data.perPage|| 100000
@@ -46,7 +45,7 @@ export const searchResolver = {
                                 [Op.lte]: data.priceMax || 100000
                             }
                         },
-                        attributeValues: attributeValues
+                        attributeValues
                     },
                     order: order ? [order] : []
                 })

@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
+import Price from '../product/Price.component'
 
 const useStyles = makeStyles({
     root: {
@@ -45,7 +46,7 @@ export function ProductItem(props) {
                         { sku }
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        { price }
+                        <Price value={ price } />
                     </Typography>
                     </CardContent>
                 </CardActionArea>

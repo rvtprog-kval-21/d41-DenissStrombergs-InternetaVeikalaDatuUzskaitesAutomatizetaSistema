@@ -1,4 +1,4 @@
-import { gql, useQuery } from '@apollo/client'
+import { gql, useMutation, useQuery } from '@apollo/client'
 
 export const GET_ALL_SHIPPING_METHODS = gql`
     query GetAllShippingMethods {
@@ -21,10 +21,16 @@ export const GET_ALL_PAYMENT_METHODS = gql`
 `
 
 export const SUBMIT_ORDER = gql`
-    mutation SubmitOrder {
-        submitOrder {
-            reference
-        }
+    query SubmitOrder(
+        $addressId: ID!,
+        $shippingMethodId: ID!,
+        $paymentMethodId: ID!
+    ) {
+        reference: submitOrder(
+            address_id: $addressId,
+            shipping_method_id: $shippingMethodId,
+            payment_method_id: $paymentMethodId
+        )
     }
 `
 
@@ -49,11 +55,11 @@ export function GetAllPaymentMethods() {
 }
 
 export function SubmitOrder(variables) {
-    const { loading, error, data } = useQuery(SUBMIT_ORDER, { variables })
+    const { loading, error, data: { reference } = {} } = useQuery(SUBMIT_ORDER, { variables })
 
     if (loading || error) {
         return null
     }
 
-    return data
+    return reference
 }

@@ -20,6 +20,8 @@ import addressTypeDef from '../type-def/Address.type-DEF'
 import reviewTypeDef from '../type-def/Review.type-def'
 import ordersTypeDef from '../type-def/Order.type-def'
 import orderResolver from '../resolver/Order.resolver'
+import mediaTypeDef from '../type-def/Media.type.def'
+import mediaResolver from '../resolver/Media.resolver'
 
 export function buildSchema(models) {
     const typeDefs = [
@@ -32,7 +34,8 @@ export function buildSchema(models) {
         userTypeDef,
         addressTypeDef,
         reviewTypeDef,
-        ordersTypeDef
+        ordersTypeDef,
+        mediaTypeDef
     ]
     const resolvers = [
         ...Object.values(models).map(generateResolver),
@@ -44,7 +47,8 @@ export function buildSchema(models) {
         userResolver,
         addressResolver,
         reviewResolver,
-        orderResolver
+        orderResolver,
+        mediaResolver
     ]
 
     return makeExecutableSchema({

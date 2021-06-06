@@ -25,7 +25,7 @@ import ConfigResource from '../admin/resource/Config/ConfigResource.component'
 import PaymentMethodResource from '../admin/resource/PaymentMethod/PaymentMethodResource.component'
 import ShippingMethodResource from '../admin/resource/ShippingMethod/ShippingMethodResource.component'
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
-import { setContext } from '@apollo/client/link/context';
+import { setContext } from '@apollo/client/link/context'
 import CustomerCustomerGroupResource from '../admin/resource/CustomerCustomerGroup/CustomerCustomerGroupResource.component'
 
 const httpLink = createHttpLink({
@@ -43,7 +43,7 @@ const authLink = setContext((_, { headers }) => {
             authentication: token ? token : ''
         }
     }
-});
+})
 
 const client = new ApolloClient({
     link: authLink.concat(httpLink),

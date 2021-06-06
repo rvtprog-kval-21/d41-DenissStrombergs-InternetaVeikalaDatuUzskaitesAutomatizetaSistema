@@ -7,7 +7,8 @@ const fieldPermissions = {
     allPaymentMethods: 'PUBLIC',
     allShippingMethods: 'PUBLIC',
     allReviews: 'PUBLIC',
-    Config: 'PUBLIC'
+    Config: 'PUBLIC',
+    AttributeSet: 'PUBLIC'
 }
 
 export function validateFieldPermission(fieldName, role) {

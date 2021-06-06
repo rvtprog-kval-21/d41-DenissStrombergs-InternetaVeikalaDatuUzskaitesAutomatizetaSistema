@@ -15,6 +15,15 @@ export class CartItem extends Model {
                 quantity: {
                     type: DataTypes.INTEGER
                 },
+                totalTax: {
+                    type: DataTypes.FLOAT
+                },
+                subtotal: {
+                    type: DataTypes.FLOAT
+                },
+                total: {
+                    type: DataTypes.FLOAT
+                },
                 customer_id: {
                     type: DataTypes.INTEGER,
                     references: {

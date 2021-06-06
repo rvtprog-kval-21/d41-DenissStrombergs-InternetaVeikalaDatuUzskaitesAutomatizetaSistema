@@ -1,4 +1,4 @@
-import { Grid, makeStyles, Typography } from '@material-ui/core'
+import { Box, Grid, makeStyles, Typography } from '@material-ui/core'
 import ProductItem from './ProductItem.component'
 import FilterList from './FilterList.component'
 import Pagination from './Pagination.component'
@@ -18,13 +18,14 @@ const useStyles = makeStyles((theme) => ({
 export function ProductList(props) {
     const classes = useStyles()
     const { urlKey, query = '' } = useParams()
-    const { page = 1, sort } = queryString.parse(window.location.search)
+    const { page = 1, sort, attributeValues } = queryString.parse(window.location.search)
     const search = Search({
         categoryUrlKey: urlKey,
         search: query,
         perPage: CONFIG.SEARCH.PER_PAGE,
         sort,
-        page: parseInt(page)
+        page: parseInt(page),
+        attributeValues
     })
 
     if (!search) {
@@ -57,7 +58,9 @@ export function ProductList(props) {
                     <FilterList search={ search } />
                 </Grid>
                 <Grid item xs={ 10 }>
-                    <Sort />
+                    <Box marginBottom={ 2 }>
+                        <Sort />
+                    </Box>
                     <Grid
                         container
                         direction="row"
@@ -67,7 +70,9 @@ export function ProductList(props) {
                     >
                         { products.map(renderProductItem)  }
                     </Grid>
-                    <Pagination page={ page } search={ search } />
+                    <Box marginTop={ 2 }>
+                        <Pagination page={ page } search={ search } />
+                    </Box>
                 </Grid>
             </>
         )

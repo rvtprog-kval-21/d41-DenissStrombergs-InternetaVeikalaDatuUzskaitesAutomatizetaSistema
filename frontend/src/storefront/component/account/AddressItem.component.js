@@ -2,7 +2,7 @@ import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import { Box, Button, ButtonBase, CardActions, Grid, makeStyles } from '@material-ui/core'
-import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButton from '@material-ui/lab/ToggleButton'
 
 const useStyles = makeStyles({
     root: {

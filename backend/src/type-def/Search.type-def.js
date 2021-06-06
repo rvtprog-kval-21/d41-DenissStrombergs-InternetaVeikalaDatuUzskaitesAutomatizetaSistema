@@ -15,18 +15,13 @@ export const searchTypeDef = `
         Aggregations: Aggregations
     }
 
-    input AttributeValue {
-        code: String!
-        value: String!
-    }
-
     type Query {
         search(
             categoryUrlKey: String
             search: String
             priceMin: Float
             priceMax: Float
-            attributeValues: [AttributeValue]
+            attributeValues: String
             page: Int
             perPage: Int
             sort: String

@@ -3,7 +3,7 @@ import MuiAlert from '@material-ui/lab/Alert'
 import { useDispatch, useSelector } from 'react-redux'
 
 export function Alert(props) {
-    return <MuiAlert elevation={ 6 } variant="filled" {...props} />;
+    return <MuiAlert elevation={ 6 } variant="filled" {...props} />
 }
 
 export function Notification() {
