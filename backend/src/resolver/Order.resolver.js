@@ -8,7 +8,15 @@ export const orderResolver = {
                     return null
                 }
 
-                return await models.Order.findOne({ where: { id: data.id, customer_id: customer.id } })
+                return await models.Order.findOne({ where: { id: data.id, customer_id: customer.id }, include: [
+                    {
+                        model: models.Address
+                    },
+                    {
+                        model: models.OrderItem,
+                        include: models.Product
+                    }
+                ]})
             } catch (error) {
                 console.error(error)
 

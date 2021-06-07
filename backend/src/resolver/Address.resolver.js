@@ -78,7 +78,8 @@ export const addressResolver = {
                 }
 
                 const entity = await models.Address.findOne({ where: { id: data.id, customer_id: customer.id } })
-                await entity.destroy()
+                entity.customer_id = null
+                entity.save()
 
                 return true
             } catch (error) {

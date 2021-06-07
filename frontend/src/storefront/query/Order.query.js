@@ -11,18 +11,6 @@ export const GET_ALL_CUSTOMER_ORDERS = gql`
             totalTax
             subtotal
             total
-            address: Address {
-                id
-                firstName
-                lastName
-                phoneNumber
-                country
-                city
-                province
-                street1
-                street2
-                postalCode
-            }
         }
     }
 `
@@ -49,6 +37,16 @@ export const GET_CUSTOMER_ORDER = gql`
                 street1
                 street2
                 postalCode
+            }
+            items: OrderItems {
+                quantity
+                totalTax
+                subtotal
+                total
+                product: Product {
+                    urlKey
+                    name
+                }
             }
         }
     }

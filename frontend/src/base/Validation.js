@@ -18,25 +18,25 @@ export const VALIDATION = {
         postalCode: Yup.string().required('Is required')
     }),
     ACCOUNT: Yup.object().shape({
-        email: Yup.string().required('Is required'),
+        email: Yup.string().required('Is required').email('Enter valid email'),
         firstName: Yup.string().required('Is required'),
         lastName: Yup.string().required('Is required'),
     }),
     SIGN_IN: Yup.object().shape({
-        email: Yup.string().required('Is required'),
+        email: Yup.string().required('Is required').email('Enter valid email'),
         password: Yup.string().required('Is required')
     }),
     SIGN_UP: Yup.object().shape({
-        email: Yup.string().required('Is required'),
+        email: Yup.string().required('Is required').email('Enter valid email'),
         password: Yup.string().required('Is required'),
-        confirmPassword: Yup.string().required('Is required'),
+        confirmPassword: Yup.string().required('Is required').oneOf([Yup.ref('password'), null], 'Passwords must match'),
         firstName: Yup.string().required('Is required'),
         lastName: Yup.string().required('Is required')
     }),
     PASSWORD: Yup.object().shape({
         oldPassword: Yup.string().required('Is required'),
         newPassword: Yup.string().required('Is required'),
-        confirmNewPassword: Yup.string().required('Is required')
+        confirmNewPassword: Yup.string().required('Is required').oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
     }),
     SHIPPING_STEP: Yup.object().shape({
         shippingMethod: Yup.string().required('Is required')

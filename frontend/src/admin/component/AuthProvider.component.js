@@ -1,3 +1,5 @@
+import { CONFIG } from "../../base/Config"
+
 const SIGN_IN_USER = `
     mutation SingInUser($username: String!, $password: String!) {
         user: signInUser(username: $username, password: $password) {
@@ -13,7 +15,7 @@ const SIGN_IN_USER = `
 
 const authProvider = {
     login: async ({ username, password }) => {
-        const user = await fetch('http://localhost:3001/graphql', {
+        const user = await fetch(CONFIG.API + '/graphql', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

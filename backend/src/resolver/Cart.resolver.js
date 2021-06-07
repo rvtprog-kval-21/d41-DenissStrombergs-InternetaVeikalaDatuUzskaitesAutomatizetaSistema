@@ -59,6 +59,7 @@ export const cartResolver = {
 
                 const out = await models.CartItem.findByPk(cartItem.id, { include: [models.Product] })
                 computeItemTotals(out)
+                await out.save()
 
                 return {
                     item: out,

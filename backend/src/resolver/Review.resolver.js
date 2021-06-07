@@ -17,7 +17,7 @@ export const reviewResolver = {
         },
         allCustomerReviews: async function(_, data, { models, token }) {
             try {
-                const customer = await models.Customer.findOne({ where: { token }})
+                const customer = await models.Customer.findOne({ where: { token } })
 
                 if (!customer) {
                     return null
@@ -25,6 +25,17 @@ export const reviewResolver = {
                 
 
                 return await models.Review.findAll({ where: { customer_id: customer.id }, include: models.Product })
+            } catch (error) {
+                console.error(error)
+
+                return null
+            }
+        },
+        allProductReviews: async function(_, data, { models }) {
+            try {
+                return await models.Review.findAll({ where: { product_id: data.product_id }, include: models.Customer, order: [
+                    ['date', 'DESC']
+                ]})
             } catch (error) {
                 console.error(error)
 
@@ -38,6 +49,17 @@ export const reviewResolver = {
                 const customer = await models.Customer.findOne({ where: { token }})
 
                 if (!customer) {
+                    return null
+                }
+
+                const product = await models.Order.findOne({ where: { customer_id: customer.id }, include: {
+                    model: models.OrderItem,
+                    where: {
+                        product_id: data.product_id
+                    }
+                } })
+
+                if (!product) {
                     return null
                 }
 
@@ -80,6 +102,8 @@ export const reviewResolver = {
 
                 const entity = await models.Review.findOne({ where: { id: data.id, customer_id: customer.id } })
                 await entity.destroy()
+
+                return true
             } catch (error) {
                 console.error(error)
 

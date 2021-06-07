@@ -2,7 +2,7 @@ import { BooleanField, Datagrid, EditButton, List, TextField } from 'react-admin
 
 export function PageList(props) {
     return (
-        <List { ...props }>
+        <List { ...props } exporter={ false }>
             <Datagrid>
                 <TextField source="id" />
                 <TextField source="urlKey" />

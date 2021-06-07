@@ -1,4 +1,4 @@
-import { BooleanInput, Edit, SimpleForm, TextInput } from 'react-admin'
+import { BooleanInput, Edit, SimpleForm, TextInput, required } from 'react-admin'
 import RichTextInput from 'ra-input-rich-text'
 
 export function PageEdit(props) {
@@ -6,9 +6,9 @@ export function PageEdit(props) {
         <Edit { ...props }>
             <SimpleForm>
                 <TextInput source="id" disabled />
-                <TextInput source="urlKey" />
+                <TextInput source="urlKey" validate={ required() } />
                 <BooleanInput source="isEnabled" />
-                <TextInput source="title" />
+                <TextInput source="title" validate={ required() } />
                 <RichTextInput source="content" />
             </SimpleForm>
         </Edit>

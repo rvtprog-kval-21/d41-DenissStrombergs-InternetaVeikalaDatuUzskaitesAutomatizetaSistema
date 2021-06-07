@@ -1,4 +1,4 @@
-import { BooleanInput, Edit, SimpleForm, TextInput } from 'react-admin'
+import { BooleanInput, Edit, SimpleForm, TextInput, required } from 'react-admin'
 import RichTextInput from 'ra-input-rich-text'
 
 export function BlockEdit(props) {
@@ -6,9 +6,9 @@ export function BlockEdit(props) {
         <Edit { ...props }>
             <SimpleForm>
                 <TextInput source="id" disabled />
-                <TextInput source="code" />
+                <TextInput source="code" validate={ required() } />
                 <BooleanInput source="isEnabled" />
-                <RichTextInput source="content" />
+                <RichTextInput source="content" validate={ required() } />
             </SimpleForm>
         </Edit>
     )

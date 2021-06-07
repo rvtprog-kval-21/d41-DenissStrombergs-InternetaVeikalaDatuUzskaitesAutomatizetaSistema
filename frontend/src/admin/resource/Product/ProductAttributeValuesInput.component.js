@@ -5,6 +5,7 @@ import { Formik, Form, Field } from 'formik'
 import STYLE from '../../../base/Style'
 import { TextField, Select, Switch } from 'formik-material-ui'
 import { Typography, FormControl, InputLabel, MenuItem } from '@material-ui/core'
+import { CONFIG } from '../../../base/Config'
 
 export function ProductAttributeValuesInput(props) {
     const { record: { attributeValues }, setAttributeValues } = props
@@ -13,7 +14,7 @@ export function ProductAttributeValuesInput(props) {
     const record = useRecordContext()
 
     useEffect(async () => {
-        const data = await fetch('http://localhost:3001/graphql', {
+        const data = await fetch(CONFIG.API + '/graphql', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

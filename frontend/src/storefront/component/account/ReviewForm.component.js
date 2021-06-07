@@ -2,7 +2,7 @@ import { useApolloClient } from '@apollo/client'
 import { Button, FormControl, InputLabel, MenuItem } from '@material-ui/core'
 import { Formik, Form, Field } from 'formik'
 import { TextField, Select } from 'formik-material-ui'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import STYLE from '../../../base/Style'
 import VALIDATION from '../../../base/Validation'
 import { createCustomerReview, deleteCustomerReview, updateCustomerReview } from '../../query/Review.query'
@@ -10,10 +10,11 @@ import { useHistory } from 'react-router'
 import { showNotification } from '../../dispatcher/Notification.dispatcher'
 
 export function ReviewForm(props) {
+    const account = useSelector((state) => state.AccountReducer)
     const dispatch = useDispatch()
     const client = useApolloClient()
     const history = useHistory()
-    const { productId, review, mode } = props
+    const { productId, review, mode, setPostedReview } = props
     const classes = STYLE.form()
     const initialValues = {
         title: '',
@@ -34,7 +35,7 @@ export function ReviewForm(props) {
         const messages = {
             create: {
                 SUCCESS: 'Successfully posted new review.',
-                ERROR: 'Failed to post new review.'
+                ERROR: 'Failed to post new review, you either have not bought this product or trying to post second review.'
             },
             edit: {
                 SUCCESS: 'Successfully updated your review.',
@@ -44,6 +45,20 @@ export function ReviewForm(props) {
 
         if (data) {
             showNotification({ dispatch }, { severity: 'SUCCESS', message: messages[mode].SUCCESS })
+
+            if (setPostedReview) {
+                setPostedReview({
+                    ...data,
+                    customer: {
+                        firstName: account?.firstName,
+                        lastName: account?.firstName
+                    }
+                })
+            }
+
+            if (mode === 'edit') {
+                history.push('/account/reviews')
+            }
         } else {
             showNotification({ dispatch }, { severity: 'ERROR', message: messages[mode].ERROR })
         }

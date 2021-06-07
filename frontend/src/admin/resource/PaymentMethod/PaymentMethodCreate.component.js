@@ -1,11 +1,11 @@
-import { Create, SimpleForm, TextInput } from 'react-admin'
+import { Create, SimpleForm, TextInput, required } from 'react-admin'
 
 export function PaymentMethodCreate(props) {
     return (
         <Create { ...props }>
             <SimpleForm>
-                <TextInput source="code" />
-                <TextInput source="name" />
+                <TextInput source="code" validate={ required() } />
+                <TextInput source="name" validate={ required() } />
             </SimpleForm>
         </Create>
     )

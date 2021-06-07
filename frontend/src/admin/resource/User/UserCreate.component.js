@@ -1,14 +1,14 @@
-import { Create, PasswordInput, SimpleForm, TextInput } from 'react-admin'
+import { Create, PasswordInput, SimpleForm, TextInput, required, email } from 'react-admin'
 
 export function UserCreate(props) {
     return (
         <Create { ...props }>
-            <SimpleForm>
-                <TextInput source="username" />
-                <TextInput source="email" type="email" />
-                <PasswordInput source="password" />
-                <TextInput source="firstName" />
-                <TextInput source="lastName" />
+            <SimpleForm >
+                <TextInput source="username" validate={ required() } />
+                <TextInput source="email" type="email" validate={ [required(), email()] } />
+                <PasswordInput source="password" validate={ required() } />
+                <TextInput source="firstName" validate={ required() } />
+                <TextInput source="lastName" validate={ required() } />
             </SimpleForm>
         </Create>
     )

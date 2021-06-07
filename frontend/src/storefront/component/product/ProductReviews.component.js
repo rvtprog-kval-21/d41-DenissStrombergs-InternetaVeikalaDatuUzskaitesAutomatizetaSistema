@@ -3,6 +3,7 @@ import { Rating } from '@material-ui/lab'
 import { GetAllProductReviews } from '../../query/Review.query'
 import ReviewForm from '../account/ReviewForm.component'
 import moment from 'moment'
+import { useState } from 'react'
 
 export function renderProductReview(review) {
     const { date, title, content, customer: { firstName, lastName }, rating } = review
@@ -41,6 +42,7 @@ export function renderProductReview(review) {
 export function ProductReviews(props) {
     const { product: { id } } = props
     const reviews = GetAllProductReviews({ productId: id })
+    const [postedReview, setPostedReview] = useState(null)
 
     if (!reviews) {
         return null
@@ -52,11 +54,11 @@ export function ProductReviews(props) {
                 <Typography variant="h5">Write a review:</Typography>
             </Grid>
             <Grid item xs={ 12 }>
-                <ReviewForm mode="create" productId={ id } />
+                <ReviewForm mode="create" productId={ id } setPostedReview={ setPostedReview } />
             </Grid>
             <Grid item xs={ 12 }>
                 <Grid container spacing={ 4 }>
-                    { reviews.map(renderProductReview) }
+                    { postedReview ? [postedReview, ...reviews].map(renderProductReview)  : reviews.map(renderProductReview) }
                 </Grid>
             </Grid>
         </Grid>

@@ -1,4 +1,4 @@
-import { BooleanInput, Datagrid, DeleteButton, Edit, ReferenceField, ReferenceManyField, SimpleForm, TextField, TextInput } from 'react-admin'
+import { BooleanInput, Datagrid, DeleteButton, Edit, ReferenceField, ReferenceManyField, SimpleForm, TextField, TextInput, required } from 'react-admin'
 import AttributeSetAttributeCreateButton from './AttributeSetAttributeCreateButton.component'
 
 export function AttributeSetEdit(props) {
@@ -7,7 +7,7 @@ export function AttributeSetEdit(props) {
             <SimpleForm>
                 <TextInput source="id" disabled/>
                 <BooleanInput source="isEnabled"/>
-                <TextInput source="name"/>
+                <TextInput source="name" validate={ required() } />
                 <AttributeSetAttributeCreateButton />
                 <ReferenceManyField
                     source="id"

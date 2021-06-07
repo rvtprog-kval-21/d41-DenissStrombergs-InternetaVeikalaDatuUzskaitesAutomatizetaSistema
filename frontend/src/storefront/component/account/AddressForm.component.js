@@ -8,6 +8,7 @@ import VALIDATION from '../../../base/Validation'
 import { showNotification } from '../../dispatcher/Notification.dispatcher'
 import { createCustomerAddress, deleteCustomerAddress, updateCustomerAddress } from '../../query/Address.query'
 import { useHistory } from 'react-router'
+import CountrySelector, { countries } from './CountrySelector.component'
 
 export function AddressFormFields() {
     return (
@@ -33,13 +34,7 @@ export function AddressFormFields() {
                 label="Phone number"
                 fullWidth
             />
-            <Field
-                component={ TextField }
-                type="text"
-                name="country"
-                label="Country"
-                fullWidth
-            />
+            <CountrySelector />
             <Field
                 component={ TextField }
                 type="text"
@@ -89,7 +84,7 @@ export function AddressForm(props) {
         firstName: '',
         lastName: '',
         phoneNumber: '',
-        country: '',
+        country: countries[0],
         city: '',
         province: '',
         street1: '',

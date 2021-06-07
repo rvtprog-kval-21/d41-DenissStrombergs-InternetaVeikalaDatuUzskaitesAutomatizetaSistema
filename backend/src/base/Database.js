@@ -28,7 +28,10 @@ class Database {
         this.connect()
         this.init()
         this.associate()
-        //this.create()
+
+        if (CONFIG.GENERATE_SAMPLE_DATA) {
+            this.create()
+        }
     }
 
     connect() {

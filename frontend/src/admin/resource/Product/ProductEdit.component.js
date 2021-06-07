@@ -1,4 +1,4 @@
-import { BooleanInput, Edit, NumberInput, SimpleForm, TextInput, ImageField, ImageInput, Toolbar, useUpdate, useRefresh } from 'react-admin'
+import { BooleanInput, Edit, NumberInput, SimpleForm, TextInput, ImageField, ImageInput, Toolbar, useUpdate, useRefresh, required, ReferenceInput, SelectInput } from 'react-admin'
 import RichTextInput from 'ra-input-rich-text'
 import { ProductSpecialDiscountTypeInput } from './ProductSpecialDiscountTypeInput.component'
 import ProductAttributeValuesInput from './ProductAttributeValuesInput.component'
@@ -6,6 +6,7 @@ import ProductCategoryInput from './ProductCategoryInput.component'
 import ProductCategoryCreateButton from './ProductCategoryCreateButton.component'
 import { useState } from 'react'
 import { UPLOAD_MEDIA } from '../../../storefront/query/Product.query'
+import { CONFIG } from '../../../base/Config'
 
 const toBase64 = file => new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -35,7 +36,7 @@ export function ProductEdit(props) {
     const getFilesFromEvent = async (event) => {
         const [file] = event.dataTransfer ? event.dataTransfer.files : event.target.files;
 
-        const url = await fetch('http://localhost:3001/graphql', {
+        const url = await fetch(CONFIG.API + '/graphql', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -56,13 +57,13 @@ export function ProductEdit(props) {
         <Edit { ...props }>
             <SimpleForm save={ onSave } toolbar={ <Toolbar alwaysEnableSaveButton /> }>
                 <TextInput source="id" disabled />
-                <TextInput source="urlKey" />
-                <TextInput source="sku" />
+                <TextInput source="urlKey" validate={ required() } />
+                <TextInput source="sku" validate={ required() } />
                 <BooleanInput source="isEnabled" />
-                <TextInput source="name" />
-                <NumberInput source="price" />
-                <NumberInput source="stockQuantity" />
-                <NumberInput source="soldAmount" />
+                <TextInput source="name" validate={ required() } />
+                <NumberInput source="price" validate={ required() } />
+                <NumberInput source="stockQuantity" validate={ required() } />
+                <NumberInput source="soldAmount" disabled />
                 <ProductSpecialDiscountTypeInput />
                 <NumberInput source="specialDiscountValue" />
                 <NumberInput source="specialTaxRate" />
@@ -77,6 +78,9 @@ export function ProductEdit(props) {
                 <ImageInput source="other_images" multiple options={ { getFilesFromEvent } }>
                     <ImageField source="url" />
                 </ImageInput>
+                <ReferenceInput source="attribute_set_id" reference="AttributeSet" validate={ required() }>
+                    <SelectInput source="name" />
+                </ReferenceInput>
                 <ProductAttributeValuesInput attributeValues={ attributeValues } setAttributeValues={ setAttributeValues } />
                 <ProductCategoryCreateButton />
                 <ProductCategoryInput />

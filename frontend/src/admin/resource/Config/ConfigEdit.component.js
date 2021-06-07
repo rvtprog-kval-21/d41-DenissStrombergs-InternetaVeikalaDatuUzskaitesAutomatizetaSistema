@@ -1,10 +1,10 @@
-import { Edit, SimpleForm, TextInput } from 'react-admin'
+import { Edit, SimpleForm, TextInput, required } from 'react-admin'
 
 export function ConfigEdit(props) {
     return (
         <Edit { ...props }>
             <SimpleForm>
-                <TextInput source="currencySign" />
+                <TextInput source="currencySign" validate={ required() } />
             </SimpleForm>
         </Edit>
     )

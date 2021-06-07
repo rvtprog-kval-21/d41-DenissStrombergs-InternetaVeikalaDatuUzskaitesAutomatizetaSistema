@@ -2,7 +2,7 @@ import { Datagrid, EditButton, List, TextField } from 'react-admin'
 
 export function CustomerList(props) {
     return (
-        <List { ...props }>
+        <List { ...props } exporter={ false }>
             <Datagrid>
                 <TextField source="id" />
                 <TextField source="email" />

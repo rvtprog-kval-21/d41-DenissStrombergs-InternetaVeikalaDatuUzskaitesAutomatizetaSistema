@@ -1,4 +1,5 @@
 import fs from 'fs'
+import CONFIG from '../base/Config';
 
 export const mediaResolver = {
     Mutation: {
@@ -10,7 +11,7 @@ export const mediaResolver = {
                     console.log(error);
                 });
 
-                return `http://localhost:3001/images/${ data.name }`
+                return `${ CONFIG.API }/images/${ data.name }`
             } catch (error) {
                 console.error(error)
 

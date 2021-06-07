@@ -1,12 +1,12 @@
-import { Edit, SimpleForm, TextInput } from 'react-admin'
+import { Edit, SimpleForm, TextInput, required } from 'react-admin'
 
 export function CustomerGroupEdit(props) {
     return (
         <Edit { ...props }>
             <SimpleForm>
                 <TextInput source="id" disabled />
-                <TextInput source="code" />
-                <TextInput source="name" />
+                <TextInput source="code" validate={ required() } />
+                <TextInput source="name" validate={ required() } />
             </SimpleForm>
         </Edit>
     )

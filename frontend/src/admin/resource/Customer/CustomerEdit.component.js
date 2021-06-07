@@ -1,4 +1,4 @@
-import { Edit, SimpleForm, TextInput } from 'react-admin'
+import { Edit, SimpleForm, TextInput, required, email } from 'react-admin'
 import CustomerCustomerGroupCreateButton from './CustomerCustomerGroupCreateButton.component'
 import CustomerCustomerGroupInput from './CustomerCustomerGroupInput.component'
 
@@ -7,9 +7,9 @@ export function CustomerEdit(props) {
         <Edit { ...props }>
             <SimpleForm>
                 <TextInput source="id" disabled />
-                <TextInput source="email" />
-                <TextInput source="firstName" />
-                <TextInput source="lastName" />
+                <TextInput source="email" validate={ [required(), email()] } />
+                <TextInput source="firstName" validate={ required() } />
+                <TextInput source="lastName" validate={ required() } />
                 <CustomerCustomerGroupCreateButton />
                 <CustomerCustomerGroupInput />
             </SimpleForm>

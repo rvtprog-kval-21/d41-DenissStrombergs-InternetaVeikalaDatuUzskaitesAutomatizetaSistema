@@ -27,9 +27,10 @@ import ShippingMethodResource from '../admin/resource/ShippingMethod/ShippingMet
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import CustomerCustomerGroupResource from '../admin/resource/CustomerCustomerGroup/CustomerCustomerGroupResource.component'
+import { CONFIG } from './Config'
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:3001/graphql'
+    uri: CONFIG.API + '/graphql'
 })
 
 const authLink = setContext((_, { headers }) => {

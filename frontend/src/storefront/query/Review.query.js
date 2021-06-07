@@ -20,7 +20,7 @@ export const GET_ALL_CUSTOMER_REVIEWS = gql`
 
 export const GET_ALL_PRODUCT_REVIEWS = gql`
     query GetAllProductReviews($productId: ID!) {
-        reviews: allReviews(filter: { product_id: $productId }) {
+        reviews: allProductReviews(product_id: $productId) {
             id
             status
             date

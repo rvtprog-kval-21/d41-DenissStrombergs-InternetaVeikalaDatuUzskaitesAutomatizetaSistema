@@ -29,13 +29,22 @@ export const checkoutResolver = {
                 })
 
                 customer.CartItems.forEach(async (cartItem) => {
-                    await models.OrderItem.create({
-                        totalTax: cartItem.totalTax,
-                        subtotal: cartItem.subtotal,
-                        total: cartItem.total,
-                        product_id: cartItem.product_id,
-                        order_id: order.id
-                    })
+                    const product = await models.Product.findByPk(cartItem.product_id)
+
+                    if (product) {
+                        product.stockQuantity -= cartItem.quantity
+                        product.soldAmount += cartItem.quantity
+                        await product.save()
+
+                        await models.OrderItem.create({
+                            quantity: cartItem.quantity,
+                            totalTax: cartItem.totalTax,
+                            subtotal: cartItem.subtotal,
+                            total: cartItem.total,
+                            product_id: cartItem.product_id,
+                            order_id: order.id
+                        })
+                    }
                 })
 
                 return order.reference

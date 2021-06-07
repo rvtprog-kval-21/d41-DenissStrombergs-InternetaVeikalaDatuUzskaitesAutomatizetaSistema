@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BooleanInput, Edit, SimpleForm, TextInput, useRefresh, useUpdate, Toolbar } from 'react-admin'
+import { BooleanInput, Edit, SimpleForm, TextInput, useRefresh, useUpdate, Toolbar, required } from 'react-admin'
 import AttributeOptionsInput from './AttributeOptionsInput.component'
 
 export function AttributeEdit(props) {
@@ -24,9 +24,9 @@ export function AttributeEdit(props) {
         <Edit { ...props }>
             <SimpleForm save={ onSave } toolbar={<Toolbar alwaysEnableSaveButton /> }>
                 <TextInput source="id" disabled />
-                <TextInput source="code" />
+                <TextInput source="code" validate={ required() } />
                 <BooleanInput source="isEnabled" />
-                <TextInput source="label" />
+                <TextInput source="label" validate={ required() } />
                 <AttributeOptionsInput setAttributeOptions={ setAttributeOptions } />
                 <BooleanInput source="isFilter" />
             </SimpleForm>

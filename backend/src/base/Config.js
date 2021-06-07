@@ -10,9 +10,8 @@ export const CONFIG = {
             logging: false
         }
     ],
-    URL: {
-        SERVER: 'http://localhost:3001/'
-    }
+    API: 'http://localhost:3001',
+    GENERATE_SAMPLE_DATA: false
 }
 
 export default CONFIG

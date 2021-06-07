@@ -2,6 +2,7 @@ export const reviewTypeDef = `
     type Query {
         customerReview(id: ID!) : Review
         allCustomerReviews : [Review]
+        allProductReviews(product_id: ID!) : [Review]
     }
 
     type Mutation {

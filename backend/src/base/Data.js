@@ -1,4 +1,5 @@
 import faker from 'faker'
+import CONFIG from './Config'
 import { attributes, attributeSetAttributes, attributeSets, blocks, categories, configs, customerGroups, pages, paymentMethods, shippingMethods } from './CoreData'
 
 export function randomInteger(min, max) {
@@ -166,17 +167,17 @@ export function generateProducts(count, type) {
             shortDescription: faker.lorem.sentence(10),
             longDescription: faker.lorem.paragraph(10),
             base_image: {
-                url: 'http://localhost:3001/images/1280x720.png'
+                url: CONFIG.API + '/images/1280x720.png'
             },
             thumbnail_image: {
-                url: 'http://localhost:3001/images/640x360.png'
+                url: CONFIG.API + '/images/640x360.png'
             },
             other_images: [
                 {
-                    url: 'http://localhost:3001/images/1024x1024.png'
+                    url: CONFIG.API + '/images/1024x1024.png'
                 },
                 {
-                    url: 'http://localhost:3001/images/512x512.png'
+                    url: CONFIG.API + '/images/512x512.png'
                 }
             ],
             soldAmount: randomInteger(0, 10),
@@ -259,7 +260,7 @@ export function generateOrderItems(cartItems) {
         subtotal: cartItem.subtotal,
         total: cartItem.total,
         order_id: cartItem.customer_id,
-        product_Id: cartItem.product_id
+        product_id: cartItem.product_id
     }))
 }
 

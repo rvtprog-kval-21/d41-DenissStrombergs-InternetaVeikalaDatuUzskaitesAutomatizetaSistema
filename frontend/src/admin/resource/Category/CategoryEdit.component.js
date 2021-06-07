@@ -1,4 +1,4 @@
-import { BooleanInput, Edit, NumberInput, SimpleForm, TextInput } from 'react-admin'
+import { BooleanInput, Edit, SimpleForm, TextInput, required } from 'react-admin'
 import RichTextInput from 'ra-input-rich-text'
 
 export function CategoryEdit(props) {
@@ -6,9 +6,9 @@ export function CategoryEdit(props) {
         <Edit { ...props }>
             <SimpleForm>
                 <TextInput source="id" disabled />
-                <TextInput source="urlKey" />
+                <TextInput source="urlKey" validate={ required() } />
                 <BooleanInput source="isEnabled" />
-                <TextInput source="name" />
+                <TextInput source="name" validate={ required() } />
                 <BooleanInput source="isInMenu" />
                 <RichTextInput source="content" />
             </SimpleForm>
