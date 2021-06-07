@@ -8,7 +8,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import Checkbox from '@material-ui/core/Checkbox'
-import queryString from 'query-string'
+import { useDispatch, useSelector } from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
     nested: {
@@ -17,13 +17,13 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export function FilterItem(props) {
+    const { attributeValues } = useSelector((state) => state.SearchReducer)
     const classes = useStyles()
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(false)
+    const dispatch = useDispatch()
     const { attribute: { label, code } } = props
     const { aggregations: { filterValues } } = props
-    const a = queryString.parse(window.location.search)
-    // Trash code, but lazy fixing it
-    const [checked, setChecked] = useState([0, ...Object.keys(JSON.parse(a.attributeValues || '{}')[code] || []).map((val) => parseInt(val))])
+    const [checked, setChecked] = useState([0, ...Object.keys(attributeValues[code] || {}).map((val) => parseInt(val)) ])
 
     const handleClick = () => {
         setOpen(!open)
@@ -40,15 +40,16 @@ export function FilterItem(props) {
         }
 
         const [, ...checkedMap] = newChecked
-        const mapped = {}
-        checkedMap.forEach((val) => mapped[val] = Object.keys(filterValues[code])[val - 1])
+        const values = {}
+        checkedMap.forEach((val) => values[val] = Object.keys(filterValues[code])[val - 1])
 
-        const a = queryString.parse(window.location.search)
-        a.attributeValues = JSON.stringify({
-            ...JSON.parse(a.attributeValues || '{}'),
-            [code]: mapped
+        dispatch({
+            type: 'SET_ATTRIBUTE_VALUES',
+            payload: {
+                code,
+                values
+            }
         })
-        window.location.search = queryString.stringify(a)
 
         setChecked(newChecked)
     }

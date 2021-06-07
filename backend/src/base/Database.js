@@ -28,7 +28,7 @@ class Database {
         this.connect()
         this.init()
         this.associate()
-        this.create()
+        //this.create()
     }
 
     connect() {

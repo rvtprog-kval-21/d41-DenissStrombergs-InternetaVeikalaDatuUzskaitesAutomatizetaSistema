@@ -34,7 +34,7 @@ export function ProductDetails(props) {
                     { attribute.label }
                 </dt>
                 <dd>
-                    { attribute.value }
+                    { attribute.value.toString() }
                 </dd>
             </div>
         )

@@ -5,6 +5,7 @@ import AccountReducer from '../storefront/reducer/Account.reducer'
 import CheckoutReducer from '../storefront/reducer/Checkout.reducer'
 import ConfigReducer from '../storefront/reducer/Config.reducer'
 import NotificationReducer from '../storefront/reducer/Notification.reducer'
+import SearchReducer from '../storefront/reducer/Search.reducer'
 
 export const createRootReducer = (history) => combineReducers({
     router: connectRouter(history),
@@ -12,7 +13,8 @@ export const createRootReducer = (history) => combineReducers({
     AccountReducer,
     CheckoutReducer,
     ConfigReducer,
-    NotificationReducer
+    NotificationReducer,
+    SearchReducer
 })
 
 export default createRootReducer

@@ -1,5 +1,6 @@
 export const CONFIG = {
     SEARCH: {
-        PER_PAGE: 4
-    }
+        PER_PAGE: 10
+    },
+    API: 'http://localhost:3001'
 }

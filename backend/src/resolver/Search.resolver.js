@@ -13,7 +13,7 @@ export const searchResolver = {
     Query: {
         search: async function(_, data, { sequelize, models }) {
             const attributeValues = (JSON.parse(data.attributeValues || '{}') || {})
-            Object.keys(attributeValues).forEach((key) => attributeValues[key] = { [Op.in]: Object.values(attributeValues[key]) })
+            Object.keys(attributeValues).forEach((key) => attributeValues[key] = Object.values(attributeValues[key]))
             const order = orderMap[data.sort]
             const page = data.page ? data.page - 1 : 0
             const perPage = data.perPage|| 100000
@@ -44,14 +44,11 @@ export const searchResolver = {
                                 [Op.gte]: data.priceMin || 0,
                                 [Op.lte]: data.priceMax || 100000
                             }
-                        },
-                        attributeValues
+                        }
                     },
                     order: order ? [order] : []
                 })
-                const count = products.length
-                const minPrice = products.reduce((a, b) => (a.price < b.price ? a.price : b.price), 0)
-                const maxPrice = products.reduce((a, b) => (a.price > b.price ? a.price : b.price), 100000)
+
                 const filterValues = {}
                 products.forEach((product) => {
                     const { attributeValues } = product
@@ -63,11 +60,7 @@ export const searchResolver = {
                             filterValues[attributeCode] = {}
                         }
 
-                        if (!filterValues[attributeCode][attributeValue]) {
-                            filterValues[attributeCode][attributeValue] = 1
-                        } else {
-                            filterValues[attributeCode][attributeValues] += 1
-                        }
+                        filterValues[attributeCode][attributeValue] = true
                     }
                 })
                 const attributeCodes = Object.keys(filterValues)
@@ -77,9 +70,34 @@ export const searchResolver = {
                     }
                 })
 
+                const finalProducts = products.slice(page * perPage, page * perPage + perPage).filter(
+                    ({ attributeValues: values }) => {
+                        let matches = true
+                        const keys = Object.keys(values)
+
+                        for (const key of keys) {
+                            const attributeValueArray = attributeValues[key]
+
+                            if (attributeValueArray) {
+                                matches = matches && attributeValueArray.indexOf(values[key].toString()) > -1
+                            }
+
+                            if (!matches) {
+                                return false
+                            }
+                        }
+
+                        return matches
+                    }
+                )
+
+                const count = finalProducts.length
+                const minPrice = finalProducts.reduce((a, b) => (a.price < b.price ? a.price : b.price), 0)
+                const maxPrice = finalProducts.reduce((a, b) => (a.price > b.price ? a.price : b.price), 100000)
+
                 return {
                     Category: category,
-                    Products: products.slice(page * perPage, page * perPage + perPage),
+                    Products: finalProducts,
                     Attributes: attributes,
                     Aggregations: {
                         count,

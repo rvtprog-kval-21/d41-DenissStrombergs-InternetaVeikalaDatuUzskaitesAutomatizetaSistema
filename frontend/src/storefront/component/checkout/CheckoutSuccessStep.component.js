@@ -17,7 +17,8 @@ export function CheckoutSuccessStep() {
     return (
         <Grid container spacing={ 4 }>
             <Grid item xs={ 12 }>
-                <Typography>{ reference }</Typography>
+                <Typography variant="h4">You have successfully complete the order.</Typography>
+                <Typography>Order reference: { reference }</Typography>
                 <Button href="/" variant="contained" color="primary">
                     Continue shopping
                 </Button>

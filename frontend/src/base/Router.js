@@ -6,11 +6,12 @@ import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
 import { ApolloProvider } from '@apollo/client/react'
 import { setContext } from '@apollo/client/link/context'
 import StoreFront from './Storefront'
+import { CONFIG } from './Config'
 
 const store = configureStore()
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:3001/graphql'
+    uri: CONFIG.API + '/graphql'
 })
 
 const authLink = setContext((_, { headers }) => {

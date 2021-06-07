@@ -6,8 +6,7 @@ import Sort from './Sort.component'
 import { useParams } from 'react-router-dom'
 import parse from 'html-react-parser'
 import { Search } from '../../query/Search.query'
-import { CONFIG } from '../../../base/Config'
-import queryString from 'query-string'
+import { useSelector } from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,15 +17,16 @@ const useStyles = makeStyles((theme) => ({
 export function ProductList(props) {
     const classes = useStyles()
     const { urlKey, query = '' } = useParams()
-    const { page = 1, sort, attributeValues } = queryString.parse(window.location.search)
+    const { perPage, sort, page, attributeValues } = useSelector((state) => state.SearchReducer)
     const search = Search({
         categoryUrlKey: urlKey,
         search: query,
-        perPage: CONFIG.SEARCH.PER_PAGE,
+        perPage,
         sort,
-        page: parseInt(page),
-        attributeValues
+        page,
+        attributeValues: JSON.stringify(attributeValues)
     })
+
 
     if (!search) {
         return null
@@ -43,21 +43,26 @@ export function ProductList(props) {
 
     const renderNoProducts = () => {
         return (
-            <Grid item xs={ 12 }>
-                <Typography>
-                    No products found
-                </Typography>
-            </Grid>
+            <>
+                <Grid item xs={ 3 }>
+                    <FilterList search={ search } />
+                </Grid>
+                <Grid item xs={ 9 }>
+                    <Typography>
+                        No products found
+                    </Typography>
+                </Grid>
+            </>
         )
     }
 
     const renderProducts = () => {
         return (
             <>
-                <Grid item xs={ 2 }>
+                <Grid item xs={ 3 }>
                     <FilterList search={ search } />
                 </Grid>
-                <Grid item xs={ 10 }>
+                <Grid item xs={ 9 }>
                     <Box marginBottom={ 2 }>
                         <Sort />
                     </Box>

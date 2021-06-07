@@ -1,7 +1,6 @@
 import MenuItem from '@material-ui/core/MenuItem'
 import Select from '@material-ui/core/Select'
-import queryString from 'query-string'
-import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 const items = [
     {
@@ -35,14 +34,16 @@ const items = [
 ]
 
 export function Sort(props) {
-    const { sort = 'NO_ORDER' } = queryString.parse(window.location.search)
-    const [sortState, setSortState] = useState(sort)
+    const dispatch = useDispatch()
+    const { sort } = useSelector((state) => state.SearchReducer)
 
     const onClick = (event) => {
-        setSortState(event.target.value)
-        const a = queryString.parse(window.location.search)
-        a.sort = event.target.value == 'NO_ORDER' ? '' : event.target.value
-        window.location.search = queryString.stringify(a)
+        dispatch({
+            type: 'SET_SORT',
+            payload: {
+                sort: event.target.value
+            }
+        })
     }
 
     const renderItem = (item) => {
@@ -55,11 +56,9 @@ export function Sort(props) {
 
     return (
         <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={ sortState }
             onChange={ onClick }
             fullWidth
+            value={ sort }
         >
             { items.map(renderItem) }
         </Select>

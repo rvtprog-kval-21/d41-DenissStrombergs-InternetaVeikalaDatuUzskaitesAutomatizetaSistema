@@ -2,7 +2,8 @@ import FilterItem from './FilterItem.component'
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
-import { Typography } from '@material-ui/core'
+import { Button, Typography } from '@material-ui/core'
+import { useDispatch } from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -13,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export function FilterList(props) {
+    const dispatch = useDispatch()
     const classes = useStyles()
     const { search: { attributes, aggregations } } = props
 
@@ -22,8 +24,19 @@ export function FilterList(props) {
         )
     }
 
+    const onResetButtonClick = () => {
+        dispatch({
+            type: 'RESET_FILTERS'
+        })
+    }
+
     if (!attributes.length) {
-        return null
+        return (
+            <div>
+                <Typography>No products found based on selected filters.</Typography>
+                <Button onClick={ onResetButtonClick } variant="contained" color="primary">Reset</Button>
+            </div>
+        )
     }
 
     return (
