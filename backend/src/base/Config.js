@@ -6,7 +6,8 @@ export const CONFIG = {
         {
             dialect: 'postgres',
             host: 'localhost',
-            underscored: true
+            underscored: true,
+            logging: true
         }
     ]
 }

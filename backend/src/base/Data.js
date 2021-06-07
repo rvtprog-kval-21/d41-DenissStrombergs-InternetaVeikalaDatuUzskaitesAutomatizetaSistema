@@ -1,931 +1,437 @@
+import faker from 'faker'
+import { attributes, attributeSetAttributes, attributeSets, blocks, categories, configs, customerGroups, pages, paymentMethods, shippingMethods } from './CoreData'
+
+export function randomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+export function generateCustomers(count) {
+    return new Array(count).fill({}).map(() => ({
+        email: faker.internet.email(),
+        password: faker.internet.password(),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        totalTax: 0,
+        subtotal: 0,
+        total: 0
+    }))
+}
+
+export function generateUsers(count) {
+    return new Array(count).fill({}).map(() => ({
+        username: faker.internet.userName(),
+        email: faker.internet.email(),
+        password: faker.internet.password(),
+        firstName: faker.name.firstName(),
+        lastName: faker.name.lastName()
+    }))
+}
+
+export function generateAddresses(customers, count) {
+    const addresses = []
+
+    customers.forEach((customer, index) => {
+        addresses.push({
+            firstName: customer.firstName,
+            lastName: customer.lastName,
+            phoneNumber: faker.phone.phoneNumber(),
+            country: faker.address.country(),
+            city: faker.address.city(),
+            province: faker.address.state(),
+            street1: faker.address.streetAddress(),
+            street2: Math.random() > 0.5 ? faker.address.streetAddress() : '',
+            postalCode: faker.address.zipCode(),
+            customer_id: index + 1
+        })
+    })
+
+    return addresses
+}
+
+export function generateCustomerCustomerGroups(customers) {
+    const customerCustomerGroups = []
+
+    customers.forEach((customer, index) => {
+        customerCustomerGroups.push({
+            customer_id: index + 1,
+            customer_group_id: randomInteger(1, customerGroups.length)
+        })
+    })
+
+    return customerCustomerGroups
+}
+
+export const pencilTypes = [
+    'graphite pencil',
+    'solid graphite pencil',
+    'liquid graphite pencil',
+    'charcoal pencil',
+    'carbon pencil',
+    'colored pencil',
+    'grease pencil',
+    'watercolor pencil',
+    'mechanical pencil'
+]
+
+export const penTypes = [
+    'fountain pen',
+    'ballpoint pen',
+    'roller ball pen',
+    'gel pen pen',
+    'stylus pen',
+    'novelty pen'
+]
+
+export const drawingAccessoryTypes = [
+    'mechanical pencil lead',
+    'eraser'
+]
+
+export function getAttributes(attribute_set_id) {
+    return attributeSetAttributes.filter((item) => item.attribute_set_id == attribute_set_id).map((item) => attributes[item.attribute_id - 1])
+}
+
+export function generateAttributeValues(attribute_set_id) {
+    const attributes = getAttributes(attribute_set_id)
+    const attributeValues = {}
+
+    attributes.forEach((attribute) => {
+        const { attributeOptions, type, code } = attribute
+
+        if (type === 'boolean') {
+            attributeValues[code] = Math.random() > 0.5
+        }
+
+        if (type === 'number') {
+            attributeValues[code] = randomInteger(0, 100)
+        }
+
+        if (type === 'string') {
+            attributeValues[code] = faker.lorem.sentence(5)
+        }
+
+        if ((type === 'select_number' || type === 'select_string') && attributeOptions.length) {
+            attributeValues[code] = attributeOptions[randomInteger(0, attributeOptions.length - 1)].value
+        }
+    })
+
+    return attributeValues
+}
+
+export function generateDrawingData(types, index) {
+    const randomType = types[randomInteger(0, types.length - 1)]
+    const urlKey = randomType.replace(' ', '_') + index.toString()
+    const attribute_set_id = 2
+    const attributeValues = generateAttributeValues(attribute_set_id)
+
+    return {
+        urlKey: urlKey,
+        sku: urlKey,
+        name: randomType[0].toUpperCase() + randomType.substr(1),
+        attributeValues,
+        attribute_set_id
+    }
+}
+
+export function generateReadingData(index) {
+    const name = faker.commerce.productName()
+    const urlKey = name.toLowerCase().replace(' ', '_') + index.toString()
+    const attribute_set_id = 3
+    const attributeValues = generateAttributeValues(attribute_set_id)
+
+    return {
+        urlKey: urlKey,
+        sku: urlKey,
+        name: name,
+        attributeValues,
+        attribute_set_id
+    }
+}
+
+export function generateProducts(count, type) {
+
+    return new Array(count).fill({}).map((_, index) => {
+        const data = type(index + 1)
+
+        return {
+            urlKey: data.urlKey,
+            sku: data.sku,
+            isEnabled: true,
+            name: data.name,
+            price: faker.commerce.price(),
+            stockQuantity: randomInteger(0, 100),
+            specialDiscountType: ['percent', 'amount'][randomInteger(0, 1)],
+            specialDiscountValue: Math.random() > 0.5 ? randomInteger(1, 20) : 0,
+            specialTaxRate: 0,
+            shortDescription: faker.lorem.sentence(10),
+            longDescription: faker.lorem.paragraph(10),
+            base_image: {
+                url: 'http://localhost:3001/images/1280x720.png'
+            },
+            thumbnail_image: {
+                url: 'http://localhost:3001/images/640x360.png'
+            },
+            other_images: [
+                {
+                    url: 'http://localhost:3001/images/1024x1024.png'
+                },
+                {
+                    url: 'http://localhost:3001/images/512x512.png'
+                }
+            ],
+            soldAmount: randomInteger(0, 10),
+            attributeValues: data.attributeValues,
+            attribute_set_id: data.attribute_set_id
+        }
+    })
+}
+
+export function generateReviews(products, customers) {
+    const reviews = []
+
+    products.forEach((_, index) => {
+        reviews.push({
+            status: 'accepted',
+            date: faker.date.past(),
+            title: faker.lorem.sentence(10),
+            content: faker.lorem.paragraph(10),
+            rating: randomInteger(1, 10),
+            customer_id: randomInteger(1, customers.length),
+            product_id: index + 1
+        })
+    })
+
+    return reviews
+}
+
+export function generateCartItems(customers, products) {
+    const cartItems = []
+
+    customers.forEach((_, index) => {
+        const product_id = randomInteger(1, products.length)
+        const randomProduct = products[product_id - 1]
+        const quantity = randomInteger(1, 10)
+        const totalTax = randomProduct.price * quantity * (randomProduct.specialTaxRate || 0.21)
+        const subtotal = randomProduct.price * quantity
+        const total = subtotal + totalTax
+
+        customers[index].totalTax += totalTax
+        customers[index].subtotal += subtotal
+        customers[index].total += total
+
+        cartItems.push({
+            quantity,
+            totalTax,
+            subtotal,
+            total,
+            customer_id: index + 1,
+            product_id
+        })
+    })
+
+    return cartItems
+}
+
+export function generateOrders(customers) {
+    const orders = []
+
+    customers.forEach((customer, index) => {
+        orders.push({
+            reference: Math.random().toString(36).substr(2).toUpperCase(),
+            date: faker.date.past(),
+            status: 'ordered',
+            totalDelivery: 0,
+            totalTax: customer.totalTax,
+            subtotal: customer.subtotal,
+            total: customer.total,
+            customer_id: index + 1,
+            address_id: index + 1
+        })
+    })
+
+    return orders
+}
+
+export function generateOrderItems(cartItems) {
+    return cartItems.map((cartItem) => ({
+        quantity: cartItem.quantity,
+        totalTax: cartItem.totalTax,
+        subtotal: cartItem.subtotal,
+        total: cartItem.total,
+        order_id: cartItem.customer_id,
+        product_Id: cartItem.product_id
+    }))
+}
+
+export function generateInvoices(orders) {
+    return orders.map((order, index) => ({
+        date: order.date,
+        totalDelivery: order.totalDelivery,
+        totalTax: order.totalTax,
+        subtotal: order.subtotal,
+        total: order.total,
+        order_id: index + 1
+    }))
+}
+
+const customers = [
+    {
+        email: 'deniss.strombergs@scandiweb.com',
+        password: 'Test12#$',
+        firstName: 'Deniss',
+        lastName: 'Strombergs',
+        totalTax: 73.5,
+        subtotal: 350,
+        total: 423.5
+    },
+    ...generateCustomers(100)
+]
+
+const customerCustomerGroups = generateCustomerCustomerGroups(customers)
+
+const addresses = generateAddresses(customers)
+
+const users = [
+    {
+        username: 'deniss',
+        email: 'deniss.strombergs@scandiweb.com',
+        password: 'Test12#$',
+        firstName: 'Deniss',
+        lastName: 'Strombergs'
+    },
+    ...generateUsers(9)
+]
+
+const pencils = generateProducts(20, (index) => generateDrawingData(pencilTypes, index))
+const pens = generateProducts(20, (index) => generateDrawingData(penTypes, index))
+const drawingAccessories = generateProducts(20, (index) => generateDrawingData(drawingAccessoryTypes, index))
+const books = generateProducts(20, (index) => generateReadingData(index))
+const comics = generateProducts(20, (index) => generateReadingData(index))
+const products = [
+    ...pencils,
+    ...pens,
+    ...drawingAccessories,
+    ...books,
+    ...comics
+]
+
+const reviews = generateReviews(products, customers)
+
+export function generateProductCategories(products, offset, category_id) {
+    const productCategories = []
+
+    products.forEach((_, index) => {
+        productCategories.push({
+            product_id: index + 1 + offset,
+            category_id
+        })
+    })
+
+    return productCategories
+}
+
+const productCategories = [
+    ...generateProductCategories(pencils, 0, 2),
+    ...generateProductCategories(pencils, 0, 4),
+    ...generateProductCategories(pens, 20, 2),
+    ...generateProductCategories(pencils, 20, 5),
+    ...generateProductCategories(drawingAccessories, 40, 2),
+    ...generateProductCategories(drawingAccessories, 40, 6),
+    ...generateProductCategories(books, 60, 3),
+    ...generateProductCategories(books, 60, 7),
+    ...generateProductCategories(books, 80, 3),
+    ...generateProductCategories(books, 80, 8),
+]
+
+const cartItems = generateCartItems(customers, products)
+const orders = generateOrders(customers)
+const orderItems = generateOrderItems(cartItems)
+const invoices = generateInvoices(orders)
+
 export const DATA = [
     {
         modelName: 'User',
-        modelData: [
-            {
-                username: 'deniss',
-                email: 'deniss.strombergs@scandiweb.com',
-                password: 'Test12#$',
-                firstName: 'Deniss',
-                lastName: 'Strombergs'
-            },
-            {
-                username: 'nikolajs',
-                email: 'nikolajs.lapins@gmail.com',
-                password: 'Nikolajs1234',
-                firstName: 'Nikolajs',
-                lastName: 'Lapins'
-            },
-            {
-                username: 'anna',
-                email: 'anna.kaulina@gmail.com',
-                password: 'Anna1234',
-                firstName: 'Anna',
-                lastName: 'Kaulina'
-            },
-            {
-                username: 'daniela',
-                email: 'daniela.salmina@gmail.com',
-                password: 'Daniela1234',
-                firstName: 'Daniela',
-                lastName: 'Salmina'
-            }
-        ]
+        modelData: users
     },
     {
         modelName: 'Attribute',
-        modelData: [
-            {
-                code: 'color',
-                isEnabled: true,
-                label: 'Color',
-                type: 'select_string',
-                attributeOptions: [
-                    {
-                        value: 'Red'
-                    },
-                    {
-                        value: 'Green'
-                    },
-                    {
-                        value: 'Blue'
-                    },
-                    {
-                        value: 'Yellow'
-                    },
-                    {
-                        value: 'Magenta'
-                    },
-                    {
-                        value: 'Cyan'
-                    },
-                    {
-                        value: 'White'
-                    },
-                    {
-                        value: 'Black'
-                    }
-                ],
-                isFilter: true,
-                attributeGroup: 'General'
-            },
-            {
-                code: 'pencil_hardness',
-                isEnabled: true,
-                label: 'Pencil hardness',
-                type: 'select_string',
-                attributeOptions: [
-                    {
-                        value: 'B5'
-                    },
-                    {
-                        value: 'B4'
-                    },
-                    {
-                        value: 'B3'
-                    },
-                    {
-                        value: 'B2'
-                    },
-                    {
-                        value: 'B'
-                    },
-                    {
-                        value: 'HB'
-                    },
-                    {
-                        value: 'H'
-                    },
-                    {
-                        value: 'H2'
-                    },
-                    {
-                        value: 'H3'
-                    },
-                    {
-                        value: 'H4'
-                    },
-                    {
-                        value: 'H5'
-                    }
-                ],
-                isFilter: true,
-                attributeGroup: 'General'
-            },
-            {
-                code: 'nib_size',
-                isEnabled: true,
-                label: 'Nib size',
-                type: 'select_number',
-                attributeOptions: [
-                    {
-                        value: 0.01
-                    },
-                    {
-                        value: 0.02
-                    },
-                    {
-                        value: 0.03
-                    },
-                    {
-                        value: 0.04
-                    },
-                    {
-                        value: 0.05
-                    }
-                ],
-                isFilter: true,
-                attributeGroup: 'General'
-            },
-            {
-                code: 'author',
-                isEnabled: true,
-                label: 'Author',
-                type: 'string',
-                attributeOptions: [],
-                isFilter: true,
-                attributeGroup: 'General'
-            },
-            {
-                code: 'publisher',
-                isEnabled: true,
-                label: 'Publisher',
-                type: 'string',
-                attributeOptions: [],
-                isFilter: true,
-                attributeGroup: 'General'
-            },
-            {
-                code: 'page_count',
-                isEnabled: true,
-                label: 'Page count',
-                type: 'number',
-                attributeOptions: [],
-                isFilter: true,
-                attributeGroup: 'General'
-            },
-            {
-                code: 'has_eraser',
-                isEnabled: true,
-                label: 'Has eraser',
-                type: 'boolean',
-                attributeOptions: [],
-                isFilter: true,
-                attributeGroup: 'General'
-            }
-        ]
+        modelData: attributes
     },
     {
         modelName: 'AttributeSet',
-        modelData: [
-            {
-                code: 'default',
-                isEnabled: true,
-                name: 'Default'
-            },
-            {
-                code: 'drawing',
-                isEnabled: true,
-                name: 'Drawing'
-            },
-            {
-                code: 'reading',
-                isEnabled: true,
-                name: 'Reading'
-            }
-        ]
+        modelData: attributeSets
     },
     {
         modelName: 'AttributeSetAttribute',
-        modelData: [
-            {
-                attribute_set_id: 1,
-                attribute_id: 1
-            },
-            {
-                attribute_set_id: 2,
-                attribute_id: 1
-            },
-            {
-                attribute_set_id: 2,
-                attribute_id: 2
-            },
-            {
-                attribute_set_id: 2,
-                attribute_id: 3
-            },
-            {
-                attribute_set_id: 3,
-                attribute_id: 1
-            },
-            {
-                attribute_set_id: 3,
-                attribute_id: 4
-            },
-            {
-                attribute_set_id: 3,
-                attribute_id: 5
-            },
-            {
-                attribute_set_id: 3,
-                attribute_id: 6
-            },
-            {
-                attribute_set_id: 2,
-                attribute_id: 7
-            }
-        ]
+        modelData: attributeSetAttributes
     },
     {
         modelName: 'Block',
-        modelData: [
-            {
-                code: 'test_block',
-                isEnabled: true,
-                content: '<h2>Test Block</h2>'
-            },
-            {
-                code: 'footer',
-                isEnabled: true,
-                content: `
-                    <footer>
-                        <h2>Footer</h2>
-                    </footer>
-                `
-            }
-        ]
+        modelData: blocks
     },
     {
         modelName: 'Category',
-        modelData: [
-            {
-                urlKey: null,
-                isEnabled: true,
-                name: 'Root',
-                isInMenu: true,
-                content: ``,
-                category_id: null
-            },
-            {
-                urlKey: 'drawing',
-                isEnabled: true,
-                name: 'Drawing',
-                isInMenu: true,
-                content: `
-                    <h2>Drawing</h2>
-                `,
-                category_id: 1
-            },
-            {
-                urlKey: 'reading',
-                isEnabled: true,
-                name: 'Reading',
-                isInMenu: true,
-                content: ``,
-                category_id: 1
-            },
-            {
-                urlKey: 'pencils',
-                isEnabled: true,
-                name: 'Pencils',
-                isInMenu: true,
-                content: ``,
-                category_id: 2
-            },
-            {
-                urlKey: 'pens',
-                isEnabled: true,
-                name: 'Pens',
-                isInMenu: true,
-                content: ``,
-                category_id: 2
-            },
-            {
-                urlKey: 'regular_pencils',
-                isEnabled: true,
-                name: 'Regular pencils',
-                isInMenu: true,
-                content: ``,
-                category_id: 4
-            },
-            {
-                urlKey: 'mechanical_pencils',
-                isEnabled: true,
-                name: 'Mechanical pencils',
-                isInMenu: true,
-                content: ``,
-                category_id: 4
-            },
-            {
-                urlKey: 'ballpoint_pens',
-                isEnabled: true,
-                name: 'Ballpoint pens',
-                productCount: 0,
-                isInMenu: true,
-                content: ``,
-                category_id: 5
-            },
-            {
-                urlKey: 'fountain_pens',
-                isEnabled: true,
-                name: 'Fountain pens',
-                productCount: 0,
-                isInMenu: true,
-                content: ``,
-                category_id: 5
-            },
-            {
-                urlKey: 'books',
-                isEnabled: true,
-                name: 'Books',
-                productCount: 0,
-                isInMenu: true,
-                content: ``,
-                category_id: 3
-            },
-            {
-                urlKey: 'comics',
-                isEnabled: true,
-                name: 'Comics',
-                productCount: 0,
-                isInMenu: true,
-                content: ``,
-                category_id: 3
-            },
-            {
-                urlKey: 'manga',
-                isEnabled: true,
-                name: 'Manga',
-                productCount: 0,
-                isInMenu: true,
-                content: ``,
-                category_id: 3
-            }
-        ]
+        modelData: categories
     },
     {
         modelName: 'Customer',
-        modelData: [
-            {
-                email: 'deniss.strombergs@scandiweb.com',
-                password: 'Test12#$',
-                firstName: 'Deniss',
-                lastName: 'Strombergs',
-                totalTax: 73.5,
-                subtotal: 350,
-                total: 423.5
-            },
-            {
-                email: 'nikolajs.lapins@gmail.com',
-                password: 'Nikolajs1234',
-                firstName: 'Nikolajs',
-                lastName: 'Lapins'
-            },
-            {
-                email: 'anna.kaulina@gmail.com',
-                password: 'Anna1234',
-                firstName: 'Anna',
-                lastName: 'Kaulina'
-            },
-            {
-                email: 'daniela.salmina@gmail.com',
-                password: 'Daniela1234',
-                firstName: 'Daniela',
-                lastName: 'Salmina'
-            }
-        ]
+        modelData: customers
     },
     {
         modelName: 'Address',
-        modelData: [
-            {
-                firstName: 'Deniss',
-                lastName: 'Strombergs',
-                phoneNumber: '22034599',
-                country: 'Latvia',
-                city: 'Marupe',
-                province: 'Marupes novads',
-                street1: 'Tiraine, Viskalnu iela 13-8',
-                street2: '',
-                postalCode: 'LV-2167',
-                customer_id: 1
-            },
-            {
-                firstName: 'Nikolajs',
-                lastName: 'Lapins',
-                phoneNumber: '22034599',
-                country: 'Latvia',
-                city: 'Marupe',
-                province: 'Marupes novads',
-                street1: 'Tiraine, Viskalnu iela 13-8',
-                street2: '',
-                postalCode: 'LV-2167',
-                customer_id: 2
-            },
-            {
-                firstName: 'Anna',
-                lastName: 'Kaulina',
-                phoneNumber: '22034599',
-                country: 'Latvia',
-                city: 'Marupe',
-                province: 'Marupes novads',
-                street1: 'Tiraine, Viskalnu iela 13-8',
-                street2: '',
-                postalCode: 'LV-2167',
-                customer_id: 3
-            },
-            {
-                firstName: 'Daniela',
-                lastName: 'Salmina',
-                phoneNumber: '22034599',
-                country: 'Latvia',
-                city: 'Marupe',
-                province: 'Marupes novads',
-                street1: 'Tiraine, Viskalnu iela 13-8',
-                street2: '',
-                postalCode: 'LV-2167',
-                customer_id: 4
-            }
-        ]
+        modelData: addresses
     },
     {
         modelName: 'CustomerGroup',
-        modelData: [
-            {
-                code: 'guest',
-                name: 'Guest'
-            },
-            {
-                code: 'new',
-                name: 'New'
-            },
-            {
-                code: 'loyal',
-                name: 'Loyal'
-            },
-            {
-                code: 'rich',
-                name: 'Rich'
-            },
-            {
-                code: 'poor',
-                name: 'Poor'
-            },
-            {
-                code: 'obsessed',
-                name: 'Obsessed'
-            }
-        ]
+        modelData: customerGroups
     },
     {
         modelName: 'CustomerCustomerGroup',
-        modelData: [
-            {
-                customer_id: 1,
-                customer_group_id: 1
-            },
-            {
-                customer_id: 1,
-                customer_group_id: 2
-            }
-        ]
+        modelData: customerCustomerGroups
     },
     {
         modelName: 'Order',
-        modelData: [
-            {
-                reference: '9V617LMMJST',
-                date: '2021-04-20',
-                status: 'ordered',
-                totalDelivery: 6.99,
-                totalTax: 21.0,
-                subtotal: 79.0,
-                total: 100.0,
-                customer_id: 1,
-                address_id: 1
-            }
-        ]
+        modelData: orders
     },
     {
         modelName: 'Invoice',
-        modelData: [
-            {
-                date: '2021-04-20',
-                totalDelivery: 6.99,
-                totalTax: 21.0,
-                subtotal: 79.0,
-                total: 100.0,
-                order_id: 1
-            }
-        ]
+        modelData: invoices
     },
     {
         modelName: 'Page',
-        modelData: [
-            {
-                isEnabled: true,
-                urlKey: 'test_page',
-                title: 'Test Page',
-                content: '<h1>Test Page</h1>'
-            },
-            {
-                isEnabled: true,
-                urlKey: 'homepage',
-                title: 'Homepage',
-                content: '<h1>Welcome to the store.</h1>'
-            },
-            {
-                isEnabled: true,
-                urlKey: 'about-us',
-                title: 'About Us',
-                content: '<h1>About us.</h1>'
-            },
-            {
-                isEnabled: true,
-                urlKey: 'faq',
-                title: 'FAQ',
-                content: '<h1>FAQ.</h1>'
-            },
-            {
-                isEnabled: true,
-                urlKey: 'terms_and_conditions',
-                title: 'Terms and conditions',
-                content: '<h1>Terms and conditions.</h1>'
-            },
-            {
-                isEnabled: true,
-                urlKey: 'delivery',
-                title: 'Delivery',
-                content: '<h1>Delivery.</h1>'
-            }
-        ]
+        modelData: pages
     },
     {
         modelName: 'Product',
-        modelData: [
-            {
-                urlKey: 'mechanical_pencil_001mm',
-                sku: 'mechanical_pencil_001mm',
-                isEnabled: true,
-                name: 'Mechanical pencil (0.01mm)',
-                price: 30.0,
-                stockQuantity: 100,
-                specialDiscountType: '',
-                specialDiscountValue: 0.0,
-                specialTaxRate: 0.0,
-                shortDescription: 'Mechanical pencil with 0.01mm nib.',
-                longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                base_image: {
-                    url: 'https://via.placeholder.com/1280x720'
-                },
-                thumbnail_image: {
-                    url: 'https://via.placeholder.com/640x360'
-                },
-                other_images: [
-                    {
-                        url: 'https://via.placeholder.com/1024x1024'
-                    },
-                    {
-                        url: 'https://via.placeholder.com/512x512'
-                    }
-                ],
-                soldAmount: 10,
-                attributeValues: {
-                    nib_size: 0.01,
-                    color: 'Black',
-                    pencil_hardness: 'HB',
-                    has_eraser: true
-                },
-                attribute_set_id: 2
-            },
-            {
-                urlKey: 'mechanical_pencil_002mm',
-                sku: 'mechanical_pencil_002mm',
-                isEnabled: true,
-                name: 'Mechanical pencil (0.02mm)',
-                price: 20.0,
-                stockQuantity: 100,
-                specialDiscountType: '',
-                specialDiscountValue: 0.0,
-                specialTaxRate: 0.0,
-                shortDescription: 'Mechanical pencil with 0.02mm nib.',
-                longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                base_image: {
-                    url: 'https://via.placeholder.com/1280x720'
-                },
-                thumbnail_image: {
-                    url: 'https://via.placeholder.com/640x360'
-                },
-                other_images: [
-                    {
-                        url: 'https://via.placeholder.com/1024x1024'
-                    },
-                    {
-                        url: 'https://via.placeholder.com/512x512'
-                    }
-                ],
-                soldAmount: 20,
-                attributeValues: {
-                    nib_size: 0.02
-                },
-                attribute_set_id: 2
-            },
-            {
-                urlKey: 'mechanical_pencil_003mm',
-                sku: 'mechanical_pencil_003mm',
-                isEnabled: true,
-                name: 'Mechanical pencil (0.03mm)',
-                price: 15.0,
-                stockQuantity: 100,
-                specialDiscountType: '',
-                specialDiscountValue: 0.0,
-                specialTaxRate: 0.0,
-                shortDescription: 'Mechanical pencil with 0.03mm nib.',
-                longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                base_image: {
-                    url: 'https://via.placeholder.com/1280x720'
-                },
-                thumbnail_image: {
-                    url: 'https://via.placeholder.com/640x360'
-                },
-                other_images: [
-                    {
-                        url: 'https://via.placeholder.com/1024x1024'
-                    },
-                    {
-                        url: 'https://via.placeholder.com/512x512'
-                    }
-                ],
-                soldAmount: 10,
-                attributeValues: {
-                    nib_size: 0.03
-                },
-                attribute_set_id: 2
-            },
-            {
-                urlKey: 'mechanical_pencil_004mm',
-                sku: 'mechanical_pencil_004mm',
-                isEnabled: true,
-                name: 'Mechanical pencil (0.04mm)',
-                price: 30.0,
-                stockQuantity: 100,
-                specialDiscountType: '',
-                specialDiscountValue: 0.0,
-                specialTaxRate: 0.0,
-                shortDescription: 'Mechanical pencil with 0.04mm nib.',
-                longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                base_image: {
-                    url: 'https://via.placeholder.com/1280x720'
-                },
-                thumbnail_image: {
-                    url: 'https://via.placeholder.com/640x360'
-                },
-                other_images: [
-                    {
-                        url: 'https://via.placeholder.com/1024x1024'
-                    },
-                    {
-                        url: 'https://via.placeholder.com/512x512'
-                    }
-                ],
-                soldAmount: 10,
-                attributeValues: {
-                    nib_size: 0.04
-                },
-                attribute_set_id: 2
-            },
-            {
-                urlKey: 'mechanical_pencil_005mm',
-                sku: 'mechanical_pencil_005mm',
-                isEnabled: true,
-                name: 'Mechanical pencil (0.05mm)',
-                price: 30.0,
-                stockQuantity: 100,
-                specialDiscountType: '',
-                specialDiscountValue: 0.0,
-                specialTaxRate: 0.0,
-                shortDescription: 'Mechanical pencil with 0.05mm nib.',
-                longDescription: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                base_image: {
-                    url: 'https://via.placeholder.com/1280x720'
-                },
-                thumbnail_image: {
-                    url: 'https://via.placeholder.com/640x360'
-                },
-                other_images: [
-                    {
-                        url: 'https://via.placeholder.com/1024x1024'
-                    },
-                    {
-                        url: 'https://via.placeholder.com/512x512'
-                    }
-                ],
-                soldAmount: 10,
-                attributeValues: {
-                    nib_size: 0.05
-                },
-                attribute_set_id: 2
-            }
-        ]
+        modelData: products
     },
     {
         modelName: 'CartItem',
-        modelData: [
-            {
-                quantity: 5,
-                totalTax: 31.5,
-                subtotal: 150,
-                total: 181.5,
-                customer_id: 1,
-                product_id: 1
-            },
-            {
-                quantity: 10,
-                totalTax: 42,
-                subtotal: 200,
-                total: 242,
-                customer_id: 1,
-                product_id: 2
-            }
-        ]
+        modelData: cartItems
     },
     {
         modelName: 'OrderItem',
-        modelData: [
-            {
-                quantity: 2,
-                totalTax: 4.2,
-                subtotal: 20 ,
-                total: 24.2,
-                order_id: 1,
-                product_id: 1
-            },
-            {
-                quantity: 2,
-                totalTax: 31.5,
-                subtotal: 15 ,
-                total: 18.15,
-                order_id: 1,
-                product_id: 2
-            }
-        ]
+        modelData: orderItems
     },
     {
         modelName: 'ProductCategory',
-        modelData: [
-            {
-                product_id: 1,
-                category_id: 7
-            },
-            {
-                product_id: 2,
-                category_id: 7
-            },
-            {
-                product_id: 3,
-                category_id: 7
-            },
-            {
-                product_id: 4,
-                category_id: 7
-            },
-            {
-                product_id: 5,
-                category_id: 7
-            },
-            {
-                product_id: 1,
-                category_id: 2
-            },
-            {
-                product_id: 2,
-                category_id: 2
-            },
-            {
-                product_id: 3,
-                category_id: 2
-            },
-            {
-                product_id: 4,
-                category_id: 2
-            },
-            {
-                product_id: 5,
-                category_id: 2
-            }
-        ]
+        modelData: productCategories
     },
     {
         modelName: 'Review',
-        modelData: [
-            {
-                status: 'accepted',
-                date: '2021-05-05',
-                title: 'Trash',
-                content: 'Absolute garbage, does not work.',
-                rating: 1,
-                customer_id: 1,
-                product_id: 1
-            },
-            {
-                status: 'accepted',
-                date: '2021-05-05',
-                title: 'Very nice',
-                content: 'Very nice product, I use it every day.',
-                rating: 10,
-                customer_id: 2,
-                product_id: 1
-            },
-            {
-                status: 'accepted',
-                date: '2021-05-05',
-                title: 'Fine',
-                content: 'Yea its pretty good, but it has its own downsides.',
-                rating: 7,
-                customer_id: 3,
-                product_id: 1
-            },
-            {
-                status: 'accepted',
-                date: '2021-05-05',
-                title: 'Very nice',
-                content: 'Very nice, but I still would prefer to use the other version.',
-                rating: 8,
-                customer_id: 4,
-                product_id: 1
-            },
-            {
-                status: 'accepted',
-                date: '2021-05-05',
-                title: 'Alirght',
-                content: 'It is alright, not too good, not too bad.',
-                rating: 5,
-                customer_id: 1,
-                product_id: 2
-            },
-            {
-                status: 'accepted',
-                date: '2021-05-05',
-                title: 'Perfect',
-                content: 'The best thing I have ever used in my life.',
-                rating: 10,
-                customer_id: 2,
-                product_id: 2
-            },
-            {
-                status: 'accepted',
-                date: '2021-05-05',
-                title: 'Trash',
-                content: 'Absolute garbage, does not work.',
-                rating: 1,
-                customer_id: 3,
-                product_id: 2
-            },
-            {
-                status: 'accepted',
-                date: '2021-05-05',
-                title: 'Trash',
-                content: 'This product is not very good, do not recomend it.',
-                rating: 5,
-                customer_id: 4,
-                product_id: 2
-            }
-        ]
+        modelData: reviews
     },
     {
         modelName: 'Config',
-        modelData: [
-            {
-                currencySign: '€',
-                currencySignPosition: 'right'
-            }
-        ]
+        modelData: configs
     },
     {
         modelName: 'ShippingMethod',
-        modelData: [
-            {
-                code: 'flat_rate',
-                name: 'Flat rate'
-            },
-            {
-                code: 'table_rate',
-                name: 'Table rate'
-            }
-        ]
+        modelData: shippingMethods
     },
     {
         modelName: 'PaymentMethod',
-        modelData: [
-            {
-                code: 'bank_transfer',
-                name: 'Bank transfer'
-            },
-            {
-                code: 'payment_card',
-                name: 'Payment card'
-            }
-        ]
+        modelData: paymentMethods
     }
 ]
 

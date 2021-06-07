@@ -27,7 +27,7 @@ export function ProductItem(props) {
     }
 
     return (
-        <Grid item>
+        <Grid item xs={ 4 }>
             <Card className={ classes.root }>
                 <CardActionArea onClick={ onProductClick }>
                     <CardMedia
