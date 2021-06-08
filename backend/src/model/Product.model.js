@@ -83,7 +83,6 @@ export class Product extends Model {
         this.hasMany(models.CartItem, { foreignKey: 'product_id' })
         this.hasMany(models.OrderItem, { foreignKey: 'product_id' })
         this.hasMany(models.Review, { foreignKey: 'product_id' })
-        this.hasMany(models.CartItem, { foreignKey: 'product_id'})
     }
 }
 

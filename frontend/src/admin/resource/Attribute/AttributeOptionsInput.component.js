@@ -1,10 +1,12 @@
 import { IconButton } from '@material-ui/core'
 import { DataGrid } from '@material-ui/data-grid'
-import { useRecordContext } from 'react-admin'
+import { useRecordContext, showNotification } from 'react-admin'
 import AddIcon from '@material-ui/icons/Add'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { useState } from 'react'
 import { AttributeTypeInput } from './AttributeTypeInput.component'
+import { useDispatch } from 'react-redux'
+import { validate } from 'graphql'
 
 const selectTypes = [
     'select_number',
@@ -17,25 +19,25 @@ const typeMap = {
 }
 
 export function AttributeOptionsInput(props) {
-    const [selection, setSelection] = useState([])
-    const { type: recordType, attributeOptions = [] } = useRecordContext()
-    const [rows, setRows] = useState(attributeOptions.map((row, id) => ({ id, ...row })))
-    const [columns, setColumns] = useState(null)
+    const { validate } = props
+    const dispatch = useDispatch()
+    const { attributeOptions: recordAttributeOptions = [], type: recordType } = useRecordContext()
+    const [attributeOptions, setAttributeOptions] = useState(recordAttributeOptions)
     const [type, setType] = useState(recordType)
-    const { setAttributeOptions } = props
+    const [selection, setSelection] = useState([])
+    const [columns, setColumns] = useState([
+        {
+            field: 'value',
+            headerName: 'Value',
+            editable: true,
+            type: typeMap[type],
+            width: 400
+        }
+    ])
 
-    if (!columns) {
-        setColumns(
-            [
-                {
-                    field: 'value',
-                    headerName: 'Value',
-                    editable: true,
-                    type: typeMap[type],
-                    width: 400
-                }
-            ]
-        )
+    const setAllAttributeOptions = (attributeOptions) => {
+        setAttributeOptions(attributeOptions)
+        validate(attributeOptions)
     }
 
     const onTypeChange = (event) => {
@@ -44,40 +46,38 @@ export function AttributeOptionsInput(props) {
         newColumns[0].type = typeMap[value]
         setColumns(newColumns)
         setType(value)
-
-        if (type === 'select_string' && value === 'select_number') {
-            const newRows = rows.map((row) => ({ ...row, value: 0 }))
-            setRows(newRows)
-        }
-
-        if (type === 'select_number' && value === 'select_string') {
-            const newRows = rows.map((row) => ({ ...row, value: 'Value' }))
-            setRows(newRows)
-        }
+        setAllAttributeOptions([])
     }
 
     const onAddButtonClick = () => {
-        setRows([
-            ...rows,
+        const containsNull = attributeOptions.some((option) => !option.value)
+
+        if (containsNull) {
+            dispatch(showNotification('All values must be defined.', 'error'))
+            return
+        }
+
+        const newAttributeOptions = [
+            ...attributeOptions,
             {
-                id: rows.length,
-                label: 'Label',
-                value: type === 'select_string' ? 'Value' : 0
+                value: null
             }
-        ])
+        ]
+
+        setAllAttributeOptions(newAttributeOptions)
     }
 
     const onRemoveButtonClick = () => {
-        const newRows = []
+        const newAttributeOptions = []
 
-        rows.forEach((row) => {
-            if (selection.indexOf(row.id) < 0) {
-                newRows.push(row)
+        attributeOptions.forEach((option, index) => {
+            if (selection.indexOf(index) < 0) {
+                newAttributeOptions.push(option)
             }
         })
 
-        setRows(newRows)
         setSelection([])
+        setAllAttributeOptions(newAttributeOptions)
     }
 
     const onSelectionModelChange = ({ selectionModel }) => {
@@ -85,13 +85,23 @@ export function AttributeOptionsInput(props) {
     }
 
     const onEditCellChangeCommitted = ({ id, props: { value } }) => {
-        const newRows = rows.map((row) => {
+        const containsDuplicate = attributeOptions.find((option) => option.value == value)
+
+        if (containsDuplicate && attributeOptions.indexOf(containsDuplicate) != id) {
+            dispatch(showNotification('All values must be unique.', 'error'))
+        }
+
+        if (!value) {
+            dispatch(showNotification('All values must be defined.', 'error'))
+        }
+
+        const newAttributeOptions = attributeOptions.map((option, index) => {
             return (
-                row.id == id ? { ...row, value: value } : row
+                index == id ? { ...option, value: (containsDuplicate && value != option.value) || !value ? option.value : value } : option
             )
         })
         
-        setRows(newRows)
+        setAllAttributeOptions(newAttributeOptions)
     }
 
     const renderRemoveButton = (params) => {
@@ -107,7 +117,7 @@ export function AttributeOptionsInput(props) {
     }
 
     const renderDataGrid = () => {
-        if (selectTypes.indexOf((type)) < 0 || !attributeOptions) {
+        if (selectTypes.indexOf((type)) < 0) {
             return null
         }
 
@@ -119,19 +129,19 @@ export function AttributeOptionsInput(props) {
                 { renderRemoveButton() }
                 <DataGrid
                     columns={ columns }
-                    rows={ rows }
+                    rows={ attributeOptions.map((option, id) => ({ id, ...option })) }
                     checkboxSelection
                     autoHeight
                     hideFooterPagination
                     disableColumnMenu
                     onSelectionModelChange={ onSelectionModelChange }
                     onEditCellChangeCommitted={ onEditCellChangeCommitted }
+                    selectionModel={ selection }
+                    onChange={ () => console.log('test') }
                 />
             </>
         )
     }
-
-    setAttributeOptions(rows)
 
     return (
         <>

@@ -38,12 +38,6 @@ export const searchResolver = {
                         isEnabled: true,
                         name: {
                             [Op.iLike]: '%' + (data.search || '') + '%'
-                        },
-                        price: {
-                            [Op.and]: {
-                                [Op.gte]: data.priceMin || 0,
-                                [Op.lte]: data.priceMax || 100000
-                            }
                         }
                     },
                     order: order ? [order] : []
@@ -70,8 +64,10 @@ export const searchResolver = {
                     }
                 })
 
-                const finalProducts = products.slice(page * perPage, page * perPage + perPage).filter(
-                    ({ attributeValues: values }) => {
+                const prices = []
+
+                const finalProducts = products.filter(
+                    ({ attributeValues: values, price }) => {
                         let matches = true
                         const keys = Object.keys(values)
 
@@ -79,7 +75,9 @@ export const searchResolver = {
                             const attributeValueArray = attributeValues[key]
 
                             if (attributeValueArray) {
-                                matches = matches && attributeValueArray.indexOf(values[key].toString()) > -1
+                                if (Object.keys(attributeValueArray).length) {
+                                    matches = matches && attributeValueArray.indexOf(values[key].toString()) > -1
+                                }
                             }
 
                             if (!matches) {
@@ -87,17 +85,20 @@ export const searchResolver = {
                             }
                         }
 
-                        return matches
+                        prices.push(price)
+
+                        return matches && price >= (data.minPrice || 0) && price <= (data.maxPrice || 100000)
                     }
                 )
 
+                // Not very efficient, but for now will be good
                 const count = finalProducts.length
-                const minPrice = finalProducts.reduce((a, b) => (a.price < b.price ? a.price : b.price), 0)
-                const maxPrice = finalProducts.reduce((a, b) => (a.price > b.price ? a.price : b.price), 100000)
+                const minPrice = prices.length ? Math.min(...prices) : 0
+                const maxPrice = prices.length ? Math.max(...prices) : 100000
 
                 return {
                     Category: category,
-                    Products: finalProducts,
+                    Products: finalProducts.slice(page * perPage, page * perPage + perPage),
                     Attributes: attributes,
                     Aggregations: {
                         count,

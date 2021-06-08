@@ -2,12 +2,14 @@ const initialState = {
     perPage: 12,
     sort: 'NO_ORDER',
     page: 1,
-    attributeValues: {}
+    attributeValues: {},
+    minPrice: 0,
+    maxPrice: 100000
 }
 
 export function SearchReducer(state = initialState, action) {
     const { attributeValues } = state
-    const { type, payload: { code, values, sort, page } = {} } = action
+    const { type, payload: { code, values, sort, page, minPrice, maxPrice } = {} } = action
 
     switch (type) {
         case 'SET_PAGE':
@@ -16,7 +18,6 @@ export function SearchReducer(state = initialState, action) {
                 page
             }
         case 'SET_SORT':
-            console.log(sort)
             return {
                 ...state,
                 sort
@@ -28,6 +29,13 @@ export function SearchReducer(state = initialState, action) {
                     ...attributeValues,
                     [code]: values
                 }
+            }
+        case 'SET_PRICE_RANGE':
+            console.log(minPrice, maxPrice)
+            return {
+                ...state,
+                minPrice,
+                maxPrice
             }
         case 'RESET_FILTERS':
             return initialState

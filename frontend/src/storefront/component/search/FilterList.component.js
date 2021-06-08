@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import { Button, Typography } from '@material-ui/core'
 import { useDispatch } from 'react-redux'
+import PriceRange from './PriceRange.component'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,6 +50,7 @@ export function FilterList(props) {
                 aria-labelledby="nested-list-subheader"
                 className={classes.root}
             >
+                    <PriceRange aggregations={ aggregations } />
                     { attributes.map(renderFilterItem) }
             </List>
         </div>

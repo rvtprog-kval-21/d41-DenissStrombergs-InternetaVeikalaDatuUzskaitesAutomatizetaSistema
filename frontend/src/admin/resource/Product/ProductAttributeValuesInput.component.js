@@ -8,7 +8,7 @@ import { Typography, FormControl, InputLabel, MenuItem } from '@material-ui/core
 import { CONFIG } from '../../../base/Config'
 
 export function ProductAttributeValuesInput(props) {
-    const { record: { attributeValues }, setAttributeValues } = props
+    const { record: { attributeValues: rAttributeValues }, validate, attributeValues } = props
     const classes = STYLE.form()
     const [attributeSet, setAttributeSet] = useState(null)
     const record = useRecordContext()
@@ -35,13 +35,7 @@ export function ProductAttributeValuesInput(props) {
         return null
     }
 
-    const initialValues = {
-        ...attributeValues
-    }
-
-    const onSubmit = (values, { setSubmitting }) => {
-        setSubmitting(false)
-    }
+    const initialValues = attributeValues || rAttributeValues
 
     const renderField = (attribute) => {
         const { attributeOptions, type, code, label } = attribute
@@ -67,6 +61,7 @@ export function ProductAttributeValuesInput(props) {
                 <Field
                     component={ TextField }
                     type="number"
+                    label={ label }
                     name={ code }
                     fullWidth
                 />
@@ -79,6 +74,7 @@ export function ProductAttributeValuesInput(props) {
                     component={ TextField }
                     type="text"
                     name={ code }
+                    label={ label }
                     fullWidth
                 />
             )
@@ -117,15 +113,10 @@ export function ProductAttributeValuesInput(props) {
         )
     }
 
-    const onValidate = (attributeValues) => {
-        setAttributeValues(attributeValues)
-    }
-
     return (
         <Formik
             initialValues={ initialValues }
-            onSubmit={ onSubmit }
-            validate={ onValidate }
+            validate={ validate }
         >
             { renderForm }
         </Formik>

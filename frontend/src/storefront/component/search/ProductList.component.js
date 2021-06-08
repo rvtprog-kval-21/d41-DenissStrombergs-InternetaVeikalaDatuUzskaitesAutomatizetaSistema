@@ -17,14 +17,17 @@ const useStyles = makeStyles((theme) => ({
 export function ProductList(props) {
     const classes = useStyles()
     const { urlKey, query = '' } = useParams()
-    const { perPage, sort, page, attributeValues } = useSelector((state) => state.SearchReducer)
+    const { perPage, sort, page, attributeValues, minPrice, maxPrice } = useSelector((state) => state.SearchReducer)
+
     const search = Search({
         categoryUrlKey: urlKey,
         search: query,
         perPage,
         sort,
         page,
-        attributeValues: JSON.stringify(attributeValues)
+        attributeValues: JSON.stringify(attributeValues),
+        minPrice,
+        maxPrice
     })
 
 

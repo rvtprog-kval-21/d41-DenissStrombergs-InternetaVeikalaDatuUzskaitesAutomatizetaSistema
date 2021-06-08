@@ -1,13 +1,19 @@
 import { useState } from 'react'
-import { BooleanInput, Edit, SimpleForm, TextInput, useRefresh, useUpdate, Toolbar, required } from 'react-admin'
+import { BooleanInput, Edit, SimpleForm, TextInput, useRefresh, useUpdate, Toolbar, required, showNotification } from 'react-admin'
+import { useDispatch } from 'react-redux'
 import AttributeOptionsInput from './AttributeOptionsInput.component'
 
 export function AttributeEdit(props) {
-    const [attributeOptions, setAttributeOptions] = useState()
+    const dispatch = useDispatch()
+    const [attributeOptions, setAttributeOptions] = useState([])
     const [update, { loading, error }] = useUpdate()
-    const refresh = useRefresh()
 
     const onSave = (data) => {
+        if (attributeOptions.some((option) => !option.value)) {
+            dispatch(showNotification('All attribute options must be defined.', 'error'))
+            return
+        }
+
         const newData = {
             ...data,
             attributeOptions
@@ -16,8 +22,12 @@ export function AttributeEdit(props) {
         update('Attribute', data.id, newData)
 
         if (!error && !loading) {
-            refresh()
+            dispatch(showNotification('Element updated.'))
         }
+    }
+
+    const validate = (newAttributeOptions) => {
+        setAttributeOptions(newAttributeOptions)
     }
 
     return (
@@ -27,7 +37,7 @@ export function AttributeEdit(props) {
                 <TextInput source="code" validate={ required() } />
                 <BooleanInput source="isEnabled" />
                 <TextInput source="label" validate={ required() } />
-                <AttributeOptionsInput setAttributeOptions={ setAttributeOptions } />
+                <AttributeOptionsInput attributeOptions={ attributeOptions } validate={ validate } />
                 <BooleanInput source="isFilter" />
             </SimpleForm>
         </Edit>

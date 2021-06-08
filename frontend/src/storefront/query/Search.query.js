@@ -4,8 +4,8 @@ export const SEARCH = gql`
     query Search(
         $categoryUrlKey: String,
         $search: String,
-        $priceMin: Float,
-        $priceMax: Float,
+        $minPrice: Float,
+        $maxPrice: Float,
         $attributeValues: String,
         $page: Int,
         $perPage: Int,
@@ -14,8 +14,8 @@ export const SEARCH = gql`
         search(
             categoryUrlKey: $categoryUrlKey,
             search: $search,
-            priceMin: $priceMin,
-            priceMax: $priceMax,
+            minPrice: $minPrice,
+            maxPrice: $maxPrice,
             attributeValues: $attributeValues,
             page: $page,
             perPage: $perPage,
@@ -57,7 +57,7 @@ export const SEARCH = gql`
 `
 
 export function Search(variables) {
-    const { loading, error, data: { search } = {} } = useQuery(SEARCH, { variables })
+    const { loading, error, data: { search } = {} } = useQuery(SEARCH, { variables, fetchPolicy: 'no-cache' })
 
     if (loading || error) {
         return null

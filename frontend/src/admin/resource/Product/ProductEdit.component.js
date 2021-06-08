@@ -36,6 +36,10 @@ export function ProductEdit(props) {
     const getFilesFromEvent = async (event) => {
         const [file] = event.dataTransfer ? event.dataTransfer.files : event.target.files;
 
+        if (!file.type.startsWith('image/')) {
+            return []
+        }
+
         const url = await fetch(CONFIG.API + '/graphql', {
             method: 'POST',
             headers: {
@@ -49,8 +53,13 @@ export function ProductEdit(props) {
         }).then((data) => data.json()).then(({ data }) => data?.url)
 
         return [{
-            url
+            url,
+            type: file.type
         }]
+    }
+
+    const validate = (attributeValues) => {
+        setAttributeValues(attributeValues)
     }
 
     return (
@@ -69,19 +78,19 @@ export function ProductEdit(props) {
                 <NumberInput source="specialTaxRate" />
                 <TextInput source="shortDescription" />
                 <RichTextInput source="longDescription" />
-                <ImageInput source="base_image" options={ { getFilesFromEvent } }>
+                <ImageInput source="base_image" options={ { getFilesFromEvent } } accept="image/*">
                     <ImageField source="url" />
                 </ImageInput>
-                <ImageInput source="thumbnail_image" options={ { getFilesFromEvent } }>
+                <ImageInput source="thumbnail_image" options={ { getFilesFromEvent } } accept="image/*">
                     <ImageField source="url" />
                 </ImageInput>
-                <ImageInput source="other_images" multiple options={ { getFilesFromEvent } }>
+                <ImageInput source="other_images" multiple options={ { getFilesFromEvent } } accept="image/*">
                     <ImageField source="url" />
                 </ImageInput>
                 <ReferenceInput source="attribute_set_id" reference="AttributeSet" validate={ required() }>
                     <SelectInput source="name" />
                 </ReferenceInput>
-                <ProductAttributeValuesInput attributeValues={ attributeValues } setAttributeValues={ setAttributeValues } />
+                <ProductAttributeValuesInput attributeValues={ attributeValues } validate={ validate } />
                 <ProductCategoryCreateButton />
                 <ProductCategoryInput />
             </SimpleForm>

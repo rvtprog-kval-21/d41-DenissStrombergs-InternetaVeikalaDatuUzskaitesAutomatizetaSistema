@@ -19,8 +19,8 @@ export const searchTypeDef = `
         search(
             categoryUrlKey: String
             search: String
-            priceMin: Float
-            priceMax: Float
+            minPrice: Float
+            maxPrice: Float
             attributeValues: String
             page: Int
             perPage: Int

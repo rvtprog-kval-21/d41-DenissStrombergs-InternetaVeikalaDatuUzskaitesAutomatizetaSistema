@@ -28,7 +28,6 @@ export function ProductGallery(props) {
 
     const renderSlide = (slide) => {
         const { url, title } = slide
-        console.log(url)
 
         return (
             <Card className={ classes.root } >

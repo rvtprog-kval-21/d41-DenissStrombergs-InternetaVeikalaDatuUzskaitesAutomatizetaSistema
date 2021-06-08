@@ -36,7 +36,7 @@ export async function validateAccess(models, fieldName, role, token) {
             const client = await models.Customer.findOne({ where: { token } })
 
             if (!client) {
-                return false
+                return validateFieldPermission(fieldName, 'PUBLIC')
             }
 
             return validateFieldPermission(fieldName, role)
@@ -114,9 +114,6 @@ export function generateResolver(model) {
                             limit: data.perPage || 100000,
                             offset: data.page * data.perPage || 0,
                             order: data.sortField && data.sortOrder ? [[data.sortField, data.sortOrder]] : [],
-                            include: {
-                                all: true
-                            },
                             where: filter
                         })
                     }
@@ -151,7 +148,7 @@ export function generateResolver(model) {
                 }
 
                 try {
-                    const entity = await models[singularName].findByPk(data.id)
+                    const entity = await models[singularName].findOne({ where: { id: data.id } })
                     Object.assign(entity, data)
 
                     await entity.save()
@@ -171,7 +168,7 @@ export function generateResolver(model) {
                 }
 
                 try {
-                    const entity = await models[singularName].findByPk(data.id)
+                    const entity = await models[singularName].findOne({ where: { id: data.id } })
                     await entity.destroy()
 
                     return entity
