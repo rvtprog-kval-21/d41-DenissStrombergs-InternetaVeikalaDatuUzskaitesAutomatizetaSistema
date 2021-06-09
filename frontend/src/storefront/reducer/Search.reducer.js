@@ -31,7 +31,6 @@ export function SearchReducer(state = initialState, action) {
                 }
             }
         case 'SET_PRICE_RANGE':
-            console.log(minPrice, maxPrice)
             return {
                 ...state,
                 minPrice,

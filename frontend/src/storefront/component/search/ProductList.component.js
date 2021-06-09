@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 export function ProductList(props) {
     const classes = useStyles()
-    const { urlKey, query = '' } = useParams()
+    const { urlKey, query = ' ' } = useParams()
     const { perPage, sort, page, attributeValues, minPrice, maxPrice } = useSelector((state) => state.SearchReducer)
 
     const search = Search({
@@ -63,7 +63,7 @@ export function ProductList(props) {
         return (
             <>
                 <Grid item xs={ 3 }>
-                    <FilterList search={ search } />
+                    <FilterList search={ search } query={ query } />
                 </Grid>
                 <Grid item xs={ 9 }>
                     <Box marginBottom={ 2 }>

@@ -5,6 +5,7 @@ import List from '@material-ui/core/List'
 import { Button, Typography } from '@material-ui/core'
 import { useDispatch } from 'react-redux'
 import PriceRange from './PriceRange.component'
+import { useHistory } from 'react-router'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,9 +16,10 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export function FilterList(props) {
+    const history = useHistory()
     const dispatch = useDispatch()
     const classes = useStyles()
-    const { search: { attributes, aggregations } } = props
+    const { search: { attributes, aggregations }, query } = props
 
     const renderFilterItem = (attribute) => {
         return (
@@ -26,6 +28,10 @@ export function FilterList(props) {
     }
 
     const onResetButtonClick = () => {
+        if (query != ' ') {
+            history.push('/search/ ')
+        }
+
         dispatch({
             type: 'RESET_FILTERS'
         })

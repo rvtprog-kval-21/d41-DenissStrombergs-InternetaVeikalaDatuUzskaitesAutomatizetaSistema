@@ -47,7 +47,7 @@ export function OrderEdit(props) {
                 <TextInput source="reference" disabled fullWidth />
                 <DateInput source="date" disabled fullWidth />
                 <OrderStatusInput fullWidth />
-                <NumberInput source="totalDelivery" disabled fullWidth />
+                <NumberInput source="totalDelivery" fullWidth />
                 <NumberInput source="totalTax" disabled fullWidth />
                 <NumberInput source="subtotal" disabled fullWidth />
                 <NumberInput source="total" disabled fullWidth />
