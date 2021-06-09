@@ -16,8 +16,9 @@ Projektā tiek izmantots:
 - PostgreSQL
 
 ## Izmantotie avoti
-https://github.com/marmelab/react-admin/blob/master/examples/demo/src/layout/SubMenu.tsx - tika ņemts kods, lai izprastu kā strādā, un daļēji arī tiek izmanots ar modifkācijām
-https://github.com/marmelab/react-admin/blob/master/examples/demo/src/layout/Login.tsx - arī tika ņemts no šī faila, lai realizētu administrātora autorizāciju
+[React Admin Login](https://github.com/marmelab/react-admin/blob/master/examples/demo/src/layout/Login.tsx) - tika ņemts no šī faila, lai realizētu administrātora autorizāciju.
+
+[React Admin SubMenu](https://github.com/marmelab/react-admin/blob/master/examples/demo/src/layout/SubMenu.tsx) - tika ņemts kods, lai izprastu kā strādā, un daļēji arī tiek izmanots ar modifkācijām.
 
 ## Uzstādīšanas instrukcijas
 1. Ir nepieciešams strādājošs Node un PostgreSQL setups
