@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 })
 
 export function ProductItem(props) {
-    const { product: { name, sku, price, shortDescription, urlKey } } = props
+    const { product, product: { name, sku, price, shortDescription, urlKey } } = props
     const classes = useStyles()
     const history = useHistory()
 
@@ -46,7 +46,7 @@ export function ProductItem(props) {
                         { sku }
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        <Price value={ price } />
+                        <Price value={ price } product={ product } />
                     </Typography>
                     </CardContent>
                 </CardActionArea>

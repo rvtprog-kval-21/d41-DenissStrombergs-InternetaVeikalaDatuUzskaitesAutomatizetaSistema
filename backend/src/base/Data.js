@@ -294,13 +294,20 @@ const addresses = generateAddresses(customers)
 
 const users = [
     {
+        username: 'admin',
+        email: 'admin@storefront.com',
+        password: 'Admin1234',
+        firstName: 'Admin',
+        lastName: 'Admin'
+    },
+    {
         username: 'deniss',
         email: 'deniss.strombergs@scandiweb.com',
         password: 'Test12#$',
         firstName: 'Deniss',
         lastName: 'Strombergs'
     },
-    ...generateUsers(9)
+    ...generateUsers(8)
 ]
 
 const pencils = generateProducts(20, (index) => generateDrawingData(pencilTypes, index))

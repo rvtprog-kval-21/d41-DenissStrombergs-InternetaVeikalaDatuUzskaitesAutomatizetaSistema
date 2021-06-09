@@ -20,15 +20,6 @@ export const userResolver = {
 
                 return null
             }
-        },
-        signOutUser: async function(_, data, { models }) {
-            try {
-                
-            } catch (error) {
-                console.error(error)
-
-                return null
-            }
         }
     }
 }

@@ -5,7 +5,6 @@ export const addressTypeDef = `
     }
 
     type Mutation {
-
         createCustomerAddress(
             firstName: String!,
             lastName: String!,

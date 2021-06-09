@@ -1,5 +1,4 @@
 import {
-    singOut as signOutMutation,
     signIn as signInMutation,
     signUp as signUpMutation,
     updateAccount as updateAccountMutation,
@@ -32,17 +31,10 @@ export const signUp = async ({ dispatch, client, history }, payload) => {
     }
 }
 
-export const signOut = async ({ dispatch, client, history }) => {
-    const status = await signOutMutation(client)
-
-    if (status) {
-        dispatch({ type: 'SIGN_OUT' })
-        dispatch({ type: 'CLEAR_CART' })
-        showNotification({ dispatch }, { severity: 'SUCCESS', message: 'Successfully signed out.' })
-        history.push('/')
-    } else {
-        showNotification({ dispatch }, { severity: 'ERROR', message: 'Failed to sign out.' })
-    }
+export const signOut = async ({ dispatch }) => {
+    dispatch({ type: 'SIGN_OUT' })
+    dispatch({ type: 'CLEAR_CART' })
+    showNotification({ dispatch }, { severity: 'SUCCESS', message: 'Successfully signed out.' })
 }
 
 export const updateAccount = async ({ dispatch, client }, payload) => {

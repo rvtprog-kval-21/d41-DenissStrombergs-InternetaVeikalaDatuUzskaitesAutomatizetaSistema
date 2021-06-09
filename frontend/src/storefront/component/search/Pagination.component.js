@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import ReactPagination from '@material-ui/lab/Pagination'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { CONFIG } from '../../../base/Config'
 
 const useStyles = makeStyles((theme) => ({
@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export function Pagination(props) {
+    const { perPage } = useSelector((state) => state.SearchReducer)
     const dispatch = useDispatch()
     const { search: { aggregations: { count } }, page } = props
     const classes = useStyles()
@@ -27,7 +28,7 @@ export function Pagination(props) {
 
     return (
         <div>
-            <ReactPagination className={ classes.root } page={ parseInt(page) } count={ Math.ceil(count / CONFIG.SEARCH.PER_PAGE) } onChange={ onClick } />
+            <ReactPagination className={ classes.root } page={ parseInt(page) } count={ Math.ceil(count / perPage ) } onChange={ onClick } />
         </div>
     )
 }

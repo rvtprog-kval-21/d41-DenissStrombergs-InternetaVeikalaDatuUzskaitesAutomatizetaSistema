@@ -18,19 +18,6 @@ export const accountResolver = {
                 return null
             }
         },
-        signOut: async function(_, data, { models, token }) {
-            try {
-                const customer = await models.Customer.findOne({ where: { token }})
-                customer.token = null
-                await customer.save()
-
-                return true
-            } catch (error) {
-                console.error(error)
-
-                return null
-            }
-        },
         signUp: async function(_, data, { models }) {
             try {
                 const customer = await models.Customer.create(data)
