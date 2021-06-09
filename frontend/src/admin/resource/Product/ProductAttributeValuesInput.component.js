@@ -14,6 +14,10 @@ export function ProductAttributeValuesInput(props) {
     const record = useRecordContext()
 
     useEffect(async () => {
+        if (!record.attribute_set_id) {
+            return null
+        }
+
         const data = await fetch(CONFIG.API + '/graphql', {
             method: 'POST',
             headers: {

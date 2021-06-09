@@ -54,6 +54,41 @@ export const checkoutResolver = {
                 return null
             }
         }
+    },
+    Mutation: {
+        generateInvoice: async function(_, data, { models, token }) {
+            try {
+                const user = await models.User.findOne({ where: { token } })
+
+                console.log(token)
+
+                if (!user) {
+                    return null
+                }
+
+                const order = await models.Order.findByPk(data.order_id)
+
+                if (!order) {
+                    return null
+                }
+
+                const invoice = await models.Invoice.create({
+                    order_id: order.id,
+                    totalDelivery: order.totalDelivery,
+                    totalTax: order.totalTax,
+                    subtotal: order.subtotal,
+                    total: order.total
+                })
+
+                console.log(invoice)
+
+                return !!invoice
+            } catch (error) {
+                console.error(error)
+
+                return null
+            }
+        }
     }
 }
 

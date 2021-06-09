@@ -1,7 +1,8 @@
 import { Typography } from '@material-ui/core'
 
 export function ProductDetails(props) {
-    const { product: { longDescription, attributeSet: { attributes }, attributeValues } } = props
+    const { product: { longDescription, attributeSet = {}, attributeValues } } = props
+    const { attributes = [] } = attributeSet || {}
 
     const groupAttributes = () => {
         const attributeGroups = {}

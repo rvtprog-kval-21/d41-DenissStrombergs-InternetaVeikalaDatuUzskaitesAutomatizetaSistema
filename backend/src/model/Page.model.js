@@ -15,7 +15,8 @@ export class Page extends Model {
                     unique: true
                 },
                 isEnabled: {
-                    type: DataTypes.BOOLEAN
+                    type: DataTypes.BOOLEAN,
+                    defaultValue: false
                 },
                 title: {
                     type: DataTypes.STRING

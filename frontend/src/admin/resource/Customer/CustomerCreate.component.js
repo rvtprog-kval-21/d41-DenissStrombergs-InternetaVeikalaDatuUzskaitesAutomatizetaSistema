@@ -4,10 +4,10 @@ export function CustomerCreate(props) {
     return (
         <Create { ...props }>
             <SimpleForm>
-                <TextInput source="email" validate={ [required(), email()] } />
-                <PasswordInput source="password" validate={ required() } />
-                <TextInput source="firstName" validate={ required() } />
-                <TextInput source="lastName" validate={ required() } />
+                <TextInput source="email" validate={ [required(), email()] } fullWidth />
+                <PasswordInput source="password" validate={ required() } fullWidth />
+                <TextInput source="firstName" validate={ required() } fullWidth />
+                <TextInput source="lastName" validate={ required() } fullWidth />
             </SimpleForm>
         </Create>
     )

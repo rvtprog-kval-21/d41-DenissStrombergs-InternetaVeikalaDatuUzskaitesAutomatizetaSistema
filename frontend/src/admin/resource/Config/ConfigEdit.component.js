@@ -4,7 +4,7 @@ export function ConfigEdit(props) {
     return (
         <Edit { ...props }>
             <SimpleForm>
-                <TextInput source="currencySign" validate={ required() } />
+                <TextInput source="currencySign" validate={ required() } fullWidth />
             </SimpleForm>
         </Edit>
     )

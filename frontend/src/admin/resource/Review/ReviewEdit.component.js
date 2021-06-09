@@ -12,7 +12,7 @@ export function ReviewEdit(props) {
                 <TextInput source="title" disabled fullWidth />
                 <TextInput source="content" disabled fullWidth />
                 <NumberInput source="rating" disabled min={ 1 } max={ 10 } fullWidth />
-                <ReferenceField source="customer_id" reference="Customer">
+                <ReferenceField source="customer_id" reference="Customer" fullWidth>
                     <CustomerField />
                 </ReferenceField>
             </SimpleForm>

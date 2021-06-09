@@ -145,7 +145,7 @@ export function AttributeOptionsInput(props) {
 
     return (
         <>
-            <AttributeTypeInput onChange={ onTypeChange } fullWidth />
+            <AttributeTypeInput onChange={ onTypeChange } fullWidth { ...props } />
             { renderDataGrid() }
         </>
     )

@@ -5,9 +5,9 @@ export function BlockCreate(props) {
     return (
         <Create { ...props }>
             <SimpleForm>
-                <TextInput source="code" validate={ required() } />
-                <BooleanInput source="isEnabled" />
-                <RichTextInput source="content" validate={ required() } />
+                <TextInput source="code" validate={ required() } fullWidth />
+                <BooleanInput source="isEnabled" fullWidth />
+                <RichTextInput source="content" validate={ required() } fullWidth />
             </SimpleForm>
         </Create>
     )

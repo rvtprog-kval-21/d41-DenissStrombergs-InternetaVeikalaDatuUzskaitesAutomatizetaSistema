@@ -5,11 +5,11 @@ export function CategoryCreate(props) {
     return (
         <Create { ...props }>
             <SimpleForm>
-                <TextInput source="urlKey" validate={ required() } />
-                <BooleanInput source="isEnabled" />
-                <TextInput source="name" validate={ required() } />
-                <BooleanInput source="isInMenu" />
-                <RichTextInput source="content" />
+                <TextInput source="urlKey" validate={ required() } fullWidth />
+                <BooleanInput source="isEnabled" fullWidth />
+                <TextInput source="name" validate={ required() } fullWidth />
+                <BooleanInput source="isInMenu" fullWidth />
+                <RichTextInput source="content" fullWidth />
             </SimpleForm>
         </Create>
     )

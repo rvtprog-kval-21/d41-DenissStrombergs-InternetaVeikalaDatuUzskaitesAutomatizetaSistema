@@ -5,14 +5,15 @@ export function AttributeSetEdit(props) {
     return (
         <Edit { ...props }>
             <SimpleForm>
-                <TextInput source="id" disabled/>
-                <BooleanInput source="isEnabled"/>
-                <TextInput source="name" validate={ required() } />
+                <TextInput source="id" disabled fullWidth />
+                <BooleanInput source="isEnabled" fullWidth />
+                <TextInput source="name" validate={ required() } fullWidth />
                 <AttributeSetAttributeCreateButton />
                 <ReferenceManyField
                     source="id"
                     target="attribute_set_id"
                     reference="AttributeSetAttribute"
+                    fullWidth
                 >
                     <Datagrid>
                         <ReferenceField source="attribute_id" reference="Attribute">

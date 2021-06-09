@@ -1,12 +1,12 @@
 import InvoiceIcon from '@material-ui/icons/Receipt'
 import InvoiceList from './InvoiceList.component'
-import InvoiceShow from './InvoiceShow.component'
+import InvoiceEdit from './InvoiceEdit.component'
 
 export const InvoiceResource = {
     name: 'Invoice',
     icon: InvoiceIcon,
     list: InvoiceList,
-    show: InvoiceShow
+    edit: InvoiceEdit
 }
 
 export default InvoiceResource

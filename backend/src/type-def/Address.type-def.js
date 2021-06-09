@@ -11,9 +11,9 @@ export const addressTypeDef = `
             phoneNumber: String!,
             country: String!,
             city: String!,
-            province: String!,
+            province: String,
             street1: String!,
-            street2: String!,
+            street2: String,
             postalCode: String!
         ) : Address
         updateCustomerAddress(
@@ -23,9 +23,9 @@ export const addressTypeDef = `
             phoneNumber: String!,
             country: String!,
             city: String!,
-            province: String!,
+            province: String,
             street1: String!,
-            street2: String!,
+            street2: String,
             postalCode: String!
         ) : Address
         deleteCustomerAddress(id: ID!) : Boolean

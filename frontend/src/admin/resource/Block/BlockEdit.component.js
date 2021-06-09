@@ -5,10 +5,10 @@ export function BlockEdit(props) {
     return (
         <Edit { ...props }>
             <SimpleForm>
-                <TextInput source="id" disabled />
-                <TextInput source="code" validate={ required() } />
-                <BooleanInput source="isEnabled" />
-                <RichTextInput source="content" validate={ required() } />
+                <TextInput source="id" disabled fullWidth />
+                <TextInput source="code" validate={ required() } fullWidth />
+                <BooleanInput source="isEnabled" fullWidth />
+                <RichTextInput source="content" validate={ required() } fullWidth />
             </SimpleForm>
         </Edit>
     )

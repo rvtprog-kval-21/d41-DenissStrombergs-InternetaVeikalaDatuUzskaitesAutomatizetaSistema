@@ -21,7 +21,8 @@ export class Product extends Model {
                     unique: true
                 },
                 isEnabled: {
-                    type: DataTypes.BOOLEAN
+                    type: DataTypes.BOOLEAN,
+                    defaultValue: false
                 },
                 name: {
                     type: DataTypes.STRING
@@ -33,34 +34,44 @@ export class Product extends Model {
                     type: DataTypes.INTEGER
                 },
                 specialDiscountType: {
-                    type: DataTypes.STRING
+                    type: DataTypes.STRING,
+                    defaultValue: null
                 },
                 specialDiscountValue: {
-                    type: DataTypes.FLOAT
+                    type: DataTypes.FLOAT,
+                    defaultValue: null
                 },
                 specialTaxRate: {
-                    type: DataTypes.FLOAT
+                    type: DataTypes.FLOAT,
+                    defaultValue: null
                 },
                 shortDescription: {
-                    type: DataTypes.STRING
+                    type: DataTypes.STRING,
+                    defaultValue: ''
                 },
                 longDescription: {
-                    type: DataTypes.TEXT
+                    type: DataTypes.TEXT,
+                    defaultValue: ''
                 },
                 base_image: {
-                    type: DataTypes.JSONB
+                    type: DataTypes.JSONB,
+                    defaultValue: null
                 },
                 thumbnail_image: {
-                    type: DataTypes.JSONB
+                    type: DataTypes.JSONB,
+                    defaultValue: null
                 },
                 other_images: {
-                    type: DataTypes.JSONB
+                    type: DataTypes.JSONB,
+                    defaultValue: null
                 },
                 attributeValues: {
-                    type: DataTypes.JSONB
+                    type: DataTypes.JSONB,
+                    defaultValue: null
                 },
                 soldAmount: {
-                    type: DataTypes.INTEGER
+                    type: DataTypes.INTEGER,
+                    defaultValue: 0
                 },
                 attribute_set_id: {
                     type: DataTypes.INTEGER,
@@ -81,7 +92,7 @@ export class Product extends Model {
     static associate(models) {
         this.belongsTo(models.AttributeSet, { foreignKey: 'attribute_set_id' })
         this.hasMany(models.CartItem, { foreignKey: 'product_id' })
-        this.hasMany(models.OrderItem, { foreignKey: 'product_id' })
+        this.hasMany(models.OrderItem, { foreignKey: 'product_id', onDelete: 'SET NULL' })
         this.hasMany(models.Review, { foreignKey: 'product_id' })
     }
 }

@@ -15,7 +15,8 @@ export class Block extends Model {
                     unique: true
                 },
                 isEnabled: {
-                    type: DataTypes.BOOLEAN
+                    type: DataTypes.BOOLEAN,
+                    defaultValue: true
                 },
                 content: {
                     type: DataTypes.TEXT

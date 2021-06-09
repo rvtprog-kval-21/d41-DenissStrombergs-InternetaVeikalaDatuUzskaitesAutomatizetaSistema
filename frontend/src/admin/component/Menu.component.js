@@ -72,7 +72,7 @@ export function Menu({ onMenuClick, dense = false }) {
                 dense={ dense }
             >
                 <MenuItemLink
-                    to="Product"
+                    to="/Product"
                     primaryText="Products"
                     leftIcon={ <ProductResource.icon /> }
                     onClick={ onMenuClick }

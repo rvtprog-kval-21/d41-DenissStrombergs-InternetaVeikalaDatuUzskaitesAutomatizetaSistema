@@ -5,11 +5,11 @@ export function PageEdit(props) {
     return (
         <Edit { ...props }>
             <SimpleForm>
-                <TextInput source="id" disabled />
-                <TextInput source="urlKey" validate={ required() } />
-                <BooleanInput source="isEnabled" />
-                <TextInput source="title" validate={ required() } />
-                <RichTextInput source="content" />
+                <TextInput source="id" disabled fullWidth />
+                <TextInput source="urlKey" validate={ required() } fullWidth />
+                <BooleanInput source="isEnabled" fullWidth />
+                <TextInput source="title" validate={ required() } fullWidth />
+                <RichTextInput source="content" fullWidth validate={ required() } />
             </SimpleForm>
         </Edit>
     )

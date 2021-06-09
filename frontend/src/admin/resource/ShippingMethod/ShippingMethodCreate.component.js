@@ -4,8 +4,8 @@ export function ShippingMethodCreate(props) {
     return (
         <Create { ...props }>
             <SimpleForm>
-                <TextInput source="code" validate={ required() } />
-                <TextInput source="name" validate={ required() } />
+                <TextInput source="code" validate={ required() } fullWidth />
+                <TextInput source="name" validate={ required() } fullWidth />
             </SimpleForm>
         </Create>
     )

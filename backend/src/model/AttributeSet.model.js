@@ -15,7 +15,8 @@ export class AttributeSet extends Model {
                     unique: true
                 },
                 isEnabled: {
-                    type: DataTypes.BOOLEAN
+                    type: DataTypes.BOOLEAN,
+                    defaultValue: false
                 },
                 name: {
                     type: DataTypes.STRING
@@ -30,7 +31,7 @@ export class AttributeSet extends Model {
     }
 
     static associate(models) {
-        this.hasMany(models.Product, { foreignKey: 'attribute_set_id' })
+        this.hasMany(models.Product, { foreignKey: 'attribute_set_id', onDelete: 'SET NULL' })
     }
 }
 

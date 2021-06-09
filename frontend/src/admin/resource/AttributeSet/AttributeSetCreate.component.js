@@ -4,8 +4,8 @@ export function AttributeSetCreate(props) {
     return (
         <Create { ...props } title="Create an attribute set">
             <SimpleForm>
-                <BooleanInput source="isEnabled"/>
-                <TextInput source="name" validate={ required() } />
+                <BooleanInput source="isEnabled" fullWidth/>
+                <TextInput source="name" validate={ required() } fullWidth />
             </SimpleForm>
         </Create>
     )

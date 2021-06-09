@@ -11,7 +11,7 @@ export const CONFIG = {
         }
     ],
     API: 'http://localhost:3001',
-    GENERATE_SAMPLE_DATA: false,
+    GENERATE_SAMPLE_DATA: true,
     GENERATE_SCHEMA: false
 }
 

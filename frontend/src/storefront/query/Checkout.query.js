@@ -34,6 +34,14 @@ export const SUBMIT_ORDER = gql`
     }
 `
 
+export const GENERATE_INVOICE = `
+    mutation GenerateInvoice(
+        $orderId: ID!,
+    ) {
+        status: generateInvoice(order_id: $orderId)
+    }
+`
+
 export function GetAllShippingMethods() {
     const { loading, error, data: { shippingMethods } = {} } = useQuery(GET_ALL_SHIPPING_METHODS, {})
 

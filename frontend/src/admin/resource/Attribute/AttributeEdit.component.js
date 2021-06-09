@@ -33,12 +33,12 @@ export function AttributeEdit(props) {
     return (
         <Edit { ...props }>
             <SimpleForm save={ onSave } toolbar={<Toolbar alwaysEnableSaveButton /> }>
-                <TextInput source="id" disabled />
-                <TextInput source="code" validate={ required() } />
-                <BooleanInput source="isEnabled" />
-                <TextInput source="label" validate={ required() } />
-                <AttributeOptionsInput attributeOptions={ attributeOptions } validate={ validate } />
-                <BooleanInput source="isFilter" />
+                <TextInput source="id" disabled fullWidth />
+                <TextInput source="code" validate={ required() } fullWidth />
+                <BooleanInput source="isEnabled" fullWidth />
+                <TextInput source="label" validate={ required() } fullWidth />
+                <AttributeOptionsInput attributeOptions={ attributeOptions } validate={ validate } fullWidth />
+                <BooleanInput source="isFilter" fullWidth />
             </SimpleForm>
         </Edit>
     )

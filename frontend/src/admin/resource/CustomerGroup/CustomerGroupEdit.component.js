@@ -4,9 +4,9 @@ export function CustomerGroupEdit(props) {
     return (
         <Edit { ...props }>
             <SimpleForm>
-                <TextInput source="id" disabled />
-                <TextInput source="code" validate={ required() } />
-                <TextInput source="name" validate={ required() } />
+                <TextInput source="id" disabled fullWidth />
+                <TextInput source="code" validate={ required() } fullWidth />
+                <TextInput source="name" validate={ required() } fullWidth />
             </SimpleForm>
         </Edit>
     )

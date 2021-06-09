@@ -5,10 +5,10 @@ export function PageCreate(props) {
     return (
         <Create { ...props }>
             <SimpleForm>
-                <TextInput source="urlKey" validate={ required() } />
-                <BooleanInput source="isEnabled" />
-                <TextInput source="title" validate={ required() } />
-                <RichTextInput source="content" />
+                <TextInput source="urlKey" validate={ required() } fullWidth />
+                <BooleanInput source="isEnabled" fullWidth />
+                <TextInput source="title" validate={ required() } fullWidth />
+                <RichTextInput source="content" fullWidth validate={ required() }  />
             </SimpleForm>
         </Create>
     )

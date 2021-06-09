@@ -15,7 +15,8 @@ export class Attribute extends Model {
                     unique: true
                 },
                 isEnabled: {
-                    type: DataTypes.BOOLEAN
+                    type: DataTypes.BOOLEAN,
+                    defaultValue: false
                 },
                 label: {
                     type: DataTypes.STRING
@@ -24,10 +25,12 @@ export class Attribute extends Model {
                     type: DataTypes.STRING
                 },
                 attributeOptions: {
-                    type: DataTypes.JSONB
+                    type: DataTypes.JSONB,
+                    defaultValue: null
                 },
                 isFilter: {
-                    type: DataTypes.BOOLEAN
+                    type: DataTypes.BOOLEAN,
+                    defaultValue: false
                 },
                 attributeGroup: {
                     type: DataTypes.STRING

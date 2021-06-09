@@ -16,13 +16,15 @@ export class Category extends Model {
                     allowNull: true
                 },
                 isEnabled: {
-                    type: DataTypes.BOOLEAN
+                    type: DataTypes.BOOLEAN,
+                    defaultValue: false
                 },
                 name: {
                     type: DataTypes.STRING
                 },
                 isInMenu: {
-                    type: DataTypes.BOOLEAN
+                    type: DataTypes.BOOLEAN,
+                    defaultValue: false
                 },
                 content: {
                     type: DataTypes.TEXT

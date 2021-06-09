@@ -1,4 +1,4 @@
-import { DataTypes, Model } from 'sequelize'
+import { DataTypes, Model, Sequelize } from 'sequelize'
 import Order from './Order.model'
 
 export class Invoice extends Model {
@@ -13,6 +13,7 @@ export class Invoice extends Model {
                 },
                 date: {
                     type: DataTypes.DATE,
+                    defaultValue: Sequelize.NOW
                 },
                 totalDelivery: {
                     type: DataTypes.FLOAT
@@ -28,6 +29,7 @@ export class Invoice extends Model {
                 },
                 order_id: {
                     type: DataTypes.INTEGER,
+                    unique: true,
                     references: {
                         model: Order,
                         key: 'id'
