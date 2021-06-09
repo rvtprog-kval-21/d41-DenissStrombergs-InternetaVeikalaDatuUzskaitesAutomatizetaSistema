@@ -1,12 +1,23 @@
-# Interneta veikala sistēma
+# Interneta veikala datu uzskaites automatizētā sistēma
+
 ## Projekta apraksts
-Relativi vienkārša interneta veikala sistēma līdzīgi Magento 2, bet mazāka, ir admin, kur lietotājs (administrators) var veidot, rediģet, dzēst dažādus datus, un apskatīt kopsavilkumu, un kur ir storefront, kur lietotājs (klients) var meklēt, pievienot produktu grozām, veidot savu akauntu un veikt pasutījumus.
+Relativi vienkārša interneta veikala sistēma līdzīgi Magento 2, bet mazāka, ir admin, kur lietotājs (administrators) var veidot, rediģet, dzēst dažādus datus, un apskatīt kopsavilkumu, un kur ir storefront, kur pircējs (klients) var meklēt, pievienot produktu grozām, veidot savu akauntu un veikt pasutījumus.
 
 ## Izmantotās tehnoloģijas
-- HTML, Sass, JavaScript
+Projektā tiek izmantots:
+- JavaScript
+- JSS
 - React
+- Material UI
+- React Admin
 - Node
+- Express
+- GraphQL
 - PostgreSQL
+
+## Izmantotie avoti
+https://github.com/marmelab/react-admin/blob/master/examples/demo/src/layout/SubMenu.tsx - tika ņemts kods, lai izprastu kā strādā, un daļēji arī tiek izmanots ar modifkācijām
+https://github.com/marmelab/react-admin/blob/master/examples/demo/src/layout/Login.tsx - arī tika ņemts no šī faila, lai realizētu administrātora autorizāciju
 
 ## Uzstādīšanas instrukcijas
 1. Ir nepieciešams strādājošs Node un PostgreSQL setups
@@ -14,6 +25,6 @@ Relativi vienkārša interneta veikala sistēma līdzīgi Magento 2, bet mazāka
 3. cd d41-DenissStrombergs-InternetaVeikals
 4. cd backend
 5. npm start
-5. Atvert jaunu konsoles logu
+5. Atvert jaunu konsoles logu d41-DenissStrombergs-InternetaVeikals direktorijā
 6. cd frontend
 7. npm start
