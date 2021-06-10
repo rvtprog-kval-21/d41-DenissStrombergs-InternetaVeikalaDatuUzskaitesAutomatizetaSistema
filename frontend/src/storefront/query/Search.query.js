@@ -36,9 +36,9 @@ export const SEARCH = gql`
                 specialDiscountType
                 specialDiscountValue
                 specialTaxRate
-                base_image
-                thumbnail_image
-                other_images
+                baseImage
+                thumbnailImage
+                otherImages
             }
             attributes: Attributes {
                 id

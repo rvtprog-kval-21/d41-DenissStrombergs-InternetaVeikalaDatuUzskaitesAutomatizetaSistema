@@ -137,7 +137,6 @@ export function AttributeOptionsInput(props) {
                     onSelectionModelChange={ onSelectionModelChange }
                     onEditCellChangeCommitted={ onEditCellChangeCommitted }
                     selectionModel={ selection }
-                    onChange={ () => console.log('test') }
                 />
             </>
         )

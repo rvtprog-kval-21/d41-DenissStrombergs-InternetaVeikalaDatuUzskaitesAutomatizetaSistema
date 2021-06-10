@@ -53,15 +53,15 @@ export class Product extends Model {
                     type: DataTypes.TEXT,
                     defaultValue: ''
                 },
-                base_image: {
+                baseImage: {
                     type: DataTypes.JSONB,
                     defaultValue: null
                 },
-                thumbnail_image: {
+                thumbnailImage: {
                     type: DataTypes.JSONB,
                     defaultValue: null
                 },
-                other_images: {
+                otherImages: {
                     type: DataTypes.JSONB,
                     defaultValue: null
                 },

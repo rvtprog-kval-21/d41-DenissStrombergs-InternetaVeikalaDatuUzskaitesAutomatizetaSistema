@@ -60,8 +60,6 @@ export const checkoutResolver = {
             try {
                 const user = await models.User.findOne({ where: { token } })
 
-                console.log(token)
-
                 if (!user) {
                     return null
                 }
@@ -79,8 +77,6 @@ export const checkoutResolver = {
                     subtotal: order.subtotal,
                     total: order.total
                 })
-
-                console.log(invoice)
 
                 return !!invoice
             } catch (error) {

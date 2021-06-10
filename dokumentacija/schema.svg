@@ -416,11 +416,11 @@
 <polygon fill="none" stroke="#000000" points="787.5,-344 787.5,-366 932.5,-366 932.5,-344 787.5,-344"/>
 <text text-anchor="start" x="792.5" y="-352" font-family="Times,serif" font-size="10.00" fill="#000000">longDescription: TEXT</text>
 <polygon fill="none" stroke="#000000" points="787.5,-322 787.5,-344 932.5,-344 932.5,-322 787.5,-322"/>
-<text text-anchor="start" x="792.5" y="-330" font-family="Times,serif" font-size="10.00" fill="#000000">base_image: JSON</text>
+<text text-anchor="start" x="792.5" y="-330" font-family="Times,serif" font-size="10.00" fill="#000000">baseImage: JSON</text>
 <polygon fill="none" stroke="#000000" points="787.5,-300 787.5,-322 932.5,-322 932.5,-300 787.5,-300"/>
-<text text-anchor="start" x="792.5" y="-308" font-family="Times,serif" font-size="10.00" fill="#000000">thumbnail_image: JSON</text>
+<text text-anchor="start" x="792.5" y="-308" font-family="Times,serif" font-size="10.00" fill="#000000">thumbnailImage: JSON</text>
 <polygon fill="none" stroke="#000000" points="787.5,-278 787.5,-300 932.5,-300 932.5,-278 787.5,-278"/>
-<text text-anchor="start" x="792.5" y="-286" font-family="Times,serif" font-size="10.00" fill="#000000">other_images: JSON</text>
+<text text-anchor="start" x="792.5" y="-286" font-family="Times,serif" font-size="10.00" fill="#000000">otherImages: JSON</text>
 <polygon fill="none" stroke="#000000" points="787.5,-256 787.5,-278 932.5,-278 932.5,-256 787.5,-256"/>
 <text text-anchor="start" x="792.5" y="-264" font-family="Times,serif" font-size="10.00" fill="#000000">attributeValues: JSON</text>
 <polygon fill="none" stroke="#000000" points="787.5,-234 787.5,-256 932.5,-256 932.5,-234 787.5,-234"/>

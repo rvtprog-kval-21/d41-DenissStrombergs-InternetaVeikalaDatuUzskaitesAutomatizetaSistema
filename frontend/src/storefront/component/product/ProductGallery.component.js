@@ -12,11 +12,11 @@ const useStyles = makeStyles({
 
 export function ProductGallery(props) {
     const classes = useStyles()
-    const { product: { base_image, thumbnail_image, other_images } } = props
+    const { product: { baseImage, thumbnailImage, otherImages } } = props
     const slides = [
-        base_image,
-        thumbnail_image,
-        ...other_images
+        baseImage,
+        thumbnailImage,
+        ...otherImages
     ]
     const settings = {
         dots: true,

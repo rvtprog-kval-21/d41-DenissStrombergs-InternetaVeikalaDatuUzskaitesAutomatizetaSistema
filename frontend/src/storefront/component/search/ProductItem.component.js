@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 })
 
 export function ProductItem(props) {
-    const { product, product: { name, sku, price, shortDescription, urlKey } } = props
+    const { product, product: { name, sku, price, shortDescription, urlKey, thumbnailImage: { url } = {} } } = props
     const classes = useStyles()
     const history = useHistory()
 
@@ -32,7 +32,7 @@ export function ProductItem(props) {
                 <CardActionArea onClick={ onProductClick }>
                     <CardMedia
                         className={classes.media}
-                        image="https://via.placeholder.com/480x360"
+                        image={ url }
                         title={ name }
                     />
                     <CardContent>

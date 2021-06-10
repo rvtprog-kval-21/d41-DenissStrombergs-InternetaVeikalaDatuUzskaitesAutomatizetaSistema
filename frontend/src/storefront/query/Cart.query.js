@@ -16,9 +16,9 @@ export const ADD_PRODUCT = gql`
                     specialDiscountType
                     specialDiscountValue
                     specialTaxRate
-                    base_image
-                    thumbnail_image
-                    other_images
+                    baseImage
+                    thumbnailImage
+                    otherImages
                 }
             }
             totals
@@ -42,9 +42,9 @@ export const REMOVE_PRODUCT = gql`
                     specialDiscountType
                     specialDiscountValue
                     specialTaxRate
-                    base_image
-                    thumbnail_image
-                    other_images
+                    baseImage
+                    thumbnailImage
+                    otherImages
                 }
             }
             totals

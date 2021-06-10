@@ -167,13 +167,13 @@ export function generateProducts(count, type) {
             specialTaxRate: 0,
             shortDescription: faker.lorem.sentence(10),
             longDescription: faker.lorem.paragraph(10),
-            base_image: {
+            baseImage: {
                 url: CONFIG.API + '/images/1280x720.png'
             },
-            thumbnail_image: {
+            thumbnailImage: {
                 url: CONFIG.API + '/images/640x360.png'
             },
-            other_images: [
+            otherImages: [
                 {
                     url: CONFIG.API + '/images/1024x1024.png'
                 },

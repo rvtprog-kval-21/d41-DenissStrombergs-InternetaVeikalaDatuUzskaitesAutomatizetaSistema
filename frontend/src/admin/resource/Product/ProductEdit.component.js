@@ -72,13 +72,13 @@ export function ProductEdit(props) {
                 <NumberInput source="specialTaxRate" fullWidth />
                 <TextInput source="shortDescription" fullWidth />
                 <RichTextInput source="longDescription" />
-                <ImageInput source="base_image" options={ { getFilesFromEvent } } accept="image/*">
+                <ImageInput source="baseImage" options={ { getFilesFromEvent } } accept="image/*">
                     <ImageField source="url" />
                 </ImageInput>
-                <ImageInput source="thumbnail_image" options={ { getFilesFromEvent } } accept="image/*">
+                <ImageInput source="thumbnailImage" options={ { getFilesFromEvent } } accept="image/*">
                     <ImageField source="url" />
                 </ImageInput>
-                <ImageInput source="other_images" multiple options={ { getFilesFromEvent } } accept="image/*">
+                <ImageInput source="otherImages" multiple options={ { getFilesFromEvent } } accept="image/*">
                     <ImageField source="url" />
                 </ImageInput>
                 <ReferenceInput source="attribute_set_id" reference="AttributeSet" validate={ required() } fullWidth>

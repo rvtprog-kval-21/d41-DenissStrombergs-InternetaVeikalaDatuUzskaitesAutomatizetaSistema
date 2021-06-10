@@ -13,9 +13,9 @@ export const GET_PRODUCT = gql`
             specialTaxRate
             shortDescription
             longDescription
-            base_image
-            thumbnail_image
-            other_images
+            baseImage
+            thumbnailImage
+            otherImages
             attributeValues
             attributeSet: AttributeSet {
                 attributes: Attributes {

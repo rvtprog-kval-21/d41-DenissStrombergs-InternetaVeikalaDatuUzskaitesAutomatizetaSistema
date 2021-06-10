@@ -24,9 +24,9 @@ export const SIGN_IN = gql`
                     specialDiscountType
                     specialDiscountValue
                     specialTaxRate
-                    base_image
-                    thumbnail_image
-                    other_images
+                    baseImage
+                    thumbnailImage
+                    otherImages
                 }
             }
         }

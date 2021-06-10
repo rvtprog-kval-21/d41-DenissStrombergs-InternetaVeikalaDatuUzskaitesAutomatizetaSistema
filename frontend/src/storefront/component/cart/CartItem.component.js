@@ -31,7 +31,7 @@ export function CartItem(props) {
     const client = useApolloClient()
     const history = useHistory()
     const classes = useStyles()
-    const { item: { product: { id, sku, name, urlKey, price }, quantity }, shouldRenderCartItemActions = true } = props
+    const { item: { product: { id, sku, name, urlKey, price, thumbnailImage: { url } = {} }, quantity }, shouldRenderCartItemActions = true } = props
 
     const onProductClick = () => {
         history.push(`/product/${ urlKey }`)
@@ -70,7 +70,7 @@ export function CartItem(props) {
                         <div>
                             <CardMedia
                                 className={ classes.media }
-                                image="https://via.placeholder.com/480x360"
+                                image={ url }
                                 title={ name }
                             />
                         </div>
