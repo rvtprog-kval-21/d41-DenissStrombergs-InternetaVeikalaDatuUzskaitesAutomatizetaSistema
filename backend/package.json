@@ -17,6 +17,7 @@
     "@babel/cli": "^7.13.10",
     "@babel/core": "^7.13.10",
     "@babel/preset-env": "^7.13.10",
+    "bcrypt": "^5.0.1",
     "camelcase": "^6.2.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",

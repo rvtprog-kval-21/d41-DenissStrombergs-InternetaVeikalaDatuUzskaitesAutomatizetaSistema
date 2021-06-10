@@ -28,14 +28,14 @@ export const VALIDATION = {
     }),
     SIGN_UP: Yup.object().shape({
         email: Yup.string().required('Is required').email('Enter valid email'),
-        password: Yup.string().required('Is required'),
+        password: Yup.string().required('Is required').min(8, 'Password must be at least 8 characters long.'),
         confirmPassword: Yup.string().required('Is required').oneOf([Yup.ref('password'), null], 'Passwords must match'),
         firstName: Yup.string().required('Is required'),
         lastName: Yup.string().required('Is required')
     }),
     PASSWORD: Yup.object().shape({
         oldPassword: Yup.string().required('Is required'),
-        newPassword: Yup.string().required('Is required'),
+        newPassword: Yup.string().required('Is required').min(8, 'Password must be at least 8 characters long.'),
         confirmNewPassword: Yup.string().required('Is required').oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
     }),
     SHIPPING_STEP: Yup.object().shape({

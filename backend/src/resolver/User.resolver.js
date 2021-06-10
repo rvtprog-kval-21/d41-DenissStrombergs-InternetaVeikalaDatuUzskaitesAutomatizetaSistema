@@ -1,20 +1,20 @@
-import { generateToken } from '../base/Auth'
+import { compareHash, generateToken } from '../base/Auth'
 
 export const userResolver = {
     Mutation: {
         signInUser: async function(_, data, { models }) {
             try {
                 const user = await models.User.findOne({ where: {
-                    username: data.username,
-                    password: data.password
+                    username: data.username
                 }})
 
-                if (user) {
+                if (user && compareHash(user.password, data.password)) {
                     user.token = generateToken(user)
-                    user.save()
+                    await user.save()
+                    return user
                 }
 
-                return user
+                return null
             } catch (error) {
                 console.error(error)
 

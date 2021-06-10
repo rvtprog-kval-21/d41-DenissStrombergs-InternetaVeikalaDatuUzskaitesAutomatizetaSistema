@@ -1,4 +1,5 @@
 import faker from 'faker'
+import { encryptPassword } from './Auth'
 import CONFIG from './Config'
 import { attributes, attributeSetAttributes, attributeSets, blocks, categories, configs, customerGroups, pages, paymentMethods, shippingMethods } from './CoreData'
 
@@ -9,7 +10,7 @@ export function randomInteger(min, max) {
 export function generateCustomers(count) {
     return new Array(count).fill({}).map(() => ({
         email: faker.internet.email(),
-        password: faker.internet.password(),
+        password: encryptPassword(faker.internet.password()),
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         totalTax: 0,
@@ -22,7 +23,7 @@ export function generateUsers(count) {
     return new Array(count).fill({}).map(() => ({
         username: faker.internet.userName(),
         email: faker.internet.email(),
-        password: faker.internet.password(),
+        password: encryptPassword(faker.internet.password()),
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName()
     }))
@@ -278,7 +279,7 @@ export function generateInvoices(orders) {
 const customers = [
     {
         email: 'deniss.strombergs@scandiweb.com',
-        password: 'Test12#$',
+        password: encryptPassword('Test12#$'),
         firstName: 'Deniss',
         lastName: 'Strombergs',
         totalTax: 73.5,
@@ -296,14 +297,14 @@ const users = [
     {
         username: 'admin',
         email: 'admin@storefront.com',
-        password: 'Admin1234',
+        password: encryptPassword('Admin1234'),
         firstName: 'Admin',
         lastName: 'Admin'
     },
     {
         username: 'deniss',
         email: 'deniss.strombergs@scandiweb.com',
-        password: 'Test12#$',
+        password: encryptPassword('Test12#$'),
         firstName: 'Deniss',
         lastName: 'Strombergs'
     },

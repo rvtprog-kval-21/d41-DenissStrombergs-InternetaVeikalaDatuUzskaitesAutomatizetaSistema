@@ -1,4 +1,4 @@
-import { generateToken } from '../base/Auth'
+import { compareHash, encryptPassword, generateToken } from '../base/Auth'
 
 export const accountResolver = {
     Mutation: {
@@ -6,8 +6,12 @@ export const accountResolver = {
             try {
                 const customer = await models.Customer.findOne({ where: {
                     email: data.email,
-                    password: data.password
                 }, include: { model: models.CartItem, include: [models.Product] }})
+
+                if (customer && !compareHash(customer.password, data.password)) {
+                    return null
+                }
+
                 customer.token = generateToken(customer)
                 await customer.save()
 
@@ -22,6 +26,7 @@ export const accountResolver = {
             try {
                 const customer = await models.Customer.create(data)
                 customer.token = generateToken(customer)
+                customer.password = encryptPassword(customer.password)
                 await customer.save()
 
                 return customer
@@ -34,10 +39,10 @@ export const accountResolver = {
         changePassword: async function(_, data, { models, token }) {
             try {
                 const customer = await models.Customer.findOne({ where: { token }})
-                
+
                 if (customer) {
-                    if (data.oldPassword == customer.password) {
-                        customer.password = data.newPassword
+                    if (compareHash(customer.password, data.oldPassword)) {
+                        customer.password = encryptPassword(data.newPassword)
                         await customer.save()
                         return true
                     }
