@@ -7,6 +7,7 @@ import { ApolloProvider } from '@apollo/client/react'
 import { setContext } from '@apollo/client/link/context'
 import StoreFront from './Storefront'
 import { CONFIG } from './Config'
+import { getItem } from './Utility'
 
 const store = configureStore()
 
@@ -15,7 +16,7 @@ const httpLink = createHttpLink({
 })
 
 const authLink = setContext((_, { headers }) => {
-    const account = JSON.parse(localStorage.getItem('ACCOUNT')) || {}
+    const account = getItem('ACCOUNT') || {}
     const { token } = account
 
     return {

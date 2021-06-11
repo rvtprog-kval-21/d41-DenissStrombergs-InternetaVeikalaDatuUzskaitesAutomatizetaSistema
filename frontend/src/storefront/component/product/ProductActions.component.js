@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Typography } from '@material-ui/core'
 import { useApolloClient } from '@apollo/client'
-import Price from './Price.component'
 import { addProductToCart } from '../../dispatcher/Cart.dispatcher'
 import { showNotification } from '../../dispatcher/Notification.dispatcher'
+import { ProductPrice } from './ProductPrice.component'
 
 export function ProductActions(props) {
     const dispatch = useDispatch()
     const client = useApolloClient()
     const account = useSelector((state) => state.AccountReducer)
-    const { product: { id, name, sku, price} } = props
+    const { product, product: { id, name, sku} } = props
 
     const onAddToCartButtonClick = () => {
         if (account.token) {
@@ -29,7 +29,7 @@ export function ProductActions(props) {
             </Typography>
             <Typography>
                 { 'Price: ' }
-                <Price value={ price } />
+                <ProductPrice product={ product } />
             </Typography>
             <Button onClick={ onAddToCartButtonClick } variant="contained" color="primary">
                 Add to cart

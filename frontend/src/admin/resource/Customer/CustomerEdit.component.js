@@ -7,9 +7,9 @@ export function CustomerEdit(props) {
         <Edit { ...props }>
             <SimpleForm>
                 <TextInput source="id" disabled fullWidth />
-                <TextInput source="email" validate={ [required(), email()] } fullWidth />
-                <TextInput source="firstName" validate={ required() } fullWidth />
-                <TextInput source="lastName" validate={ required() } fullWidth />
+                <TextInput source="email" disabled fullWidth />
+                <TextInput source="firstName" disabled validate={ required() } fullWidth />
+                <TextInput source="lastName" disabled validate={ required() } fullWidth />
                 <CustomerCustomerGroupCreateButton />
                 <CustomerCustomerGroupInput />
             </SimpleForm>

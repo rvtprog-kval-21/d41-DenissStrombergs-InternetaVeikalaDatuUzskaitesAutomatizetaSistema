@@ -8,7 +8,7 @@ export function PriceRange(props) {
     const dispatch = useDispatch()
     const { aggregations: { minPrice, maxPrice } = {} } = props
     const filter = useSelector((state) => state.SearchReducer)
-    const [value, setValue] = React.useState([filter.minPrice, filter.maxPrice]);
+    const [value, setValue] = React.useState([filter.minPrice, filter.maxPrice])
 
     const handleChange = (_, newValue) => {
         setValue(newValue)

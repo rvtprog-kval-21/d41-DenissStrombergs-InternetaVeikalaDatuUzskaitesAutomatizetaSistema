@@ -1,6 +1,8 @@
+import { setItem, getItem } from "../../base/Utility"
+
 export const initialState = {}
 
-export function CheckoutReducer(state = JSON.parse(window.localStorage.getItem('CHECKOUT')) || initialState, action) {
+export function CheckoutReducer(state = getItem('CHECKOUT') || initialState, action) {
     const { type, payload } = action
 
     switch (type) {
@@ -10,7 +12,7 @@ export function CheckoutReducer(state = JSON.parse(window.localStorage.getItem('
                 address: payload
             }
 
-            window.localStorage.setItem('CHECKOUT', JSON.stringify(out))
+            setItem('CHECKOUT', out)
 
             return out
         case 'SET_SHIPPING_METHOD':
@@ -19,7 +21,7 @@ export function CheckoutReducer(state = JSON.parse(window.localStorage.getItem('
                 shippingMethodId: payload
             }
 
-            window.localStorage.setItem('CHECKOUT', JSON.stringify(out2))
+            setItem('CHECKOUT', out2)
 
             return out2
         case 'SET_PAYMENT_METHOD':
@@ -28,7 +30,7 @@ export function CheckoutReducer(state = JSON.parse(window.localStorage.getItem('
                 paymentMethodId: payload
             }
 
-            window.localStorage.setItem('CHECKOUT', JSON.stringify(out3))
+            setItem('CHECKOUT', out3)
 
             return out3
         default:

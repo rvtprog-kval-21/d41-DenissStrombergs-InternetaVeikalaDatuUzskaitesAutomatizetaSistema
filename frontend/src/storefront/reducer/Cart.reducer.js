@@ -1,3 +1,5 @@
+import { getItem, setItem } from "../../base/Utility"
+
 export const initialState = {
     items: {},
     totals: {
@@ -7,7 +9,7 @@ export const initialState = {
     }
 }
 
-export function CartReducer(state = JSON.parse(window.localStorage.getItem('CART')) || initialState, action) {
+export function CartReducer(state = getItem('CART') || initialState, action) {
     const { items } = state
     const { type, payload: { item, totals, account } = {} } = action
 
@@ -21,7 +23,7 @@ export function CartReducer(state = JSON.parse(window.localStorage.getItem('CART
                 },
                 totals
             }
-            window.localStorage.setItem('CART', JSON.stringify(out))
+            setItem('CART', out)
 
             return out
         case 'REMOVE_PRODUCT_FROM_CART':
@@ -34,7 +36,7 @@ export function CartReducer(state = JSON.parse(window.localStorage.getItem('CART
                     },
                     totals
                 }
-                window.localStorage.setItem('CART', JSON.stringify(out))
+                setItem('CART', out)
 
                 return out
             } else {
@@ -46,12 +48,12 @@ export function CartReducer(state = JSON.parse(window.localStorage.getItem('CART
                     },
                     totals
                 }
-                window.localStorage.setItem('CART', JSON.stringify(out))
+                setItem('CART', out)
 
                 return out
             }
         case 'CLEAR_CART':
-            window.localStorage.setItem('CART', JSON.stringify(initialState))
+            setItem('CART', initialState)
 
             return initialState
         case 'LOAD_CART':
@@ -65,7 +67,7 @@ export function CartReducer(state = JSON.parse(window.localStorage.getItem('CART
                 }
             }
             account.items.map((item) => out2.items[item.id] = item)
-            window.localStorage.setItem('CART', JSON.stringify(out2))
+            setItem('CART', out2)
 
             return out2
         default:

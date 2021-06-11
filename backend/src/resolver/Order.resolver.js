@@ -1,3 +1,5 @@
+import { validateAccess } from "../base/Resolver"
+
 export const orderResolver = {
     Query: {
         customerOrder: async function(_, data, { models, token }) {
@@ -38,6 +40,30 @@ export const orderResolver = {
                 return null
             }
         }
+    },
+    Mutation: {
+        updateOrder: async function(_, data, { models, role, token }) {
+            const hasAccess = await validateAccess(models, 'updateOrder', role, token)
+            
+            if (!hasAccess) {
+                return null
+            }
+
+            try {
+                const entity = await models.Order.findOne({ where: { id: data.id } })
+                const totalDeliveryDifference = data.totalDelivery - entity.totalDelivery
+                Object.assign(entity, data)
+                entity.total += totalDeliveryDifference
+
+                await entity.save()
+
+                return entity
+            } catch (error) {
+                console.error(error)
+
+                return false
+            }
+        },
     }
 }
 

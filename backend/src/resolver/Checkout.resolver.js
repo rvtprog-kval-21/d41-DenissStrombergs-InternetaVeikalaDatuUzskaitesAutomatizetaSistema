@@ -70,13 +70,25 @@ export const checkoutResolver = {
                     return null
                 }
 
-                const invoice = await models.Invoice.create({
-                    order_id: order.id,
+                const values = {
                     totalDelivery: order.totalDelivery,
                     totalTax: order.totalTax,
                     subtotal: order.subtotal,
                     total: order.total
+                }
+
+                const invoice = await models.Invoice.findOne({ where: { order_id: order.id } }).then(async (invoice) => {
+                    if (invoice) {
+                        return await invoice.update(values)
+                    }
+
+                    return await models.Invoice.create({
+                        ...values,
+                        order_id: order.id,
+                    })
                 })
+
+                console.log(invoice)
 
                 return !!invoice
             } catch (error) {

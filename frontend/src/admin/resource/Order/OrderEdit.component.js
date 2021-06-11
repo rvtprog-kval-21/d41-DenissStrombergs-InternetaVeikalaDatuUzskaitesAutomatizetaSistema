@@ -2,6 +2,7 @@ import { Button } from '@material-ui/core'
 import { Datagrid, DateInput, Edit, NumberField, NumberInput, ReferenceField, ReferenceManyField, showNotification, SimpleForm, TextField, TextInput, useRefresh } from 'react-admin'
 import { useDispatch } from 'react-redux'
 import { CONFIG } from '../../../base/Config'
+import { fetchGraphQl } from '../../../base/Utility'
 import { GENERATE_INVOICE } from '../../../storefront/query/Checkout.query'
 import AddressField from '../Address/AddressField.component'
 import CustomerField from '../Customer/CustomerField.component'
@@ -12,34 +13,21 @@ export function OrderEdit(props) {
     const refresh = useRefresh()
 
     const onGenerateInvoiceButtonClick = async () => {
-        const { id } = props
-        const invoice = await fetch(CONFIG.API + '/graphql', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'authentication': JSON.parse(localStorage.getItem('USER') || '{}')?.token
-            },
-            body: JSON.stringify({
-                query: GENERATE_INVOICE,
-                variables: {
-                    orderId: id
-                }
-            })
-        }).then(data => data.json()).then(({data}) => data?.status)
+        const { id: orderId } = props
+        const invoice = await fetchGraphQl(GENERATE_INVOICE, { orderId }, 'status', 'ADMIN')
 
         if (invoice) {
-            dispatch(showNotification('Successfully generated an invoice for this order.'))
+            dispatch(showNotification('Successfully (re)generated an invoice for this order.'))
             refresh()
         } else {
-            dispatch(showNotification('Invoice for this order is already generated.'))
+            dispatch(showNotification('Failed to to re(generate) invoice.'))
         }
     }
 
     return (
         <Edit { ...props }>
             <SimpleForm>
-                <Button variant="contained" color="primary" onClick={ onGenerateInvoiceButtonClick }>Generate Invoice</Button>
+                <Button variant="contained" color="primary" onClick={ onGenerateInvoiceButtonClick }>(Re)generate Invoice</Button>
                 <ReferenceField target="Invoice" source="Invoice.id" reference="Invoice" fullWidth>
                     <div>View invoice</div>
                 </ReferenceField>

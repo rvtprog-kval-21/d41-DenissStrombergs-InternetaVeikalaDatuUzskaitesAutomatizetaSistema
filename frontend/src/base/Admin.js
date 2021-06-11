@@ -28,13 +28,14 @@ import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import CustomerCustomerGroupResource from '../admin/resource/CustomerCustomerGroup/CustomerCustomerGroupResource.component'
 import { CONFIG } from './Config'
+import { getItem } from './Utility'
 
 const httpLink = createHttpLink({
     uri: CONFIG.API + '/graphql'
 })
 
 const authLink = setContext((_, { headers }) => {
-    const user = JSON.parse(localStorage.getItem('USER')) || {}
+    const user = getItem('USER') || {}
     const { token } = user
 
     return {

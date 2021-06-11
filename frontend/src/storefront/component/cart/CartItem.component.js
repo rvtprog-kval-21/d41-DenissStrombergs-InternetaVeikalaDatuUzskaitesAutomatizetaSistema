@@ -12,8 +12,8 @@ import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/Remove'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { useApolloClient } from '@apollo/client'
-import Price from '../product/Price.component'
 import { addProductToCart, removeProductFromCart } from '../../dispatcher/Cart.dispatcher'
+import { ProductPrice } from '../product/ProductPrice.component'
 
 const useStyles = makeStyles({
     media: {
@@ -31,7 +31,7 @@ export function CartItem(props) {
     const client = useApolloClient()
     const history = useHistory()
     const classes = useStyles()
-    const { item: { product: { id, sku, name, urlKey, price, thumbnailImage: { url } = {} }, quantity }, shouldRenderCartItemActions = true } = props
+    const { item: { product, product: { id, sku, name, urlKey, price, thumbnailImage: { url } = {} }, quantity }, shouldRenderCartItemActions = true } = props
 
     const onProductClick = () => {
         history.push(`/product/${ urlKey }`)
@@ -83,7 +83,7 @@ export function CartItem(props) {
                                     { name }
                                 </Typography>
                                 <Typography gutterBottom variant="h6">
-                                    <Price value={ price } />
+                                    <ProductPrice product={ product } />
                                 </Typography>
                             </CardContent>
                         </div>

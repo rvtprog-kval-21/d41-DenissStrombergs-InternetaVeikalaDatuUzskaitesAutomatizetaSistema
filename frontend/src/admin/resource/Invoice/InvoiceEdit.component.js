@@ -1,4 +1,4 @@
-import { DateField, NumberField, ReferenceField, Show, TextField, Datagrid, ReferenceManyField, SimpleForm, Edit } from 'react-admin'
+import { DateField, NumberField, ReferenceField, TextField, Datagrid, ReferenceManyField, SimpleForm, Edit } from 'react-admin'
 import OrderField from '../Order/OrderField.component'
 import AddressField from '../Address/AddressField.component'
 import CustomerField from '../Customer/CustomerField.component'

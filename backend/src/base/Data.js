@@ -164,7 +164,7 @@ export function generateProducts(count, type) {
             stockQuantity: randomInteger(0, 100),
             specialDiscountType: ['percent', 'amount'][randomInteger(0, 1)],
             specialDiscountValue: Math.random() > 0.5 ? randomInteger(1, 20) : 0,
-            specialTaxRate: 0,
+            specialTaxRate: 21,
             shortDescription: faker.lorem.sentence(10),
             longDescription: faker.lorem.paragraph(10),
             baseImage: {
@@ -213,8 +213,10 @@ export function generateCartItems(customers, products) {
         const product_id = randomInteger(1, products.length)
         const randomProduct = products[product_id - 1]
         const quantity = randomInteger(1, 10)
-        const totalTax = randomProduct.price * quantity * (randomProduct.specialTaxRate || 0.21)
-        const subtotal = randomProduct.price * quantity
+        const originalValue = randomProduct.price * quantity
+        const discountedValue = randomProduct.specialDiscountType === 'PERCENT' ? originalValue - originalValue * randomProduct.specialDiscountValue : originalValue - randomProduct.specialDiscountValue
+        const subtotal = discountedValue > 0 ? discountedValue : subtotal
+        const totalTax = subtotal * randomProduct.specialTaxRate / 100
         const total = subtotal + totalTax
 
         customers[index].totalTax += totalTax

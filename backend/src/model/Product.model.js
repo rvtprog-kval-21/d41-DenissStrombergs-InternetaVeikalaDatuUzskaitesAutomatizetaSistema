@@ -43,7 +43,7 @@ export class Product extends Model {
                 },
                 specialTaxRate: {
                     type: DataTypes.FLOAT,
-                    defaultValue: null
+                    defaultValue: 21
                 },
                 shortDescription: {
                     type: DataTypes.STRING,

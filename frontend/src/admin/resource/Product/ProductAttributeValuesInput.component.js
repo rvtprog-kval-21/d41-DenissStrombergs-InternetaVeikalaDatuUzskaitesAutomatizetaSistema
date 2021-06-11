@@ -5,7 +5,7 @@ import { Formik, Form, Field } from 'formik'
 import STYLE from '../../../base/Style'
 import { TextField, Select, Switch } from 'formik-material-ui'
 import { Typography, FormControl, InputLabel, MenuItem } from '@material-ui/core'
-import { CONFIG } from '../../../base/Config'
+import { fetchGraphQl } from '../../../base/Utility'
 
 export function ProductAttributeValuesInput(props) {
     const { record: { attributeValues: rAttributeValues }, validate, attributeValues } = props
@@ -18,19 +18,9 @@ export function ProductAttributeValuesInput(props) {
             return null
         }
 
-        const data = await fetch(CONFIG.API + '/graphql', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                query: GET_ATTRIBUTE_SET,
-                variables: { id: record.attribute_set_id }
-            })
-        }).then((data) => data.json()).then(({ data }) => data.attributeSet)
+        const data = await fetchGraphQl(GET_ATTRIBUTE_SET, { id: record.attribute_set_id }, 'attributeSet', 'ADMIN')
 
-        if (!attributeSet) {
+        if (!attributeSet && data) {
             setAttributeSet(data)
         }
     })

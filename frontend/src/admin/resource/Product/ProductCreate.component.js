@@ -3,33 +3,25 @@ import RichTextInput from 'ra-input-rich-text'
 import { ProductSpecialDiscountTypeInput } from './ProductSpecialDiscountTypeInput.component'
 import { CONFIG } from '../../../base/Config'
 import { UPLOAD_MEDIA } from '../../../storefront/query/Product.query'
+import { fetchGraphQl } from '../../../base/Utility'
 
 export const toBase64 = file => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = error => reject(error)
 })
 
 export function ProductCreate(props) {
     const getFilesFromEvent = async (event) => {
-        const [file] = event.dataTransfer ? event.dataTransfer.files : event.target.files;
+        const [file] = event.dataTransfer ? event.dataTransfer.files : event.target.files
 
         if (!file.type.startsWith('image/')) {
             return []
         }
 
-        const url = await fetch(CONFIG.API + '/graphql', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                query: UPLOAD_MEDIA,
-                variables: { data: await toBase64(file).catch(e => Error(e)), name: file.name }
-            })
-        }).then((data) => data.json()).then(({ data }) => data?.url)
+        const base64 = await toBase64(file).catch(e => Error(e))
+        const url = await fetchGraphQl(UPLOAD_MEDIA, { data: base64, name: file.name }, 'url', 'ADMIN')
 
         return [{
             url,

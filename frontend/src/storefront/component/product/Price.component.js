@@ -5,7 +5,7 @@ export function roundPriceValue(value) {
 }
 
 export function Price(props) {
-    const { value, product: { specialDiscountType, specialDiscountValue } = {} } = props
+    const { value } = props
     const { currencySign, currencySignPosition } = useSelector((state) => state.ConfigReducer)
     
     switch (currencySignPosition) {
