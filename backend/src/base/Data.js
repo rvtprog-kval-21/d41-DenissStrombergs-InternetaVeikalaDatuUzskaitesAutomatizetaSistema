@@ -215,7 +215,7 @@ export function generateCartItems(customers, products) {
         const quantity = randomInteger(1, 10)
         const originalValue = randomProduct.price * quantity
         const discountedValue = randomProduct.specialDiscountType === 'PERCENT' ? originalValue - originalValue * randomProduct.specialDiscountValue : originalValue - randomProduct.specialDiscountValue
-        const subtotal = discountedValue > 0 ? discountedValue : subtotal
+        const subtotal = discountedValue > 0 ? discountedValue : originalValue
         const totalTax = subtotal * randomProduct.specialTaxRate / 100
         const total = subtotal + totalTax
 

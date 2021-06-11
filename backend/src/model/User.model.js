@@ -19,7 +19,8 @@ export class Admin extends Model {
                     unique: true
                 },
                 password: {
-                    type: DataTypes.STRING
+                    type: DataTypes.STRING,
+                    defaultValue: null
                 },
                 firstName: {
                     type: DataTypes.STRING
@@ -28,7 +29,8 @@ export class Admin extends Model {
                     type: DataTypes.STRING
                 },
                 token: {
-                    type: DataTypes.TEXT
+                    type: DataTypes.TEXT,
+                    defaultValue: null
                 }
             },
             {

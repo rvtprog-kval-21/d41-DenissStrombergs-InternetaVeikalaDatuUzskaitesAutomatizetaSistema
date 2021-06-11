@@ -310,7 +310,7 @@ export const attributeSetAttributes = [
 
 export const categories = [
     {
-        urlKey: null,
+        urlKey: 'root',
         isEnabled: true,
         name: 'Root',
         isInMenu: true,

@@ -1,4 +1,4 @@
-import { BooleanInput, Edit, SimpleForm, TextInput, required } from 'react-admin'
+import { BooleanInput, Edit, SimpleForm, TextInput, required, ReferenceInput, SelectInput } from 'react-admin'
 import RichTextInput from 'ra-input-rich-text'
 
 export function CategoryEdit(props) {
@@ -11,6 +11,9 @@ export function CategoryEdit(props) {
                 <TextInput source="name" validate={ required() } fullWidth />
                 <BooleanInput source="isInMenu" fullWidth />
                 <RichTextInput source="content" fullWidth />
+                <ReferenceInput source="category_id" reference="Category" fullWidth>
+                    <SelectInput source="name" />
+                </ReferenceInput>
             </SimpleForm>
         </Edit>
     )

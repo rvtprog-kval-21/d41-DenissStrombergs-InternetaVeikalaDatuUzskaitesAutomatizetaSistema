@@ -1,4 +1,4 @@
-import { BooleanInput, Create, SimpleForm, TextInput, required } from 'react-admin'
+import { BooleanInput, Create, SimpleForm, TextInput, required, ReferenceInput, SelectInput } from 'react-admin'
 import RichTextInput from 'ra-input-rich-text'
 
 export function CategoryCreate(props) {
@@ -10,6 +10,9 @@ export function CategoryCreate(props) {
                 <TextInput source="name" validate={ required() } fullWidth />
                 <BooleanInput source="isInMenu" fullWidth />
                 <RichTextInput source="content" fullWidth />
+                <ReferenceInput source="category_id" reference="Category" fullWidth>
+                    <SelectInput source="name" />
+                </ReferenceInput>
             </SimpleForm>
         </Create>
     )

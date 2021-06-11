@@ -7,7 +7,6 @@ export function ReviewList(props) {
                 <TextField source="id" />
                 <TextField source="status" />
                 <DateField source="date" />
-                <TextField source="content" />
                 <NumberField source="rating" />
                 <EditButton />
             </Datagrid>

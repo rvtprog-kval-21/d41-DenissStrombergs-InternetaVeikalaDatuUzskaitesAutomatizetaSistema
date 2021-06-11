@@ -65,7 +65,7 @@ export function generateResolver(model) {
                 }
 
                 try {
-                    return await models[singularName].findByPk(data.id, { include: { all: true } })
+                    return await models[singularName].findByPk(data.id, { include: { all: true }, attributes: { exclude: ['password'] }, })
                 } catch (error) {
                     console.error(error)
 
@@ -84,6 +84,7 @@ export function generateResolver(model) {
                     const filter = ids ? { id: ids, ...other } : data.filter
 
                     return await models[singularName].findAll({
+                        attributes: { exclude: ['password'] },
                         limit: data.perPage || 100000,
                         offset: data.page * data.perPage || 0,
                         order: data.sortField && data.sortOrder ? [[data.sortField, data.sortOrder]] : [],
@@ -148,7 +149,7 @@ export function generateResolver(model) {
                 }
 
                 try {
-                    const entity = await models[singularName].findOne({ where: { id: data.id } })
+                    const entity = await models[singularName].findOne({ where: { id: data.id }, attributes: { exclude: ['password'] } })
                     Object.assign(entity, data)
 
                     await entity.save()

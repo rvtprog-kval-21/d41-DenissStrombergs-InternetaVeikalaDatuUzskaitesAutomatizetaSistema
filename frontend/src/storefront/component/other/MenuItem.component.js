@@ -21,7 +21,7 @@ export function MenuItem(props) {
       setOpen(!open)
     }
 
-    const { children, menuItem: { name, urlKey }, categories } = props
+    const { children, menuItem: { name, urlKey } } = props
 
     const renderItem = (item) => {
         const { name, urlKey } = item

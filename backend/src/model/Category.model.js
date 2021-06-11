@@ -27,7 +27,8 @@ export class Category extends Model {
                     defaultValue: false
                 },
                 content: {
-                    type: DataTypes.TEXT
+                    type: DataTypes.TEXT,
+                    defaultValue: ''
                 },
                 category_id: {
                     type: DataTypes.INTEGER,

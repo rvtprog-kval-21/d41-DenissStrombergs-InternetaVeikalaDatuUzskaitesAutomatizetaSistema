@@ -6,7 +6,6 @@ import ProductCategoryInput from './ProductCategoryInput.component'
 import ProductCategoryCreateButton from './ProductCategoryCreateButton.component'
 import { useState } from 'react'
 import { UPLOAD_MEDIA } from '../../../storefront/query/Product.query'
-import { CONFIG } from '../../../base/Config'
 import { toBase64 } from './ProductCreate.component'
 import { fetchGraphQl } from '../../../base/Utility'
 
