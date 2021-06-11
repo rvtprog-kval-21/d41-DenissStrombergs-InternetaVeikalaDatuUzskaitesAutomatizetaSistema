@@ -198,7 +198,7 @@ export function generateReviews(products, customers) {
             title: faker.lorem.sentence(10),
             content: faker.lorem.paragraph(10),
             rating: randomInteger(1, 10),
-            customer_id: randomInteger(1, customers.length),
+            customer_id: index + 1,
             product_id: index + 1
         })
     })

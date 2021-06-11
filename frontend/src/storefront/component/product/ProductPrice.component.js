@@ -19,6 +19,7 @@ export function ProductPrice(props) {
                 <span>
                     <Price value={ discountedPrice } />
                 </span>
+                { ' ' }
                 <del>
                     <Price value={ originalPrice } />
                 </del>

@@ -88,8 +88,6 @@ export const checkoutResolver = {
                     })
                 })
 
-                console.log(invoice)
-
                 return !!invoice
             } catch (error) {
                 console.error(error)

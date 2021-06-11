@@ -1,6 +1,7 @@
 import { GetAllCategories } from '../../query/Category.query'
 import List from '@material-ui/core/List'
 import MenuItem from './MenuItem.component'
+import { PageMenuItem } from './PagesMenuItem.component'
 
 export function Menu() {
     const categories = GetAllCategories()
@@ -28,6 +29,7 @@ export function Menu() {
     return (
         <List>
             { renderFirstLevelList() }
+            <PageMenuItem />
         </List>
     )
 }

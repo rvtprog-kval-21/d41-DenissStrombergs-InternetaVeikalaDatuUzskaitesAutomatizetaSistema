@@ -1,4 +1,4 @@
-import { validateAccess } from "../base/Resolver"
+import { validateAccess } from '../base/Resolver'
 
 export const orderResolver = {
     Query: {

@@ -19,7 +19,7 @@ export function FilterList(props) {
     const history = useHistory()
     const dispatch = useDispatch()
     const classes = useStyles()
-    const { search: { attributes, aggregations }, query } = props
+    const { search: { attributes, aggregations, products }, query } = props
 
     const renderFilterItem = (attribute) => {
         return (
@@ -28,7 +28,7 @@ export function FilterList(props) {
     }
 
     const onResetButtonClick = () => {
-        if (query != ' ') {
+        if (query && query != ' ') {
             history.push('/search/ ')
         }
 
@@ -37,7 +37,7 @@ export function FilterList(props) {
         })
     }
 
-    if (!attributes.length) {
+    if (!attributes.length || !products.length) {
         return (
             <div>
                 <Typography>No products found based on selected filters.</Typography>
@@ -54,7 +54,7 @@ export function FilterList(props) {
             <List
                 component="nav"
                 aria-labelledby="nested-list-subheader"
-                className={classes.root}
+                className={ classes.root }
             >
                     <PriceRange aggregations={ aggregations } />
                     { attributes.map(renderFilterItem) }

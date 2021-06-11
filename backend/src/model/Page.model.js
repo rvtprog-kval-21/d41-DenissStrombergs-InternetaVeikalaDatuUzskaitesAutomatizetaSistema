@@ -22,7 +22,7 @@ export class Page extends Model {
                     type: DataTypes.STRING
                 },
                 content: {
-                    type: DataTypes.STRING
+                    type: DataTypes.TEXT
                 }
             },
             {

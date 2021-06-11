@@ -1,4 +1,4 @@
-import { setItem, getItem } from "../../base/Utility"
+import { setItem, getItem } from '../../base/Utility'
 
 export const initialState = {}
 
