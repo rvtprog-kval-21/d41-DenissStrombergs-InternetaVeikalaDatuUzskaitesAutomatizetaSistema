@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import STYLE from '../../../base/Style'
 import VALIDATION from '../../../base/Validation'
 import { createCustomerReview, deleteCustomerReview, updateCustomerReview } from '../../query/Review.query'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import { showNotification } from '../../dispatcher/Notification.dispatcher'
 
 export function ReviewForm(props) {

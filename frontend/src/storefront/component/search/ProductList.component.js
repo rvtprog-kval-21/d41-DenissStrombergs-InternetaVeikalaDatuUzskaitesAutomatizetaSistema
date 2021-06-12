@@ -3,7 +3,6 @@ import ProductItem from './ProductItem.component'
 import FilterList from './FilterList.component'
 import Pagination from './Pagination.component'
 import Sort from './Sort.component'
-import { useParams } from 'react-router-dom'
 import parse from 'html-react-parser'
 import { Search } from '../../query/Search.query'
 import { useSelector } from 'react-redux'
@@ -16,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 
 export function ProductList(props) {
     const classes = useStyles()
-    const { urlKey, query = '' } = useParams()
+    const { urlKey, query } = props
     const { perPage, sort, page, attributeValues, minPrice, maxPrice } = useSelector((state) => state.SearchReducer)
 
     const search = Search({

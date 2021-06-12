@@ -19,7 +19,7 @@ export function CheckoutShippingStep(props) {
     const { setStep } = props
     const addresses = GetAllCustomerAddresses() || []
 
-    if (!shippingMethods) {
+    if (!shippingMethods || !shippingMethods.length) {
         return null
     }
 

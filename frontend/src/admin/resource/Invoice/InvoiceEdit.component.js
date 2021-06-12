@@ -33,8 +33,8 @@ export function InvoiceEdit(props) {
                         <NumberField source="total" />
                     </Datagrid>
                 </ReferenceManyField>
-                <ReferenceField source="order_id" reference="Order" label="Customer">
-                    <ReferenceField source="customer_id" reference="Customer">
+                <ReferenceField source="order_id" reference="Order" label="Customer" link={ false }>
+                    <ReferenceField source="customer_id" reference="Customer" link={ false }>
                         <CustomerField />
                     </ReferenceField>
                 </ReferenceField>

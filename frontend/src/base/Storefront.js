@@ -39,8 +39,8 @@ export function StoreFront() {
                     <Route path="/category/:urlKey" render={ () => (<Category/>) }/>
                     <Route path="/page/:urlKey" render={ () => (<Page/>) }/>
                     <Route path="/product/:urlKey" render={ () => (<Product/>) }/>
-                    <Route path="/search" render={ () => (<Search/>) }/>
                     <Route path="/search/:query" render={ () => (<Search/>) }/>
+                    <Route path="/search" render={ () => (<Search/>) }/>
                     <Route render={ () => (<Error/>) }/>
                 </Switch>
                 <Footer/>

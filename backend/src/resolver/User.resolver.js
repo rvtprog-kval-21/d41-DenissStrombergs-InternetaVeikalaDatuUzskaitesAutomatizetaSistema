@@ -1,4 +1,5 @@
 import { compareHash, encryptPassword, generateToken } from '../base/Auth'
+import { validateAccess } from '../base/Resolver'
 
 export const userResolver = {
     Mutation: {
@@ -15,6 +16,23 @@ export const userResolver = {
                 }
 
                 return null
+            } catch (error) {
+                console.error(error)
+
+                return null
+            }
+        },
+        createUser: async function(_, data, { models, role, token }) {
+            const hasAccess = await validateAccess(models, 'createUser', role, token)
+
+            if (!hasAccess) {
+                return null
+            }
+
+            try {
+                data.password = encryptPassword(data.password)
+
+                return await models.User.create(data)
             } catch (error) {
                 console.error(error)
 

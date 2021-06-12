@@ -7,7 +7,7 @@ import STYLE from '../../../base/Style'
 import VALIDATION from '../../../base/Validation'
 import { showNotification } from '../../dispatcher/Notification.dispatcher'
 import { createCustomerAddress, deleteCustomerAddress, updateCustomerAddress } from '../../query/Address.query'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 import CountrySelector, { countries } from './CountrySelector.component'
 
 export function AddressFormFields() {

@@ -22,8 +22,6 @@ import User from '../model/User.model'
 import Config from '../model/Config.model'
 import PaymentMethod from '../model/PaymentMethod.model'
 import ShippingMethod from '../model/ShippingMethod.model'
-import { writeFileSync } from 'fs'
-import sequelizeErd from 'sequelize-erd'
 
 class Database {
     constructor() {
@@ -33,10 +31,6 @@ class Database {
 
         if (CONFIG.GENERATE_SAMPLE_DATA) {
             this.create()
-        }
-
-        if (CONFIG.GENERATE_SCHEMA) {
-            this.generateSchema()
         }
     }
 
@@ -90,11 +84,6 @@ class Database {
                 }
             }
         }
-    }
-
-    async generateSchema() {
-        const svg = await sequelizeErd({ source: this.sequelize, engine: 'dot' })
-        writeFileSync('../documentation/schema.svg', svg)
     }
 }
 

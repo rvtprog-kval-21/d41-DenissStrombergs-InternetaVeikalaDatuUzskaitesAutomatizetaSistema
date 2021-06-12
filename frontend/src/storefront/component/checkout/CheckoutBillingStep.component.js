@@ -11,7 +11,7 @@ export function CheckoutBillingStep(props) {
     const paymentMethods = GetAllPaymentMethods()
     const { setStep } = props
 
-    if (!paymentMethods) {
+    if (!paymentMethods || !paymentMethods.length) {
         return null
     }
 

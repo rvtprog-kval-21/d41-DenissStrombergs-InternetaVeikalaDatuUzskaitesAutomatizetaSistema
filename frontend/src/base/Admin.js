@@ -47,6 +47,8 @@ const authLink = setContext((_, { headers }) => {
     }
 })
 
+const history = createBrowserHistory({ basename: 'admin' })
+
 const client = new ApolloClient({
     link: authLink.concat(httpLink),
     cache: new InMemoryCache()
@@ -76,7 +78,7 @@ export function Admin() {
     return (
         <ReactAdmin
             dataProvider={ dataProvider }
-            history={ createBrowserHistory({ basename: 'admin' }) }
+            history={ history }
             layout={ Layout }
             authProvider={ authProvider }
             loginPage={ LoginPage }

@@ -6,7 +6,6 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import { useState } from 'react'
 import { AttributeTypeInput } from './AttributeTypeInput.component'
 import { useDispatch } from 'react-redux'
-import { validate } from 'graphql'
 
 const selectTypes = [
     'select_number',
@@ -19,7 +18,7 @@ const typeMap = {
 }
 
 export function AttributeOptionsInput(props) {
-    const { validate } = props
+    const { test } = props
     const dispatch = useDispatch()
     const { attributeOptions: recordAttributeOptions = [], type: recordType } = useRecordContext()
     const [attributeOptions, setAttributeOptions] = useState(recordAttributeOptions)
@@ -37,7 +36,7 @@ export function AttributeOptionsInput(props) {
 
     const setAllAttributeOptions = (attributeOptions) => {
         setAttributeOptions(attributeOptions)
-        validate(attributeOptions)
+        test(attributeOptions)
     }
 
     const onTypeChange = (event) => {

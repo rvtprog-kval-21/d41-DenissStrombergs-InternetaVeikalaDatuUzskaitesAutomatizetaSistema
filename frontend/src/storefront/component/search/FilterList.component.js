@@ -5,7 +5,7 @@ import List from '@material-ui/core/List'
 import { Button, Typography } from '@material-ui/core'
 import { useDispatch } from 'react-redux'
 import PriceRange from './PriceRange.component'
-import { useHistory } from 'react-router'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     root: {

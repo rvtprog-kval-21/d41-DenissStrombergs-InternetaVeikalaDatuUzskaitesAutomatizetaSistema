@@ -16,7 +16,7 @@ export function AttributeEdit(props) {
 
         const newData = {
             ...data,
-            attributeOptions
+            attributeOptions: attributeOptions || []
         }
 
         update('Attribute', data.id, newData)
@@ -26,7 +26,8 @@ export function AttributeEdit(props) {
         }
     }
 
-    const validate = (newAttributeOptions) => {
+    const test = (newAttributeOptions) => {
+        console.log(newAttributeOptions)
         setAttributeOptions(newAttributeOptions)
     }
 
@@ -37,7 +38,7 @@ export function AttributeEdit(props) {
                 <TextInput source="code" validate={ required() } fullWidth />
                 <BooleanInput source="isEnabled" fullWidth />
                 <TextInput source="label" validate={ required() } fullWidth />
-                <AttributeOptionsInput attributeOptions={ attributeOptions } validate={ validate } fullWidth />
+                <AttributeOptionsInput attributeOptions={ attributeOptions } test={ test } fullWidth />
                 <BooleanInput source="isFilter" fullWidth />
             </SimpleForm>
         </Edit>
