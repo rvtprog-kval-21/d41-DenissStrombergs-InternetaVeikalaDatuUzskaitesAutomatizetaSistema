@@ -16,6 +16,16 @@ Projektā tiek izmantots:
 - PostgreSQL
 
 ## Izmantotie avoti
+[React dokumentācija](https://reactjs.org/docs/getting-started.html)
+
+[Material UI dokumentācija](https://material-ui.com/)
+
+[React Admin dokumentācija](https://marmelab.com/react-admin/Readme.html)
+
+[GraphQL dokumentācija](https://graphql.org/learn/)
+
+[PostgreSQL dokumentācija](https://www.postgresql.org/docs/)
+
 [React Admin Login](https://github.com/marmelab/react-admin/blob/master/examples/demo/src/layout/Login.tsx) - tika ņemts no šī faila, lai realizētu administrātora autorizāciju.
 
 [React Admin SubMenu](https://github.com/marmelab/react-admin/blob/master/examples/demo/src/layout/SubMenu.tsx) - tika ņemts kods, lai izprastu kā strādā, un daļēji arī tiek izmanots ar modifkācijām.
