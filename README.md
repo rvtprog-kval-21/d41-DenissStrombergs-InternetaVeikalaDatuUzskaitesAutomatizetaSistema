@@ -22,10 +22,11 @@ Projektā tiek izmantots:
 
 ## Uzstādīšanas instrukcijas
 1. Ir nepieciešams strādājošs Node un PostgreSQL setups
-2. git clone https://github.com/rvtprog-kval-21/d41-DenissStrombergs-InternetaVeikals.git
-3. cd d41-DenissStrombergs-InternetaVeikals
-4. cd backend
-5. npm start
-5. Atvert jaunu konsoles logu d41-DenissStrombergs-InternetaVeikals direktorijā
-6. cd frontend
+2. Konfigurācija atrodas /backend/src/base/Config.js failā
+4. git clone https://github.com/rvtprog-kval-21/d41-DenissStrombergs-InternetaVeikals.git
+5. cd d41-DenissStrombergs-InternetaVeikals
+6. cd backend
 7. npm start
+8. Atvert jaunu konsoles logu d41-DenissStrombergs-InternetaVeikals direktorijā
+9. cd frontend
+10. npm start
