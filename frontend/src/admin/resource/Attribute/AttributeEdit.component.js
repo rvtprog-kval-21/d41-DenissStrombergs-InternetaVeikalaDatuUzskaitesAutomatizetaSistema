@@ -40,6 +40,7 @@ export function AttributeEdit(props) {
                 <TextInput source="label" validate={ required() } fullWidth />
                 <AttributeOptionsInput attributeOptions={ attributeOptions } test={ test } fullWidth />
                 <BooleanInput source="isFilter" fullWidth />
+                <TextInput source="attributeGroup" validate={ required() } fullWidth />
             </SimpleForm>
         </Edit>
     )

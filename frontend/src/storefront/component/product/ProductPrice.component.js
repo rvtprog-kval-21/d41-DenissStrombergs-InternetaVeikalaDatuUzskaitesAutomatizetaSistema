@@ -8,7 +8,7 @@ export function ProductPrice(props) {
     const renderVat = () => {
         return (
             <span>
-                { ` VAT ${ specialTaxRate }%` }
+                { ` VAT ${ specialTaxRate || 21 }%` }
             </span>
         )
     }

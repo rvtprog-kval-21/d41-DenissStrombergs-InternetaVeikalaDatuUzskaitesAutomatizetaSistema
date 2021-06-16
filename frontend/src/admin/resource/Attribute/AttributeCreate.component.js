@@ -19,6 +19,7 @@ export function AttributeCreate(props) {
                 <TextInput source="label" validate={ required() } fullWidth />
                 <AttributeOptionsInput type={ type } fullWidth isRequired />
                 <BooleanInput source="isFilter" fullWidth />
+                <TextInput source="attributeGroup" validate={ required() } fullWidth />
             </SimpleForm>
         </Create>
     )
