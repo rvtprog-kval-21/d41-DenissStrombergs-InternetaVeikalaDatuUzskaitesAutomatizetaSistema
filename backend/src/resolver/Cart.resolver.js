@@ -17,9 +17,9 @@ export const computeTotals = async (models, customer) => {
 }
 
 export const computeItemTotals = (item) => {
-    const { Product: { specialDiscountType, specialDiscountValue, price, specialTaxRate } = {}, quantity } = item
+    const { Product: { specialDiscountType, specialDiscountValue, price, specialTaxRate = 21 } = {}, quantity } = item
     const subtotal = price * quantity
-    const discountedValue = specialDiscountType === 'PERCENT' ? subtotal - subtotal * specialDiscountValue : subtotal - specialDiscountValue
+    const discountedValue = specialDiscountType === 'PERCENT' ? subtotal - subtotal * specialDiscountValue || 0 : subtotal - (specialDiscountType === 'AMOUNT' ? specialDiscountValue : 0)
 
     item.subtotal = discountedValue > 0 ? discountedValue : subtotal
     item.totalTax = item.subtotal * specialTaxRate / 100

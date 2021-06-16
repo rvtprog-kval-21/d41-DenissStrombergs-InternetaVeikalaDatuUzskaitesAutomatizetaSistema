@@ -7,7 +7,7 @@ export const CONFIG = {
             dialect: 'postgres',
             host: 'localhost',
             underscored: true,
-            logging: false
+            logging: true
         }
     ],
     API: 'http://localhost:3001',

@@ -65,7 +65,7 @@ export function generateResolver(model) {
                 }
 
                 try {
-                    return await models[singularName].findByPk(data.id, { include: { all: true }, attributes: { exclude: ['password'] }, })
+                    return await models[singularName].findOne({ where: { id: data.id }, include: { all: true }, attributes: { exclude: ['password'] }, })
                 } catch (error) {
                     console.error(error)
 
