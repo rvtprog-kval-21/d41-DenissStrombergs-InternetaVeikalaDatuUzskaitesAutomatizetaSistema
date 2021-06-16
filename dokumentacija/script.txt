@@ -1,0 +1,74 @@
+Uzdevuma nostādne
+    Tad kvalifikācijas darba uzdevuma mērķis bija izveidot interneta veikala sistēmu, kura nodrošinātu pamata interneta veikala darbības,
+    un uz kuras pamata varētu uzbūvētu, konkrētu interneta veikalu, balstoties uz konkrētā gadījuma nepieciešamībām. Lidzīgi
+    jau ekstitējošīem variantiem kā Magento, Shopify, Big Commerce un citiem, taču ne tik sarežģīta.
+Izmantotas izstrādes tehnoloģijas
+    Galvenokārt programmas izstrādei tika izmantota viena programmēšanas valoda, tas ir JavaScript,
+    tā tika izmantota, gan lai realizetu klienta daļu, gan lai realizētu servera daļu.
+    
+    Klienta daļai tika izmantots React ietvars ar Material UI stilu ietvaru, kas nodrošina visu lietotāja interfaisa funkcionalitāti.
+
+    Lai relizētu administrātora daļu tika izmantots React Admin JavaScript bibliotēka, kas nodrošina klienta un severa sasaisti tieši administratora daļai,
+    un uz kuras pamata tika uzbuvēta ši sistēma adminstrātora daļa.
+
+    Server daļai tiek izmantots Node ar express bibliotēku, kura nordošina klienta un servera komunikāciju, un GraphQL, kā pieprasījumu valoda.
+
+    Kā datubāzes sistēma, tiek izmantota PostgreSQL.
+
+Funkcionālās dekompizīcijas diagramma
+    Tad šī ir funkcionālās dekompozīcijas diagramma, kurā tiek parādītas trīs 3 lietotāju lomas
+    ar dažādām funckionalitēm un privilēģījām.
+
+    Ir viesis, kuram ir pamata darbības, kā apskatīt veikalu, tā saturu, meklēt un apskatīt produktus un reģistrēies.
+
+    Ir pircējs, tas ir reģīstrēts lietotājs, un tas var pievienot produktus grozā, rediģēt groza sastāvu, kā arī
+    veikt pasūtīju un rakstīt atsauksmes nopirktajiem produktiem.
+
+    Reģistrēts lietotājs var arī rediģēt savu akauntu, mainīt savus personālos datus, un pievienot, rediģēt un dzēst
+    savas adreses, redigēt un dzēst savas atsauksmes, un apskatīt savus pasūtījumus.
+    
+    Tad ir administrātors, lietotājs, ar lielākām privilēģijām, kurš nosaka veikala saturu, tas, var pārvaldīt, dažādu
+    objektu datus, tas ir produkti, kategorijas, atribūti, atribūtu seti, un citi.
+
+ER diagramma
+    Kā var redzēt šeit ir ER diagramma, kas parāda sistēmas entitiju attiecības. Var redzēt, kā ir divas galvenās entitijas, kuras veido visvairāk attiecību, tas ir pricējs un produkts.
+
+    Šeit ir pircēju adreses, kā arī pircēju grupas entitija, lai iedalītu pirceju dažādās grupās
+
+    Šeti ir pasūtījumu un rēķinu enittijas
+
+    Vēl ir attribūtu un atribūtu setu tabulas, lai glabātu produkta atribūtu datus
+
+    Un arī kateogirju un atsauksmju tabula, kas attiecās uz produktu
+
+Tabulu saišu shēma
+    Tad tabulas shmēma ir diezgan līdzīga ER diagrammai, ir 2 galvenās tabulas, kas ir Produkts un 
+   
+    Pircējs, un tad ir vairākas tabulas, kas ir domātas daudzi-pret-dauzdiem relācijas realizācijai
+
+Datu plūsmu diagramma, 
+    Tad šeit ir datu plūsmas diagramma, kas attēlo pasūtījuma izveides procesu
+    
+    Tad serverim tiek sūtīts, klienta autorizācijas tokens un adreses id, bāzējoties uz autorizācijas tokenu tiek atrasti pircēja dati un pārbaudīta pircēja piekļuva, pēc tam pārbauda vai tāda adreses eksistē
+    
+    Tad tiek izveidots jauns pasūtījums balstoties uz pircēja groza datiem
+
+    Tiek atrasti visi groza produkti un tiek pārbaudīta to pieejamība
+    
+    Beigās tiek izveidoti visi pasūtījuma produtki balstoties uz groza produktu datiem
+    
+    Ja vis ir veiksmīgs, izejas dati ir pasūījuma reference, pretējā gadījuma kļūda
+
+Demonstrācija
+    Pirceja daļa
+        Tagad es nodemonstrēšu savu programmu no pircēja puses
+    Produkta izveide
+
+Secinājumi
+    Tad secinājumos varu pateikt, to ka tika izstrādāta programma, kura varētu nodrošināt pamata interneta veikala darbības,
+    un kuru pat varētu izmantot, lai uzbūvetu konkrēta veikala risinājumu
+    
+    Taču nevar redzēt uzreiz, cik laba šis sistēma būtu īstajā dzīvē, jo vēl netiek izmantota, taču var pateikt to,
+    ka sistēma ir ļoti jauna un ir nepieciešami noteikti uzlabojumi.
+
+Paldies par uzmanību.

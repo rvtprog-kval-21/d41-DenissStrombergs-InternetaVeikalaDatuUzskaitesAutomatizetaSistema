@@ -7,6 +7,17 @@ import { TextField, Select, Switch } from 'formik-material-ui'
 import { Typography, FormControl, InputLabel, MenuItem } from '@material-ui/core'
 import { fetchGraphQl } from '../../../base/Utility'
 
+export function generateAttributeValues({ attributes = [] }) {
+    const attributeValues = {}
+
+    attributes.forEach((attribute) => {
+        const { code } = attribute
+        attributeValues[code] = null
+    })
+
+    return attributeValues
+}
+
 export function ProductAttributeValuesInput(props) {
     const { record: { attributeValues: rAttributeValues }, validate, attributeValues } = props
     const classes = STYLE.form()
@@ -29,7 +40,7 @@ export function ProductAttributeValuesInput(props) {
         return null
     }
 
-    const initialValues = attributeValues || rAttributeValues
+    const initialValues = attributeValues || rAttributeValues || generateAttributeValues(attributeSet)
 
     const renderField = (attribute) => {
         const { attributeOptions, type, code, label } = attribute
