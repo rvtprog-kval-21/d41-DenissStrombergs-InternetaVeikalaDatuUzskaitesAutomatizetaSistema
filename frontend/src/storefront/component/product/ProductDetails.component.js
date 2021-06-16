@@ -1,4 +1,5 @@
 import { Typography } from '@material-ui/core'
+import parse from 'html-react-parser'
 
 export function ProductDetails(props) {
     const { product: { longDescription, attributeSet = {}, attributeValues } } = props
@@ -57,7 +58,7 @@ export function ProductDetails(props) {
     return (
         <div>
             <Typography>
-                { longDescription }
+                { parse(longDescription) }
             </Typography>
             <div>
                 { Object.keys(attributeGroups).map(renderAttributeGroup) }

@@ -22,7 +22,7 @@ Funkcionālās dekompizīcijas diagramma
     Ir viesis, kuram ir pamata darbības, kā apskatīt veikalu, tā saturu, meklēt un apskatīt produktus un reģistrēies.
 
     Ir pircējs, tas ir reģīstrēts lietotājs, un tas var pievienot produktus grozā, rediģēt groza sastāvu, kā arī
-    veikt pasūtīju un rakstīt atsauksmes nopirktajiem produktiem.
+    veikt pasūtījumu un rakstīt atsauksmes nopirktajiem produktiem.
 
     Reģistrēts lietotājs var arī rediģēt savu akauntu, mainīt savus personālos datus, un pievienot, rediģēt un dzēst
     savas adreses, redigēt un dzēst savas atsauksmes, un apskatīt savus pasūtījumus.
@@ -33,20 +33,20 @@ Funkcionālās dekompizīcijas diagramma
 ER diagramma
     Kā var redzēt šeit ir ER diagramma, kas parāda sistēmas entitiju attiecības. Var redzēt, kā ir divas galvenās entitijas, kuras veido visvairāk attiecību, tas ir pricējs un produkts.
 
-    Šeit ir pircēju adreses, kā arī pircēju grupas entitija, lai iedalītu pirceju dažādās grupās
+    Šeit ir pircēju adreses, un pircējam var būt vairākas adreses, kā arī pircēju grupas entitija, lai iedalītu pirceju dažādās grupās
 
     Šeti ir pasūtījumu un rēķinu enittijas
 
-    Vēl ir attribūtu un atribūtu setu tabulas, lai glabātu produkta atribūtu datus
+    Vēl ir attribūtu un atribūtu setu entitijas, kas nosaka produkta atribūtus
 
-    Un arī kateogirju un atsauksmju tabula, kas attiecās uz produktu
+    Un arī kateogirju un atsauksmju entitijas, kas attiecās uz produktu
 
 Tabulu saišu shēma
     Tad tabulas shmēma ir diezgan līdzīga ER diagrammai, ir 2 galvenās tabulas, kas ir Produkts un 
-   
+
     Pircējs, un tad ir vairākas tabulas, kas ir domātas daudzi-pret-dauzdiem relācijas realizācijai
 
-Datu plūsmu diagramma, 
+Datu plūsmu diagramma
     Tad šeit ir datu plūsmas diagramma, kas attēlo pasūtījuma izveides procesu
     
     Tad serverim tiek sūtīts, klienta autorizācijas tokens un adreses id, bāzējoties uz autorizācijas tokenu tiek atrasti pircēja dati un pārbaudīta pircēja piekļuva, pēc tam pārbauda vai tāda adreses eksistē
@@ -60,9 +60,13 @@ Datu plūsmu diagramma,
     Ja vis ir veiksmīgs, izejas dati ir pasūījuma reference, pretējā gadījuma kļūda
 
 Demonstrācija
-    Pirceja daļa
-        Tagad es nodemonstrēšu savu programmu no pircēja puses
     Produkta izveide
+        Parādīšū kategorijas izveidi
+        Atribūtu izveidi
+        Atribūta pievienošana atribūtu setam
+        Produkta izveide
+    Pirceja daļa
+        Jauna produkta pirkšana
 
 Secinājumi
     Tad secinājumos varu pateikt, to ka tika izstrādāta programma, kura varētu nodrošināt pamata interneta veikala darbības,

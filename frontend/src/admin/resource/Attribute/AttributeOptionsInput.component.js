@@ -18,7 +18,7 @@ const typeMap = {
 }
 
 export function AttributeOptionsInput(props) {
-    const { test } = props
+    const { test = () => {} } = props
     const dispatch = useDispatch()
     const { attributeOptions: recordAttributeOptions = [], type: recordType } = useRecordContext()
     const [attributeOptions, setAttributeOptions] = useState(recordAttributeOptions)
